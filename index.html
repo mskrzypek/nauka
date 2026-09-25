@@ -148,7 +148,7 @@ function renderKid(kid) {
       <section>
         <h2><span aria-hidden="true">${s.emoji}</span> ${esc(s.name)}</h2>
         <div class="apps">${list.filter(a => a.subject === s.id).map(a => `
-          <a class="app" href="${esc(a.file)}" data-id="${esc(a.id)}" data-v="${esc(a.updated || a.added)}">
+          <a class="app" href="${esc(a.file)}?dla=${kid}" data-id="${esc(a.id)}" data-v="${esc(a.updated || a.added)}">
             <span class="ico" aria-hidden="true">${esc(a.emoji)}</span>
             <span>
               <span class="t">${esc(a.title)}</span>${isNew(a, kid) ? `<span class="badge">NOWE</span>` : ""}<br>

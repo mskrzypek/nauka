@@ -23,4 +23,5 @@ Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
 ## Zasady dla apek
 
 - Jeden plik HTML, bez zewnętrznych plików lokalnych (dozwolone CDN i Google Fonts).
+- Strona-matka otwiera apkę z `?dla=<id dziecka>` (np. `apps/x.html?dla=zoja`). Apka dla kilkorga dzieci powinna z tego brać imię i klucz `localStorage` (np. `nazwa-v1:zoja`), żeby postępy się nie mieszały; bez parametru – krótki wybór „Kto ćwiczy?” spośród dzieci, dla których jest apka. Apka dla jednego dziecka może mieć imię wpisane na sztywno – nie pytaj o imię.
 - Po polsku, działa na telefonie (viewport, duże przyciski), bez danych osobowych poza imieniem dziecka.

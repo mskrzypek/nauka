@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tabliczka mnożenia – trening</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✖️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFF8EE; --grid:#F3E6D2; --ink:#2B2340; --muted:#6E6485; --line:#E6D8C3; --surface:#FFFFFF;
+  --accent:#7B3FE4; --accent-ink:#FFFFFF; --ok:#1C8A57; --okbg:#E1F5EA; --bad:#C92A4B; --badbg:#FCE6EB;
+  --m0:#ECE6DC; --m1:#F7B8B8; --m2:#FFD96B; --m3:#9EE0B8; --m4:#3FBF7F; --star:#F2A900;
+  --shadow:0 1px 2px rgba(43,35,64,.06),0 6px 18px rgba(43,35,64,.07);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#17132A; --grid:#211B3A; --ink:#EEEAFB; --muted:#A79FC4; --line:#352D55; --surface:#211B3A;
+    --accent:#A57BFF; --accent-ink:#17132A; --ok:#5AD69A; --okbg:#12382A; --bad:#FF7A96; --badbg:#3E1628;
+    --m0:#2C2548; --m1:#6B2D3F; --m2:#7A6420; --m3:#2F6B4D; --m4:#3FBF7F; --star:#FFC940;
+    --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.wrap{max-width:640px; margin:0 auto; padding:max(18px,env(safe-area-inset-top)) 16px max(40px,env(safe-area-inset-bottom))}
+h1,h2,h3{font-family:var(--fh); line-height:1.1; margin:0}
+h1{font-size:clamp(30px,8vw,42px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:22px; font-weight:800; margin-bottom:10px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:not-allowed; opacity:.45}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+[hidden]{display:none!important}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow)}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:14px; padding:10px 18px; font:800 17px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.big{padding:14px 22px; font-size:20px; width:100%}
+.top{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:14px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.pills{display:flex; gap:8px; flex-wrap:wrap}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+
+/* Ekran główny */
+.hello{margin:4px 0 18px}
+.hello .sub{color:var(--muted); font-size:19px}
+.menu{display:grid; gap:12px; margin-top:14px}
+.tile{display:flex; gap:14px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); transition:transform .12s}
+.tile:hover:not(:disabled){transform:translateY(-2px); border-color:var(--accent)}
+.tile .ico{font-size:34px; width:46px; text-align:center; flex:none}
+.tile .t{font:800 20px var(--fh); display:block}
+.tile .d{color:var(--muted); font-size:15px}
+.mapmini{display:grid; grid-template-columns:repeat(10,1fr); gap:3px; margin:10px 0 6px}
+.mapmini i{aspect-ratio:1; border-radius:4px; background:var(--m0)}
+.legend{display:flex; gap:12px; flex-wrap:wrap; font-size:14px; color:var(--muted)}
+.legend span::before{content:""; display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-1px; background:var(--c)}
+
+/* Wybór tabliczek */
+.nums{display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:10px 0 14px}
+.num{border:2px solid var(--line); background:var(--surface); border-radius:14px; padding:12px 0; font:800 22px var(--fh)}
+.num[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.presets{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+.preset{border:1px solid var(--line); background:var(--surface); border-radius:99px; padding:6px 14px; font-size:15px}
+.toggle{display:flex; gap:10px; align-items:flex-start; margin:0 0 18px; cursor:pointer}
+.toggle input{width:22px; height:22px; margin:2px 0 0; accent-color:var(--accent); flex:none}
+
+/* Pytanie */
+.bar{height:10px; background:var(--m0); border-radius:6px; overflow:hidden; margin-bottom:14px}
+.bar span{display:block; height:100%; background:var(--accent); width:0; transition:width .25s}
+.q{text-align:center; padding:22px 12px 18px; border-radius:22px; background:var(--surface); border:2px solid var(--line); box-shadow:var(--shadow); transition:background .2s,border-color .2s}
+.q.ok{background:var(--okbg); border-color:var(--ok)}
+.q.bad{background:var(--badbg); border-color:var(--bad)}
+.eq{font:800 clamp(40px,13vw,64px)/1.1 var(--fh); letter-spacing:-.01em; white-space:nowrap}
+.ans{display:inline-block; min-width:1.6em; padding:0 .15em; border-bottom:4px solid var(--accent); color:var(--accent)}
+.q.ok .ans{color:var(--ok); border-color:var(--ok)}
+.q.bad .ans{color:var(--bad); border-color:var(--bad); text-decoration:line-through}
+.fb{min-height:3.2em; margin-top:10px; font-size:17px}
+.fb .right{font:800 26px var(--fh); color:var(--ok)}
+.pad{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px}
+.key{border:0; background:var(--surface); border-radius:16px; padding:14px 0; font:800 28px var(--fh); box-shadow:var(--shadow), inset 0 0 0 1px var(--line); user-select:none; -webkit-user-select:none}
+.key:active{transform:scale(.96)}
+.key.go{background:var(--accent); color:var(--accent-ink); box-shadow:none}
+.key.del{font-size:22px}
+.timer{font:800 22px var(--fh)}
+.timer.low{color:var(--bad)}
+
+/* Podsumowanie */
+.stars{font-size:48px; letter-spacing:.08em; color:var(--star); line-height:1; margin:6px 0 10px}
+.stars .off{color:var(--m0)}
+.big-num{font:800 56px/1 var(--fh)}
+.misses{display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 16px}
+.miss{background:var(--badbg); color:var(--ink); border-radius:10px; padding:4px 10px; font-weight:700}
+.pop{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+
+/* Ściąga */
+.tbl{display:grid; grid-template-columns:repeat(11,1fr); gap:3px; margin:8px 0 12px}
+.tbl b,.tbl button{aspect-ratio:1; display:grid; place-items:center; border-radius:6px; font:700 clamp(11px,3.4vw,17px) var(--fh); border:0; padding:0}
+.tbl b{color:var(--muted)}
+.tbl button{background:var(--m0); color:var(--ink)}
+.tbl button.hl{outline:2px solid var(--accent); outline-offset:-2px}
+.tbl button.sel{background:var(--accent)!important; color:var(--accent-ink)}
+.info{min-height:2.6em; text-align:center; font-size:18px}
+.info strong{font:800 24px var(--fh)}
+.who{display:grid; gap:12px; grid-template-columns:1fr 1fr; margin-top:16px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important; animation:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ KTO ĆWICZY ============ */
+// Strona-matka otwiera apkę z ?dla=<id dziecka>; każde dziecko ma osobne postępy.
+const KIDS={zoja:'Zoja',igor:'Igor',wiktor:'Wiktor'};
+const FOR=['zoja','igor'];
+let kid=(new URLSearchParams(location.search).get('dla')||'').toLowerCase();
+if(!KIDS[kid]) kid=null;
+
+/* ============ ZAPIS ============ */
+const blank=()=>({facts:{},days:[],rounds:0,best60:0,stars:0,sel:[2,3,4,5],gaps:false,muted:false});
+let S=blank(), canSave=true;
+const key=()=>'tabliczka-v1:'+kid;
+function load(){ S=blank(); try{ const r=localStorage.getItem(key()); if(r) S=Object.assign(blank(),JSON.parse(r)); }catch(e){ canSave=false; } }
+function save(){ if(!canSave) return; try{ localStorage.setItem(key(),JSON.stringify(S)); }catch(e){ canSave=false; } }
+const today=()=>new Date().toLocaleDateString('sv');
+function markDay(){ const d=today(); if(!S.days.includes(d)) S.days.push(d); }
+function streak(){
+  let n=0; const d=new Date();
+  if(!S.days.includes(d.toLocaleDateString('sv'))) d.setDate(d.getDate()-1);
+  while(S.days.includes(d.toLocaleDateString('sv'))){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+
+/* ============ FAKTY ============ */
+// a×b i b×a to ten sam fakt – 55 faktów dla 1…10.
+const fk=(a,b)=>Math.min(a,b)+'x'+Math.max(a,b);
+const ALL=[]; for(let a=1;a<=10;a++) for(let b=a;b<=10;b++) ALL.push([a,b]);
+const box=(a,b)=>(S.facts[fk(a,b)]||{}).b||0;
+function level(a,b){ const f=S.facts[fk(a,b)]; if(!f||!(f.r+f.w)) return 0; return f.b>=4?4:f.b>=3?3:f.b>=1?2:1; }
+const mastered=()=>ALL.filter(([a,b])=>level(a,b)>=3).length;
+const weak=()=>ALL.filter(([a,b])=>level(a,b)===1);
+function record(a,b,ok,ms){
+  const k=fk(a,b), f=S.facts[k]||(S.facts[k]={b:0,r:0,w:0});
+  if(ok){ f.r++; if(ms===null) {} else if(ms<6000) f.b=Math.min(4,f.b+1); else if(f.b<2) f.b++; }
+  else { f.w++; f.b=0; }
+  markDay(); save();
+}
+function pick(pool,lastK){
+  let c=pool.filter(([a,b])=>fk(a,b)!==lastK); if(!c.length) c=pool;
+  const w=c.map(([a,b])=>{ const f=S.facts[fk(a,b)]; return (f&&(f.r+f.w)?1:1.3)/Math.pow(1+box(a,b),1.4); });
+  let r=Math.random()*w.reduce((x,y)=>x+y,0);
+  for(let i=0;i<c.length;i++){ r-=w[i]; if(r<=0) return c[i]; }
+  return c[c.length-1];
+}
+function makeQ([a,b],gaps){
+  if(Math.random()<.5) [a,b]=[b,a];
+  const p=a*b;
+  if(gaps&&Math.random()<.35) return {a,b,gap:true,ans:b,text:`${a} × <span class="ans" id="ans">?</span> = ${p}`};
+  return {a,b,gap:false,ans:p,text:`${a} × ${b} = <span class="ans" id="ans">?</span>`};
+}
+
+/* ============ PODPOWIEDZI ============ */
+function hint(a,b){
+  const order=[1,10,2,5,9,4,3,6,8,7];
+  const f=order.find(x=>x===a||x===b), n=f===a?b:a;
+  if(a===b&&f===a&&f>5) return `${a} × ${a} to kwadrat – warto zapamiętać na pamięć.`;
+  switch(f){
+    case 1: return `Razy 1 zawsze wychodzi ta sama liczba.`;
+    case 10: return `Razy 10 – dopisz zero na końcu: ${n} → ${n*10}.`;
+    case 2: return `Razy 2 to dodanie liczby do siebie: ${n} + ${n} = ${n*2}.`;
+    case 5: return `Razy 5 to połowa z razy 10: ${n} × 10 = ${n*10}, połowa to ${n*5}.`;
+    case 9: return `Razy 9 to razy 10 minus jeden raz: ${n*10} − ${n} = ${n*9}.`;
+    case 4: return `Razy 4 to dwa razy podwojenie: ${n} → ${n*2} → ${n*4}.`;
+    case 3: return `Razy 3 to razy 2 i jeszcze raz: ${n*2} + ${n} = ${n*3}.`;
+    case 6: return `Razy 6 to razy 5 i jeszcze raz: ${n*5} + ${n} = ${n*6}.`;
+    case 8: return `Razy 8 to razy 4 podwojone: ${n*4} + ${n*4} = ${n*8}.`;
+    case 7: return `Razy 7 to razy 5 i razy 2: ${n*5} + ${n*2} = ${n*7}.`;
+  }
+  return '';
+}
+
+/* ============ DŹWIĘK ============ */
+let actx=null;
+function tone(f,d,type,vol,delay){
+  if(S.muted) return;
+  try{
+    if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+    const t=actx.currentTime+(delay||0), o=actx.createOscillator(), g=actx.createGain();
+    o.type=type||'triangle'; o.frequency.setValueAtTime(f,t);
+    g.gain.setValueAtTime(vol||.07,t); g.gain.exponentialRampToValueAtTime(.0001,t+d);
+    o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t+d+.03);
+  }catch(e){}
+}
+const sOk=()=>{ tone(660,.1); tone(990,.14,'triangle',.07,.08); };
+const sBad=()=>tone(180,.22,'sawtooth',.04);
+const sWin=()=>[523,659,784,1047].forEach((f,i)=>tone(f,.18,'triangle',.07,i*.1));
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app');
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const plDni=n=>n===1?'dzień':'dni';
+let onKey=null;
+document.addEventListener('keydown',e=>{ if(onKey) onKey(e); });
+const topBar=title=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${title}</h2></div>`;
+function bindBack(fn){ $('bBack').onclick=fn||home; }
+
+/* ============ KTO ĆWICZY (bez ?dla) ============ */
+function chooseKid(){
+  onKey=null;
+  $app.innerHTML=`<h1>✖️ Tabliczka mnożenia</h1><p class="muted" style="margin-top:8px">Kto ćwiczy?</p>
+    <div class="who">${FOR.map(k=>`<button class="btn big" data-k="${k}">${KIDS[k]}</button>`).join('')}</div>`;
+  $app.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
+    kid=b.dataset.k; history.replaceState(null,'','?dla='+kid); load(); home();
+  });
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  onKey=null; window.scrollTo(0,0);
+  const m=mastered(), st=streak(), wk=weak().length;
+  const cells=[]; for(let a=1;a<=10;a++) for(let b=1;b<=10;b++) cells.push(`<i style="background:var(--m${level(a,b)})"></i>`);
+  $app.innerHTML=`
+    <div class="hello">
+      <h1>Cześć, ${esc(KIDS[kid])}! 👋</h1>
+      <div class="sub">Tabliczka mnożenia – ćwiczymy</div>
+    </div>
+    <div class="pills">
+      <span class="pill">🔥 seria: ${st} ${plDni(st)}</span>
+      <span class="pill">⭐ ${S.stars}</span>
+      ${S.best60?`<span class="pill">⏱️ rekord: ${S.best60}</span>`:''}
+    </div>
+    <div class="menu">
+      <button class="tile" id="tTrain"><span class="ico">🎯</span><span><span class="t">Trening</span><span class="d">Wybierz, które liczby ćwiczysz. 12 pytań.</span></span></button>
+      <button class="tile" id="tWeak" ${wk?'':'disabled'}><span class="ico">🩹</span><span><span class="t">Powtórka trudnych</span><span class="d">${wk?`${wk} ${wk===1?'działanie czeka':wk<5?'działania czekają':'działań czeka'} na poprawkę`:'Na razie nie ma pomyłek do poprawy'}</span></span></button>
+      <button class="tile" id="tRace"><span class="ico">⏱️</span><span><span class="t">Wyzwanie 60 sekund</span><span class="d">Ile zdążysz? ${S.best60?`Twój rekord: ${S.best60}.`:'Ustal swój pierwszy rekord.'}</span></span></button>
+      <button class="tile" id="tMap" style="display:block">
+        <span style="display:flex;gap:14px;align-items:center"><span class="ico">🗺️</span><span><span class="t">Mapa i ściąga</span><span class="d">Opanowane: <b>${m} z 55</b> działań</span></span></span>
+        <span class="mapmini" aria-hidden="true">${cells.join('')}</span>
+        <span class="legend"><span style="--c:var(--m0)">nie było</span><span style="--c:var(--m1)">do poprawy</span><span style="--c:var(--m2)">w drodze</span><span style="--c:var(--m3)">umiem</span><span style="--c:var(--m4)">mistrz</span></span>
+      </button>
+    </div>
+    <div class="row" style="margin-top:18px">
+      <button class="btn" id="bMute" style="font-size:15px;padding:6px 14px">${S.muted?'🔇 Włącz dźwięk':'🔊 Wycisz'}</button>
+      ${canSave?'':'<span class="muted small">Ta przeglądarka nie zapisze postępów.</span>'}
+    </div>`;
+  $('tTrain').onclick=choose;
+  $('tWeak').onclick=()=>startRound(weak(),{title:'Powtórka trudnych',len:Math.min(12,Math.max(6,weak().length*2)),gaps:false});
+  $('tRace').onclick=race;
+  $('tMap').onclick=()=>map();
+  $('bMute').onclick=()=>{ S.muted=!S.muted; save(); home(); };
+}
+
+/* ============ WYBÓR TABLICZEK ============ */
+function choose(){
+  onKey=null; window.scrollTo(0,0);
+  let sel=new Set(S.sel);
+  const presets=[['Łatwe: 1, 2, 5, 10',[1,2,5,10]],['Średnie: 3, 4, 6',[3,4,6]],['Trudne: 7, 8, 9',[7,8,9]],['Wszystko',[1,2,3,4,5,6,7,8,9,10]]];
+  function draw(){
+    $app.innerHTML=`${topBar('Trening')}
+      <p>Które liczby ćwiczysz? Będzie np. <b>${[...sel].sort((a,b)=>a-b)[0]||'?'} × 7</b>.</p>
+      <div class="nums">${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="num" data-n="${n}" aria-pressed="${sel.has(n)}">${n}</button>`).join('')}</div>
+      <div class="presets">${presets.map(([l],i)=>`<button class="preset" data-p="${i}">${l}</button>`).join('')}</div>
+      <label class="toggle"><input type="checkbox" id="gaps" ${S.gaps?'checked':''}><span>Z lukami, np. <b>6 × ? = 42</b><br><span class="muted small">trudniejsze – trzeba odgadnąć brakującą liczbę</span></span></label>
+      <button class="btn primary big" id="bGo" ${sel.size?'':'disabled'}>Zaczynamy!</button>`;
+    bindBack();
+    $app.querySelectorAll('.num').forEach(b=>b.onclick=()=>{ const n=+b.dataset.n; sel.has(n)?sel.delete(n):sel.add(n); draw(); });
+    $app.querySelectorAll('.preset').forEach(b=>b.onclick=()=>{ sel=new Set(presets[+b.dataset.p][1]); draw(); });
+    $('gaps').onchange=e=>{ S.gaps=e.target.checked; save(); };
+    $('bGo').onclick=()=>{
+      S.sel=[...sel].sort((a,b)=>a-b); save();
+      const pool=ALL.filter(([a,b])=>sel.has(a)||sel.has(b));
+      startRound(pool,{title:'Trening: '+S.sel.join(', '),len:12,gaps:S.gaps});
+    };
+  }
+  draw();
+}
+
+/* ============ KLAWIATURA ============ */
+const padHtml=`<div class="pad" id="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-d="${n}">${n}</button>`).join('')}
+  <button class="key del" data-d="del" aria-label="Skasuj">⌫</button><button class="key" data-d="0">0</button><button class="key go" data-d="ok" aria-label="Sprawdź">OK</button></div>`;
+function bindPad(onDigit,onDel,onOk){
+  $('pad').querySelectorAll('.key').forEach(k=>k.addEventListener('pointerdown',e=>{
+    e.preventDefault(); const d=k.dataset.d;
+    if(d==='del') onDel(); else if(d==='ok') onOk(); else onDigit(d);
+  }));
+  $('pad').querySelectorAll('.key').forEach(k=>k.addEventListener('click',e=>{ if(e.detail===0){ const d=k.dataset.d; if(d==='del') onDel(); else if(d==='ok') onOk(); else onDigit(d); } }));
+  onKey=e=>{
+    if(/^[0-9]$/.test(e.key)){ e.preventDefault(); onDigit(e.key); }
+    else if(e.key==='Backspace'){ e.preventDefault(); onDel(); }
+    else if(e.key==='Enter'){ e.preventDefault(); onOk(); }
+    else if(e.key==='Escape'){ e.preventDefault(); home(); }
+  };
+}
+
+/* ============ RUNDA ============ */
+function startRound(pool,opt){
+  window.scrollTo(0,0);
+  const R={pool,opt,n:0,first:0,misses:[],retry:[],lastK:null,t0:Date.now()};
+  let q=null, typed='', phase='ask', shownAt=0, isRetry=false;
+
+  $app.innerHTML=`${topBar(esc(opt.title))}
+    <div class="bar"><span id="bar"></span></div>
+    <div class="q" id="q"><div class="eq" id="eq"></div><div class="fb" id="fb" aria-live="polite"></div></div>
+    ${padHtml}`;
+  bindBack();
+  bindPad(d=>{ if(phase!=='ask'||typed.length>=3) return; typed+=d; show(); },
+          ()=>{ if(phase!=='ask') return; typed=typed.slice(0,-1); show(); },
+          ()=>{ if(phase==='ask') check(); else next(); });
+
+  function show(){ const a=$('ans'); if(a) a.textContent=typed||'?'; }
+  function next(){
+    if(R.n>=opt.len&&!R.retry.length) return finish();
+    phase='ask'; typed='';
+    if(R.n<opt.len){ const f=pick(pool,R.lastK); q=makeQ(f,opt.gaps); isRetry=false; }
+    else { q=R.retry.shift(); isRetry=true; }
+    R.lastK=fk(q.a,q.b);
+    $('q').className='q'; $('eq').innerHTML=q.text;
+    $('fb').innerHTML=isRetry?'<span class="muted">Poprawka – spróbuj jeszcze raz</span>':'';
+    $('bar').style.width=(100*R.n/opt.len)+'%';
+    shownAt=Date.now();
+  }
+  function check(){
+    if(!typed) return;
+    const ok=+typed===q.ans, ms=Date.now()-shownAt;
+    record(q.a,q.b,ok,isRetry?null:ms); // poprawka nie awansuje faktu
+    if(!isRetry){ R.n++; if(ok) R.first++; else { R.misses.push(q); R.retry.push(q); } }
+    else if(!ok) R.retry.push(q);
+    $('bar').style.width=(100*R.n/opt.len)+'%';
+    if(ok){
+      sOk(); $('q').className='q ok';
+      $('fb').innerHTML=['Brawo!','Świetnie!','Super!','Tak jest!','Dokładnie!'][Math.floor(Math.random()*5)]+(ms<3000&&!isRetry?' ⚡':'');
+      phase='wait'; setTimeout(()=>{ if(phase==='wait') next(); },650);
+    } else {
+      sBad(); $('q').className='q bad'; phase='shown';
+      $('fb').innerHTML=`<div class="right">${q.a} × ${q.b} = ${q.a*q.b}</div><div>${esc(hint(q.a,q.b))}</div><div class="muted small" style="margin-top:6px">Naciśnij OK, żeby iść dalej</div>`;
+    }
+  }
+  function finish(){
+    const pct=R.first/opt.len, stars=pct===1?3:pct>=.8?2:pct>=.6?1:0;
+    S.rounds++; S.stars+=stars; save(); if(stars===3) sWin();
+    const sec=Math.round((Date.now()-R.t0)/1000);
+    const uniq=[...new Map(R.misses.map(m=>[fk(m.a,m.b),m])).values()];
+    onKey=e=>{ if(e.key==='Enter'){ e.preventDefault(); $('bAgain').click(); } else if(e.key==='Escape') home(); };
+    $app.innerHTML=`${topBar(esc(opt.title))}
+      <div class="card" style="text-align:center">
+        <div class="stars pop" aria-label="${stars} z 3 gwiazdek">${'★'.repeat(stars)}<span class="off">${'★'.repeat(3-stars)}</span></div>
+        <h2>${stars===3?'Bezbłędnie! 🎉':stars===2?'Bardzo dobrze!':stars===1?'Dobrze, ćwiczymy dalej!':'Nie poddawaj się – następnym razem będzie lepiej!'}</h2>
+        <p><b>${R.first} z ${opt.len}</b> dobrze za pierwszym razem · ${Math.floor(sec/60)?Math.floor(sec/60)+' min ':''}${sec%60} s</p>
+        ${uniq.length?`<p class="muted small" style="margin-bottom:4px">Do zapamiętania:</p><div class="misses" style="justify-content:center">${uniq.map(m=>`<span class="miss">${m.a} × ${m.b} = ${m.a*m.b}</span>`).join('')}</div>`:''}
+        <div class="row" style="justify-content:center"><button class="btn primary" id="bAgain">Jeszcze raz</button><button class="btn" id="bMenu">Menu</button></div>
+      </div>`;
+    bindBack();
+    $('bAgain').onclick=()=>startRound(opt.title==='Powtórka trudnych'&&weak().length?weak():pool,opt);
+    $('bMenu').onclick=home;
+  }
+  next();
+}
+
+/* ============ WYZWANIE 60 S ============ */
+function race(){
+  window.scrollTo(0,0);
+  const pool=ALL.filter(([a,b])=>a>1), LEN=60;
+  let q=null, typed='', score=0, lastK=null, end=0, timer=null, shownAt=0, lock=false, started=false;
+  $app.innerHTML=`${topBar('Wyzwanie 60 sekund')}
+    <div class="row" style="justify-content:space-between;margin-bottom:10px">
+      <span class="timer" id="tm">60 s</span><span class="timer">✅ <span id="sc">0</span></span>
+    </div>
+    <div class="q" id="q"><div class="eq" id="eq"></div><div class="fb" id="fb" aria-live="polite"><span class="muted">Czas rusza po pierwszej cyfrze</span></div></div>
+    ${padHtml}`;
+  bindBack(()=>{ clearInterval(timer); home(); });
+  bindPad(d=>{ if(lock||typed.length>=3) return; if(!started) start(); typed+=d; $('ans').textContent=typed; },
+          ()=>{ if(lock) return; typed=typed.slice(0,-1); $('ans').textContent=typed||'?'; },
+          ()=>{ if(!lock&&typed) check(); });
+  const prevKey=onKey; onKey=e=>{ if(e.key==='Escape'){ clearInterval(timer); home(); } else prevKey(e); };
+  function start(){
+    started=true; end=Date.now()+LEN*1000; $('fb').innerHTML='';
+    timer=setInterval(()=>{ const left=Math.max(0,Math.ceil((end-Date.now())/1000)); $('tm').textContent=left+' s'; $('tm').classList.toggle('low',left<=10); if(left<=0) done(); },200);
+  }
+  function next(){ typed=''; lock=false; q=makeQ(pick(pool,lastK),false); lastK=fk(q.a,q.b); $('q').className='q'; $('eq').innerHTML=q.text; shownAt=Date.now(); }
+  function check(){
+    const ok=+typed===q.ans; record(q.a,q.b,ok,Date.now()-shownAt);
+    if(ok){ score++; $('sc').textContent=score; sOk(); $('q').className='q ok'; lock=true; setTimeout(next,250); }
+    else { sBad(); $('q').className='q bad'; $('fb').innerHTML=`<div class="right">${q.a} × ${q.b} = ${q.a*q.b}</div>`; lock=true; setTimeout(()=>{ $('fb').innerHTML=''; next(); },1400); }
+  }
+  function done(){
+    clearInterval(timer); lock=true;
+    const rec=score>S.best60, prev=S.best60; if(rec) S.best60=score; save(); if(rec) sWin();
+    onKey=e=>{ if(e.key==='Enter'){ e.preventDefault(); race(); } else if(e.key==='Escape') home(); };
+    $app.innerHTML=`${topBar('Wyzwanie 60 sekund')}
+      <div class="card" style="text-align:center">
+        <p class="muted" style="margin-bottom:2px">Dobre odpowiedzi</p>
+        <div class="big-num pop">${score}</div>
+        <h2 style="margin-top:10px">${rec?(prev?`Nowy rekord! Poprzedni: ${prev} 🏆`:'Pierwszy rekord ustalony! 🏆'):`Rekord: ${S.best60}. Próbuj dalej!`}</h2>
+        <div class="row" style="justify-content:center;margin-top:14px"><button class="btn primary" id="bAgain">Jeszcze raz</button><button class="btn" id="bMenu">Menu</button></div>
+      </div>`;
+    bindBack(); $('bAgain').onclick=race; $('bMenu').onclick=home;
+  }
+  next();
+}
+
+/* ============ MAPA I ŚCIĄGA ============ */
+function map(){
+  onKey=e=>{ if(e.key==='Escape') home(); }; window.scrollTo(0,0);
+  const names=['jeszcze nie było','do poprawy','w drodze','umiem','mistrz'];
+  let cells='<b></b>'+[1,2,3,4,5,6,7,8,9,10].map(n=>`<b>${n}</b>`).join('');
+  for(let a=1;a<=10;a++){ cells+=`<b>${a}</b>`; for(let b=1;b<=10;b++) cells+=`<button data-a="${a}" data-b="${b}" style="background:var(--m${level(a,b)})" aria-label="${a} razy ${b}">${a*b}</button>`; }
+  $app.innerHTML=`${topBar('Mapa i ściąga')}
+    <p class="muted small">Kolor pokazuje, jak Ci idzie. Dotknij liczby, żeby zobaczyć działanie.</p>
+    <div class="tbl" id="tbl">${cells}</div>
+    <div class="info" id="info" aria-live="polite">Opanowane: <strong>${mastered()} z 55</strong></div>
+    <div class="legend" style="justify-content:center;margin-top:6px"><span style="--c:var(--m0)">nie było</span><span style="--c:var(--m1)">do poprawy</span><span style="--c:var(--m2)">w drodze</span><span style="--c:var(--m3)">umiem</span><span style="--c:var(--m4)">mistrz</span></div>`;
+  bindBack();
+  const btns=[...$('tbl').querySelectorAll('button')];
+  btns.forEach(c=>c.onclick=()=>{
+    const a=+c.dataset.a, b=+c.dataset.b;
+    btns.forEach(x=>{ x.classList.toggle('sel',x===c); x.classList.toggle('hl',x!==c&&(+x.dataset.a===a||+x.dataset.b===b)&&+x.dataset.a<=a&&+x.dataset.b<=b); });
+    $('info').innerHTML=`<strong>${a} × ${b} = ${a*b}</strong><br><span class="muted small">${names[level(a,b)]}${a!==b?` · to samo co ${b} × ${a}`:''}</span>`;
+  });
+}
+
+/* ============ START ============ */
+if(kid){ load(); home(); } else chooseKid();
+</script>
+</body>
+</html>

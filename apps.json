@@ -105,6 +105,19 @@
       ],
       "added": "2026-09-25",
       "desc": "Gra o replikacji DNA"
+    },
+    {
+      "id": "tabliczka-mnozenia",
+      "file": "apps/tabliczka-mnozenia.html",
+      "title": "Tabliczka mnożenia – trening",
+      "emoji": "✖️",
+      "subject": "matematyka",
+      "kids": [
+        "zoja",
+        "igor"
+      ],
+      "added": "2026-09-25",
+      "desc": "Trening, wyzwanie na czas i mapa postępów"
     }
   ]
 }
