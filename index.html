@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Nasze apki do nauki</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F9FC; --grid:#E2EAF3; --ink:#1B2A4A; --muted:#566785; --line:#D3DDEA; --surface:#FFFFFF;
+  --accent:#2A4D9B; --new:#E4572E; --shadow:0 1px 2px rgba(27,42,74,.06),0 4px 14px rgba(27,42,74,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0E1627; --grid:#172238; --ink:#E5ECF6; --muted:#9BA9C3; --line:#2B3A5A; --surface:#142036;
+    --accent:#9DB8F2; --new:#FF7A52; --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.wrap{max-width:760px; margin:0 auto; padding:max(20px,env(safe-area-inset-top)) 16px 64px}
+h1,h2,h3{font-family:var(--fh); margin:0; line-height:1.15}
+h1{font-size:clamp(28px,7vw,40px); font-weight:800; letter-spacing:-.01em}
+.lead{color:var(--muted); margin:6px 0 24px}
+a{color:inherit}
+button{font:inherit; color:inherit}
+
+/* Wybór dziecka */
+.kids{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.kid{
+  display:flex; align-items:center; gap:14px; padding:18px; text-decoration:none;
+  background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow);
+  transition:transform .12s ease, border-color .12s ease;
+}
+.kid:hover,.kid:focus-visible{transform:translateY(-2px); border-color:var(--c)}
+.avatar{
+  flex:none; width:56px; height:56px; border-radius:50%; display:grid; place-items:center;
+  background:var(--c); color:#fff; font:800 26px var(--fh);
+}
+.kid .name{font:700 22px var(--fh)}
+.kid .meta{color:var(--muted); font-size:15px}
+.dot{display:inline-block; background:var(--new); color:#fff; font-size:12px; font-weight:700; padding:1px 8px; border-radius:99px; margin-left:4px; vertical-align:2px}
+
+/* Lista apek dziecka */
+.top{display:flex; align-items:center; gap:14px; margin-bottom:18px}
+.back{
+  flex:none; width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--surface);
+  display:grid; place-items:center; text-decoration:none; font-size:22px; box-shadow:var(--shadow);
+}
+.chips{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px}
+.chip{
+  border:1px solid var(--line); background:var(--surface); border-radius:99px; padding:6px 14px; cursor:pointer; font-size:16px;
+}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+section{margin-bottom:26px}
+section h2{font-size:20px; font-weight:600; margin:0 0 10px; display:flex; gap:8px; align-items:center}
+.apps{display:grid; gap:10px}
+.app{
+  display:flex; gap:14px; align-items:center; padding:14px 16px; text-decoration:none;
+  background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+  transition:transform .12s ease, border-color .12s ease;
+}
+.app:hover,.app:focus-visible{transform:translateY(-1px); border-color:var(--accent)}
+.app .ico{flex:none; font-size:34px; width:44px; text-align:center}
+.app .t{font-weight:700; line-height:1.3}
+.app .d{color:var(--muted); font-size:15px}
+.app .go{margin-left:auto; color:var(--muted); font-size:22px}
+.badge{background:var(--new); color:#fff; font-size:12px; font-weight:700; padding:2px 8px; border-radius:99px; margin-left:6px; vertical-align:2px; letter-spacing:.03em}
+.empty{padding:28px; text-align:center; color:var(--muted); border:2px dashed var(--line); border-radius:16px; background:var(--surface)}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"><p class="lead">Ładuję…</p></main>
+<script>
+const NEW_DAYS = 14;
+const $app = document.getElementById("app");
+let data, filter = "all";
+
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} },
+};
+const seenKey = kid => "seen:" + kid;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate = iso => new Date(iso + "T12:00:00").toLocaleDateString("pl-PL", { day: "numeric", month: "short" });
+const daysAgo = iso => (Date.now() - new Date(iso + "T12:00:00")) / 864e5;
+
+const appsFor = kid => data.apps
+  .filter(a => a.kids.includes(kid))
+  .sort((a, b) => (b.updated || b.added).localeCompare(a.updated || a.added));
+const isNew = (a, kid) => daysAgo(a.updated || a.added) <= NEW_DAYS && !store.get(seenKey(kid), []).includes(a.id + "@" + (a.updated || a.added));
+
+function renderHome() {
+  document.title = "Nasze apki do nauki";
+  $app.innerHTML = `
+    <h1>🎒 Apki do nauki</h1>
+    <p class="lead">Kto się dziś uczy?</p>
+    <div class="kids">${data.kids.map(k => {
+      const list = appsFor(k.id), n = list.filter(a => isNew(a, k.id)).length;
+      return `<a class="kid" href="#/${k.id}" style="--c:${k.color}">
+        <span class="avatar" aria-hidden="true">${esc(k.name[0])}</span>
+        <span><span class="name">${esc(k.name)}</span><br>
+        <span class="meta">${list.length} ${plural(list.length)}${n ? `<span class="dot">${n} nowe</span>` : ""}</span></span>
+      </a>`;
+    }).join("")}</div>`;
+}
+
+function plural(n) {
+  if (n === 1) return "apka";
+  const d = n % 10, t = n % 100;
+  return d >= 2 && d <= 4 && (t < 12 || t > 14) ? "apki" : "apek";
+}
+
+function renderKid(kid) {
+  const k = data.kids.find(x => x.id === kid);
+  if (!k) return renderHome();
+  document.title = `${k.name} – apki do nauki`;
+  const list = appsFor(kid);
+  const subjects = data.subjects.filter(s => list.some(a => a.subject === s.id));
+  if (filter !== "all" && !subjects.some(s => s.id === filter)) filter = "all";
+  const shown = subjects.filter(s => filter === "all" || s.id === filter);
+
+  $app.innerHTML = `
+    <div class="top">
+      <a class="back" href="#/" aria-label="Wróć do wyboru">←</a>
+      <span class="avatar" style="--c:${k.color}" aria-hidden="true">${esc(k.name[0])}</span>
+      <h1>${esc(k.name)}</h1>
+    </div>
+    ${subjects.length > 1 ? `<div class="chips" role="group" aria-label="Przedmiot">
+      <button class="chip" data-f="all" aria-pressed="${filter === "all"}">Wszystko</button>
+      ${subjects.map(s => `<button class="chip" data-f="${s.id}" aria-pressed="${filter === s.id}">${s.emoji} ${esc(s.name)}</button>`).join("")}
+    </div>` : ""}
+    ${list.length ? shown.map(s => `
+      <section>
+        <h2><span aria-hidden="true">${s.emoji}</span> ${esc(s.name)}</h2>
+        <div class="apps">${list.filter(a => a.subject === s.id).map(a => `
+          <a class="app" href="${esc(a.file)}" data-id="${esc(a.id)}" data-v="${esc(a.updated || a.added)}">
+            <span class="ico" aria-hidden="true">${esc(a.emoji)}</span>
+            <span>
+              <span class="t">${esc(a.title)}</span>${isNew(a, kid) ? `<span class="badge">NOWE</span>` : ""}<br>
+              <span class="d">${a.desc ? esc(a.desc) + " · " : ""}${a.updated ? "poprawiona " + fmtDate(a.updated) : fmtDate(a.added)}</span>
+            </span>
+            <span class="go" aria-hidden="true">›</span>
+          </a>`).join("")}
+        </div>
+      </section>`).join("") : `<div class="empty">Jeszcze nie ma tu apek. Wkrótce będą! 🚀</div>`}`;
+
+  $app.querySelectorAll(".chip").forEach(b => b.onclick = () => { filter = b.dataset.f; renderKid(kid); });
+  $app.querySelectorAll(".app").forEach(a => a.addEventListener("click", () => {
+    const seen = store.get(seenKey(kid), []);
+    const tag = a.dataset.id + "@" + a.dataset.v;
+    if (!seen.includes(tag)) store.set(seenKey(kid), [...seen, tag]);
+  }));
+}
+
+function route() {
+  const kid = location.hash.replace(/^#\/?/, "");
+  kid ? renderKid(kid) : renderHome();
+  window.scrollTo(0, 0);
+}
+
+fetch("apps.json", { cache: "no-cache" })
+  .then(r => r.json())
+  .then(j => { data = j; addEventListener("hashchange", () => { filter = "all"; route(); }); route(); })
+  .catch(() => { $app.innerHTML = `<p class="lead">Nie udało się wczytać listy apek. Odśwież stronę.</p>`; });
+</script>
+</body>
+</html>

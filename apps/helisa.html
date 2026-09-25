@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Helisa – trening z DNA</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F9FC; --grid:#E2EAF3; --ink:#1B2A4A; --muted:#566785; --line:#C8D4E3; --surface:#FFFFFF;
+  --A:#E4572E; --T:#F3B61F; --G:#2A4D9B; --C:#6FB1E0;
+  --ok:#1C7F54; --okbg:#E2F3EA; --bad:#B8284F; --badbg:#FBE5EB; --focus:#2A4D9B; --warnbg:#FFF4D6;
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0E1627; --grid:#172238; --ink:#E5ECF6; --muted:#9BA9C3; --line:#2B3A5A; --surface:#142036;
+    --G:#5D86DA; --ok:#4FC98F; --okbg:#10352A; --bad:#F2729A; --badbg:#3B1627; --focus:#9DB8F2; --warnbg:#3A3116;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; color:var(--ink); font-family:var(--fb); font-size:17px; line-height:1.55;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+h1,h2,h3,h4{font-family:var(--fh); line-height:1.15; margin:0 0 .5em}
+h2{font-size:1.65rem; font-weight:800}
+h3{font-size:1.25rem; font-weight:700}
+p{margin:0 0 .8em}
+a{color:var(--G)}
+button,select,input{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--focus); outline-offset:2px; border-radius:6px}
+.wrap{max-width:780px; margin:0 auto; padding:0 18px}
+
+/* header */
+.top{padding:18px 0 0}
+.brandrow{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:8px 16px}
+.brand h1{font-size:2.3rem; font-weight:800; letter-spacing:-.02em; margin:0}
+.brand p{margin:0; color:var(--muted); font-size:.95rem}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font-family:var(--fh); font-weight:700; font-size:.9rem; background:var(--surface); border:1.5px solid var(--line); border-radius:999px; padding:.2em .75em; white-space:nowrap}
+.helixbox{margin:10px 0 2px}
+#helix svg{width:100%; height:auto; display:block}
+.helixcap{font-size:.9rem; color:var(--muted); margin:0}
+.rung.new{animation:grow .7s cubic-bezier(.3,1.5,.5,1) both; transform-box:fill-box; transform-origin:center}
+@keyframes grow{from{transform:scaleY(0); opacity:0}}
+@media (prefers-reduced-motion: reduce){ .rung.new{animation:none} .flash{transition:none!important} }
+
+.tabs{display:flex; gap:6px; overflow-x:auto; padding:12px 0 14px; scrollbar-width:thin}
+.tab{flex:0 0 auto; border:2px solid var(--ink); background:var(--surface); border-radius:10px; padding:.45em .9em; font-family:var(--fh); font-weight:700; cursor:pointer}
+.tab[aria-current="page"]{background:var(--ink); color:var(--paper)}
+
+main{padding-bottom:48px}
+section, article{margin:0 0 22px}
+.panel{background:var(--surface); border:1.5px solid var(--line); border-radius:14px; padding:18px 20px}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:.4em; border:2px solid var(--ink); background:var(--surface); color:var(--ink); border-radius:10px; padding:.6em 1.15em; font-family:var(--fh); font-weight:700; font-size:1rem; cursor:pointer; text-decoration:none}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn.ghost{border-color:var(--line)}
+.btn.small{padding:.35em .8em; font-size:.92rem}
+.btn:disabled{opacity:.38; cursor:not-allowed}
+.btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+
+/* base chips */
+.b{display:inline-grid; place-items:center; width:2.2em; height:2.2em; border-radius:7px; font-family:var(--fh); font-weight:800; font-size:1.05rem; flex:0 0 auto}
+.b.sm{width:1.6em; height:1.6em; font-size:.85rem; border-radius:5px; vertical-align:-.25em}
+.b-A{background:var(--A); color:#fff}
+.b-T{background:var(--T); color:#1B2A4A}
+.b-G{background:var(--G); color:#fff}
+.b-C{background:var(--C); color:#1B2A4A}
+.slot{display:inline-grid; place-items:center; width:2.2em; height:2.2em; border-radius:7px; border:2px dashed var(--line)}
+.slot.next{border-color:var(--ink)}
+
+/* dashboard */
+.recommend{border-left:6px solid var(--G)}
+.topics{list-style:none; margin:0; padding:0}
+.topics li{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(90px,1fr) auto auto; gap:6px 12px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line)}
+.topics li:last-child{border-bottom:0}
+.bar{height:10px; background:var(--grid); border-radius:6px; overflow:hidden}
+.bar > span{display:block; height:100%; background:var(--G); border-radius:6px}
+.bar.full > span{background:var(--ok)}
+.count{font-family:var(--fh); font-weight:700; font-size:.92rem; white-space:nowrap}
+@media (max-width:560px){
+  .topics li{grid-template-columns:1fr auto; }
+  .topics li .bar{grid-column:1 / -1; grid-row:2}
+}
+.hist{list-style:none; margin:0; padding:0}
+.hist li{display:flex; justify-content:space-between; gap:12px; padding:6px 0; border-bottom:1px dashed var(--line); font-size:.95rem}
+.hist li:last-child{border-bottom:0}
+.gradepill{font-family:var(--fh); font-weight:800; min-width:1.9em; text-align:center; border-radius:6px; padding:0 .4em; background:var(--grid)}
+details summary{cursor:pointer; font-family:var(--fh); font-weight:700}
+
+/* setup chips */
+.choices{display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 14px}
+.choice{border:2px solid var(--line); background:var(--surface); border-radius:10px; padding:.45em .85em; cursor:pointer; font-weight:700}
+.choice[aria-pressed="true"]{border-color:var(--ink); background:var(--ink); color:var(--paper)}
+label.check{display:flex; gap:.5em; align-items:center; cursor:pointer}
+label.check input{width:1.2em; height:1.2em}
+
+/* session */
+.sesshead{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px}
+.progress{height:8px; background:var(--grid); border-radius:6px; overflow:hidden; margin-bottom:16px}
+.progress > span{display:block; height:100%; background:var(--ink)}
+.qtag{display:inline-block; font-size:.85rem; font-weight:700; color:var(--muted); margin-bottom:6px}
+.qtext{font-family:var(--fh); font-size:1.35rem; font-weight:700; line-height:1.3; margin:0 0 14px}
+.opts{display:grid; gap:8px}
+.opt{display:block; width:100%; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:11px; padding:.75em 1em; cursor:pointer; line-height:1.35}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.selected{border-color:var(--G); box-shadow:inset 0 0 0 1px var(--G)}
+.opt.correct, .text-in.correct, select.correct, li.correct{border-color:var(--ok)!important; background:var(--okbg)!important}
+.opt.wrong, .text-in.wrong, select.wrong, li.wrong{border-color:var(--bad)!important; background:var(--badbg)!important}
+.opt:disabled{cursor:default; opacity:1}
+.text-in{width:100%; border:2px solid var(--line); background:var(--surface); border-radius:11px; padding:.7em .9em; font-size:1.1rem}
+.text-in:focus{border-color:var(--ink); outline:none}
+.hint{color:var(--muted); font-size:.92rem}
+ol.order-target{counter-reset:o; list-style:none; margin:0 0 12px; padding:0; display:grid; gap:6px}
+ol.order-target li{counter-increment:o; border:2px solid var(--ink); border-radius:10px; padding:.55em .8em .55em 2.6em; position:relative; background:var(--surface)}
+ol.order-target li::before{content:counter(o); position:absolute; left:.8em; top:.5em; font-family:var(--fh); font-weight:800}
+ol.order-target li.placeholder{border-style:dashed; border-color:var(--line); color:var(--muted); padding-left:.8em}
+ol.order-target li.placeholder::before{content:none}
+.order-pool{display:grid; gap:8px; margin-bottom:10px}
+.match-row{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.4fr); gap:10px; align-items:center; margin-bottom:10px}
+.match-left{font-weight:700}
+.match select{width:100%; border:2px solid var(--line); background:var(--surface); border-radius:10px; padding:.55em .6em}
+@media (max-width:520px){ .match-row{grid-template-columns:1fr} }
+
+.strand{display:flex; gap:6px; overflow-x:auto; padding:6px 2px 10px}
+.col{display:flex; flex-direction:column; align-items:center; gap:3px}
+.bond{width:0; height:18px; border-left:3px dotted var(--muted)}
+.col button.b{border:0; cursor:pointer}
+.col .b.picked{outline:3px solid var(--ink); outline-offset:2px}
+.col .b.okmark{box-shadow:0 0 0 3px var(--ok)}
+.col .b.badmark{box-shadow:0 0 0 3px var(--bad)}
+.strandlabel{font-size:.85rem; color:var(--muted); margin:0}
+.pad{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+.key{width:3.2em; height:3.2em; border-radius:12px; border:0; font-family:var(--fh); font-weight:800; font-size:1.2rem; cursor:pointer}
+.key.back{background:var(--surface); border:2px solid var(--line)}
+
+.feedback{margin-top:16px}
+.feedback .fb{border-radius:12px; padding:12px 14px}
+.fb.ok{background:var(--okbg); border:2px solid var(--ok)}
+.fb.bad{background:var(--badbg); border:2px solid var(--bad)}
+.fb strong.lead{font-family:var(--fh); font-size:1.1rem}
+.fb p{margin:.35em 0 0}
+.actions{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap}
+
+/* results */
+.bigscore{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.bignum{font-family:var(--fh); font-weight:800; font-size:4.2rem; line-height:1; letter-spacing:-.03em}
+.review{list-style:none; margin:0; padding:0}
+.review li{border-bottom:1px solid var(--line); padding:12px 0}
+.review li:last-child{border-bottom:0}
+.review .mark{font-family:var(--fh); font-weight:800; margin-right:.35em}
+.review .mark.ok{color:var(--ok)} .review .mark.bad{color:var(--bad)}
+.scale{border-collapse:collapse; font-size:.95rem}
+.scale td{padding:3px 12px 3px 0}
+
+/* learn */
+.lesson{max-width:68ch}
+.lesson h3{margin-top:.2em}
+.lesson ul, .lesson ol{padding-left:1.3em; margin:0 0 .8em}
+.lesson li{margin-bottom:.25em}
+.plus{border-left:4px solid var(--T); padding-left:12px}
+.warn{background:var(--warnbg); border-radius:10px; padding:10px 12px}
+.baselist{display:grid; gap:8px; margin:0 0 12px}
+.baselist div{display:flex; align-items:center; gap:12px}
+.example{display:inline-flex; flex-direction:column; gap:4px; margin:4px 0 12px}
+.example .rowx{display:flex; gap:4px}
+.toc{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 18px}
+.toc a{font-size:.92rem; font-weight:700; text-decoration:none; border:1.5px solid var(--line); background:var(--surface); border-radius:999px; padding:.2em .7em; color:var(--ink)}
+
+/* flashcards */
+.flash{min-height:190px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:var(--surface); border:2px solid var(--ink); border-radius:16px; padding:22px; cursor:pointer; transition:transform .25s ease}
+.flash.flipped{transform:rotateX(0deg); border-color:var(--G)}
+.flash .front{font-family:var(--fh); font-weight:800; font-size:1.6rem}
+.flash .back{font-size:1.1rem; margin-top:10px}
+.flash .side{font-size:.85rem; color:var(--muted); margin-bottom:8px}
+
+#storageWarn{background:var(--warnbg); border:2px solid var(--T); border-radius:12px; padding:10px 14px; margin:0 0 16px}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brandrow">
+      <div class="brand">
+        <h1>Helisa</h1>
+        <p id="who">Trening do kartkówki z budowy i znaczenia DNA</p>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="helixbox">
+      <div id="helix"></div>
+      <p class="helixcap" id="helixcap"></p>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Sekcje">
+      <button class="tab" data-view="home">Start</button>
+      <button class="tab" data-view="learn">Nauka</button>
+      <button class="tab" data-view="train">Trening</button>
+      <button class="tab" data-view="workshop">Warsztat nici</button>
+      <button class="tab" data-view="cards">Fiszki</button>
+      <button class="tab" data-view="exam">Kartkówka próbna</button>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div id="storageWarn" hidden>Ta przeglądarka nie pozwala zapisać postępów z tego pliku, więc wyniki znikną po jego zamknięciu. Otwórz plik w Chrome, Edge lub Firefoksie na komputerze.</div>
+  <div id="app"></div>
+</main>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+
+<script>
+"use strict";
+/* ================= DANE ================= */
+const TOPICS=[
+  {id:'nazwa',name:'Pełna nazwa DNA'},
+  {id:'miejsce',name:'Gdzie jest DNA'},
+  {id:'ksztalt',name:'Kształt DNA'},
+  {id:'budowa',name:'Budowa nukleotydu'},
+  {id:'zasady',name:'Zasady azotowe'},
+  {id:'kompl',name:'Komplementarność'},
+  {id:'replik',name:'Replikacja'},
+  {id:'funkcja',name:'Funkcja DNA'},
+  {id:'plus',name:'Ponad program ⭐'}
+];
+const TNAME=Object.fromEntries(TOPICS.map(t=>[t.id,t.name]));
+const BASE_TOPICS=TOPICS.filter(t=>t.id!=='plus');
+
+// w pytaniach wyboru poprawna odpowiedź jest zawsze PIERWSZA – kolejność jest losowana przy wyświetlaniu
+const mc=(id,topic,q,opts,e)=>({id,topic,type:'mc',q,opts,e});
+const inp=(id,topic,q,answers,e,show)=>({id,topic,type:'input',q,answers,e,show:show||answers[0]});
+const ord=(id,topic,q,steps,e)=>({id,topic,type:'order',q,steps,e});
+const mat=(id,topic,q,pairs,e)=>({id,topic,type:'match',q,pairs,e});
+
+const BANK=[
+/* nazwa */
+mc('n1','nazwa','Jaka jest pełna nazwa DNA?',['kwas deoksyrybonukleinowy','kwas rybonukleinowy','kwas deoksynukleotydowy','deoksyryboza nukleinowa'],'DNA to kwas deoksyrybonukleinowy. Kwas rybonukleinowy to RNA – inna cząsteczka.'),
+mc('n2','nazwa','Od czego pochodzi człon „nukleinowy” w nazwie DNA?',['od łacińskiego słowa nucleus, czyli jądro','od słowa „nić”','od nazwy nukleotydu adeninowego','od nazwiska odkrywcy'],'Kwasy nukleinowe odkryto w jądrach komórkowych – stąd nazwa od nucleus, czyli jądro.'),
+mc('n3','nazwa','Człon „deoksyrybo-” w nazwie DNA pochodzi od:',['cukru deoksyrybozy','zasady azotowej','reszty kwasu fosforowego','białka'],'Deoksyryboza to cukier, który jest częścią każdego nukleotydu.'),
+inp('n4','nazwa','Wpisz pełną nazwę DNA.',['kwas deoksyrybonukleinowy'],'Kwas + deoksyrybo (cukier) + nukleinowy (od nucleus – jądro). Tę nazwę trzeba umieć napisać bezbłędnie.'),
+mc('n5','nazwa','Skąd pochodzi skrót DNA?',['z angielskiej nazwy deoxyribonucleic acid','od słów „dziedziczna nić atomów”','od słów „dwuniciowy nukleotyd azotowy”','od słów „deoksyryboza, nukleotyd, azot”'],'DNA to skrót od angielskiej nazwy deoxyribonucleic acid, czyli kwas deoksyrybonukleinowy.'),
+/* miejsce */
+mc('m1','miejsce','Gdzie w komórce zwierzęcej znajduje się głównie DNA?',['w jądrze komórkowym','w błonie komórkowej','w cytoplazmie','w rybosomach'],'DNA znajduje się głównie w jądrze komórkowym i jest jego najważniejszym składnikiem.'),
+mc('m2','miejsce','DNA jest najważniejszym składnikiem:',['jądra komórkowego','błony komórkowej','cytoplazmy','mitochondrium'],'Tak mówi podręcznik: DNA znajduje się głównie w jądrze i jest jego najważniejszym składnikiem.'),
+mc('m3','miejsce','Prawda czy fałsz: w jednej komórce człowieka jest tylko jedna cząsteczka DNA.',['Fałsz – w jednej komórce jest wiele cząsteczek DNA','Prawda'],'W komórce (z wyjątkiem bakterii) jest wiele cząsteczek DNA. U człowieka typowa komórka ma ich 46 – każda to jeden chromosom.'),
+mc('m4','miejsce','Jaką łączną długość ma rozwinięte DNA z jednej komórki człowieka?',['ponad 2 metry','ok. 2 milimetry','ok. 2 centymetry','ok. 2 kilometry'],'Łącznie ponad 2 m – a jądro ma średnicę zaledwie kilku mikrometrów.'),
+mc('m5','miejsce','Jak DNA o długości ponad 2 m mieści się w jądrze o średnicy kilku mikrometrów?',['jest nawinięte na białka i ciasno zwinięte','jest pocięte na bardzo krótkie kawałki','jest ściśnięte do rozmiaru jednego atomu','większość DNA wystaje poza komórkę'],'Cząsteczki DNA są nawinięte na odpowiednie białka – jak nici na szpulki. Jądro przypomina koszyk pełen kłębków wełny.'),
+inp('m6','miejsce','W jakiej części komórki znajduje się głównie DNA? Wpisz nazwę.',['jądro komórkowe','jądro','w jądrze komórkowym','w jądrze','jądrze komórkowym','jądrze'],'DNA znajduje się głównie w jądrze komórkowym.','jądro komórkowe'),
+/* ksztalt */
+mc('k1','ksztalt','Jaki kształt ma cząsteczka DNA?',['podwójnej helisy','pojedynczej prostej nici','pierścienia','kulki'],'Dwie nici skręcone spiralnie wokół wspólnej osi tworzą podwójną helisę.'),
+mc('k2','ksztalt','Podwójną helisę DNA często porównuje się do:',['skręconej drabiny','sznura korali','sprężyny z jednego drutu','kłębka włóczki'],'Boki drabiny to nici, a szczeble to pary zasad azotowych.'),
+mc('k3','ksztalt','Z ilu nici składa się cząsteczka DNA?',['z dwóch','z jednej','z trzech','z czterech'],'Cząsteczka DNA składa się z dwóch nici – stąd „podwójna” helisa.'),
+inp('k4','ksztalt','Jak nazywa się kształt cząsteczki DNA? Wpisz dwa słowa.',['podwójna helisa','podwójnej helisy','helisa podwójna'],'Podwójna helisa – dwie spiralnie skręcone nici.','podwójna helisa'),
+mc('k5','ksztalt','Co tworzy „szczeble” drabiny DNA?',['pary zasad azotowych z przeciwległych nici','reszty kwasu fosforowego','cząsteczki deoksyrybozy','białka'],'Zasady azotowe są skierowane do wnętrza cząsteczki i łączą się w pary.'),
+mc('k6','ksztalt','Co tworzy „boki” drabiny DNA?',['na przemian cukier (deoksyryboza) i reszty kwasu fosforowego','zasady azotowe','wiązania wodorowe','białka'],'Szkielet każdej nici to łańcuch: cukier – fosforan – cukier – fosforan…'),
+mc('k7','ksztalt','Jak są ułożone względem siebie nici DNA?',['są spiralnie skręcone wokół wspólnej osi i równo od siebie oddalone','leżą obok siebie proste i równoległe','przecinają się pod kątem prostym','jedna jest zwinięta wewnątrz drugiej'],'Tak opisuje to podręcznik: dwie spiralnie skręcone, równo odległe od siebie nici.'),
+/* budowa */
+mc('b1','budowa','Z jakich części składa się pojedynczy nukleotyd DNA?',['deoksyryboza, reszta kwasu fosforowego, zasada azotowa','ryboza, reszta kwasu fosforowego, zasada azotowa','deoksyryboza, białko, zasada azotowa','aminokwas, cukier, zasada azotowa'],'Nukleotyd = cukier (deoksyryboza) + reszta kwasu fosforowego + zasada azotowa. Ryboza występuje w RNA, nie w DNA.'),
+mc('b2','budowa','Podstawową jednostką budującą nić DNA jest:',['nukleotyd','aminokwas','gen','chromosom'],'Każda nić DNA to szereg połączonych, wielokrotnie powtarzających się nukleotydów.'),
+mc('b3','budowa','Deoksyryboza to:',['cukier','zasada azotowa','białko','kwas'],'Deoksyryboza to cukier – jeden z trzech składników nukleotydu.'),
+mc('b4','budowa','Który element NIE wchodzi w skład nukleotydu DNA?',['aminokwas','deoksyryboza','reszta kwasu fosforowego','zasada azotowa'],'Aminokwasy budują białka, a nie nukleotydy.'),
+mc('b5','budowa','Ile rodzajów nukleotydów buduje DNA?',['4','2','3','20'],'Cztery: adeninowy (A), tyminowy (T), cytozynowy (C) i guaninowy (G).'),
+mc('b6','budowa','Czym różnią się od siebie nukleotydy w DNA?',['rodzajem zasady azotowej','rodzajem cukru','liczbą reszt kwasu fosforowego','kolorem'],'Cukier i fosforan są w każdym nukleotydzie takie same – różni je tylko zasada azotowa (A, T, C lub G).'),
+inp('b7','budowa','Jak nazywa się cukier wchodzący w skład nukleotydów DNA?',['deoksyryboza'],'Deoksyryboza – stąd człon „deoksyrybo-” w nazwie DNA.'),
+mat('b8','budowa','Połącz element nukleotydu z jego opisem.',[['deoksyryboza','cukier'],['reszta kwasu fosforowego','część szkieletu nici z atomem fosforu'],['zasada azotowa','A, T, C lub G – skierowana do wnętrza helisy']],'Te trzy części tworzą każdy nukleotyd.'),
+/* zasady */
+mc('z1','zasady','Które zasady azotowe budują nukleotydy DNA?',['adenina, tymina, cytozyna, guanina','adenina, uracyl, cytozyna, guanina','adenina, tymina, cytozyna, glukoza','alanina, tymina, cytozyna, guanina'],'A – adenina, T – tymina, C – cytozyna, G – guanina.'),
+mc('z2','zasady','Litera T w DNA oznacza:',['tyminę','tlen','tyrozynę','trypsynę'],'T – tymina (nukleotyd tyminowy).'),
+mc('z3','zasady','Litera C w DNA oznacza:',['cytozynę','cukier','celulozę','chlor'],'C – cytozyna (nukleotyd cytozynowy).'),
+mc('z4','zasady','Litera G w DNA oznacza:',['guaninę','glukozę','gen','glicerol'],'G – guanina (nukleotyd guaninowy).'),
+mc('z5','zasady','Litera A w DNA oznacza:',['adeninę','azot','aminokwas','albuminę'],'A – adenina (nukleotyd adeninowy).'),
+mat('z6','zasady','Połącz literę z nazwą zasady azotowej.',[['A','adenina'],['T','tymina'],['C','cytozyna'],['G','guanina']],'Skróty to pierwsze litery nazw zasad.'),
+inp('z7','zasady','Wpisz nazwę zasady oznaczonej literą G.',['guanina'],'G – guanina.'),
+inp('z8','zasady','Wpisz nazwę zasady oznaczonej literą C.',['cytozyna'],'C – cytozyna.'),
+inp('z9','zasady','Wpisz nazwę zasady oznaczonej literą T.',['tymina'],'T – tymina.'),
+inp('z10','zasady','Wpisz nazwę zasady oznaczonej literą A.',['adenina'],'A – adenina.'),
+mc('z11','zasady','Nukleotyd zawierający guaninę nazywamy:',['guaninowym','guanozynowym','glukozowym','genowym'],'Nazwa nukleotydu pochodzi od zasady: adeninowy, tyminowy, cytozynowy, guaninowy.'),
+/* komplementarność */
+mc('c1','kompl','Z którym nukleotydem łączy się nukleotyd adeninowy (A)?',['z tyminowym (T)','z cytozynowym (C)','z guaninowym (G)','z adeninowym (A)'],'A łączy się tylko z T.'),
+mc('c2','kompl','Z którym nukleotydem łączy się nukleotyd guaninowy (G)?',['z cytozynowym (C)','z tyminowym (T)','z adeninowym (A)','z guaninowym (G)'],'G łączy się tylko z C. Sposób na zapamiętanie: kanciaste A i T razem, okrągłe C i G razem.'),
+mc('c3','kompl','Na czym polega reguła komplementarności?',['A łączy się tylko z T, a C tylko z G, więc kolejność w jednej nici wyznacza kolejność w drugiej','każdy nukleotyd może połączyć się z dowolnym innym','obie nici mają identyczną kolejność nukleotydów','nukleotydy łączą się tylko z takimi samymi'],'Znając jedną nić, znamy drugą – nici są do siebie dopasowane, a nie identyczne.'),
+mc('c4','kompl','Jedna nić ma kolejność A T G C C A. Jaka jest nić komplementarna?',['T A C G G T','A T G C C A','T A G C C T','G C A T T G'],'Zamieniamy litera po literze: A→T, T→A, G→C, C→G.'),
+mc('c5','kompl','Czym łączą się zasady azotowe z przeciwległych nici?',['słabymi wiązaniami wodorowymi','resztami kwasu fosforowego','cząsteczkami cukru','białkami'],'Wiązania wodorowe są słabe, dzięki czemu nici można rozpiąć, np. podczas replikacji.'),
+mc('c6','kompl','Prawda czy fałsz: obie nici DNA mają identyczną kolejność nukleotydów.',['Fałsz – nici są komplementarne, czyli do siebie dopasowane','Prawda'],'Naprzeciw A jest T, naprzeciw C jest G – kolejności są różne, ale ściśle ze sobą powiązane.'),
+mc('c7','kompl','Jeśli znamy kolejność nukleotydów w jednej nici DNA, to:',['możemy ustalić kolejność w drugiej nici','nic nie wiemy o drugiej nici','druga nić jest identyczna','druga nić ma litery w kolejności alfabetycznej'],'To bezpośredni skutek reguły komplementarności.'),
+inp('c8','kompl','Z jakim nukleotydem łączy się nukleotyd cytozynowy? Wpisz literę lub nazwę.',['g','guanina','guaninowy','z guaninowym','nukleotyd guaninowy','z nukleotydem guaninowym','z guaniną','guaniną'],'C łączy się z G, czyli z nukleotydem guaninowym.','G (guaninowy)'),
+mc('c9','kompl','Jak nazywamy cechę DNA, że kolejność nukleotydów w jednej nici jest wyznaczana przez kolejność w drugiej?',['komplementarność','replikacja','helisa','mutacja'],'To komplementarność.'),
+/* replikacja */
+mc('r1','replik','Co to jest replikacja?',['powielanie (podwojenie) DNA przed podziałem komórki','rozpad DNA na pojedyncze nukleotydy','łączenie DNA matki i ojca','zwijanie DNA w jądrze'],'Replikacja to powielanie DNA, żeby każda komórka potomna dostała pełną kopię informacji.'),
+mc('r2','replik','Kiedy zachodzi replikacja?',['przed podziałem komórki','po śmierci komórki','tylko podczas snu','tylko w komórkach jajowych'],'DNA jest kopiowane przed każdym podziałem komórki.'),
+mc('r3','replik','Jak wyglądają cząsteczki DNA powstałe w wyniku replikacji?',['każda ma jedną nić starą i jedną nową','obie nici każdej cząsteczki są nowe','jedna cząsteczka ma dwie stare nici, druga dwie nowe','każda ma nici poskładane z losowych kawałków'],'Stara nić jest wzorem, do którego dobudowuje się nową – powstaje para: nić stara (macierzysta) + nić nowa.'),
+mc('r4','replik','Cząsteczki DNA powstałe w replikacji w porównaniu z cząsteczką wyjściową są:',['identyczne','zupełnie inne','o połowę krótsze','odwrócone'],'Są identyczne z wyjściową. Uwaga: na str. 8 podręcznik pisze „komplementarne” – to nieścisłość. Komplementarna do starej nici jest tylko nowo dobudowana nić.'),
+mc('r5','replik','Po co zachodzi replikacja?',['żeby każda komórka potomna dostała pełną kopię informacji o cechach organizmu','żeby komórka miała zapas energii','żeby usunąć stare DNA','żeby DNA zmieniło kształt'],'Bez replikacji po podziale każda komórka dostałaby tylko część instrukcji.'),
+mc('r6','replik','Co dzieje się na początku replikacji?',['podwójna helisa rozplata się na pojedyncze nici','komórka dzieli się na dwie','DNA opuszcza jądro','nukleotydy zamieniają się w aminokwasy'],'Najpierw nici muszą się rozpleść – dopiero wtedy do każdej można dobudować nową.'),
+mc('r7','replik','Co przyłącza się do rozplecionych nici podczas replikacji?',['komplementarne nukleotydy','aminokwasy','gotowe chromosomy','same zasady azotowe bez cukru'],'Wolne nukleotydy dopasowują się do nici według reguły A–T, C–G.'),
+mc('r8','replik','Dlaczego bezbłędny przebieg replikacji jest ważny?',['bo zmiana (błąd) w DNA może zaburzyć procesy w komórkach potomnych','bo błąd przyspiesza podział komórki','bo błędy w DNA nie mają znaczenia','bo bez tego DNA nie zmieści się w jądrze'],'Komórka potomna działa według instrukcji z DNA. Błąd w instrukcji może zaburzyć jej pracę.'),
+mc('r9','replik','Nić, która była w DNA przed replikacją, nazywamy:',['nicią starą (macierzystą)','nicią nową','nicią zapasową','nicią potomną'],'Nić stara, czyli macierzysta, służy jako wzór do dobudowania nowej.'),
+ord('r10','replik','Ułóż etapy replikacji we właściwej kolejności.',['Podwójna helisa rozplata się na dwie pojedyncze nici.','Do każdej nici przyłączają się komplementarne nukleotydy (A z T, C z G).','Nowe nukleotydy łączą się ze sobą w nową nić.','Powstają dwie identyczne cząsteczki DNA – każda z nicią starą i nową.'],'Rozplecenie → dopasowanie nukleotydów → połączenie w nić → dwie identyczne cząsteczki.'),
+inp('r11','replik','Jak nazywa się proces powielania DNA?',['replikacja','replikacją'],'Replikacja.','replikacja'),
+mc('r12','replik','Każda komórka potomna po podziale otrzymuje:',['jedną z dwóch kopii informacji o cechach organizmu','połowę informacji','losową część DNA','żadnego DNA – musi je zbudować od zera'],'Dzięki replikacji obie komórki potomne dostają taką samą, pełną porcję informacji.'),
+/* funkcja */
+mc('f1','funkcja','Jaką funkcję pełni DNA w organizmach?',['przechowuje informację o cechach i funkcjonowaniu organizmu i przekazuje ją komórkom potomnym','dostarcza komórce energii','buduje błonę komórkową','transportuje tlen'],'DNA zawiera kompletną informację o budowie i funkcjonowaniu organizmu.'),
+mc('f2','funkcja','W czym zapisana jest informacja o cechach organizmu?',['w kolejności nukleotydów w DNA','w kształcie komórki','w liczbie mitochondriów','w kolorze jądra komórkowego'],'Jak znaczenie zdania zależy od kolejności liter – tylko że alfabet DNA ma 4 litery.'),
+mc('f3','funkcja','Co kieruje pracą każdej komórki?',['informacja zapisana w DNA','błona komórkowa','cytoplazma','woda'],'DNA zawiera instrukcje dotyczące budowy i funkcjonowania komórki i całego organizmu.'),
+mc('f4','funkcja','Dlaczego ludzie są do siebie podobni, ale nie tacy sami?',['mamy wspólne cechy gatunku zapisane w DNA, ale kolejność nukleotydów trochę różni się u każdego','wszyscy mamy identyczne DNA','podobieństwo zależy tylko od jedzenia','DNA nie ma wpływu na wygląd'],'Wspólne cechy gatunku (np. duży mózg, dwunożny chód) mamy wszyscy, ale drobne różnice w DNA sprawiają, że każdy jest inny.'),
+inp('f5','funkcja','Uzupełnij: informacja o cechach organizmu jest zapisana w kolejności ______ w DNA.',['nukleotydów','nukleotydy'],'W kolejności nukleotydów.','nukleotydów'),
+mc('f6','funkcja','Podczas podziału komórki informacja zawarta w DNA:',['jest przekazywana do komórek potomnych','zostaje zniszczona','trafia tylko do jednej komórki','zamienia się w białko'],'Każda komórka potomna otrzymuje kopię informacji o cechach organizmu.'),
+mc('f7','funkcja','Przypisywanie organizmów do królestw, gromad czy gatunków na podstawie wspólnych cech to:',['klasyfikacja','replikacja','komplementarność','mutacja'],'Naukowcy podzielili organizmy na grupy systematyczne właśnie na podstawie ich cech (str. 6).'),
+/* ⭐ ponad program */
+mc('p1','plus','Z atomów jakich pierwiastków zbudowane są nukleotydy DNA?',['węgla, wodoru, tlenu, azotu i fosforu','tylko węgla, wodoru i tlenu','węgla, wodoru, tlenu, azotu i siarki','żelaza, wapnia, sodu i potasu'],'C, H, O, N, P. Na przykład nukleotyd z adeniną ma wzór C₁₀H₁₄N₅O₆P – to 36 atomów.'),
+mc('p2','plus','Reszta kwasu fosforowego to:',['grupa atomów – jeden atom fosforu połączony z atomami tlenu','pojedynczy atom fosforu','cząsteczka białka','kropelka kwasu w jądrze komórkowym'],'Kwas fosforowy to H₃PO₄. Gdy łączy się z cukrem, traci część wodorów – to, co zostaje, to „reszta”.'),
+mc('p3','plus','Czym chemicznie jest nukleotyd?',['cząsteczką związku chemicznego złożoną z kilkudziesięciu atomów','pojedynczym atomem','małą żywą komórką','mieszaniną kilku substancji'],'Nukleotyd to cząsteczka – tego samego rodzaju co cukier czy witamina.'),
+mc('p4','plus','Jakim wiązaniem połączone są cukier i fosforan w szkielecie jednej nici?',['mocnym wiązaniem kowalencyjnym (wspólne elektrony)','słabym wiązaniem wodorowym','przyciąganiem magnetycznym','białkowym klejem'],'Szkielet nici jest mocny – wiązania kowalencyjne. Słabe są tylko wiązania wodorowe między niciami.'),
+mc('p5','plus','Czym jest wiązanie wodorowe?',['przyciąganiem lekko dodatniego atomu wodoru do lekko ujemnego atomu (np. azotu lub tlenu) z sąsiedniej cząsteczki','wspólną parą elektronów dwóch atomów wodoru','cząsteczką gazu wodoru H₂ między nićmi','wiązaniem, które powstaje tylko w wodzie'],'Azot lub tlen „ściąga” elektron wodoru, więc wodór staje się małym dodatnim punktem, który przyciąga ujemny atom z drugiej zasady – jak słaby magnesik.'),
+mc('p6','plus','Ile wiązań wodorowych łączy parę G–C?',['3','2','1','4'],'G–C łączą trzy wiązania wodorowe, a A–T dwa. Dlatego para G–C trzyma się mocniej.'),
+mc('p7','plus','Ile wiązań wodorowych łączy parę A–T?',['2','3','1','4'],'A–T łączą dwa wiązania wodorowe.'),
+mc('p8','plus','Dlaczego to dobrze, że wiązania wodorowe w DNA są słabe?',['bo nici można rozpiąć (np. przy replikacji) bez niszczenia ich szkieletu','bo DNA powinno się samo rozpadać','bo łatwiej je narysować','to nie ma żadnego znaczenia'],'Rozpinanie wiązań wodorowych działa jak suwak zamka błyskawicznego – mocny szkielet zostaje nietknięty.'),
+mc('p9','plus','Dlaczego odległość między nićmi DNA jest wszędzie taka sama?',['każda para to jedna zasada duża (A lub G) i jedna mała (T lub C)','bo nici są sztywne jak metal','bo rozsuwają je białka','to przypadek'],'A i G mają po dwa pierścienie, T i C po jednym. Każdy „szczebel” ma więc tę samą długość.'),
+mc('p10','plus','Dlaczego A nie łączy się z C?',['bo ich miejsca wiązań wodorowych (plusiki i minusiki) do siebie nie pasują','bo A jest pierwsza w alfabecie','bo obie są dużymi zasadami','bo występują w różnych komórkach'],'Każda zasada ma plusiki i minusiki w konkretnych miejscach – pasują do siebie tylko A–T i G–C, jak kształty puzzli.'),
+mc('p11','plus','Dlaczego DNA nazywamy kwasem?',['bo reszty kwasu fosforowego nadają mu właściwości kwasowe','bo jest kwaśne w smaku','bo powstaje w żołądku','bo zawiera kwas solny'],'Reszty fosforanowe mają ładunek ujemny i nadają cząsteczce charakter kwasowy.'),
+mc('p12','plus','Jaką grubość ma podwójna helisa DNA?',['ok. 2 nanometry','ok. 2 mikrometry','ok. 2 milimetry','ok. 0,2 milimetra'],'Ok. 2 nm, czyli dwie miliardowe części metra. Jeden atom to ok. 0,1 nm.'),
+mc('p13','plus','Ile mniej więcej par nukleotydów liczy DNA jednej komórki człowieka?',['ok. 6,4 miliarda','ok. 6400','ok. 64 tysiące','ok. 64 miliony'],'Ok. 6,4 mld par. Podręcznik pisze o „tysiącach nukleotydów” – w rzeczywistości jedna cząsteczka ma ich miliony.'),
+mc('p14','plus','Która zasada występuje w RNA, ale NIE w DNA?',['uracyl','adenina','guanina','cytozyna'],'W RNA zamiast tyminy jest uracyl (U). To częsta pułapka w testach.'),
+mc('p15','plus','Gdzie znajduje się DNA u bakterii?',['w cytoplazmie, bo bakterie nie mają jądra','w jądrze komórkowym','w ścianie komórkowej','bakterie nie mają DNA'],'Bakterie nie mają jądra – ich DNA leży w cytoplazmie. Widać to na zdjęciu na str. 6.'),
+mc('p16','plus','Oprócz jądra niewielka ilość DNA znajduje się też w:',['mitochondriach','rybosomach','błonie komórkowej','cytoplazmie komórki zwierzęcej luzem'],'Mitochondria mają własne małe DNA. U roślin także chloroplasty.'),
+mc('p17','plus','Które białko dokleja nowe nukleotydy podczas replikacji?',['polimeraza DNA','hemoglobina','histon','insulina'],'Polimeraza DNA „czyta” starą nić i dokleja pasujące nukleotydy.'),
+mc('p18','plus','W której fazie cyklu komórkowego zachodzi replikacja DNA?',['S','M','G1','G2'],'Faza S (od „synteza”): ok. 8 godzin w typowej dzielącej się komórce człowieka.'),
+mc('p19','plus','Jak nazywa się faza, w której komórka ma już podwojone DNA, ale jeszcze się nie dzieli?',['G2','G1','S','M'],'G2 – ok. 4 godziny sprawdzania i przygotowania do podziału.'),
+ord('p20','plus','Ułóż fazy cyklu komórkowego we właściwej kolejności.',['G1 – komórka rośnie i pracuje','S – replikacja DNA','G2 – przygotowanie do podziału','M – podział komórki'],'G1 → S → G2 → M, a potem od nowa. Cały cykl trwa zwykle około doby.'),
+mc('p21','plus','Ile mniej więcej trwa replikacja całego DNA w typowej dzielącej się komórce człowieka?',['ok. 8 godzin','ok. 8 sekund','ok. 8 dni','ok. 8 lat'],'Ok. 8 godzin (faza S).'),
+mc('p22','plus','Dlaczego replikacja trwa tylko kilka godzin, choć polimeraza dokleja zaledwie kilkadziesiąt nukleotydów na sekundę?',['bo kopiowanie startuje jednocześnie w dziesiątkach tysięcy miejsc','bo polimeraza z czasem przyspiesza','bo DNA jest krótkie','bo komórka kopiuje tylko połowę DNA'],'Gdyby kopiowała tylko jedna para maszynek, trwałoby to ponad 2 lata.'),
+mc('p23','plus','Co przedstawiają chromosomy w kształcie litery X na zdjęciach z mikroskopu?',['dwie identyczne kopie DNA po replikacji, spięte w środku','chromosom płci X','po jednym chromosomie od mamy i od taty','uszkodzone DNA'],'To chromosomy tuż przed podziałem: dwie kopie, które za chwilę rozejdą się do dwóch komórek potomnych.'),
+mc('p24','plus','Gdzie w ciele człowieka komórki dzielą się (i replikują DNA) bardzo często?',['w szpiku kostnym, w wyściółce jelita i w naskórku','w dojrzałych neuronach','w dojrzałych krwinkach czerwonych','nigdzie – u dorosłych komórki się nie dzielą'],'Ciało dorosłego wymienia ok. 330 miliardów komórek dziennie. Dojrzałe krwinki czerwone nie mają jądra, a większość neuronów się nie dzieli.'),
+mc('p25','plus','Trwała zmiana (błąd) w kolejności nukleotydów w DNA to:',['mutacja','replikacja','komplementarność','helisa'],'O mutacjach będzie w dziale 2.'),
+mc('p26','plus','Jak komórka dba o to, by dwie kopie DNA po replikacji się nie splątały?',['nawija DNA na białka (histony) i spina obie kopie białkowymi obrączkami','tnie DNA na drobne kawałki','wyrzuca jedną kopię z jądra','nie dba – splątanie jest normalne'],'Nawinięcie na „szpulki”, spięcie kopii i ciasne zwinięcie przed podziałem pozwalają rozdzielić kopie bez rwania.'),
+ord('p27','plus','Ułóż od najmniejszego do największego.',['atom wodoru','nukleotyd','grubość podwójnej helisy','jądro komórkowe','komórka człowieka','rozwinięte DNA z jednej komórki'],'Ok. 0,1 nm → ok. 1 nm → ok. 2 nm → kilka mikrometrów → zwykle 10–30 mikrometrów → ponad 2 metry.'),
+mc('p28','plus','W kuchennym doświadczeniu z izolacją DNA z kiwi po co dodaje się płyn do naczyń?',['rozpuszcza tłuszczowe błony komórek i jąder','nadaje DNA kolor','zabija bakterie','usuwa wodę'],'Błony są zbudowane m.in. z tłuszczów, a płyn do naczyń rozpuszcza tłuszcz – DNA się uwalnia.'),
+mc('p29','plus','Po co w tym doświadczeniu dodaje się sól?',['zobojętnia ujemne ładunki reszt fosforanowych, więc nici mogą się zlepić','dodaje smaku','rozpuszcza błony komórkowe','zamraża DNA'],'Bez soli ujemnie naładowane nici by się odpychały. Na koniec zimny alkohol wytrąca DNA w postaci białych nitek.'),
+mc('p30','plus','Dlaczego to akurat wodór tworzy wiązania wodorowe?',['to najmniejszy atom z jednym elektronem – gdy azot lub tlen go odciągnie, zostaje mały dodatni punkt','bo wodór jest najcięższym atomem','bo DNA jest zrobione z wody','bo wodór jest metalem'],'Po odciągnięciu elektronu zostaje prawie gołe jądro wodoru, które może podejść bardzo blisko do ujemnego atomu.'),
+mc('p31','plus','Dlaczego drabina DNA skręca się w helisę?',['płaskie zasady układają się jedna na drugiej jak stos monet, chowając się przed wodą','bo polimeraza ją przekręca','bo fosforany przyciągają się nawzajem','bo tak wygląda tylko na rysunkach'],'Szkielet z fosforanami lubi wodę i jest na zewnątrz, zasady chowają się do środka. Jeden obrót przypada na ok. 10 par.')
+];
+
+const CARDS=[
+ {id:'q1',f:'DNA',b:'kwas deoksyrybonukleinowy'},
+ {id:'q2',f:'Gdzie w komórce jest DNA?',b:'głównie w jądrze komórkowym'},
+ {id:'q3',f:'Kształt DNA',b:'podwójna helisa – dwie nici spiralnie skręcone wokół wspólnej osi'},
+ {id:'q4',f:'Nukleotyd',b:'jednostka budująca DNA: deoksyryboza + reszta kwasu fosforowego + zasada azotowa'},
+ {id:'q5',f:'Deoksyryboza',b:'cukier wchodzący w skład nukleotydu DNA'},
+ {id:'q6',f:'A',b:'adenina – łączy się z T'},
+ {id:'q7',f:'T',b:'tymina – łączy się z A'},
+ {id:'q8',f:'C',b:'cytozyna – łączy się z G'},
+ {id:'q9',f:'G',b:'guanina – łączy się z C'},
+ {id:'q10',f:'Reguła komplementarności',b:'A łączy się tylko z T, a C tylko z G – kolejność w jednej nici wyznacza kolejność w drugiej'},
+ {id:'q11',f:'Wiązania wodorowe',b:'słabe wiązania łączące zasady z przeciwległych nici DNA'},
+ {id:'q12',f:'Replikacja',b:'powielanie DNA przed podziałem komórki; powstają dwie identyczne cząsteczki (nić stara + nić nowa)'},
+ {id:'q13',f:'Nić macierzysta',b:'stara nić DNA, która jest wzorem do dobudowania nowej'},
+ {id:'q14',f:'Funkcja DNA',b:'przechowuje informację o cechach i funkcjonowaniu organizmu, kieruje pracą komórki, przekazuje informację komórkom potomnym'},
+ {id:'q15',f:'Chromosom',b:'postać, jaką przybiera DNA podczas podziałów komórki'},
+ {id:'q16',f:'Polimeraza DNA',b:'białko (enzym), które dokleja nowe nukleotydy podczas replikacji',plus:true},
+ {id:'q17',f:'Mutacja',b:'trwała zmiana (błąd) w kolejności nukleotydów w DNA',plus:true},
+ {id:'q18',f:'Histony',b:'białka, na które nawija się DNA jak nić na szpulki',plus:true},
+ {id:'q19',f:'Faza S',b:'etap cyklu komórkowego, w którym zachodzi replikacja DNA',plus:true},
+ {id:'q20',f:'Faza G2',b:'komórka ma już podwojone DNA i przygotowuje się do podziału',plus:true},
+ {id:'q21',f:'Pierwiastki budujące DNA',b:'węgiel, wodór, tlen, azot, fosfor (C, H, O, N, P)',plus:true},
+ {id:'q22',f:'Uracyl',b:'zasada azotowa RNA – nie występuje w DNA',plus:true}
+];
+
+const NAME={A:'adenina',T:'tymina',C:'cytozyna',G:'guanina'};
+const PAIR={A:'T',T:'A',C:'G',G:'C'};
+const GRADES={1:'niedostateczny',2:'dopuszczający',3:'dostateczny',4:'dobry',5:'bardzo dobry',6:'celujący'};
+const LEVELS=[[0,'Atom'],[100,'Nukleotyd'],[300,'Nić'],[600,'Helisa'],[1000,'Chromosom'],[1600,'Jądro komórkowe'],[2500,'Genetyk']];
+
+/* ================= ZAPIS ================= */
+const KEY='helisa-dna-v1';
+let storageOK=true;
+function fresh(){return {v:1,name:'Wiktor',xp:0,items:{},cards:{},sessions:[],days:[],ws:{best:0,cur:0}};}
+function load(){
+  try{
+    localStorage.setItem(KEY+'-test','1'); localStorage.removeItem(KEY+'-test');
+    const raw=localStorage.getItem(KEY);
+    if(raw){ const d=JSON.parse(raw); const f=fresh(); return Object.assign(f,d,{ws:Object.assign(f.ws,d.ws||{})}); }
+  }catch(e){ storageOK=false; }
+  return fresh();
+}
+function save(){
+  if(!storageOK) return;
+  try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ storageOK=false; showStorageWarn(); }
+}
+function showStorageWarn(){ document.getElementById('storageWarn').hidden=storageOK; }
+let S=load();
+
+/* ================= POMOCNICZE ================= */
+const $=s=>document.querySelector(s);
+const app=document.getElementById('app');
+function h(tag,cls,text){const e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e;}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a;}
+const pickOne=a=>a[Math.floor(Math.random()*a.length)];
+function dayStr(d){d=d||new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function fmtDate(t){const d=new Date(t); return d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0')+', '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');}
+const norm=s=>String(s).toLowerCase().trim().replace(/\s+/g,' ').replace(/[.!,;]+$/,'');
+const strip=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ł/g,'l');
+function lev(a,b){const m=a.length,n=b.length; const d=Array.from({length:m+1},(_,i)=>[i]); for(let j=1;j<=n;j++) d[0][j]=j; for(let i=1;i<=m;i++) for(let j=1;j<=n;j++) d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[m][n];}
+function chipHTML(b,sm){return `<span class="b b-${b}${sm?' sm':''}">${b}</span>`;}
+function chipEl(b){const e=h('span','b b-'+b,b); e.setAttribute('aria-label',NAME[b]); return e;}
+function plPytan(n){ if(n===1) return 'pytanie'; const d=n%10, dd=n%100; return (d>=2&&d<=4&&!(dd>=12&&dd<=14))?'pytania':'pytań'; }
+let cleanupFns=[];
+function runCleanup(){ cleanupFns.forEach(f=>{try{f();}catch(e){}}); cleanupFns=[]; }
+
+/* ================= STATYSTYKI ================= */
+function markDay(){ const t=dayStr(); if(!S.days.includes(t)){ S.days.push(t); if(S.days.length>400) S.days=S.days.slice(-400);} }
+function record(id,ok){
+  const st=S.items[id]||(S.items[id]={n:0,ok:0,wrong:0,streak:0,last:0,lastOk:null});
+  st.n++; if(ok){st.ok++; st.streak++;} else {st.wrong++; st.streak=0;}
+  st.last=Date.now(); st.lastOk=ok; S.xp+=ok?10:2; markDay(); save();
+}
+function logSession(o){ S.sessions.push(Object.assign({t:Date.now()},o)); if(S.sessions.length>300) S.sessions=S.sessions.slice(-300); save(); }
+function isMastered(id){ const st=S.items[id]; return !!st && st.streak>=(id.startsWith('gen-')?3:2); }
+function topicIds(t){ const ids=BANK.filter(i=>i.topic===t).map(i=>i.id); if(t==='kompl') ids.push('gen-compl','gen-err'); return ids; }
+function topicStats(t){ const ids=topicIds(t); const m=ids.filter(isMastered).length; return {m,total:ids.length,frac:ids.length?m/ids.length:0}; }
+function baseStats(){ return BASE_TOPICS.reduce((a,t)=>{const s=topicStats(t.id); a.m+=s.m; a.total+=s.total; return a;},{m:0,total:0}); }
+function streakDays(){
+  const set=new Set(S.days); let d=new Date(); if(!set.has(dayStr(d))) d.setDate(d.getDate()-1);
+  let n=0; while(set.has(dayStr(d))){ n++; d.setDate(d.getDate()-1); } return n;
+}
+function level(xp){ let cur=LEVELS[0], next=null; for(let i=0;i<LEVELS.length;i++){ if(xp>=LEVELS[i][0]){cur=LEVELS[i]; next=LEVELS[i+1]||null;} } return {name:cur[1], next, toNext: next? next[0]-xp : 0}; }
+function grade(pct,bonus){ if(pct>=90&&bonus) return 6; if(pct>=90) return 5; if(pct>=75) return 4; if(pct>=55) return 3; if(pct>=40) return 2; return 1; }
+
+/* ================= NAGŁÓWEK I HELISA ================= */
+const HELIX_SEQ='ATGCGTACCTAGGCATTCGAGCTAACG';
+let shownFilled=null;
+function helixFilled(){
+  const set=new Set();
+  TOPICS.forEach((t,ti)=>{ const k=Math.floor(topicStats(t.id).frac*3+1e-9); for(let j=0;j<k;j++) set.add(ti*3+j); });
+  return set;
+}
+function renderHelix(){
+  const filled=helixFilled();
+  const W=720,H=100,mid=50,amp=32,n=27,x0=14,x1=W-14,turns=2.7;
+  const k=turns*2*Math.PI/(x1-x0);
+  let p1='',p2='';
+  for(let x=x0;x<=x1+0.01;x+=3){ const s=Math.sin(k*(x-x0)); p1+=(x===x0?'M':'L')+x.toFixed(1)+' '+(mid+amp*s).toFixed(1); p2+=(x===x0?'M':'L')+x.toFixed(1)+' '+(mid-amp*s).toFixed(1); }
+  let rungs='';
+  for(let i=0;i<n;i++){
+    const x=x0+(i+0.5)*(x1-x0)/n, s=Math.sin(k*(x-x0)), ya=mid+amp*s, yb=mid-amp*s;
+    const t=TOPICS[Math.floor(i/3)], st=topicStats(t.id);
+    const title=`<title>${esc(t.name)}: ${st.m} z ${st.total} opanowanych</title>`;
+    if(filled.has(i)){
+      const b=HELIX_SEQ[i], c=PAIR[b], isNew=shownFilled&&!shownFilled.has(i);
+      rungs+=`<g class="rung${isNew?' new':''}">${title}<line x1="${x.toFixed(1)}" y1="${ya.toFixed(1)}" x2="${x.toFixed(1)}" y2="${mid}" stroke="var(--${b})" stroke-width="7" stroke-linecap="round"/><line x1="${x.toFixed(1)}" y1="${mid}" x2="${x.toFixed(1)}" y2="${yb.toFixed(1)}" stroke="var(--${c})" stroke-width="7" stroke-linecap="round"/></g>`;
+    } else {
+      rungs+=`<g class="rung">${title}<line x1="${x.toFixed(1)}" y1="${ya.toFixed(1)}" x2="${x.toFixed(1)}" y2="${yb.toFixed(1)}" stroke="var(--line)" stroke-width="3" stroke-dasharray="3 4" stroke-linecap="round"/></g>`;
+    }
+  }
+  const svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Twoja helisa: zbudowane pary ${filled.size} z ${n}"><path d="${p2}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round" opacity=".45"/>${rungs}<path d="${p1}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/></svg>`;
+  $('#helix').innerHTML=svg;
+  $('#helixcap').textContent=`Twoja helisa: ${filled.size} z ${n} par. Każdy opanowany temat dokłada do niej pary.`;
+  shownFilled=filled;
+}
+function renderHeader(){
+  $('#who').textContent=`Cześć, ${S.name}! Trening do kartkówki z budowy i znaczenia DNA`;
+  const lv=level(S.xp), sd=streakDays();
+  $('#chips').innerHTML=`<span class="chip" title="Dni nauki z rzędu">🔥 ${sd} ${sd===1?'dzień':'dni'} z rzędu</span><span class="chip">${S.xp} XP</span><span class="chip" title="${lv.next?('Do poziomu '+lv.next[1]+': '+lv.toNext+' XP'):'Najwyższy poziom'}">Poziom: ${esc(lv.name)}</span>`;
+  renderHelix();
+  showStorageWarn();
+}
+
+/* ================= NAWIGACJA ================= */
+let currentView='home', session=null;
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('[data-view]'); if(!b) return;
+  if(session && session.mode==='exam' && !session.done && !confirm('Przerwać kartkówkę próbną? Wynik nie zostanie zapisany.')) return;
+  go(b.dataset.view);
+});
+function go(view){
+  runCleanup(); session=null; currentView=view;
+  document.querySelectorAll('.tab').forEach(t=>{ if(t.dataset.view===view) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
+  ({home:viewHome,learn:viewLearn,train:viewTrain,workshop:viewWorkshop,cards:viewCards,exam:viewExam})[view]();
+  renderHeader();
+  window.scrollTo(0,0);
+}
+app.addEventListener('click',e=>{
+  const b=e.target.closest('[data-action]'); if(!b) return;
+  const a=b.dataset.action;
+  if(a==='go') go(b.dataset.view);
+  else if(a==='train-topic') startTraining(b.dataset.topic,10,false);
+  else if(a==='export') exportData();
+  else if(a==='import') document.getElementById('importFile').click();
+  else if(a==='reset') resetData();
+  else if(a==='rename') rename();
+  else if(a==='start-exam') startExam();
+});
+
+/* ================= START ================= */
+function viewHome(){
+  const bs=baseStats(), pct=Math.round(100*bs.m/bs.total);
+  const exams=S.sessions.filter(x=>x.mode==='exam');
+  const best=exams.reduce((b,x)=>Math.max(b,x.grade||0),0);
+  const anySeen=Object.keys(S.items).length>0;
+  let weakest=null;
+  BASE_TOPICS.forEach(t=>{ const s=topicStats(t.id); if(s.frac<1 && (!weakest||s.frac<weakest.s.frac)) weakest={t,s}; });
+  let rec;
+  if(!anySeen) rec=`<p>Zacznij od zakładki Nauka – to kilka minut czytania. Potem zrób pierwszy trening.</p><div class="btnrow"><button class="btn primary" data-action="go" data-view="learn">Otwórz Naukę</button><button class="btn" data-action="go" data-view="train">Od razu trening</button></div>`;
+  else if(pct>=80 && best<5) rec=`<p>Materiał jest prawie opanowany. Sprawdź się w warunkach kartkówki: 10 pytań bez podpowiedzi i jedno zadanie na szóstkę.</p><div class="btnrow"><button class="btn primary" data-action="start-exam">Napisz kartkówkę próbną</button></div>`;
+  else if(weakest) rec=`<p>Najwięcej do zrobienia: <strong>${esc(weakest.t.name)}</strong> (${weakest.s.m} z ${weakest.s.total} opanowanych).</p><div class="btnrow"><button class="btn primary" data-action="train-topic" data-topic="${weakest.t.id}">Ćwicz ten temat</button></div>`;
+  else if(best<6) rec=`<p>Wszystkie tematy opanowane. Czas na kartkówkę próbną na szóstkę.</p><div class="btnrow"><button class="btn primary" data-action="start-exam">Napisz kartkówkę próbną</button></div>`;
+  else rec=`<p>Szóstka na próbnej i cały materiał opanowany. Na deser: pytania ponad program.</p><div class="btnrow"><button class="btn primary" data-action="train-topic" data-topic="plus">Ćwicz pytania ⭐</button></div>`;
+
+  const rows=TOPICS.map(t=>{ const s=topicStats(t.id), p=Math.round(s.frac*100);
+    return `<li><span>${esc(t.name)}</span><div class="bar${p===100?' full':''}" role="img" aria-label="${p}%"><span style="width:${p}%"></span></div><span class="count">${s.m}/${s.total}</span><button class="btn small ghost" data-action="train-topic" data-topic="${t.id}">Ćwicz</button></li>`; }).join('');
+  const examList=exams.slice(-5).reverse().map(x=>`<li><span>${fmtDate(x.t)}</span><span>${x.ok}/${x.total}${x.bonus?' + ⭐':''} <span class="gradepill">${x.grade}</span></span></li>`).join('');
+  const hist=S.sessions.filter(x=>x.mode!=='exam').slice(-8).reverse().map(x=>`<li><span>${fmtDate(x.t)} – ${esc(x.label)}</span><span>${x.ok}/${x.total}</span></li>`).join('');
+
+  app.innerHTML=`
+  <section class="panel recommend">
+    <h2>Kartkówka: budowa i znaczenie DNA</h2>
+    <p>Opanowane: <strong>${bs.m} z ${bs.total}</strong> ${plPytan(bs.total)} z materiału na kartkówkę (${pct}%). Pytanie jest opanowane, gdy odpowiesz na nie dobrze dwa razy z rzędu.</p>
+    ${rec}
+  </section>
+  <section class="panel">
+    <h3>Tematy</h3>
+    <ul class="topics">${rows}</ul>
+  </section>
+  <section class="panel">
+    <h3>Kartkówki próbne</h3>
+    ${examList?`<p class="small muted">Najlepsza ocena: <strong>${best} (${GRADES[best]})</strong></p><ul class="hist">${examList}</ul>`:`<p class="muted">Jeszcze żadnej. Gdy większość tematów będzie zielona, spróbuj.</p>`}
+    <div class="btnrow"><button class="btn" data-action="start-exam">Napisz kartkówkę próbną</button></div>
+  </section>
+  <section class="panel">
+    <h3>Ostatnie treningi</h3>
+    ${hist?`<ul class="hist">${hist}</ul>`:`<p class="muted">Tu pojawią się wyniki treningów i fiszek.</p>`}
+  </section>
+  <section>
+    <details class="panel">
+      <summary>Zapis postępów</summary>
+      <p class="small" style="margin-top:10px">Postępy zapisują się w tej przeglądarce na tym urządzeniu. ${storageOK?'Zapis działa.':'<strong>Zapis nie działa w tej przeglądarce.</strong>'} Kopia zapasowa pozwala przenieść wyniki na inny komputer.</p>
+      <div class="btnrow">
+        <button class="btn small" data-action="export">Pobierz kopię postępów</button>
+        <button class="btn small" data-action="import">Wczytaj kopię</button>
+        <button class="btn small ghost" data-action="rename">Zmień imię</button>
+        <button class="btn small ghost" data-action="reset">Wyzeruj postępy</button>
+      </div>
+    </details>
+  </section>`;
+}
+function exportData(){
+  const blob=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='helisa-postepy-'+dayStr()+'.json';
+  document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},800);
+}
+document.getElementById('importFile').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ const d=JSON.parse(r.result); if(!d||d.v!==1||typeof d.items!=='object') throw 0;
+      if(!confirm('Wczytać kopię? Obecne postępy zostaną zastąpione.')) return;
+      const f0=fresh(); S=Object.assign(f0,d,{ws:Object.assign(f0.ws,d.ws||{})}); save(); shownFilled=null; go('home');
+    }catch(err){ alert('To nie jest plik z postępami Helisy. Wybierz plik pobrany przyciskiem „Pobierz kopię postępów”.'); } };
+  r.readAsText(f); e.target.value='';
+});
+function resetData(){ if(confirm('Wyzerować wszystkie postępy? Tego nie da się cofnąć.')){ const n=S.name; S=fresh(); S.name=n; save(); shownFilled=null; go('home'); } }
+function rename(){ const n=prompt('Jak masz na imię?',S.name); if(n&&n.trim()){ S.name=n.trim().slice(0,30); save(); renderHeader(); } }
+
+/* ================= NAUKA ================= */
+function viewLearn(){
+  const btn=(t,label)=>`<div class="btnrow"><button class="btn small" data-action="train-topic" data-topic="${t}">${label||'Ćwicz ten temat'}</button></div>`;
+  app.innerHTML=`
+  <section class="lesson">
+    <h2>Nauka</h2>
+    <p>Wszystko, co trzeba umieć na kartkówkę z lekcji „Budowa i znaczenie DNA” (podręcznik, str. 6–8). Pod każdym punktem możesz od razu sprawdzić się z tego tematu. Fragmenty z gwiazdką ⭐ wykraczają poza podręcznik – przydadzą się na szóstkę i w kolejnych lekcjach.</p>
+  </section>
+  <nav class="toc" aria-label="Spis tematów">
+    <a href="#l-nazwa">Nazwa</a><a href="#l-miejsce">Gdzie</a><a href="#l-ksztalt">Kształt</a><a href="#l-budowa">Nukleotyd</a><a href="#l-zasady">Zasady</a><a href="#l-kompl">Komplementarność</a><a href="#l-replik">Replikacja</a><a href="#l-funkcja">Funkcja</a><a href="#l-polecenia">Polecenia ze str. 8</a><a href="#l-pulapki">Pułapki</a><a href="#l-plus">Dla dociekliwych ⭐</a>
+  </nav>
+
+  <article class="lesson panel" id="l-nazwa">
+    <h3>Pełna nazwa DNA</h3>
+    <p><strong>DNA to kwas deoksyrybonukleinowy.</strong> Łatwiej zapamiętać, gdy rozłożysz nazwę na części:</p>
+    <ul>
+      <li><strong>kwas</strong> – cząsteczka ma właściwości kwasowe (od reszt kwasu fosforowego),</li>
+      <li><strong>deoksyrybo-</strong> – od cukru deoksyrybozy,</li>
+      <li><strong>nukleinowy</strong> – od łacińskiego <em>nucleus</em>, czyli jądro, bo odkryto go w jądrze komórkowym.</li>
+    </ul>
+    ${btn('nazwa')}
+  </article>
+
+  <article class="lesson panel" id="l-miejsce">
+    <h3>Gdzie w komórce jest DNA</h3>
+    <p>DNA znajduje się <strong>głównie w jądrze komórkowym</strong> i jest jego najważniejszym składnikiem. W jednej komórce jest wiele cząsteczek DNA (u człowieka zwykle 46). Razem mają <strong>ponad 2 metry</strong> długości, a jądro ma średnicę kilku mikrometrów. Mieszczą się, bo są <strong>nawinięte na białka</strong> i ciasno zwinięte – jądro przypomina koszyk pełen kłębków wełny.</p>
+    <p class="plus">⭐ Trochę DNA jest też w mitochondriach (a u roślin w chloroplastach). Bakterie nie mają jądra – ich DNA leży w cytoplazmie.</p>
+    ${btn('miejsce')}
+  </article>
+
+  <article class="lesson panel" id="l-ksztalt">
+    <h3>Kształt DNA</h3>
+    <p>Cząsteczka DNA to <strong>podwójna helisa</strong>: dwie nici spiralnie skręcone wokół wspólnej osi i równo od siebie oddalone. Wygląda jak <strong>skręcona drabina</strong>:</p>
+    <ul>
+      <li><strong>boki drabiny</strong> to na przemian cukier (deoksyryboza) i reszty kwasu fosforowego,</li>
+      <li><strong>szczeble</strong> to pary zasad azotowych z przeciwległych nici.</li>
+    </ul>
+    <p class="plus">⭐ Helisa ma tylko ok. 2 nanometry grubości, a jeden pełny obrót przypada na ok. 10 szczebli.</p>
+    ${btn('ksztalt')}
+  </article>
+
+  <article class="lesson panel" id="l-budowa">
+    <h3>Z czego zbudowane jest DNA</h3>
+    <p>Każda nić DNA jest zbudowana z połączonych ze sobą, wielokrotnie powtarzających się jednostek – <strong>nukleotydów</strong>. Każdy nukleotyd składa się z trzech części:</p>
+    <ul>
+      <li><strong>cukru – deoksyrybozy</strong>,</li>
+      <li><strong>reszty kwasu fosforowego</strong>,</li>
+      <li><strong>zasady azotowej</strong> (adeniny, tyminy, cytozyny lub guaniny).</li>
+    </ul>
+    <p>Cukier i fosforan są w każdym nukleotydzie takie same. Nukleotydy różnią się tylko zasadą azotową.</p>
+    ${btn('budowa')}
+  </article>
+
+  <article class="lesson panel" id="l-zasady">
+    <h3>Zasady azotowe</h3>
+    <div class="baselist">
+      <div>${chipHTML('A')}<span><strong>adenina</strong> – nukleotyd adeninowy</span></div>
+      <div>${chipHTML('T')}<span><strong>tymina</strong> – nukleotyd tyminowy</span></div>
+      <div>${chipHTML('C')}<span><strong>cytozyna</strong> – nukleotyd cytozynowy</span></div>
+      <div>${chipHTML('G')}<span><strong>guanina</strong> – nukleotyd guaninowy</span></div>
+    </div>
+    <p class="plus">⭐ Pułapka: uracyl (U) występuje w RNA, nie w DNA.</p>
+    ${btn('zasady')}
+  </article>
+
+  <article class="lesson panel" id="l-kompl">
+    <h3>Reguła komplementarności</h3>
+    <p><strong>A łączy się tylko z T, a C tylko z G.</strong> Dlatego kolejność nukleotydów w jednej nici wyznacza kolejność w drugiej. Zasady z przeciwległych nici łączą się <strong>słabymi wiązaniami wodorowymi</strong>.</p>
+    <div class="example" aria-label="Przykład: nić ATGCCA i komplementarna TACGGT">
+      <div class="rowx">${'ATGCCA'.split('').map(b=>chipHTML(b)).join('')}</div>
+      <div class="rowx">${'TACGGT'.split('').map(b=>chipHTML(b)).join('')}</div>
+    </div>
+    <p>Sposób na zapamiętanie: litery „kanciaste” A i T łączą się ze sobą, a „okrągłe” C i G ze sobą.</p>
+    <div class="btnrow"><button class="btn small" data-action="train-topic" data-topic="kompl">Ćwicz ten temat</button><button class="btn small ghost" data-action="go" data-view="workshop">Buduj nici w Warsztacie</button></div>
+  </article>
+
+  <article class="lesson panel" id="l-replik">
+    <h3>Replikacja</h3>
+    <p><strong>Replikacja</strong> to powielanie (podwojenie) DNA. Zachodzi <strong>przed podziałem komórki</strong>, żeby każda komórka potomna dostała pełną, taką samą kopię informacji o cechach organizmu.</p>
+    <ol>
+      <li>Podwójna helisa rozplata się – słabe wiązania wodorowe rozpinają się jak zamek błyskawiczny.</li>
+      <li>Do każdej nici przyłączają się komplementarne nukleotydy (A z T, C z G).</li>
+      <li>Nowe nukleotydy łączą się w nową nić.</li>
+      <li>Powstają dwie cząsteczki <strong>identyczne</strong> z wyjściową. Każda ma jedną nić starą (macierzystą) i jedną nową.</li>
+    </ol>
+    <p class="warn">Uwaga: na str. 8 podręcznik pisze, że nowe cząsteczki są „komplementarne do cząsteczki wyjściowej”. To nieścisłość – są z nią identyczne. Komplementarna do starej nici jest tylko nowo dobudowana nić.</p>
+    <p><strong>Dlaczego replikacja musi być bezbłędna?</strong> Komórki potomne działają według instrukcji zapisanych w DNA. Prawie każda zmiana (błąd) w DNA może zaburzyć procesy w tych komórkach.</p>
+    ${btn('replik')}
+  </article>
+
+  <article class="lesson panel" id="l-funkcja">
+    <h3>Funkcja DNA</h3>
+    <p>DNA zawiera <strong>kompletną informację o budowie i funkcjonowaniu organizmu</strong>. Ta informacja jest zapisana w <strong>kolejności nukleotydów</strong> – tak jak znaczenie zdania zależy od kolejności liter, tylko że alfabet DNA ma 4 litery. DNA:</p>
+    <ul>
+      <li><strong>kieruje pracą każdej komórki</strong>,</li>
+      <li>podczas podziałów <strong>przekazuje informację komórkom potomnym</strong>.</li>
+    </ul>
+    <p>Jesteśmy do siebie podobni, bo wszyscy mamy w DNA cechy gatunku człowiek rozumny (np. duży mózg, oczy z przodu głowy, dwunożny chód). Nie jesteśmy tacy sami, bo kolejność nukleotydów w DNA każdego człowieka trochę się różni.</p>
+    ${btn('funkcja')}
+  </article>
+
+  <article class="lesson panel" id="l-polecenia">
+    <h3>Polecenia ze str. 8 – wzorcowe odpowiedzi</h3>
+    <p class="small muted">Najpierw spróbuj odpowiedzieć sam na głos, dopiero potem porównaj.</p>
+    <ol>
+      <li><strong>Gdzie jest DNA i jaką pełni funkcję?</strong> DNA znajduje się głównie w jądrze komórkowym. Zawiera informację o cechach, budowie i funkcjonowaniu organizmu, kieruje pracą komórki i przekazuje tę informację komórkom potomnym.</li>
+      <li><strong>Jak jest zbudowana cząsteczka DNA?</strong> Składa się z dwóch nici skręconych w podwójną helisę. Każda nić jest zbudowana z nukleotydów, a każdy nukleotyd z deoksyrybozy, reszty kwasu fosforowego i zasady azotowej (A, T, C lub G). Zasady z przeciwległych nici łączą się słabymi wiązaniami wodorowymi zgodnie z regułą komplementarności: A z T, C z G.</li>
+      <li><strong>Przebieg i znaczenie replikacji.</strong> Replikacja to powielanie DNA przed podziałem komórki. Podwójna helisa rozplata się, a do każdej nici dobudowuje się nowa, komplementarna nić. Powstają dwie identyczne cząsteczki DNA (każda z nicią starą i nową), więc każda komórka potomna dostaje pełną informację o cechach organizmu.</li>
+      <li><strong>Dlaczego bezbłędna replikacja jest ważna?</strong> Komórki działają według informacji zapisanej w DNA. Błąd w replikacji zmienia tę informację i może zaburzyć procesy w komórkach potomnych, które go odziedziczą.</li>
+    </ol>
+  </article>
+
+  <article class="lesson panel" id="l-pulapki">
+    <h3>Pułapki na kartkówce</h3>
+    <ul>
+      <li>W DNA jest <strong>deoksy</strong>ryboza, a nie ryboza (ryboza jest w RNA).</li>
+      <li>W DNA nie ma uracylu (U) – są tylko A, T, C, G.</li>
+      <li>A łączy się z T, a nie z C. G łączy się z C, a nie z T.</li>
+      <li>Replikacja zachodzi <strong>przed</strong> podziałem komórki, nie po nim.</li>
+      <li>Po replikacji cząsteczki są <strong>identyczne</strong> z wyjściową.</li>
+      <li>Pisownia: kwas deoksy-rybo-nukleinowy. Warto napisać to kilka razy.</li>
+    </ul>
+  </article>
+
+  <article class="lesson panel" id="l-plus">
+    <h3>Dla dociekliwych ⭐</h3>
+    <h4>Z czego to jest naprawdę zrobione</h4>
+    <p>Wszystko to atomy – tylko pięciu pierwiastków: węgla, wodoru, tlenu, azotu i fosforu. Nukleotyd to zwykła cząsteczka związku chemicznego (np. z adeniną: C₁₀H₁₄N₅O₆P, czyli 36 atomów). Reszta kwasu fosforowego to grupa atomów: jeden atom fosforu otoczony atomami tlenu. Kolorowe klocki na rysunkach to tylko umowne symbole tych grup atomów – atomy nie mają kolorów. Cukier i fosforan w szkielecie nici łączą mocne wiązania kowalencyjne (wspólne elektrony), tak jak w wodzie czy w cukrze.</p>
+    <h4>Wiązanie wodorowe</h4>
+    <p>Azot i tlen mocno przyciągają elektrony. Gdy wodór jest przyczepiony do azotu lub tlenu, jego jedyny elektron zostaje odciągnięty i wodór staje się maleńkim dodatnim punktem. Naprzeciw, na drugiej zasadzie, jest atom z lekkim ładunkiem ujemnym. Przeciwne ładunki się przyciągają – to wiązanie wodorowe, słabe jak mały magnesik. A i T pasują do siebie w dwóch takich punktach, G i C w trzech. A i C by się nie „zatrzasnęły”, bo plus trafiłby na plus. Do tego A i G są duże, a T i C małe – każda para to „duża + mała”, więc wszystkie szczeble mają tę samą długość.</p>
+    <h4>Dlaczego helisa się skręca</h4>
+    <p>Szkielet z fosforanami lubi wodę i jest na zewnątrz. Płaskie zasady wody nie lubią i chowają się do środka, układając się jedna na drugiej jak stos monet. Najciaśniej da się je ułożyć, gdy drabina się skręci.</p>
+    <h4>Skala</h4>
+    <p>Gdyby DNA miało grubość 1 mm, to DNA z jednej komórki miałoby ok. 1000 km długości (mniej więcej z Poznania do Paryża), a jądro komórkowe byłoby kulą o średnicy ok. 3 m. Samo DNA zajmuje tylko kilka procent objętości jądra – trudność polega nie na braku miejsca, tylko na tym, żeby się nie splątało.</p>
+    <h4>Replikacja w Twoim ciele</h4>
+    <p>Każdy z nas zaczął jako jedna komórka, a dorosły ma ok. 30 bilionów komórek – prawie każda z pełną kopią DNA. Ciało wymienia ok. 330 miliardów komórek dziennie: w szpiku kostnym powstają krwinki, wyściółka jelita odnawia się co kilka dni, naskórek ciągle odrasta, rana się goi, a Ty rośniesz. Przed każdym podziałem białko zwane <strong>polimerazą DNA</strong> kopiuje ok. 6,4 miliarda par nukleotydów. Robi to jednocześnie w dziesiątkach tysięcy miejsc, więc zajmuje to ok. 8 godzin. Zostaje zwykle tylko kilka błędów – jak przepisanie biblioteki 6 tysięcy grubych książek z kilkoma literówkami. Trwała zmiana w DNA to <strong>mutacja</strong> (będzie w dziale 2).</p>
+    <h4>Cykl komórkowy i chromosomy X</h4>
+    <p>Typowa dzieląca się komórka człowieka przechodzi cykl trwający około doby: <strong>G1</strong> (ok. 11 h, rośnie i pracuje), <strong>S</strong> (ok. 8 h, replikacja), <strong>G2</strong> (ok. 4 h, ma już podwojone DNA i przygotowuje się) i <strong>M</strong> (ok. 1 h, podział). Żeby dwie kopie się nie splątały, DNA jest nawinięte na białka zwane histonami (jak nić na szpulki), a obie kopie są spinane białkowymi obrączkami. Przed podziałem każda para ciasno się zwija – to właśnie chromosomy w kształcie X ze zdjęcia na początku działu: dwie identyczne kopie DNA spięte w środku. Więcej o tym w lekcji 3.</p>
+    <h4>Doświadczenie w kuchni</h4>
+    <p>Rozgnieć kiwi lub banana, wymieszaj z odrobiną wody, łyżeczką soli i łyżką płynu do naczyń, przecedź przez sitko. Po ściance szklanki powoli wlej bardzo zimny spirytus lub alkohol izopropylowy. Na granicy warstw pojawią się białe nitki – to miliony cząsteczek DNA. Płyn do naczyń rozpuszcza błony, sól zobojętnia ujemne ładunki fosforanów, a DNA nie rozpuszcza się w alkoholu i się wytrąca. Rób to z dorosłym – alkohol jest łatwopalny i nie nadaje się do picia.</p>
+    ${btn('plus','Ćwicz pytania ⭐')}
+  </article>`;
+}
+
+/* ================= BUDOWANIE PYTAŃ ================= */
+function randSeq(n){let s=''; for(let i=0;i<n;i++) s+='ATCG'[Math.floor(Math.random()*4)]; return s;}
+function genCompl(n){ const seq=randSeq(n); return {id:'gen-compl',topic:'kompl',type:'compl',seq,q:'Zbuduj nić komplementarną do górnej nici.',qReview:'Nić komplementarna do: '+seq.split('').join(' '),e:'Naprzeciw A zawsze stoi T, naprzeciw C stoi G (i odwrotnie).'}; }
+function genErr(n){
+  const seq=randSeq(n), comp=seq.split('').map(b=>PAIR[b]), pos=Math.floor(Math.random()*n), good=comp[pos];
+  comp[pos]=pickOne('ATCG'.split('').filter(b=>b!==good));
+  return {id:'gen-err',topic:'kompl',type:'finderr',seq,bottom:comp.join(''),pos,q:'W dolnej nici jest jeden błąd. Kliknij nukleotyd, który nie pasuje.',qReview:'Znajdź błąd: '+seq.split('').join(' ')+' / '+comp.join(' '),e:`Na pozycji ${pos+1} naprzeciw ${seq[pos]} powinno stać ${good}, a stało ${comp[pos]}.`};
+}
+function checkText(v,answers,show){
+  const n=norm(v), A=answers.map(norm), given=v.trim();
+  if(A.includes(n)) return {ok:true,given,correct:show};
+  const ns=strip(n);
+  if(A.map(strip).includes(ns)) return {ok:true,given,correct:show,note:`Dobrze, ale pamiętaj o polskich znakach: „${show}”.`};
+  if(A.some(a=>a.length>6 && lev(strip(a),ns)<=2)) return {ok:false,given,correct:show,note:'Prawie! Sprawdź pisownię – na kartkówce liczy się każda litera.'};
+  return {ok:false,given,correct:show};
+}
+function buildItem(item,ctx){
+  return ({mc:buildMC,input:buildInput,order:buildOrder,match:buildMatch,compl:buildCompl,finderr:buildFindErr})[item.type](item,ctx);
+}
+function buildMC(item,ctx){
+  const el=h('div','q-body'), list=h('div','opts'); let sel=null, locked=false;
+  shuffle(item.opts.map((_,i)=>i)).forEach(idx=>{
+    const b=h('button','opt',item.opts[idx]); b.type='button'; b.dataset.idx=idx;
+    b.addEventListener('click',()=>{ if(locked) return; sel=idx; list.querySelectorAll('.opt').forEach(x=>x.classList.toggle('selected',x===b)); ctx.ready(true); if(!ctx.exam) ctx.submit(); });
+    list.appendChild(b);
+  });
+  el.appendChild(list);
+  return {el,
+    evaluate(){ return sel===null?null:{ok:sel===0,given:item.opts[sel],correct:item.opts[0]}; },
+    reveal(){ locked=true; list.querySelectorAll('.opt').forEach(x=>{ const i=+x.dataset.idx; x.classList.remove('selected'); if(i===0) x.classList.add('correct'); else if(i===sel) x.classList.add('wrong'); x.disabled=true; }); }
+  };
+}
+function buildInput(item,ctx){
+  const el=h('div','q-body'), i=document.createElement('input');
+  i.type='text'; i.className='text-in'; i.autocomplete='off'; i.spellcheck=false; i.setAttribute('autocapitalize','off'); i.setAttribute('aria-label','Twoja odpowiedź'); i.placeholder='Wpisz odpowiedź';
+  i.addEventListener('input',()=>ctx.ready(i.value.trim().length>0));
+  i.addEventListener('keydown',e=>{ if(e.key==='Enter'&&i.value.trim()){ e.preventDefault(); ctx.submit(); } });
+  el.appendChild(i); setTimeout(()=>i.focus(),60);
+  return {el,
+    evaluate(){ return i.value.trim()?checkText(i.value,item.answers,item.show):null; },
+    reveal(r){ i.disabled=true; i.classList.add(r.ok?'correct':'wrong'); }
+  };
+}
+function buildOrder(item,ctx){
+  const el=h('div','q-body'); let shuffled=shuffle(item.steps); let tries=0;
+  while(shuffled.every((s,k)=>s===item.steps[k]) && tries++<10) shuffled=shuffle(item.steps);
+  let picked=[], locked=false;
+  const hint=h('p','hint','Klikaj w kolejności od pierwszego do ostatniego.');
+  const target=h('ol','order-target'), pool=h('div','order-pool');
+  const undo=h('button','btn small ghost','Cofnij ostatni'); undo.type='button';
+  undo.onclick=()=>{ if(locked) return; picked.pop(); draw(); ctx.ready(false); };
+  function draw(){
+    target.innerHTML='';
+    if(!picked.length) target.appendChild(h('li','placeholder','Tu pojawi się Twoja kolejność'));
+    picked.forEach(s=>target.appendChild(h('li',null,s)));
+    pool.innerHTML='';
+    shuffled.forEach(s=>{ if(picked.includes(s)) return; const b=h('button','opt',s); b.type='button'; b.onclick=()=>{ if(locked) return; picked.push(s); draw(); ctx.ready(picked.length===item.steps.length); }; pool.appendChild(b); });
+    undo.disabled=!picked.length||locked;
+  }
+  el.append(hint,target,pool,undo); draw();
+  return {el,
+    evaluate(){ if(picked.length!==item.steps.length) return null; const ok=picked.every((s,k)=>s===item.steps[k]); return {ok,given:picked.map((s,k)=>(k+1)+'. '+s).join(' '),correct:item.steps.map((s,k)=>(k+1)+'. '+s).join(' ')}; },
+    reveal(){ locked=true; undo.disabled=true; pool.innerHTML=''; [...target.children].forEach((li,k)=>li.classList.add(picked[k]===item.steps[k]?'correct':'wrong')); }
+  };
+}
+function buildMatch(item,ctx){
+  const el=h('div','q-body match'), rights=shuffle(item.pairs.map(p=>p[1])), selects=[];
+  item.pairs.forEach(([l])=>{
+    const row=h('div','match-row'), lab=h('span','match-left');
+    if(NAME[l]) lab.appendChild(chipEl(l)); else lab.textContent=l;
+    const s=document.createElement('select'); s.setAttribute('aria-label','Dopasuj: '+l);
+    s.innerHTML='<option value="">wybierz…</option>'+rights.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('');
+    s.onchange=()=>ctx.ready(selects.every(x=>x.value)); selects.push(s); row.append(lab,s); el.appendChild(row);
+  });
+  return {el,
+    evaluate(){ if(!selects.every(s=>s.value)) return null; const ok=selects.every((s,k)=>s.value===item.pairs[k][1]); return {ok,given:selects.map((s,k)=>item.pairs[k][0]+' – '+s.value).join('; '),correct:item.pairs.map(p=>p[0]+' – '+p[1]).join('; ')}; },
+    reveal(){ selects.forEach((s,k)=>{ s.disabled=true; s.classList.add(s.value===item.pairs[k][1]?'correct':'wrong'); }); }
+  };
+}
+function buildCompl(item,ctx){
+  const n=item.seq.length, el=h('div','q-body'); let typed=[], locked=false;
+  el.appendChild(h('p','strandlabel','Górna nić (dana) i Twoja nić:'));
+  const strand=h('div','strand'), cols=[];
+  for(let k=0;k<n;k++){ const c=h('div','col'); c.append(chipEl(item.seq[k]),h('span','bond'),h('span','slot')); strand.appendChild(c); cols.push(c); }
+  el.appendChild(strand);
+  const pad=h('div','pad');
+  'ATCG'.split('').forEach(b=>{ const k=h('button','key b-'+b,b); k.type='button'; k.setAttribute('aria-label','Dodaj '+NAME[b]); k.onclick=()=>add(b); pad.appendChild(k); });
+  const bs=h('button','key back','⌫'); bs.type='button'; bs.setAttribute('aria-label','Usuń ostatni'); bs.onclick=()=>{ if(!locked){ typed.pop(); draw(); } }; pad.appendChild(bs);
+  el.appendChild(pad); el.appendChild(h('p','hint','Możesz też pisać literami A, T, C, G na klawiaturze.'));
+  function draw(){ cols.forEach((c,k)=>{ const old=c.lastChild; const nw=typed[k]?chipEl(typed[k]):h('span','slot'+(k===typed.length?' next':'')); c.replaceChild(nw,old); }); ctx.ready(typed.length===n); }
+  function add(b){ if(locked||typed.length>=n) return; typed.push(b); draw(); }
+  const onKey=e=>{ if(e.target&&e.target.tagName==='INPUT') return; const key=e.key.toUpperCase();
+    if(key.length===1&&'ATCG'.includes(key)){ add(key); e.preventDefault(); }
+    else if(e.key==='Backspace'&&!locked){ typed.pop(); draw(); e.preventDefault(); }
+    else if(e.key==='Enter'&&typed.length===n&&!locked){ e.preventDefault(); ctx.submit(); } };
+  document.addEventListener('keydown',onKey); ctx.cleanup(()=>document.removeEventListener('keydown',onKey));
+  draw();
+  return {el,
+    evaluate(){ if(typed.length<n) return null; const correct=item.seq.split('').map(b=>PAIR[b]).join(''); return {ok:typed.join('')===correct,given:typed.join(' '),correct:correct.split('').join(' ')}; },
+    reveal(){ locked=true; pad.remove(); cols.forEach((c,k)=>{ c.lastChild.classList.add(typed[k]===PAIR[item.seq[k]]?'okmark':'badmark'); }); }
+  };
+}
+function buildFindErr(item,ctx){
+  const n=item.seq.length, el=h('div','q-body'); let sel=null, locked=false;
+  const strand=h('div','strand'), btns=[];
+  for(let k=0;k<n;k++){
+    const c=h('div','col'), b=h('button','b b-'+item.bottom[k],item.bottom[k]); b.type='button';
+    b.setAttribute('aria-label','Pozycja '+(k+1)+': '+NAME[item.bottom[k]]);
+    b.onclick=()=>{ if(locked) return; sel=k; btns.forEach(x=>x.classList.toggle('picked',x===b)); ctx.ready(true); if(!ctx.exam) ctx.submit(); };
+    btns.push(b); c.append(chipEl(item.seq[k]),h('span','bond'),b); strand.appendChild(c);
+  }
+  el.append(h('p','strandlabel','Kliknij w dolnej nici:'),strand);
+  return {el,
+    evaluate(){ return sel===null?null:{ok:sel===item.pos,given:'pozycja '+(sel+1),correct:'pozycja '+(item.pos+1)+' (powinno być '+PAIR[item.seq[item.pos]]+')'}; },
+    reveal(){ locked=true; btns.forEach((b,k)=>{ b.disabled=true; if(k===item.pos) b.classList.add('okmark'); else if(k===sel) b.classList.add('badmark'); }); }
+  };
+}
+function feedbackHTML(item,r){
+  const e=item.e?`<p>${esc(item.e)}</p>`:'';
+  const note=r.note?`<p>${esc(r.note)}</p>`:'';
+  if(r.ok) return `<div class="fb ok"><strong class="lead">Dobrze! +10 XP</strong>${note}${e}</div>`;
+  return `<div class="fb bad"><strong class="lead">Nie tym razem.</strong><p>Poprawnie: <strong>${esc(r.correct)}</strong></p>${note}${e}</div>`;
+}
+
+/* ================= SESJA (trening / kartkówka) ================= */
+function weight(id){ const st=S.items[id]; if(!st) return 3; if(st.lastOk===false) return 5; if(st.streak===0) return 3; if(st.streak===1) return 2; return 0.6; }
+function weightedSample(pool,k){ return pool.map(it=>({it,key:Math.pow(Math.random(),1/weight(it.id))})).sort((a,b)=>b.key-a.key).slice(0,k).map(x=>x.it); }
+function startTraining(topic,count,onlyWrong){
+  let pool=BANK.filter(it=>topic==='all'?it.topic!=='plus':topic==='mix'?true:it.topic===topic);
+  if(onlyWrong) pool=pool.filter(it=>{const st=S.items[it.id]; return st&&st.wrong>0&&st.streak<2;});
+  const withGen=!onlyWrong&&(topic==='kompl'||topic==='all'||topic==='mix');
+  const nGen=withGen?2:0;
+  let items=weightedSample(pool,Math.min(count-nGen,pool.length));
+  if(withGen){ items.splice(Math.floor(Math.random()*(items.length+1)),0,genCompl(topic==='kompl'?8:6)); items.splice(Math.floor(Math.random()*(items.length+1)),0,genErr(8)); }
+  if(!items.length){ runCleanup(); app.innerHTML=`<section class="panel"><h2>Brak pytań do powtórki</h2><p>W tym zakresie nie masz pytań, które sprawiały trudność. Wybierz zwykły trening.</p><div class="btnrow"><button class="btn primary" data-action="go" data-view="train">Wróć do treningu</button></div></section>`; return; }
+  const label=(topic==='all'?'Cały materiał':topic==='mix'?'Wszystko z ⭐':TNAME[topic])+(onlyWrong?' (błędy)':'');
+  startSession(items,'train',label,{topic,count});
+}
+function startExam(){
+  const base=BASE_TOPICS.map(t=>pickOne(BANK.filter(i=>i.topic===t.id)));
+  base.push(genCompl(8));
+  base.push(pickOne(BANK.filter(i=>i.topic!=='plus'&&!base.includes(i))));
+  const bonus=Object.assign({},pickOne(BANK.filter(i=>i.topic==='plus')),{bonus:true});
+  startSession([...shuffle(base),bonus],'exam','Kartkówka próbna',{});
+}
+function startSession(items,mode,label,opts){
+  currentView=mode==='exam'?'exam':'train';
+  document.querySelectorAll('.tab').forEach(t=>{ if(t.dataset.view===currentView) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
+  session={mode,items,i:0,results:[],label,opts,xp0:S.xp,done:false};
+  renderSessionQ();
+}
+function renderSessionQ(){
+  runCleanup();
+  const s=session, item=s.items[s.i], exam=s.mode==='exam', last=s.i===s.items.length-1;
+  app.innerHTML='';
+  const wrap=h('section','session');
+  const head=h('div','sesshead');
+  head.append(h('strong',null,`${s.label}: ${s.i+1} z ${s.items.length}`));
+  const quit=h('button','btn small ghost','Zakończ'); quit.type='button';
+  quit.onclick=()=>{ if(exam){ if(confirm('Przerwać kartkówkę próbną? Wynik nie zostanie zapisany.')) go('exam'); } else if(s.results.length) finishSession(); else go('train'); };
+  head.appendChild(quit);
+  const prog=h('div','progress'); const ps=h('span'); ps.style.width=(100*s.i/s.items.length)+'%'; prog.appendChild(ps);
+  const card=h('div','panel');
+  card.appendChild(h('span','qtag',item.bonus?'Zadanie na szóstkę ⭐':(TNAME[item.topic]||'')));
+  card.appendChild(h('p','qtext',item.q));
+  const btn=h('button','btn primary',exam?(last?'Zakończ kartkówkę':'Dalej'):'Sprawdź'); btn.type='button'; btn.disabled=true;
+  let answered=false;
+  const ctx={exam,ready:v=>{ if(!answered) btn.disabled=!v; },submit:()=>doSubmit(),cleanup:f=>cleanupFns.push(f)};
+  const built=buildItem(item,ctx);
+  card.appendChild(built.el);
+  const fb=h('div','feedback'); fb.setAttribute('aria-live','polite'); card.appendChild(fb);
+  const actions=h('div','actions'); actions.appendChild(btn); card.appendChild(actions);
+  if(!exam&&(item.type==='mc'||item.type==='finderr')) btn.hidden=true;
+  function doSubmit(){
+    if(answered) return; const r=built.evaluate(); if(!r) return;
+    answered=true; record(item.id,r.ok); s.results.push({item,res:r});
+    if(exam){ next(); return; }
+    built.reveal(r); fb.innerHTML=feedbackHTML(item,r);
+    btn.hidden=false; btn.disabled=false; btn.textContent=last?'Zobacz wynik':'Dalej'; btn.onclick=next;
+    renderHeader(); setTimeout(()=>btn.focus(),30);
+  }
+  function next(){ s.i++; if(s.i>=s.items.length) finishSession(); else renderSessionQ(); }
+  btn.onclick=doSubmit;
+  wrap.append(head,prog,card); app.appendChild(wrap);
+  window.scrollTo(0,0);
+}
+function reviewHTML(results){
+  return `<ul class="review">${results.map(({item,res})=>`<li><span class="mark ${res.ok?'ok':'bad'}">${res.ok?'✓':'✗'}</span><strong>${esc(item.qReview||item.q)}</strong>${item.bonus?' <span class="small muted">(na szóstkę)</span>':''}<br><span class="small">Twoja odpowiedź: ${esc(res.given)}</span>${res.ok?'':`<br><span class="small">Poprawnie: <strong>${esc(res.correct)}</strong></span>`}${!res.ok&&item.e?`<br><span class="small muted">${esc(item.e)}</span>`:''}</li>`).join('')}</ul>`;
+}
+function finishSession(){
+  runCleanup();
+  const s=session; s.done=true;
+  const gained=S.xp-s.xp0;
+  if(s.mode==='exam'){
+    const baseRes=s.results.filter(r=>!r.item.bonus), ok=baseRes.filter(r=>r.res.ok).length, total=baseRes.length;
+    const bonusOk=s.results.some(r=>r.item.bonus&&r.res.ok), pct=100*ok/total, g=grade(pct,bonusOk);
+    logSession({mode:'exam',label:'Kartkówka próbna',ok,total,bonus:bonusOk,grade:g});
+    const msg=g===6?'Szóstka! Tak trzymaj.':g===5?(bonusOk?'Świetnie!':'Świetnie! Do szóstki zabrakło zadania ⭐ – poćwicz pytania ponad program.'):g>=3?'Dobrze, ale jest co poprawić. Poćwicz tematy z błędami poniżej.':'Najpierw przerób Naukę i kilka treningów, potem spróbuj jeszcze raz.';
+    app.innerHTML=`<section class="panel">
+      <h2>Wynik kartkówki próbnej</h2>
+      <div class="bigscore"><span class="bignum">${g}</span><div><strong>${GRADES[g]}</strong><br>${ok} z ${total} ${plPytan(total)} dobrze, zadanie na szóstkę: ${bonusOk?'zaliczone ⭐':'niezaliczone'}<br><span class="small muted">+${gained} XP</span></div></div>
+      <p style="margin-top:12px">${msg}</p>
+      <div class="btnrow"><button class="btn primary" data-action="start-exam">Napisz jeszcze raz</button><button class="btn" data-action="go" data-view="home">Wróć do startu</button></div>
+    </section>
+    <section class="panel"><h3>Omówienie</h3>${reviewHTML(s.results)}</section>`;
+  } else {
+    const ok=s.results.filter(r=>r.res.ok).length, total=s.results.length;
+    logSession({mode:'train',label:s.label,ok,total});
+    const wrong=s.results.filter(r=>!r.res.ok);
+    app.innerHTML=`<section class="panel">
+      <h2>Koniec treningu</h2>
+      <div class="bigscore"><span class="bignum">${ok}/${total}</span><div>${ok===total?'Bezbłędnie!':ok/total>=0.7?'Dobra robota.':'Warto to powtórzyć.'}<br><span class="small muted">+${gained} XP</span></div></div>
+      <div class="btnrow" id="afterBtns"></div>
+    </section>
+    ${wrong.length?`<section class="panel"><h3>Do powtórki</h3>${reviewHTML(wrong)}</section>`:''}`;
+    const ab=$('#afterBtns');
+    if(wrong.length){ const b=h('button','btn primary','Powtórz błędne'); b.type='button'; b.onclick=()=>startSession(shuffle(wrong.map(r=>r.item.id.startsWith('gen-')?(r.item.type==='compl'?genCompl(r.item.seq.length):genErr(r.item.seq.length)):r.item)),'train',s.label+' (powtórka)',s.opts); ab.appendChild(b); }
+    const again=h('button','btn'+(wrong.length?'':' primary'),'Nowy trening z tego zakresu'); again.type='button'; again.onclick=()=>startTraining(s.opts.topic||'all',s.opts.count||10,false); ab.appendChild(again);
+    const home=h('button','btn ghost','Wróć do startu'); home.type='button'; home.onclick=()=>go('home'); ab.appendChild(home);
+  }
+  renderHeader(); window.scrollTo(0,0);
+}
+
+/* ================= TRENING – wybór ================= */
+let trainSel={topic:'all',count:10,onlyWrong:false};
+function viewTrain(){
+  const opts=[['all','Cały materiał na kartkówkę'],...BASE_TOPICS.map(t=>[t.id,t.name]),['plus','Ponad program ⭐'],['mix','Wszystko razem']];
+  app.innerHTML=`<section class="panel">
+    <h2>Trening</h2>
+    <p>Pytania dobierają się same: najczęściej wracają te, na które jeszcze nie odpowiedziałeś albo w których był błąd. Po każdej odpowiedzi zobaczysz wyjaśnienie.</p>
+    <h3>Zakres</h3>
+    <div class="choices" id="tTopic">${opts.map(([id,n])=>`<button class="choice" data-v="${id}" aria-pressed="${trainSel.topic===id}">${esc(n)}</button>`).join('')}</div>
+    <h3>Liczba pytań</h3>
+    <div class="choices" id="tCount">${[10,20].map(c=>`<button class="choice" data-v="${c}" aria-pressed="${trainSel.count===c}">${c}</button>`).join('')}</div>
+    <label class="check"><input type="checkbox" id="tWrong" ${trainSel.onlyWrong?'checked':''}> Tylko pytania, które sprawiały trudność</label>
+    <div class="btnrow"><button class="btn primary" id="tStart">Zacznij trening</button></div>
+  </section>`;
+  const bindChoices=(id,key,parse)=>{ const box=document.getElementById(id); box.addEventListener('click',e=>{ const b=e.target.closest('.choice'); if(!b) return; trainSel[key]=parse(b.dataset.v); box.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); }); };
+  bindChoices('tTopic','topic',v=>v); bindChoices('tCount','count',v=>+v);
+  $('#tWrong').onchange=e=>{ trainSel.onlyWrong=e.target.checked; };
+  $('#tStart').onclick=()=>startTraining(trainSel.topic,trainSel.count,trainSel.onlyWrong);
+}
+
+/* ================= WARSZTAT NICI ================= */
+let wsMode='build', wsLen=6;
+function viewWorkshop(){
+  app.innerHTML=`<section class="panel">
+    <h2>Warsztat nici</h2>
+    <p>Trenuj regułę komplementarności na losowych niciach: ${chipHTML('A',1)} z ${chipHTML('T',1)}, ${chipHTML('C',1)} z ${chipHTML('G',1)}.</p>
+    <div class="choices" id="wMode"><button class="choice" data-v="build" aria-pressed="${wsMode==='build'}">Buduj nić</button><button class="choice" data-v="err" aria-pressed="${wsMode==='err'}">Znajdź błąd</button></div>
+    <div class="choices" id="wLen">${[6,9,12].map(n=>`<button class="choice" data-v="${n}" aria-pressed="${wsLen===n}">${n} nukleotydów</button>`).join('')}</div>
+    <p class="small muted" id="wStats"></p>
+  </section>
+  <section class="panel" id="wArea"></section>`;
+  const bind=(id,fn)=>{ const box=document.getElementById(id); box.addEventListener('click',e=>{ const b=e.target.closest('.choice'); if(!b) return; fn(b.dataset.v); box.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); wsTask(); }); };
+  bind('wMode',v=>wsMode=v); bind('wLen',v=>wsLen=+v);
+  wsTask();
+}
+function wsStats(){ const a=S.items['gen-compl']||{ok:0,n:0}, b=S.items['gen-err']||{ok:0,n:0}; $('#wStats').textContent=`Seria poprawnych z rzędu: ${S.ws.cur} (rekord: ${S.ws.best}). Zbudowane nici: ${a.ok}/${a.n}, znalezione błędy: ${b.ok}/${b.n}.`; }
+function wsTask(){
+  runCleanup(); wsStats();
+  const area=$('#wArea'); area.innerHTML='';
+  const item=wsMode==='build'?genCompl(wsLen):genErr(wsLen);
+  area.appendChild(h('p','qtext',item.q));
+  const btn=h('button','btn primary','Sprawdź'); btn.type='button'; btn.disabled=true;
+  let answered=false;
+  const ctx={exam:false,ready:v=>{ if(!answered) btn.disabled=!v; },submit:()=>submit(),cleanup:f=>cleanupFns.push(f)};
+  const built=buildItem(item,ctx); area.appendChild(built.el);
+  const fb=h('div','feedback'); fb.setAttribute('aria-live','polite'); area.appendChild(fb);
+  const actions=h('div','actions'); actions.appendChild(btn); area.appendChild(actions);
+  if(item.type==='finderr') btn.hidden=true;
+  function submit(){
+    if(answered) return; const r=built.evaluate(); if(!r) return; answered=true;
+    record(item.id,r.ok); S.ws.cur=r.ok?S.ws.cur+1:0; S.ws.best=Math.max(S.ws.best,S.ws.cur); save();
+    built.reveal(r); fb.innerHTML=feedbackHTML(item,r);
+    btn.hidden=false; btn.disabled=false; btn.textContent='Następna nić'; btn.onclick=wsTask; setTimeout(()=>btn.focus(),30);
+    const onEnter=e=>{ if(e.key==='Enter'&&document.activeElement!==btn){ e.preventDefault(); wsTask(); } };
+    setTimeout(()=>{ document.addEventListener('keydown',onEnter); cleanupFns.push(()=>document.removeEventListener('keydown',onEnter)); },50);
+    wsStats(); renderHeader();
+  }
+  btn.onclick=submit;
+}
+
+/* ================= FISZKI ================= */
+let fc={deck:'base',reverse:false,queue:[],total:0,flipped:false,label:''};
+function viewCards(){
+  app.innerHTML=`<section class="panel">
+    <h2>Fiszki</h2>
+    <p>Pomyśl odpowiedź, odwróć kartę i oceń się uczciwie. Karty, których jeszcze nie znasz, wracają w tej samej rundzie.</p>
+    <div class="choices" id="fDeck">
+      <button class="choice" data-v="base" aria-pressed="${fc.deck==='base'}">Na kartkówkę</button>
+      <button class="choice" data-v="plus" aria-pressed="${fc.deck==='plus'}">Ponad program ⭐</button>
+      <button class="choice" data-v="all" aria-pressed="${fc.deck==='all'}">Wszystkie</button>
+    </div>
+    <label class="check"><input type="checkbox" id="fRev" ${fc.reverse?'checked':''}> Najpierw pokazuj wyjaśnienie, a pojęcie odgaduj</label>
+  </section>
+  <section id="fArea"></section>`;
+  document.getElementById('fDeck').addEventListener('click',e=>{ const b=e.target.closest('.choice'); if(!b) return; fc.deck=b.dataset.v; document.querySelectorAll('#fDeck .choice').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); fcStart(); });
+  $('#fRev').onchange=e=>{ fc.reverse=e.target.checked; fcStart(); };
+  fcStart();
+}
+function fcDeck(){ return CARDS.filter(c=>fc.deck==='all'?true:fc.deck==='plus'?c.plus:!c.plus); }
+function fcStart(onlyUnknown){
+  let deck=fcDeck(); if(onlyUnknown) deck=deck.filter(c=>!(S.cards[c.id]&&S.cards[c.id].known));
+  const unknown=shuffle(deck.filter(c=>!(S.cards[c.id]&&S.cards[c.id].known))), known=shuffle(deck.filter(c=>S.cards[c.id]&&S.cards[c.id].known));
+  fc.queue=[...unknown,...known]; fc.total=deck.length; fc.flipped=false; fc.roundKnown=0;
+  fc.label='Fiszki: '+({base:'na kartkówkę',plus:'ponad program',all:'wszystkie'})[fc.deck];
+  fcRender();
+}
+function fcRender(){
+  runCleanup();
+  const area=$('#fArea'); if(!area) return;
+  const deck=fcDeck(), knownN=deck.filter(c=>S.cards[c.id]&&S.cards[c.id].known).length;
+  if(!fc.queue.length){
+    logSession({mode:'cards',label:fc.label,ok:knownN,total:deck.length});
+    area.innerHTML=`<div class="panel"><h3>Runda skończona</h3><p>Znasz <strong>${knownN} z ${deck.length}</strong> kart w tej talii.</p><div class="btnrow" id="fEnd"></div></div>`;
+    const a=h('button','btn primary','Jeszcze raz'); a.type='button'; a.onclick=()=>fcStart(); $('#fEnd').appendChild(a);
+    if(knownN<deck.length){ const b=h('button','btn','Tylko nieznane'); b.type='button'; b.onclick=()=>fcStart(true); $('#fEnd').appendChild(b); }
+    renderHeader(); return;
+  }
+  const c=fc.queue[0], front=fc.reverse?c.b:c.f, back=fc.reverse?c.f:c.b;
+  const big=t=>(t.length===1&&NAME[t])?chipHTML(t):esc(t);
+  area.innerHTML=`<div class="panel"><p class="small muted">Zostało w rundzie: ${fc.queue.length}. Znasz: ${knownN} z ${deck.length}.</p>
+    <div class="flash${fc.flipped?' flipped':''}" id="fCard" tabindex="0" role="button" aria-label="${fc.flipped?'Karta odwrócona':'Odwróć kartę'}">
+      <div class="side">${fc.reverse?'Wyjaśnienie':'Pojęcie'}${c.plus?' ⭐':''}</div>
+      <div class="${fc.reverse?'back':'front'}">${big(front)}</div>
+      ${fc.flipped?`<div class="${fc.reverse?'front':'back'}" style="margin-top:12px">${big(back)}</div>`:''}
+    </div>
+    <div class="btnrow" id="fBtns"></div></div>`;
+  const btns=$('#fBtns');
+  if(!fc.flipped){
+    const f=h('button','btn primary','Pokaż odpowiedź'); f.type='button'; f.onclick=flip; btns.appendChild(f);
+    $('#fCard').onclick=flip;
+  } else {
+    const y=h('button','btn primary','Znam'); y.type='button'; y.onclick=()=>fcAnswer(true);
+    const n=h('button','btn','Jeszcze nie'); n.type='button'; n.onclick=()=>fcAnswer(false);
+    btns.append(y,n);
+  }
+  const onKey=e=>{ if(e.key===' '||e.key==='Enter'){ if(!fc.flipped){ e.preventDefault(); flip(); } } };
+  document.addEventListener('keydown',onKey); cleanupFns.push(()=>document.removeEventListener('keydown',onKey));
+  function flip(){ fc.flipped=true; fcRender(); }
+}
+function fcAnswer(known){
+  const c=fc.queue.shift(); const st=S.cards[c.id]||(S.cards[c.id]={known:false,n:0}); st.n++; st.known=known;
+  S.xp+=known?3:1; markDay(); save();
+  if(!known) fc.queue.splice(Math.min(3,fc.queue.length),0,c);
+  fc.flipped=false; fcRender(); renderHeader();
+}
+
+/* ================= KARTKÓWKA – wstęp ================= */
+function viewExam(){
+  const exams=S.sessions.filter(x=>x.mode==='exam').slice(-10).reverse();
+  app.innerHTML=`<section class="panel">
+    <h2>Kartkówka próbna</h2>
+    <p>10 pytań z całego materiału (po jednym z każdego tematu, budowanie nici i jedno losowe) oraz jedno zadanie na szóstkę z pytań ⭐. Bez podpowiedzi – wynik i omówienie zobaczysz na końcu.</p>
+    <table class="scale" aria-label="Skala ocen">
+      <tr><td>0–3 dobrze</td><td>1 – niedostateczny</td></tr>
+      <tr><td>4–5 dobrze</td><td>2 – dopuszczający</td></tr>
+      <tr><td>6–7 dobrze</td><td>3 – dostateczny</td></tr>
+      <tr><td>8 dobrze</td><td>4 – dobry</td></tr>
+      <tr><td>9–10 dobrze</td><td>5 – bardzo dobry</td></tr>
+      <tr><td>9–10 dobrze + zadanie ⭐</td><td>6 – celujący</td></tr>
+    </table>
+    <p class="small muted" style="margin-top:8px">Progi w szkole mogą być trochę inne – to przybliżenie.</p>
+    <div class="btnrow"><button class="btn primary" data-action="start-exam">Zacznij kartkówkę</button></div>
+  </section>
+  <section class="panel"><h3>Twoje wyniki</h3>
+    ${exams.length?`<ul class="hist">${exams.map(x=>`<li><span>${fmtDate(x.t)}</span><span>${x.ok}/${x.total}${x.bonus?' + ⭐':''} <span class="gradepill">${x.grade}</span></span></li>`).join('')}</ul>`:'<p class="muted">Jeszcze żadnej kartkówki próbnej.</p>'}
+  </section>`;
+}
+
+/* ================= START ================= */
+go('home');
+</script>
+</body>
+</html>

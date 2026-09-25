@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Części mowy – trening przed kartkówką</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📒</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F9FD; --grid:#DDE7F3; --margin:#E9A3AE;
+  --ink:#1B2B4B; --ink2:#4B5A7A; --line:#B9C7DB; --sheet:rgba(255,255,255,.92);
+  --ok:#1E8E4E; --okbg:#E6F5EC; --bad:#D22B3F; --badbg:#FCE9EC; --hl:#FFE066;
+  --tc:#1B2B4B;
+}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{margin:0}
+body{
+  font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:18px; line-height:1.5; color:var(--ink);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px; min-height:100vh;
+}
+.wrap{max-width:780px;margin:0 auto;min-height:100vh;padding:20px 20px 80px 34px;border-left:2px solid var(--margin);position:relative}
+@media (max-width:640px){.wrap{padding:14px 12px 72px 18px}body{font-size:17px}}
+.hand{font-family:"Caveat","Segoe Print","Comic Sans MS",cursive}
+h1{font-size:44px;line-height:1.05;margin:18px 0 4px;letter-spacing:-.5px}
+h2{font-size:28px;line-height:1.15;margin:10px 0 6px}
+h3{font-size:20px;margin:18px 0 6px}
+p{margin:6px 0 10px}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid #3B82F6;outline-offset:2px}
+.sub{font-size:30px;color:var(--bad);margin:0 0 14px;transform:rotate(-1.2deg);display:inline-block}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px;color:var(--ink2)}
+.bar .sp{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--sheet);border:1.5px solid var(--line);font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:9px 18px;border-radius:10px;border:2px solid var(--ink);background:var(--ink);color:#fff;font-weight:700;font-size:17px}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{background:var(--sheet);color:var(--ink)}
+.btn.ghost:hover{background:#fff;filter:none}
+.btn.small{min-height:38px;padding:5px 12px;font-size:15px}
+.btn.tc{background:var(--tc);border-color:var(--tc)}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sheet{background:var(--sheet);border:1.5px solid var(--line);border-radius:12px;padding:18px 20px}
+.muted{color:var(--ink2)}
+.small{font-size:15px}
+.warn{background:#FFF6D6;border:1.5px solid #E7C94F;border-radius:10px;padding:10px 14px;font-size:15px;margin:10px 0}
+
+/* home */
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 26px}
+@media (max-width:560px){.cta{grid-template-columns:1fr}}
+.cta button{text-align:left;padding:14px 16px;border-radius:12px;border:2px solid var(--ink);background:var(--sheet);min-height:84px}
+.cta button strong{display:block;font-size:19px}
+.cta button span{font-size:15px;color:var(--ink2)}
+.cta button.main{background:var(--ink);color:#fff}
+.cta button.main span{color:#D5DEEE}
+.cta button:disabled{opacity:.5;cursor:not-allowed}
+.topics{display:flex;flex-direction:column;gap:10px}
+.topic{display:grid;grid-template-columns:8px 1fr auto;gap:14px;align-items:center;background:var(--sheet);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px 12px 0;overflow:hidden}
+.topic .tab{align-self:stretch;background:var(--tc);border-radius:0 6px 6px 0}
+.topic h3{margin:0;font-size:20px}
+.topic .d{font-size:15px;color:var(--ink2);margin:0 0 6px}
+.topic .acts{display:flex;gap:8px}
+@media (max-width:560px){.topic{grid-template-columns:8px 1fr}.topic .acts{grid-column:2}}
+.hl{position:relative;height:12px;background:color-mix(in srgb,var(--tc) 12%,transparent);border-radius:4px 9px 3px 8px;max-width:260px}
+.hl i{position:absolute;inset:0 auto 0 0;background:color-mix(in srgb,var(--tc) 55%,transparent);border-radius:4px 9px 3px 8px}
+.hlrow{display:flex;align-items:center;gap:10px}
+.hlrow .v{font-size:22px;line-height:1;min-width:84px}
+
+/* quiz */
+.qhead{display:flex;align-items:center;gap:12px;margin:8px 0 14px}
+.qhead .tn{font-weight:700;color:var(--tc)}
+.prog{flex:1;height:8px;background:#E4EAF3;border-radius:6px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--tc);transition:width .25s}
+.qcard{background:var(--sheet);border:1.5px solid var(--line);border-left:6px solid var(--tc);border-radius:12px;padding:20px 22px}
+.qtype{font-size:15px;color:var(--ink2);margin-bottom:4px}
+.prompt{font-size:21px;line-height:1.45;margin:0 0 16px}
+.prompt b{color:var(--tc)}
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opts.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:560px){.opts.three{grid-template-columns:1fr}}
+.opt{text-align:left;padding:12px 14px;min-height:50px;border-radius:10px;border:2px solid var(--line);background:#fff;font-size:18px}
+.opt:hover:not(:disabled){border-color:var(--tc)}
+.opt.sel{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 10%,#fff)}
+.opt.good{border-color:var(--ok);background:var(--okbg)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg);text-decoration:line-through;text-decoration-color:var(--bad)}
+.opt:disabled{cursor:default}
+input.txt{font:inherit;font-size:20px;padding:10px 14px;border-radius:10px;border:2px solid var(--line);background:#fff;width:100%;max-width:380px;color:var(--ink)}
+input.txt:focus{border-color:var(--tc);outline:none}
+input.txt.good{border-color:var(--ok);background:var(--okbg)}
+input.txt.wrong{border-color:var(--bad);background:var(--badbg)}
+.note{font-size:16px;color:#8A5A00;margin-top:8px}
+.words{display:flex;flex-wrap:wrap;gap:8px 6px;font-size:22px}
+.word{padding:5px 10px;border-radius:8px;border:2px dashed transparent;background:transparent;font-size:22px}
+.word:hover:not(:disabled){border-color:var(--line)}
+.word.sel{background:color-mix(in srgb,var(--tc) 22%,transparent);border:2px solid var(--tc)}
+.word.good{background:var(--okbg);border:2px solid var(--ok)}
+.word.miss{border:2px dashed var(--bad)}
+.word.wrong{background:var(--badbg);border:2px solid var(--bad);text-decoration:line-through}
+.word .p{color:var(--ink2)}
+.split{display:flex;align-items:stretch;font-size:40px;font-weight:700;flex-wrap:wrap}
+.split .l{padding:4px 0;line-height:1.2}
+.split .g{width:22px;border:none;background:transparent;position:relative;padding:0;margin:0 1px}
+.split .g::after{content:"";position:absolute;left:50%;top:14%;bottom:14%;width:0;border-left:3px dotted #C3CFE0;transform:translateX(-50%)}
+.split .g:hover::after{border-left-color:var(--tc)}
+.split .g.sel::after{border-left:5px solid var(--bad);top:4%;bottom:4%}
+.split .g.ans::after{border-left:5px solid var(--ok);top:4%;bottom:4%}
+.split .zero{font-size:18px;font-weight:400;margin-left:12px;align-self:center;border:2px solid var(--line);border-radius:10px;padding:6px 12px;background:#fff}
+.split .zero.sel{border-color:var(--bad);background:var(--badbg)}
+.split .zero.ans{border-color:var(--ok);background:var(--okbg)}
+.grid{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;align-items:center}
+.grid .lab{font-size:16px}
+.grid .lab small{display:block;color:var(--ink2);font-size:14px}
+.grid input.txt{font-size:18px;padding:7px 10px;max-width:260px}
+.grid .fix{font-size:15px;color:var(--ok);font-weight:700;margin-left:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:5px 12px;border-radius:999px;border:2px solid var(--line);background:#fff;font-size:16px}
+.chip.sel{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,#fff)}
+.chip.good{border-color:var(--ok);background:var(--okbg)}
+.chip.wrong{border-color:var(--bad);background:var(--badbg);text-decoration:line-through}
+.chip:disabled{cursor:default}
+.prow{display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:start;margin:10px 0}
+.prow .lab{font-weight:700;padding-top:6px;font-size:16px}
+@media (max-width:560px){.prow{grid-template-columns:1fr;gap:4px}}
+.actions{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.fb{margin-top:16px;padding:12px 16px;border-radius:10px;border:2px solid}
+.fb.ok{border-color:var(--ok);background:var(--okbg)}
+.fb.bad{border-color:var(--bad);background:var(--badbg)}
+.fb .mark{font-size:34px;line-height:1;font-weight:700}
+.fb.ok .mark{color:var(--ok)}
+.fb.bad .mark{color:var(--bad)}
+.fb .why{font-size:16px;color:var(--ink2);margin-top:4px}
+@media (prefers-reduced-motion:no-preference){
+  .fb .mark{animation:pop .28s ease-out}
+  @keyframes pop{from{transform:scale(.7) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+}
+
+/* summary */
+.score{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin:10px 0 18px}
+.circle{width:150px;height:150px;border-radius:50%;border:4px solid var(--bad);display:flex;align-items:center;justify-content:center;flex-direction:column;transform:rotate(-4deg);color:var(--bad);background:rgba(255,255,255,.7)}
+.circle .big{font-size:58px;line-height:.9;font-weight:700}
+.circle .lit{font-size:22px}
+.comment{font-size:34px;color:var(--bad);line-height:1.1;max-width:420px}
+.review{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.review li{background:var(--sheet);border:1.5px solid var(--line);border-left:5px solid var(--bad);border-radius:10px;padding:10px 14px;font-size:16px}
+.review .c{color:var(--ok);font-weight:700}
+.badgebar{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.badge{padding:6px 12px;border-radius:999px;border:2px solid var(--ink);background:var(--hl);font-weight:700;font-size:15px}
+.badge.off{background:transparent;border:2px dashed var(--line);color:var(--ink2);font-weight:400}
+
+/* learn */
+.learn table{border-collapse:collapse;width:100%;font-size:16px;margin:8px 0 14px;background:#fff}
+.learn th,.learn td{border:1.5px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+.learn th{background:color-mix(in srgb,var(--tc) 10%,#fff)}
+.learn .tw{overflow-x:auto}
+.learn ul{margin:4px 0 12px;padding-left:22px}
+.learn li{margin:3px 0}
+.learn .tip{border-left:5px solid var(--hl);background:#FFFBEA;padding:8px 12px;border-radius:0 8px 8px 0;margin:10px 0;font-size:16px}
+.learn em{font-style:italic;color:var(--tc)}
+.k{font-weight:700}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.legend span{padding:2px 10px;border-radius:999px;color:#fff;font-size:15px;font-weight:700}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:var(--sheet);margin:12px 0 20px}
+.stats div{padding:12px 14px;border-right:1.5px solid var(--line)}
+.stats div:last-child{border-right:none}
+.stats b{display:block;font-size:30px;line-height:1.1}
+.stats span{font-size:14px;color:var(--ink2)}
+@media (max-width:560px){.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(2){border-right:none}.stats div:nth-child(-n+2){border-bottom:1.5px solid var(--line)}}
+table.hist{border-collapse:collapse;width:100%;font-size:15px;background:var(--sheet)}
+table.hist th,table.hist td{border-bottom:1.5px solid var(--line);padding:6px 8px;text-align:left}
+table.hist th{font-weight:700;color:var(--ink2)}
+.tw{overflow-x:auto}
+textarea{width:100%;font:inherit;font-size:14px;border:1.5px solid var(--line);border-radius:8px;padding:8px;min-height:90px}
+.name{max-width:420px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;font-size:16px;z-index:10;max-width:90vw}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+"use strict";
+/* ============ narzędzia ============ */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const stripTags=s=>String(s).replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ');
+const norm=s=>String(s).trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!?,;:]+$/,'');
+const DIA={'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z'};
+const flat=s=>norm(s).replace(/[ąćęłńóśźż]/g,c=>DIA[c]);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const dstr=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const today=()=>dstr(new Date());
+
+/* ============ tematy ============ */
+const T={
+  czasownik:{n:'Czasownik',c:'#C2378E',d:'Osoba, liczba, czas, tryb, rodzaj, formy nieosobowe'},
+  rzeczownik:{n:'Rzeczownik',c:'#2F6FDB',d:'Własne i pospolite, rodzaj'},
+  przypadki:{n:'Przypadki',c:'#1E4A9E',d:'Odmiana przez przypadki: M, D, C, B, N, Ms, W'},
+  przymiotnik:{n:'Przymiotnik',c:'#0E8C7A',d:'Stopniowanie, rodzaj, odmiana'},
+  liczebnik:{n:'Liczebnik',c:'#B86E00',d:'Główne, porządkowe, zbiorowe'},
+  budowa:{n:'Temat i końcówka',c:'#6B4FBB',d:'Budowa wyrazu, który się odmienia'},
+  zdanie:{n:'Części mowy w zdaniu',c:'#1B2B4B',d:'Rozpoznawanie w praktyce'}
+};
+const TOPIC_KEYS=Object.keys(T);
+
+/* ============ dane ============ */
+const CASES=[['M','mianownik','kto? co?'],['D','dopełniacz','kogo? czego?'],['C','celownik','komu? czemu?'],['B','biernik','kogo? co?'],['N','narzędnik','(z) kim? (z) czym?'],['Ms','miejscownik','(o) kim? (o) czym?'],['W','wołacz','o!']];
+const CN=Object.fromEntries(CASES.map(c=>[c[0],c[1]]));
+const NOUNS={
+  kot:{lp:['kot','kota','kotu','kota','kotem','kocie','kocie'],lm:['koty','kotów','kotom','koty','kotami','kotach','koty']},
+  dom:{lp:['dom','domu','domowi','dom','domem','domu','domu'],lm:['domy','domów','domom','domy','domami','domach','domy']},
+  'szkoła':{lp:['szkoła','szkoły','szkole','szkołę','szkołą','szkole','szkoło'],lm:['szkoły','szkół','szkołom','szkoły','szkołami','szkołach','szkoły']},
+  okno:{lp:['okno','okna','oknu','okno','oknem','oknie','okno'],lm:['okna','okien','oknom','okna','oknami','oknach','okna']},
+  brat:{lp:['brat','brata','bratu','brata','bratem','bracie','bracie'],lm:['bracia','braci','braciom','braci','braćmi','braciach','bracia']},
+  mama:{lp:['mama','mamy','mamie','mamę','mamą','mamie','mamo'],lm:['mamy','mam','mamom','mamy','mamami','mamach','mamy']},
+  kolega:{lp:['kolega','kolegi','koledze','kolegę','kolegą','koledze','kolego'],lm:['koledzy','kolegów','kolegom','kolegów','kolegami','kolegach','koledzy']},
+  'książka':{lp:['książka','książki','książce','książkę','książką','książce','książko'],lm:['książki','książek','książkom','książki','książkami','książkach','książki']},
+  przyjaciel:{lp:['przyjaciel','przyjaciela','przyjacielowi','przyjaciela','przyjacielem','przyjacielu','przyjacielu'],lm:['przyjaciele','przyjaciół','przyjaciołom','przyjaciół','przyjaciółmi','przyjaciołach','przyjaciele']},
+  dziecko:{lp:['dziecko','dziecka','dziecku','dziecko','dzieckiem','dziecku','dziecko'],lm:['dzieci','dzieci','dzieciom','dzieci','dziećmi','dzieciach','dzieci']},
+  pies:{lp:['pies','psa','psu','psa','psem','psie','psie'],lm:['psy','psów','psom','psy','psami','psach','psy']},
+  rzeka:{lp:['rzeka','rzeki','rzece','rzekę','rzeką','rzece','rzeko'],lm:['rzeki','rzek','rzekom','rzeki','rzekami','rzekach','rzeki']},
+  drzewo:{lp:['drzewo','drzewa','drzewu','drzewo','drzewem','drzewie','drzewo'],lm:['drzewa','drzew','drzewom','drzewa','drzewami','drzewach','drzewa']},
+  babcia:{lp:['babcia','babci','babci','babcię','babcią','babci','babciu'],lm:['babcie','babć','babciom','babcie','babciami','babciach','babcie']}
+};
+const CASE_SENT=[
+  ['<b>Kot</b> śpi na kanapie.','M','kto? co? śpi'],
+  ['Na biurku leży <b>zeszyt</b>.','M','kto? co? leży'],
+  ['Nie widzę <b>kota</b>.','D','nie widzę (kogo? czego?)'],
+  ['Boję się <b>burzy</b>.','D','boję się (kogo? czego?)'],
+  ['Nie lubię <b>szpinaku</b>.','D','nie lubię (kogo? czego?)'],
+  ['Daję kość <b>psu</b>.','C','daję (komu? czemu?)'],
+  ['Dziękuję <b>koledze</b> za pomoc.','C','dziękuję (komu? czemu?)'],
+  ['Pomagam <b>babci</b> w ogrodzie.','C','pomagam (komu? czemu?)'],
+  ['Widzę <b>psa</b> za płotem.','B','widzę (kogo? co?) – sprawdź z „mamą”: widzę mamę'],
+  ['Czekam na <b>autobus</b>.','B','czekam na (kogo? co?)'],
+  ['Kocham moją <b>babcię</b>.','B','kocham (kogo? co?)'],
+  ['Idę do sklepu z <b>mamą</b>.','N','idę (z kim? z czym?)'],
+  ['Piszę <b>długopisem</b>.','N','piszę (kim? czym?)'],
+  ['Interesuję się <b>piłką</b> nożną.','N','interesuję się (kim? czym?)'],
+  ['Myślę o <b>bracie</b>.','Ms','myślę (o kim? o czym?)'],
+  ['Opowiadam o <b>wakacjach</b>.','Ms','opowiadam (o kim? o czym?)'],
+  ['Mieszkam w <b>Poznaniu</b>.','Ms','mieszkam (w kim? w czym?)'],
+  ['<b>Mamo</b>, pomóż mi!','W','zwracamy się do kogoś – wołacz'],
+  ['<b>Przyjacielu</b>, czekam na ciebie!','W','zwracamy się do kogoś – wołacz']
+];
+const PROSZE=[['___ o chwilę uwagi.','Proszę panią'],['___, która jest godzina?','Proszę pani'],['___ o podanie zeszytu.','Proszę panią'],['___, czy mogę wyjść?','Proszę pani'],['___ o wysłuchanie mojego zdania.','Proszę panią'],['___, ile kosztuje ten zeszyt?','Proszę pani']];
+
+const VERBS=[
+  ['piszę','1','poj','teraźniejszy','orzekający','brak'],['piszesz','2','poj','teraźniejszy','orzekający','brak'],
+  ['czytamy','1','mn','teraźniejszy','orzekający','brak'],['czytacie','2','mn','teraźniejszy','orzekający','brak'],
+  ['grają','3','mn','teraźniejszy','orzekający','brak'],['pisałem','1','poj','przeszły','orzekający','męski'],
+  ['pisałaś','2','poj','przeszły','orzekający','żeński'],['spało','3','poj','przeszły','orzekający','nijaki'],
+  ['czytaliśmy','1','mn','przeszły','orzekający','męskoosobowy'],['czytałyście','2','mn','przeszły','orzekający','niemęskoosobowy'],
+  ['grały','3','mn','przeszły','orzekający','niemęskoosobowy'],['grali','3','mn','przeszły','orzekający','męskoosobowy'],
+  ['zaśpiewam','1','poj','przyszły prosty','orzekający','brak'],['przeczytasz','2','poj','przyszły prosty','orzekający','brak'],
+  ['napiszemy','1','mn','przyszły prosty','orzekający','brak'],['będę czytać','1','poj','przyszły złożony','orzekający','brak'],
+  ['będzie grała','3','poj','przyszły złożony','orzekający','żeński'],['będziemy pisali','1','mn','przyszły złożony','orzekający','męskoosobowy'],
+  ['będą tańczyły','3','mn','przyszły złożony','orzekający','niemęskoosobowy'],
+  ['idź','2','poj','–','rozkazujący','brak'],['idźcie','2','mn','–','rozkazujący','brak'],
+  ['chodźmy','1','mn','–','rozkazujący','brak'],['niech czyta','3','poj','–','rozkazujący','brak'],
+  ['poszedłbym','1','poj','–','przypuszczający','męski'],['zrobiłabyś','2','poj','–','przypuszczający','żeński'],
+  ['czytalibyśmy','1','mn','–','przypuszczający','męskoosobowy'],['pomogłyby','3','mn','–','przypuszczający','niemęskoosobowy']
+];
+const PFIELDS=[
+  ['os','Osoba',['1','2','3'],v=>v+'. osoba'],
+  ['lb','Liczba',['poj','mn'],v=>v==='poj'?'pojedyncza':'mnoga'],
+  ['tr','Tryb',['orzekający','rozkazujący','przypuszczający'],v=>v],
+  ['cz','Czas',['przeszły','teraźniejszy','przyszły prosty','przyszły złożony','–'],v=>v==='–'?'nie określamy':v],
+  ['ro','Rodzaj',['męski','żeński','nijaki','męskoosobowy','niemęskoosobowy','brak'],v=>v==='brak'?'brak rodzaju':v]
+];
+const TRYB_SENT=[['<u>Posprzątaj</u> swój pokój!','rozkazujący'],['Chętnie <u>zjadłbym</u> lody.','przypuszczający'],['Wczoraj <u>byliśmy</u> w kinie.','orzekający'],['<u>Niech zaczeka</u> chwilę.','rozkazujący'],['Gdybym miał czas, <u>pojechałbym</u> nad morze.','przypuszczający'],['Jutro <u>pojedziemy</u> nad morze.','orzekający'],['<u>Chodźmy</u> na spacer!','rozkazujący'],['<u>Zrobiłabyś</u> mi herbatę?','przypuszczający'],['Kot <u>śpi</u> na kanapie.','orzekający']];
+const NIEOS=[['czytać','b'],['pływać','b'],['iść','b'],['zamknięto','t'],['ugotowano','t'],['posprzątano','t'],['otwarto','t'],['zbudowano','t'],['mówi się','s'],['zabrania się','s'],['tańczy się','s'],['czytam','o'],['zamknął','o'],['ugotowała','o'],['mówimy','o'],['śpiewają','o']];
+const NIEOS_L={b:'nieosobowa – bezokolicznik',t:'nieosobowa – forma zakończona na -no, -to',s:'nieosobowa – konstrukcja ze słowem „się”',o:'osobowa (wiadomo, kto wykonuje czynność)'};
+const NIEOS_SETS=[[['czytać','zamknięto','mówi się'],['czytam','zamknął','mówimy']],[['ugotowano','pływać','zabrania się'],['ugotowała','pływamy','zabraniam']],[['posprzątano','iść','śpiewa się'],['posprzątali','idę','śpiewa']],[['otwarto','rysować','tańczy się'],['otworzył','rysujesz','tańczą']]];
+const WHO=[['Na spotkaniu poruszono ważny temat.',['Uczniowie rozmawiali z dyrektorem.','Dyrektor odpowiadał na pytania.','Mama ugotowała pyszny obiad.']],['W bibliotece rozmawia się szeptem.',['Ola rozmawia z koleżanką.','Tata czyta gazetę.','Psy szczekały głośno.']],['Z braku pieniędzy zrezygnowano z wycieczki.',['Klasa zrezygnowała z wycieczki.','Pani odwołała lekcję.','Kacper wygrał konkurs.']]];
+const PAST=[['(ona) czyta',['czytała']],['(oni) grają',['grali']],['(one) piszą',['pisały']],['(ja – chłopiec) biegnę',['biegłem']],['(my – dziewczynki) śpiewamy',['śpiewałyśmy']],['(ty – dziewczyna) rysujesz',['rysowałaś']],['(ono) śpi',['spało']],['(wy – chłopcy) czytacie',['czytaliście']],['(ja – dziewczyna) idę',['szłam']],['(on) je',['jadł']]];
+const FUT=[['(ja) czytam',['będę czytać','będę czytał','będę czytała']],['(my) piszemy',['będziemy pisać','będziemy pisali','będziemy pisały']],['(ona) gra',['będzie grać','będzie grała']],['(oni) pływają',['będą pływać','będą pływali']]];
+
+const RZ=[['Warta',1,'żeński'],['Wisła',1,'żeński'],['Poznań',1,'męski'],['Kraków',1,'męski'],['Bałtyk',1,'męski'],['Ania',1,'żeński'],['Tomek',1,'męski'],['Zakopane',1,'nijaki'],['jezioro',0,'nijaki'],['przyjaźń',0,'żeński'],['las',0,'męski'],['burza',0,'żeński'],['słonecznik',0,'męski'],['dziecko',0,'nijaki'],['miasto',0,'nijaki'],['zeszyt',0,'męski'],['noc',0,'żeński'],['kość',0,'żeński'],['imię',0,'nijaki'],['muzeum',0,'nijaki'],['kamień',0,'męski'],['mysz',0,'żeński'],['dzień',0,'męski'],['sól',0,'żeński'],['tęcza',0,'żeński'],['kolega',0,'męski']];
+const TTT={'męski':'ten','żeński':'ta','nijaki':'to'};
+
+const ADJ=[['ciekawy','ciekawszy','najciekawszy','r'],['miły','milszy','najmilszy','r'],['młody','młodszy','najmłodszy','r'],['szybki','szybszy','najszybszy','r'],['ładny','ładniejszy','najładniejszy','r'],['łatwy','łatwiejszy','najłatwiejszy','r'],['mądry','mądrzejszy','najmądrzejszy','r'],['ciepły','cieplejszy','najcieplejszy','r'],['stary','starszy','najstarszy','r'],['wysoki','wyższy','najwyższy',''],['dobry','lepszy','najlepszy','n'],['zły','gorszy','najgorszy','n'],['duży','większy','największy','n'],['mały','mniejszy','najmniejszy','n'],['zadowolony','bardziej zadowolony','najbardziej zadowolony','o'],['zmęczony','bardziej zmęczony','najbardziej zmęczony','o'],['interesujący','bardziej interesujący','najbardziej interesujący','o'],['wymagający','bardziej wymagający','najbardziej wymagający','o']];
+const STL={r:'proste regularne',n:'proste nieregularne',o:'opisowe'};
+const ADJ_RODZ=[['<b>zielona</b> trawa','żeński'],['<b>wysoki</b> dom','męski'],['<b>ciepłe</b> mleko','nijaki'],['<b>weseli</b> chłopcy','męskoosobowy'],['<b>wesołe</b> dziewczynki','niemęskoosobowy'],['<b>szybkie</b> psy','niemęskoosobowy'],['<b>mądrzy</b> nauczyciele','męskoosobowy'],['<b>małe</b> dzieci','niemęskoosobowy'],['<b>stare</b> domy','niemęskoosobowy'],['<b>nowy</b> zeszyt','męski'],['<b>kolorowe</b> okno','nijaki'],['<b>odważni</b> strażacy','męskoosobowy'],['<b>pracowite</b> pszczoły','niemęskoosobowy']];
+const ADJ_FILL=[['Nie mam ___ kredki.','czerwony','czerwonej','D'],['Idę do kina z ___ bratem.','młodszy','młodszym','N'],['Myślę o ___ rowerze.','nowy','nowym','Ms'],['Daję prezent ___ siostrze.','mały','małej','C'],['Widzę ___ drzewo.','wysoki','wysokie','B'],['Przyglądam się ___ psom.','biały','białym','C'],['Rozmawiamy o ___ wakacjach.','udany','udanych','Ms'],['Nie lubię ___ zup.','słony','słonych','D']];
+
+const LIC=[['jeden','g'],['dwa','g'],['siedem','g'],['sto','g'],['tysiąc','g'],['dwadzieścia','g'],['pierwszy','p'],['trzeci','p'],['piąty','p'],['ósma','p'],['setny','p'],['dziesiąte','p'],['dwoje','z'],['troje','z'],['czworo','z'],['pięcioro','z'],['dwojga','z'],['dziesięcioro','z']];
+const LICL={g:'główny',p:'porządkowy',z:'zbiorowy'};
+const LIC_FILL=[
+  ['Na podwórku bawiło się ___ dzieci.','3',['troje'],'Liczebnik zbiorowy – używamy go z nazwami dzieci i młodych zwierząt.'],
+  ['Mam ___ koty.','2',['dwa'],'Liczebnik główny: dwa koty.'],
+  ['Mam ___ siostry.','2',['dwie'],'Liczebnik główny w rodzaju żeńskim: dwie siostry.'],
+  ['Zająłem ___ miejsce w konkursie.','1',['pierwsze'],'Liczebnik porządkowy, rodzaj nijaki: pierwsze miejsce.'],
+  ['Mieszkam na ___ piętrze.','4',['czwartym'],'Liczebnik porządkowy w miejscowniku (na czym?): na czwartym piętrze.'],
+  ['Kupiłem bilety dla ___ kolegów.','5',['pięciu'],'Liczebnik główny w dopełniaczu (dla kogo?): dla pięciu kolegów.'],
+  ['Na gałęzi siedziały ___ wróble.','3',['trzy'],'Liczebnik główny: trzy wróble.'],
+  ['Rozmawiałem z ___ koleżankami.','3',['trzema'],'Liczebnik główny w narzędniku (z kim?): z trzema koleżankami.'],
+  ['W domu mamy ___ kocięta.','2',['dwoje'],'Liczebnik zbiorowy – kocięta to młode zwierzęta.'],
+  ['Jesteśmy właścicielami ___ szczeniąt.','3',['trojga'],'Liczebnik zbiorowy w dopełniaczu (kogo?): trojga szczeniąt.'],
+  ['Chodzę do ___ klasy.','6',['szóstej'],'Liczebnik porządkowy w dopełniaczu (do czego?): do szóstej klasy.'],
+  ['Mój dziadek ma ___ lat.','70',['siedemdziesiąt'],'Liczebnik główny: siedemdziesiąt lat.']
+];
+
+const SPLIT=[['domu',3],['dom',3],['domowi',3],['kotem',3],['kot',3],['kotami',3],['bratu',4],['oknem',3],['szkołą',5],['szkoły',5],['mamę',3],['stół',4],['piszesz',4],['piszemy',4],['myjesz',3],['myję',3],['czytasz',5],['dobrego',4],['zielona',6],['nowej',3]];
+
+const SENTS=['Troje/l wesołych/p dzieci/r karmiło/c małego/p psa/r.','Nowa/p nauczycielka/r przyglądała_się/c dwóm/l uczniom/r.','Starszy/p brat/r czyta/c ciekawą/p książkę/r.','W/x sobotę/r pojechaliśmy/c nad/x duże/p jezioro/r.','Pierwszy/l uczeń/r napisał/c trudny/p sprawdzian/r.','Dwie/l białe/p kozy/r skakały/c po/x zielonej/p łące/r.','Kasia/r dostała/c od/x babci/r trzy/l kolorowe/p balony/r.','Wesoły/p tata/r głośno/x śpiewał/c piosenkę/r.','Jutro/x będziemy_grali/c w/x piłkę/r na/x szkolnym/p boisku/r.','Czworo/l przyjaciół/r zbudowało/c wysoką/p wieżę/r z/x klocków/r.'];
+const TAGN={r:'rzeczowniki',c:'czasowniki',p:'przymiotniki',l:'liczebniki'};
+const TAGC={r:'#2F6FDB',c:'#C2378E',p:'#0E8C7A',l:'#B86E00'};
+const POS=['rzeczownik','czasownik','przymiotnik','liczebnik'];
+const GER=[['<u>Gotuję</u> z babcią.','czasownik'],['<u>Gotowanie</u> z babcią.','rzeczownik'],['<u>Karmiłam</u> koty.','czasownik'],['<u>Karmienie</u> kotów.','rzeczownik'],['<u>Dekorowanie</u> pokoju.','rzeczownik'],['<u>Dekorowałem</u> pokój.','czasownik'],['<u>Pływam</u> w basenie.','czasownik'],['<u>Pływanie</u> jest zdrowe.','rzeczownik'],['Mam <u>trzy</u> długopisy.','liczebnik'],['To mój <u>trzeci</u> długopis.','liczebnik'],['To <u>trudne</u> zadanie.','przymiotnik'],['<u>Zadanie</u> było trudne.','rzeczownik']];
+
+/* ============ bank pytań ============ */
+const BANK=[];
+const add=o=>BANK.push(o);
+function mc(id,topic,prompt,options,answer,explain,label){add({id,topic,type:'mc',prompt,options,answer,explain,label});}
+function inp(id,topic,prompt,answers,explain,label){add({id,topic,type:'input',prompt,answers,explain,label});}
+
+function buildBank(){
+  /* --- czasownik --- */
+  mc('cz:t1','czasownik','Co nazywa czasownik?',['czynności i stany','cechy osób i przedmiotów','osoby, rzeczy, zjawiska','liczby i kolejność'],'czynności i stany','Czasownik nazywa czynności (biegnie) i stany (choruje, śpi).');
+  mc('cz:t2','czasownik','Na jakie pytania odpowiada czasownik?',['co robi? co się z kim (z czym) dzieje?','kto? co?','jaki? jaka? jakie?','ile? który z kolei?'],'co robi? co się z kim (z czym) dzieje?','Czasownik: co robi? co się z kim (z czym) dzieje?');
+  mc('cz:t3','czasownik','Kiedy czasownik odmienia się przez rodzaje?',['w czasie przeszłym i w niektórych formach czasu przyszłego','tylko w czasie teraźniejszym','we wszystkich czasach','nigdy'],'w czasie przeszłym i w niektórych formach czasu przyszłego','Rodzaj widać w czasie przeszłym (czytał, czytała) i w czasie przyszłym złożonym typu „będę czytał / będę czytała”. Także w trybie przypuszczającym (czytałbym, czytałabym).');
+  mc('cz:t4','czasownik','Który czasownik jest w czasie przyszłym złożonym?',['będę śpiewał','zaśpiewam','śpiewałem','śpiewam'],'będę śpiewał','Czas przyszły złożony ma dwa wyrazy: „będę” + drugi czasownik.');
+  mc('cz:t5','czasownik','Który czasownik jest w czasie przyszłym prostym?',['zaśpiewam','będę śpiewał','śpiewam','śpiewałbym'],'zaśpiewam','Czas przyszły prosty to jeden wyraz: zaśpiewam, przeczytam, napiszę.');
+  mc('cz:t6','czasownik','Jakie są tryby czasownika?',['orzekający, rozkazujący, przypuszczający','osobowy i nieosobowy','przeszły, teraźniejszy, przyszły','męski, żeński, nijaki'],'orzekający, rozkazujący, przypuszczający','Trzy tryby: orzekający (informuje), rozkazujący (polecenie), przypuszczający (z „-by”).');
+  mc('cz:t7','czasownik','Przez co odmienia się czasownik?',['przez osoby, liczby, czasy, tryby i rodzaje','tylko przez przypadki','przez przypadki i liczby','nie odmienia się'],'przez osoby, liczby, czasy, tryby i rodzaje','Czasownik to jedyna część mowy, która odmienia się przez osoby, czasy i tryby.');
+  mc('cz:t8','czasownik','Które zdanie opisuje grupę w rodzaju męskoosobowym?',['Oni grali w piłkę.','One grały w piłkę.','Psy grały w piłkę.','Dziewczynki grały w piłkę.'],'Oni grali w piłkę.','Rodzaj męskoosobowy: grupa, w której jest przynajmniej jeden mężczyzna lub chłopiec (oni grali).');
+  VERBS.forEach((v,i)=>{
+    add({id:'cz:p:'+v[0],topic:'czasownik',type:'parse',word:v[0],ans:{os:v[1],lb:v[2],cz:v[3],tr:v[4],ro:v[5]},
+      prompt:`Określ formę czasownika <b>${v[0]}</b>.`,label:'rozbiór: '+v[0],
+      explain:v[4]==='orzekający'?'':'W trybie rozkazującym i przypuszczającym nie określamy czasu.'});
+  });
+  TRYB_SENT.forEach((s,i)=>mc('cz:tr:'+i,'czasownik',`W jakim trybie jest podkreślony czasownik?<br><span class="k">${s[0]}</span>`,['orzekający','rozkazujący','przypuszczający'],s[1],{orzekający:'Tryb orzekający informuje o czynności.',rozkazujący:'Tryb rozkazujący wyraża polecenie lub prośbę.',przypuszczający:'Tryb przypuszczający poznasz po cząstce „-by”.'}[s[1]],'tryb: '+stripTags(s[0])));
+  NIEOS.forEach(([w,k])=>mc('cz:no:'+w,'czasownik',`Jaka to forma czasownika: <b>${w}</b>?`,Object.values(NIEOS_L),NIEOS_L[k],k==='o'?'Wiadomo, kto wykonuje czynność – to forma osobowa.':'W formach nieosobowych nie wiadomo, kto wykonuje czynność.','forma: '+w));
+  NIEOS_SETS.forEach((s,i)=>add({id:'cz:ms:'+i,topic:'czasownik',type:'multi',prompt:'Zaznacz wszystkie <b>nieosobowe</b> formy czasownika (są trzy).',options:[...s[0],...s[1]],correct:s[0],explain:'Nieosobowe: bezokolicznik, formy na -no, -to i konstrukcje z „się”.',label:'formy nieosobowe: '+s[0].join(', ')}));
+  WHO.forEach((w,i)=>mc('cz:who:'+i,'czasownik','W którym zdaniu <b>nie można wskazać</b>, kto wykonuje czynność?',[w[0],...w[1]],w[0],'Tu jest forma nieosobowa czasownika – nie wiadomo, kto działa.','kto działa? '+w[0]));
+  PAST.forEach(p=>inp('cz:past:'+p[0],'czasownik',`Zamień na <b>czas przeszły</b>: ${p[0]}`,p[1],'Czas przeszły: '+p[1][0]+'.','czas przeszły: '+p[0]));
+  FUT.forEach(p=>inp('cz:fut:'+p[0],'czasownik',`Zamień na <b>czas przyszły złożony</b>: ${p[0]}`,p[1],'Np. '+p[1].join(' / ')+'.','przyszły złożony: '+p[0]));
+
+  /* --- rzeczownik --- */
+  mc('rz:t1','rzeczownik','Na jakie pytania odpowiada rzeczownik?',['kto? co?','co robi?','jaki? jaka? jakie?','ile?'],'kto? co?','Rzeczownik: kto? co?');
+  mc('rz:t2','rzeczownik','Przez co odmienia się rzeczownik?',['przez liczby i przypadki','przez liczby, przypadki i rodzaje','przez osoby i czasy','nie odmienia się'],'przez liczby i przypadki','Rzeczownik odmienia się przez liczby i przypadki.');
+  mc('rz:t3','rzeczownik','Czy rzeczownik odmienia się przez rodzaje?',['Nie, ale ma określony rodzaj','Tak, jak przymiotnik','Tak, tylko w liczbie mnogiej','Nie ma żadnego rodzaju'],'Nie, ale ma określony rodzaj','Rzeczownik ma stały rodzaj (ten kot, ta mysz, to okno).');
+  mc('rz:t4','rzeczownik','Jak piszemy rzeczowniki własne?',['wielką literą','małą literą','w cudzysłowie','zależy od przypadku'],'wielką literą','Imiona, nazwiska, nazwy miast, rzek, państw piszemy wielką literą.');
+  mc('rz:t5','rzeczownik','Co nazywają rzeczowniki?',['osoby, rzeczy, rośliny, zwierzęta, miejsca, pojęcia, zjawiska','czynności i stany','cechy','liczby'],'osoby, rzeczy, rośliny, zwierzęta, miejsca, pojęcia, zjawiska','Np. uczeń, dziennik, słonecznik, żółw, las, przyjaźń, burza.');
+  RZ.forEach(([w,own,r])=>{
+    mc('rz:o:'+w,'rzeczownik',`Czy rzeczownik <b>${w}</b> jest własny czy pospolity?`,['własny','pospolity'],own?'własny':'pospolity',own?'To nazwa własna (imię, miasto, rzeka…) – piszemy ją wielką literą.':'To nazwa pospolita – ogólna nazwa, pisana małą literą.','własny/pospolity: '+w);
+    mc('rz:r:'+w,'rzeczownik',`Jaki rodzaj ma rzeczownik <b>${w}</b>?`,['męski','żeński','nijaki'],r,`Sprawdź: „${TTT[r]} ${w}” → rodzaj ${r}.`,'rodzaj: '+w);
+  });
+
+  /* --- przypadki --- */
+  CASES.forEach(([k,n,q])=>{
+    mc('pp:q:'+k,'przypadki',`Na jakie pytania odpowiada <b>${n}</b>?`,CASES.map(c=>c[2]),q,`${n[0].toUpperCase()+n.slice(1)}: ${q}`,'pytania: '+n);
+    mc('pp:n:'+k,'przypadki',`Który przypadek odpowiada na pytania: <b>${q}</b>`,CASES.map(c=>c[1]),n,`${q} → ${n}`,'który przypadek: '+q);
+  });
+  mc('pp:ord','przypadki','Jaka jest prawidłowa kolejność przypadków?',['M, D, C, B, N, Ms, W','M, B, C, D, N, Ms, W','M, D, B, C, Ms, N, W','W, M, D, C, B, N, Ms'],'M, D, C, B, N, Ms, W','Mianownik, dopełniacz, celownik, biernik, narzędnik, miejscownik, wołacz.');
+  mc('pp:t1','przypadki','Które części mowy odmieniają się przez przypadki?',['rzeczownik, przymiotnik, liczebnik','tylko rzeczownik','czasownik i rzeczownik','tylko czasownik'],'rzeczownik, przymiotnik, liczebnik','Przez przypadki odmieniają się rzeczowniki, przymiotniki i liczebniki (np. z nowym kolegą, z dwoma kotami).');
+  CASE_SENT.forEach((s,i)=>mc('pp:s:'+i,'przypadki',`W jakim przypadku jest wyróżniony rzeczownik?<br><span class="k">${s[0]}</span>`,CASES.map(c=>c[1]),CN[s[1]],'Pytamy: '+s[2]+' → '+CN[s[1]]+'.','przypadek: '+stripTags(s[0])));
+  Object.entries(NOUNS).forEach(([n,f])=>{
+    ['lp','lm'].forEach(num=>{
+      CASES.forEach(([k,cn,q],ci)=>{
+        if(ci===0)return;
+        inp(`pp:f:${n}:${num}:${k}`,'przypadki',`Wpisz formę rzeczownika <b>${n}</b>.<br>Przypadek: <span class="k">${cn}</span> – ${q}<br>Liczba: ${num==='lp'?'pojedyncza':'mnoga'}`,[f[num][ci]],`${cn} (${q}), l. ${num==='lp'?'poj.':'mn.'}: ${f[num][ci]}`,`${n} – ${cn} ${num==='lp'?'l. poj.':'l. mn.'}`);
+      });
+      add({id:`pp:tab:${n}:${num}`,topic:'przypadki',type:'table',noun:n,num,forms:f[num],prompt:`Odmień rzeczownik <b>${n}</b> przez przypadki w liczbie ${num==='lp'?'pojedynczej':'mnogiej'}.`,label:`odmiana: ${n} (${num==='lp'?'l. poj.':'l. mn.'})`});
+    });
+  });
+  PROSZE.forEach((p,i)=>mc('pp:pr:'+i,'przypadki',`Co wstawisz?<br><span class="k">${p[0]}</span>`,['Proszę pani','Proszę panią'],p[1],p[1]==='Proszę panią'?'„Proszę panią” (biernik) – gdy prosimy o coś konkretnego: proszę panią o…':'„Proszę pani” (dopełniacz) – gdy zwracamy na siebie uwagę.','proszę pani/panią: '+p[0]));
+
+  /* --- przymiotnik --- */
+  mc('pm:t1','przymiotnik','Na jakie pytania odpowiada przymiotnik?',['jaki? jaka? jakie?','kto? co?','co robi?','ile?'],'jaki? jaka? jakie?','Przymiotnik: jaki? jaka? jakie?');
+  mc('pm:t2','przymiotnik','Przez co odmienia się przymiotnik?',['przez liczby, przypadki i rodzaje','przez liczby i przypadki','przez osoby, czasy i tryby','nie odmienia się'],'przez liczby, przypadki i rodzaje','Przymiotnik dopasowuje się do rzeczownika: liczba, przypadek i rodzaj.');
+  mc('pm:t3','przymiotnik','Co nazywa przymiotnik?',['cechy osób, przedmiotów, zjawisk, roślin i zwierząt','czynności i stany','liczby i kolejność','osoby i rzeczy'],'cechy osób, przedmiotów, zjawisk, roślin i zwierząt','Np. pilny, ciężki, gwałtowna, zielona, niewielki.');
+  mc('pm:t4','przymiotnik','Jakie są stopnie przymiotnika?',['równy, wyższy, najwyższy','mały, średni, duży','pierwszy, drugi, trzeci','prosty i złożony'],'równy, wyższy, najwyższy','Np. miły – milszy – najmilszy.');
+  ADJ.forEach(([a,w,nw,t])=>{
+    inp('pm:w:'+a,'przymiotnik',`Wpisz <b>stopień wyższy</b> przymiotnika <b>${a}</b>.`,[w],`${a} – ${w} – ${nw}`,'stopień wyższy: '+a);
+    inp('pm:n:'+a,'przymiotnik',`Wpisz <b>stopień najwyższy</b> przymiotnika <b>${a}</b>.`,[nw],`${a} – ${w} – ${nw}`,'stopień najwyższy: '+a);
+    if(t)mc('pm:s:'+a,'przymiotnik',`Jak stopniuje się przymiotnik <b>${a}</b>?`,Object.values(STL),STL[t],`${a} – ${w} – ${nw} (${STL[t]})`,'stopniowanie: '+a);
+  });
+  ADJ_RODZ.forEach(([p,r])=>mc('pm:r:'+stripTags(p),'przymiotnik',`Jaki rodzaj ma przymiotnik w wyrażeniu: <span class="k">${p}</span>?`,['męski','żeński','nijaki','męskoosobowy','niemęskoosobowy'],r,r==='męskoosobowy'?'Liczba mnoga, grupa mężczyzn/chłopców → męskoosobowy.':r==='niemęskoosobowy'?'Liczba mnoga, bez mężczyzn (kobiety, zwierzęta, rzeczy) → niemęskoosobowy.':'Przymiotnik ma taki rodzaj jak rzeczownik, który określa.','rodzaj przymiotnika: '+stripTags(p)));
+  ADJ_FILL.forEach(([s,a,f,k])=>inp('pm:f:'+f,'przymiotnik',`Wpisz przymiotnik <b>${a}</b> w odpowiedniej formie:<br><span class="k">${s}</span>`,[f],`${s.replace('___',f)} – ${CN[k]}.`,'odmiana przymiotnika: '+s));
+
+  /* --- liczebnik --- */
+  mc('lc:t1','liczebnik','Na jakie pytania odpowiada liczebnik?',['ile? który (która, które) z kolei?','kto? co?','jaki? jaka? jakie?','co robi?'],'ile? który (która, które) z kolei?','Liczebnik: ile? który z kolei?');
+  mc('lc:t2','liczebnik','Które liczebniki odmieniają się przez liczby?',['tylko porządkowe','tylko główne','tylko zbiorowe','wszystkie'],'tylko porządkowe','Pierwszy uczeń – pierwsi uczniowie. Tylko porządkowe mają liczbę pojedynczą i mnogą.');
+  mc('lc:t3','liczebnik','Które liczebniki odmieniają się przez rodzaje?',['główne i porządkowe','tylko zbiorowe','tylko porządkowe','żadne'],'główne i porządkowe','Dwa koty, dwie siostry; pierwszy, pierwsza, pierwsze.');
+  mc('lc:t4','liczebnik','Co nazywają liczebniki?',['liczby i kolejność','cechy','czynności','osoby i rzeczy'],'liczby i kolejność','Np. jeden, troje, drugi, sto dwa.');
+  mc('lc:t5','liczebnik','Przez co odmieniają się wszystkie liczebniki?',['przez przypadki','przez osoby','przez czasy','nie odmieniają się'],'przez przypadki','Dwa → dwóch → dwóm → dwoma…');
+  LIC.forEach(([w,k])=>mc('lc:k:'+w,'liczebnik',`Jaki to liczebnik: <b>${w}</b>?`,['główny','porządkowy','zbiorowy'],LICL[k],{g:'Główny – odpowiada na pytanie ile?',p:'Porządkowy – który z kolei?',z:'Zbiorowy – dwoje, troje, czworo… (z dziećmi, młodymi zwierzętami)'}[k],'rodzaj liczebnika: '+w));
+  LIC_FILL.forEach(([s,n,a,e],i)=>inp('lc:f:'+i,'liczebnik',`Wpisz słownie liczebnik <b>${n}</b> w odpowiedniej formie:<br><span class="k">${s}</span>`,a,e,'liczebnik: '+s));
+
+  /* --- budowa --- */
+  mc('bu:t1','budowa','Czym jest temat wyrazu?',['stałą częścią wyrazu, która zostaje po oddzieleniu końcówki','częścią, która zmienia się w odmianie','pierwszą literą wyrazu','najdłuższą sylabą'],'stałą częścią wyrazu, która zostaje po oddzieleniu końcówki','Temat powtarza się w odmianie: dom|u, dom|owi, dom|em.');
+  mc('bu:t2','budowa','Czym jest końcówka?',['częścią wyrazu, która zmienia się w trakcie odmiany','stałą częścią wyrazu','ostatnią literą wyrazu','przyimkiem przed wyrazem'],'częścią wyrazu, która zmienia się w trakcie odmiany','Końcówka zmienia się: dom|u, dom|em, dom|owi.');
+  mc('bu:t3','budowa','Co oznacza końcówka zerowa (ø)?',['w tej formie po temacie nie ma żadnej końcówki','wyraz się nie odmienia','końcówką jest litera „o”','wyraz nie ma tematu'],'w tej formie po temacie nie ma żadnej końcówki','Np. M. dom|ø, M. brat|ø.');
+  SPLIT.forEach(([w,i])=>add({id:'bu:s:'+w,topic:'budowa',type:'split',word:w,idx:i,prompt:`Oddziel temat od końcówki w wyrazie <b>${w}</b>. Kliknij miejsce podziału.`,label:'temat|końcówka: '+w}));
+
+  /* --- zdanie --- */
+  SENTS.forEach((s,i)=>{
+    const toks=s.split(' ').map(t=>{const m=t.match(/^(.+)\/([rcplx])(\W*)$/);return {w:m[1].replace(/_/g,' '),t:m[2],p:m[3]}});
+    ['r','c','p','l'].forEach(tag=>{
+      if(!toks.some(x=>x.t===tag))return;
+      add({id:`zd:${i}:${tag}`,topic:'zdanie',type:'tap',toks,tag,prompt:`Kliknij wszystkie <b style="color:${TAGC[tag]}">${TAGN[tag]}</b> w zdaniu.`,label:`${TAGN[tag]}: ${toks.map(x=>x.w+x.p).join(' ')}`});
+    });
+  });
+  GER.forEach((g,i)=>mc('zd:g:'+i,'zdanie',`Jaką częścią mowy jest podkreślony wyraz?<br><span class="k">${g[0]}</span>`,POS,g[1],{rzeczownik:'Odpowiada na pytanie co? – to rzeczownik (np. gotowanie, karmienie).',czasownik:'Odpowiada na pytanie co robię? – to czasownik.',liczebnik:'Odpowiada na pytanie ile? albo który z kolei? – to liczebnik.',przymiotnik:'Odpowiada na pytanie jakie? – to przymiotnik.'}[g[1]],'część mowy: '+stripTags(g[0])));
+  mc('zd:t1','zdanie','Jaką częścią mowy jest wyraz <b>pierwszy</b> w zdaniu „Pierwszy uczeń wszedł do klasy”?',POS,'liczebnik','„Pierwszy” to liczebnik porządkowy (który z kolei?).');
+}
+buildBank();
+const BYID=Object.fromEntries(BANK.map(q=>[q.id,q]));
+
+/* ============ stan i zapis ============ */
+const KEY='czesci-mowy-trening-v1';
+let storageOk=true;
+function blank(){return {v:1,name:'',q:{},hist:{},sessions:[],days:[],badges:{},total:0,correct:0,created:today()}}
+function load(){try{const r=localStorage.getItem(KEY);return r?Object.assign(blank(),JSON.parse(r)):null}catch(e){storageOk=false;return null}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){storageOk=false}}
+let S=load()||blank();
+
+function record(q,ok){
+  const e=S.q[q.id]||(S.q[q.id]={b:0,r:0,w:0,t:0});
+  if(ok){e.r++;e.b=Math.min(e.b+1,4)}else{e.w++;e.b=0}
+  e.t=Date.now();
+  const h=S.hist[q.topic]||(S.hist[q.topic]=[]);
+  h.push(ok?1:0); if(h.length>30)h.shift();
+  S.total++; if(ok)S.correct++;
+  const d=today(); if(!S.days.includes(d))S.days.push(d);
+  save();
+}
+function mastery(t){const h=S.hist[t]||[];if(h.length<5)return null;const r=h.slice(-20);return pct(r.reduce((a,b)=>a+b,0),r.length)}
+function streak(){
+  const set=new Set(S.days);const d=new Date();
+  if(!set.has(dstr(d)))d.setDate(d.getDate()-1);
+  let n=0;while(set.has(dstr(d))){n++;d.setDate(d.getDate()-1)}
+  return n;
+}
+function errorPool(){return BANK.filter(q=>{const e=S.q[q.id];return e&&e.w>0&&e.b<2})}
+
+/* ============ dobór pytań ============ */
+function pick(pool,n){
+  const by={};pool.forEach(q=>(by[q.type]=by[q.type]||[]).push(q));
+  const now=Date.now();
+  const prio=q=>{const e=S.q[q.id];if(!e)return 2+Math.random()*6;
+    let p=e.b*4+Math.random()*6; if(e.w>0&&e.b===0)p-=3; if(now-e.t<10*60*1000)p+=8; return p};
+  const groups=shuffle(Object.values(by).map(g=>g.map(q=>[prio(q),q]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])));
+  const out=[];let k=0;
+  while(out.length<n&&groups.some(g=>g.length)){const g=groups[k%groups.length];if(g.length)out.push(g.shift());k++}
+  return shuffle(out);
+}
+
+/* ============ UI ogólne ============ */
+const app=$('#app');
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+function setTC(c){document.documentElement.style.setProperty('--tc',c||'#1B2B4B')}
+function topBar(){
+  return `<div class="bar"><span class="pill">🔥 seria: ${streak()} ${streak()===1?'dzień':'dni'}</span><span class="pill">✏️ odpowiedzi: ${S.total}</span><span class="sp"></span>
+  <button class="btn ghost small" data-go="home">Start</button><button class="btn ghost small" data-go="progress">Postępy</button></div>
+  ${storageOk?'':'<div class="warn">Ta przeglądarka blokuje zapis. Wyniki znikną po zamknięciu strony – otwórz plik w Chrome, Edge, Firefoksie lub Safari.</div>'}`;
+}
+app.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;const g=b.dataset.go;
+  if(g==='home')home();else if(g==='progress')progress();});
+
+/* ============ ekran imienia ============ */
+function askName(){
+  setTC();
+  app.innerHTML=`<h1>Części mowy</h1><div class="sub hand">trening przed kartkówką</div>
+  <div class="sheet name"><p>Jak masz na imię?</p><div class="row"><input class="txt" id="nm" value="Igor" autocomplete="off" aria-label="Imię"><button class="btn" id="ok">Zaczynamy</button></div></div>`;
+  const go=()=>{const v=$('#nm').value.trim();if(!v)return;S.name=v;save();home()};
+  $('#ok').onclick=go;$('#nm').onkeydown=e=>{if(e.key==='Enter')go()};$('#nm').focus();$('#nm').select();
+}
+
+/* ============ ekran główny ============ */
+function home(){
+  setTC();
+  const errs=errorPool().length;
+  const last=S.sessions.slice().reverse().find(s=>s.mode==='test');
+  app.innerHTML=`${topBar()}
+  <h1>Cześć, ${esc(S.name)}!</h1><div class="sub hand">odmienne części mowy – ćwiczymy</div>
+  <div class="cta">
+    <button class="main" id="bTest"><strong>Kartkówka próbna</strong><span>20 pytań ze wszystkich tematów, ocena na koniec${last?`. Ostatnio: ${last.pct}%`:''}</span></button>
+    <button id="bErr" ${errs?'':'disabled'}><strong>Powtórka błędów</strong><span>${errs?`${errs} ${errs===1?'pytanie czeka':errs<5?'pytania czekają':'pytań czeka'} na poprawkę`:'Na razie nie masz błędów do poprawy'}</span></button>
+  </div>
+  <h2>Tematy</h2>
+  <p class="muted small">Najpierw przeczytaj ściągę, potem ćwicz. Pasek pokazuje wynik z ostatnich 20 odpowiedzi.</p>
+  <div class="topics">${TOPIC_KEYS.map(k=>{const m=mastery(k);return `
+    <div class="topic" style="--tc:${T[k].c}"><div class="tab"></div>
+      <div><h3>${T[k].n}</h3><p class="d">${T[k].d}</p>
+        <div class="hlrow"><div class="hl" style="flex:1"><i style="width:${m??0}%"></i></div><span class="v hand">${m===null?'nowy temat':m+'%'}</span></div></div>
+      <div class="acts"><button class="btn ghost small" data-learn="${k}">Ściąga</button><button class="btn small tc" data-play="${k}">Ćwicz</button></div>
+    </div>`}).join('')}</div>`;
+  $('#bTest').onclick=()=>startSession('test');
+  $('#bErr').onclick=()=>startSession('errors');
+  app.querySelectorAll('[data-learn]').forEach(b=>b.onclick=()=>learn(b.dataset.learn));
+  app.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>startSession('topic',b.dataset.play));
+  window.scrollTo(0,0);
+}
+
+/* ============ ściągi ============ */
+const CT=(n)=>`<div class="tw"><table><tr><th>przypadek</th><th>pytania</th><th>${n}</th><th>l. mnoga</th></tr>${CASES.map((c,i)=>`<tr><td><b>${c[0]}.</b> ${c[1]}</td><td>${c[2]}</td><td>${NOUNS[n].lp[i]}</td><td>${NOUNS[n].lm[i]}</td></tr>`).join('')}</table></div>`;
+const LEARN={
+czasownik:`<p>Czasownik nazywa <b>czynności i stany</b> (uczy się, biegnie, śpi, choruje). Odpowiada na pytania: <em>co robi? co się z kim (z czym) dzieje?</em></p>
+<h3>Formy</h3><ul><li><b>osobowe</b> – wiadomo, kto działa: czytam, czytałeś, przeczytają</li>
+<li><b>nieosobowe</b> – nie wiadomo, kto działa: bezokolicznik (<em>czytać</em>), formy na <em>-no, -to</em> (<em>ugotowano, zamknięto</em>), konstrukcje z <em>się</em> (<em>zabrania się</em>)</li></ul>
+<h3>Przez co się odmienia</h3><ul><li><b>osoby</b>: 1. ja / my, 2. ty / wy, 3. on, ona, ono / oni, one</li><li><b>liczby</b>: pojedyncza i mnoga</li><li><b>czasy</b>, <b>tryby</b>, a <b>rodzaje</b> tylko w czasie przeszłym, w trybie przypuszczającym i w niektórych formach czasu przyszłego (<em>będę czytał / będę czytała</em>)</li></ul>
+<h3>Czasy</h3><div class="tw"><table><tr><th>czas</th><th>przykład</th></tr><tr><td>przeszły</td><td>czytałem, śpiewała</td></tr><tr><td>teraźniejszy</td><td>czytam, śpiewa</td></tr><tr><td>przyszły prosty (1 wyraz)</td><td>przeczytam, zaśpiewam</td></tr><tr><td>przyszły złożony (2 wyrazy)</td><td>będę czytać, będę śpiewał</td></tr></table></div>
+<h3>Tryby</h3><div class="tw"><table><tr><th>tryb</th><th>do czego służy</th><th>przykład</th></tr><tr><td>orzekający</td><td>informuje</td><td>czytam, czytałem, przeczytam</td></tr><tr><td>rozkazujący</td><td>polecenie, prośba</td><td>czytaj!, niech czyta, czytajmy!</td></tr><tr><td>przypuszczający</td><td>coś mogłoby się stać; ma cząstkę <em>-by</em></td><td>czytałbym, przeczytałabyś</td></tr></table></div>
+<div class="tip">W trybie rozkazującym i przypuszczającym <b>nie określamy czasu</b>.</div>
+<h3>Rodzaje</h3><ul><li>liczba pojedyncza: <b>męski</b> (czytał), <b>żeński</b> (czytała), <b>nijaki</b> (czytało)</li><li>liczba mnoga: <b>męskoosobowy</b> – w grupie jest choć jeden mężczyzna lub chłopiec (<em>oni czytali</em>); <b>niemęskoosobowy</b> – wszystkie inne grupy: dziewczynki, zwierzęta, rzeczy (<em>one czytały, psy biegały</em>)</li></ul>
+<div class="tip">Jak rozebrać czasownik? Zapytaj po kolei: kto? (osoba) – ilu? (liczba) – kiedy? (czas) – czy to informacja, polecenie czy „-by”? (tryb) – czy widać, czy to on, ona czy ono? (rodzaj)</div>`,
+rzeczownik:`<p>Rzeczownik nazywa <b>osoby, rzeczy, rośliny, zwierzęta, miejsca, pojęcia, zjawiska</b> (uczeń, dziennik, słonecznik, żółw, las, przyjaźń, burza). Odpowiada na pytania: <em>kto? co?</em></p>
+<h3>Podział</h3><ul><li><b>własne</b> – imiona, nazwiska, nazwy miast, rzek, gór: <em>Barbara, Gdańsk, Warta</em> – piszemy wielką literą</li><li><b>pospolite</b> – nazwy ogólne: <em>nauczyciel, kot, rzeka</em></li></ul>
+<h3>Odmiana</h3><p>Rzeczownik odmienia się przez <b>liczby</b> i <b>przypadki</b> (zobacz temat „Przypadki”).</p>
+<h3>Rodzaj</h3><p>Rzeczownik <b>nie odmienia się przez rodzaje</b>, ale <b>ma określony rodzaj</b>: męski, żeński lub nijaki.</p>
+<div class="tip">Sprawdzaj słówkiem <b>ten / ta / to</b>: ten kamień (męski), ta sól (żeński), to imię (nijaki). Uwaga na pułapki: <em>ten kolega, ten tata</em> – męski, choć kończą się na -a; <em>to muzeum</em> – nijaki; <em>ta mysz, ta noc</em> – żeński.</div>`,
+przypadki:`<p>Przez przypadki odmieniają się <b>rzeczowniki, przymiotniki i liczebniki</b>. Przypadków jest siedem, zawsze w tej kolejności:</p>
+${CT('kot')}
+${CT('mama')}
+<div class="tip">Kolejność łatwo zapamiętać: <b>M</b>ama <b>D</b>aje <b>C</b>ioci <b>B</b>uty – <b>N</b>owe, <b>M</b>odne, <b>W</b>ygodne.</div>
+<h3>Jak rozpoznać przypadek w zdaniu?</h3><p>Zadaj pytanie od czasownika albo przyimka: <em>Nie widzę</em> (kogo? czego?) <em>kota</em> → dopełniacz. <em>Idę z</em> (kim? czym?) <em>mamą</em> → narzędnik.</p>
+<div class="tip">Dopełniacz i biernik mają te same pytanie „kogo?”. Podstaw słowo <b>mama</b>: „widzę psa” → „widzę <b>mamę</b>” – biernik; „nie widzę psa” → „nie widzę <b>mamy</b>” – dopełniacz.</div>
+<p><b>Wołacz</b> używamy, gdy zwracamy się do kogoś: <em>Mamo! Kolego! Przyjacielu!</em></p>
+<h3>Proszę pani czy proszę panią?</h3><ul><li><b>proszę pani</b> (dopełniacz) – gdy chcemy zwrócić na siebie uwagę: <em>Proszę pani, która jest godzina?</em></li><li><b>proszę panią</b> (biernik) – gdy prosimy o coś konkretnego: <em>Proszę panią o podanie zeszytu.</em></li></ul>`,
+przymiotnik:`<p>Przymiotnik nazywa <b>cechy</b> osób, przedmiotów, zjawisk, roślin i zwierząt (pilny, ciężki, gwałtowna, zielona). Odpowiada na pytania: <em>jaki? jaka? jakie?</em></p>
+<h3>Odmiana</h3><p>Przez <b>liczby, przypadki i rodzaje</b> – przymiotnik zawsze dopasowuje się do rzeczownika: <em>nowy kolega → z nowym kolegą → o nowych kolegach</em>.</p>
+<ul><li>liczba pojedyncza: męski (<em>wysoki dom</em>), żeński (<em>zielona trawa</em>), nijaki (<em>ciepłe mleko</em>)</li><li>liczba mnoga: męskoosobowy (<em>weseli chłopcy</em>), niemęskoosobowy (<em>wesołe dziewczynki, szybkie psy</em>)</li></ul>
+<h3>Stopniowanie</h3><div class="tw"><table><tr><th>rodzaj</th><th>równy</th><th>wyższy</th><th>najwyższy</th></tr>
+<tr><td>proste regularne</td><td>miły<br>ładny</td><td>milszy<br>ładniejszy</td><td>najmilszy<br>najładniejszy</td></tr>
+<tr><td>proste nieregularne</td><td>dobry<br>zły<br>duży<br>mały</td><td>lepszy<br>gorszy<br>większy<br>mniejszy</td><td>najlepszy<br>najgorszy<br>największy<br>najmniejszy</td></tr>
+<tr><td>opisowe</td><td>zadowolony</td><td>bardziej zadowolony</td><td>najbardziej zadowolony</td></tr></table></div>
+<div class="tip">Nieregularnych jest mało – naucz się tych czterech: dobry, zły, duży, mały. Stopień wyższy tworzymy końcówką <em>-szy / -ejszy</em>, a najwyższy dodając <em>naj-</em>.</div>`,
+liczebnik:`<p>Liczebnik nazywa <b>liczby i kolejność</b> (jeden, troje, drugi, sto dwa). Odpowiada na pytania: <em>ile? który (która, które) z kolei?</em></p>
+<h3>Podział</h3><ul><li><b>główne</b> – ile? <em>dwa, sto, siedem</em></li><li><b>porządkowe</b> – który z kolei? <em>pierwszy, ósma, setny</em></li><li><b>zbiorowe</b> – <em>dwoje, troje, pięcioro</em>; używamy ich z nazwami dzieci i młodych zwierząt (<em>troje dzieci, dwoje kociąt</em>)</li></ul>
+<h3>Odmiana</h3><ul><li>przez <b>przypadki</b> – wszystkie (<em>dwa → dwóch → dwóm → dwoma</em>)</li><li>przez <b>liczby</b> – tylko porządkowe (<em>pierwszy uczeń – pierwsi uczniowie</em>)</li><li>przez <b>rodzaje</b> – główne i porządkowe (<em>dwa koty, dwie siostry; pierwszy, pierwsza, pierwsze</em>)</li></ul>
+<div class="tip">„Pierwszy”, „trzeci” wyglądają jak przymiotniki, ale mówią o kolejności – to <b>liczebniki porządkowe</b>.</div>`,
+budowa:`<ul><li>W każdym wyrazie, który się odmienia, jest <b>temat</b> i <b>końcówka</b>.</li><li><b>Temat</b> to stała część wyrazu – zostaje po oddzieleniu końcówki i powtarza się w odmianie.</li><li><b>Końcówka</b> to część, która zmienia się w odmianie.</li></ul>
+<div class="tw"><table><tr><th>M.</th><th>D.</th><th>C.</th><th>B.</th><th>N.</th><th>Ms.</th><th>W.</th></tr><tr><td>dom|ø</td><td>dom|u</td><td>dom|owi</td><td>dom|ø</td><td>dom|em</td><td>dom|u</td><td>dom|u</td></tr></table></div>
+<p>Czasowniki: <em>(ja) myj|ę, (ty) myj|esz, (on) myj|e</em>. Przymiotniki: <em>dobr|y, dobr|a, dobr|ego</em>.</p>
+<div class="tip"><b>Końcówka zerowa (ø)</b> – w danej formie po temacie nic nie ma: <em>dom|ø, brat|ø, stół|ø</em>. Jak znaleźć temat? Wypisz kilka form wyrazu – to, co się powtarza, jest tematem.</div>`,
+zdanie:`<div class="legend"><span style="background:${TAGC.r}">rzeczownik – kto? co?</span><span style="background:${TAGC.c}">czasownik – co robi?</span><span style="background:${TAGC.p}">przymiotnik – jaki?</span><span style="background:${TAGC.l}">liczebnik – ile? który?</span></div>
+<p>Żeby rozpoznać część mowy, zadaj pytanie o wyraz w zdaniu.</p>
+<ul><li><em>Troje</em> (ile?) <em>wesołych</em> (jakich?) <em>dzieci</em> (kto?) <em>karmiło</em> (co robiło?) <em>psa</em> (kogo?).</li></ul>
+<div class="tip">Pułapka: <em>gotowanie, karmienie, pływanie</em> to <b>rzeczowniki</b> (co?), a <em>gotuję, karmiłam, pływam</em> to <b>czasowniki</b> (co robię?).</div>
+<p>Wyrazy takie jak <em>w, nad, po, jutro, głośno</em> to nieodmienne części mowy – w tych ćwiczeniach ich nie zaznaczasz.</p>`
+};
+function learn(k){
+  setTC(T[k].c);
+  app.innerHTML=`${topBar()}<h1>${T[k].n}</h1><div class="sub hand">ściąga</div>
+  <div class="sheet learn">${LEARN[k]}</div>
+  <div class="actions"><button class="btn tc" id="go">Ćwicz ten temat</button><button class="btn ghost" data-go="home">Wróć</button></div>`;
+  $('#go').onclick=()=>startSession('topic',k);window.scrollTo(0,0);
+}
+
+/* ============ sesja ============ */
+let SES=null;
+function startSession(mode,topic){
+  let qs;
+  if(mode==='topic')qs=pick(BANK.filter(q=>q.topic===topic),10);
+  else if(mode==='errors')qs=pick(errorPool(),10);
+  else{qs=[];TOPIC_KEYS.forEach(t=>qs.push(...pick(BANK.filter(q=>q.topic===t&&q.type!=='table'),3)));qs=shuffle(qs).slice(0,20)}
+  if(!qs.length){home();return}
+  SES={mode,topic,qs,i:0,res:[],start:Date.now(),test:mode==='test'};
+  showQ();
+}
+const TYPE_HINT={mc:'Wybierz jedną odpowiedź',input:'Wpisz odpowiedź i naciśnij Enter',multi:'Zaznacz wszystkie pasujące',tap:'Klikaj wyrazy, potem sprawdź',split:'Kliknij między literami',table:'Uzupełnij wszystkie przypadki',parse:'Wybierz po jednej odpowiedzi w każdym wierszu'};
+let CUR=null;
+
+function showQ(){
+  const q=SES.qs[SES.i];
+  setTC(T[q.topic].c);
+  const title=SES.test?'Kartkówka próbna':SES.mode==='errors'?'Powtórka błędów':T[SES.topic].n;
+  app.innerHTML=`${topBar()}
+  <div class="qhead"><span class="tn">${title}</span><div class="prog"><i style="width:${pct(SES.i,SES.qs.length)}%"></i></div><span class="small muted">${SES.i+1} / ${SES.qs.length}</span></div>
+  <div class="qcard" style="--tc:${T[q.topic].c}">
+    <div class="qtype">${SES.test||SES.mode==='errors'?T[q.topic].n+': ':''}${TYPE_HINT[q.type]}</div>
+    <div class="prompt">${q.prompt}</div>
+    <div id="body"></div>
+    <div id="fb"></div>
+    <div class="actions"><button class="btn tc" id="chk">${SES.test?(SES.i+1<SES.qs.length?'Dalej':'Zakończ'):'Sprawdź'}</button><button class="btn ghost small" id="quit">Przerwij</button></div>
+  </div>`;
+  CUR={q,done:false,almost:false,ui:RENDER[q.type](q,$('#body'))};
+  $('#chk').onclick=onCheck;
+  $('#quit').onclick=()=>{if(SES.res.length===0||confirm('Przerwać? Odpowiedzi, których już udzieliłeś, zostały zapisane.'))home()};
+  window.scrollTo(0,0);
+  const f=$('#body input');if(f)f.focus();
+}
+function onCheck(){
+  if(!CUR)return;
+  if(CUR.done){next();return}
+  const r=CUR.ui.check();
+  if(r.incomplete){$('#fb').innerHTML=`<div class="note">${r.incomplete}</div>`;return}
+  if(r.almost&&!CUR.almost){CUR.almost=true;$('#fb').innerHTML=`<div class="note">Prawie! Sprawdź polskie litery (ą, ę, ó, ł, ś, ż…) i spróbuj jeszcze raz.</div>`;CUR.ui.clearMarks&&CUR.ui.clearMarks();return}
+  const ok=!!r.ok;
+  record(CUR.q,ok);
+  SES.res.push({id:CUR.q.id,ok,correct:r.correct,your:r.your});
+  CUR.done=true;
+  if(SES.test){next();return}
+  CUR.ui.reveal(ok);
+  const ex=CUR.q.explain?`<div class="why">${CUR.q.explain}</div>`:'';
+  $('#fb').innerHTML=ok?`<div class="fb ok"><div class="mark hand">${pickOne(['Dobrze!','Brawo!','Świetnie!','Tak jest!','Super!'])} ✓</div>${ex}</div>`
+    :`<div class="fb bad"><div class="mark hand">Nie tym razem</div><div>Poprawnie: <b>${r.correct}</b></div>${ex}</div>`;
+  const b=$('#chk');b.textContent=SES.i+1<SES.qs.length?'Dalej':'Zobacz wynik';b.focus();
+}
+const pickOne=a=>a[Math.floor(Math.random()*a.length)];
+function next(){SES.i++;if(SES.i>=SES.qs.length)summary();else showQ()}
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'||!CUR||!SES||!$('#chk'))return;
+  if(e.target.tagName==='BUTTON')return;
+  if(e.target.tagName==='TEXTAREA')return;
+  e.preventDefault();onCheck();
+});
+
+/* ============ renderery typów ============ */
+const RENDER={
+  mc(q,el){
+    const opts=shuffle(q.options);let sel=null;
+    el.innerHTML=`<div class="opts ${opts.length===2?'two':opts.length===3&&opts.every(o=>o.length<20)?'three':''}">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>`;
+    const bs=[...el.querySelectorAll('.opt')];
+    bs.forEach(b=>b.onclick=()=>{if(CUR.done)return;bs.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=opts[+b.dataset.i];if(!SES.test)onCheck()});
+    return{check:()=>sel===null?{incomplete:'Wybierz odpowiedź.'}:{ok:sel===q.answer,correct:q.answer,your:sel},
+      reveal(){bs.forEach(b=>{b.disabled=true;const o=opts[+b.dataset.i];if(o===q.answer)b.classList.add('good');else if(o===sel)b.classList.add('wrong')})}};
+  },
+  input(q,el){
+    el.innerHTML=`<input class="txt" id="in" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Odpowiedź">`;
+    const i=$('#in',el);
+    return{check(){const v=i.value;if(!v.trim())return{incomplete:'Wpisz odpowiedź.'};
+        const ok=q.answers.some(a=>norm(a)===norm(v));const almost=!ok&&q.answers.some(a=>flat(a)===flat(v));
+        return{ok,almost,correct:q.answers.join(' / '),your:v}},
+      clearMarks(){i.focus();i.select()},
+      reveal(ok){i.disabled=true;i.classList.add(ok?'good':'wrong')}};
+  },
+  multi(q,el){
+    const opts=shuffle(q.options);const sel=new Set();
+    el.innerHTML=`<div class="chips">${opts.map((o,i)=>`<button class="chip" data-i="${i}" aria-pressed="false">${o}</button>`).join('')}</div>`;
+    const bs=[...el.querySelectorAll('.chip')];
+    bs.forEach(b=>b.onclick=()=>{if(CUR.done)return;const o=opts[+b.dataset.i];sel.has(o)?sel.delete(o):sel.add(o);b.classList.toggle('sel');b.setAttribute('aria-pressed',sel.has(o))});
+    return{check(){if(!sel.size)return{incomplete:'Zaznacz przynajmniej jedną formę.'};const ok=sel.size===q.correct.length&&q.correct.every(c=>sel.has(c));return{ok,correct:q.correct.join(', '),your:[...sel].join(', ')}},
+      reveal(){bs.forEach(b=>{b.disabled=true;const o=opts[+b.dataset.i];const c=q.correct.includes(o);b.classList.remove('sel');if(c)b.classList.add('good');else if(sel.has(o))b.classList.add('wrong')})}};
+  },
+  tap(q,el){
+    const sel=new Set();
+    el.innerHTML=`<div class="words">${q.toks.map((t,i)=>`<button class="word" data-i="${i}" aria-pressed="false">${t.w}</button><span class="p">${t.p}</span>`).join('')}</div>`;
+    const bs=[...el.querySelectorAll('.word')];
+    bs.forEach(b=>b.onclick=()=>{if(CUR.done)return;const i=+b.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);b.classList.toggle('sel');b.setAttribute('aria-pressed',sel.has(i))});
+    const good=q.toks.map((t,i)=>t.t===q.tag?i:-1).filter(i=>i>=0);
+    return{check(){if(!sel.size)return{incomplete:'Kliknij przynajmniej jeden wyraz.'};const ok=sel.size===good.length&&good.every(i=>sel.has(i));return{ok,correct:good.map(i=>q.toks[i].w).join(', '),your:[...sel].sort((a,b)=>a-b).map(i=>q.toks[i].w).join(', ')}},
+      reveal(){bs.forEach(b=>{b.disabled=true;const i=+b.dataset.i;const g=good.includes(i);b.classList.remove('sel');if(g&&sel.has(i))b.classList.add('good');else if(g)b.classList.add('miss');else if(sel.has(i))b.classList.add('wrong')})}};
+  },
+  split(q,el){
+    const w=[...q.word];let sel=null;
+    let h='<div class="split">';
+    w.forEach((c,i)=>{h+=`<span class="l">${c}</span>`;if(i<w.length-1)h+=`<button class="g" data-i="${i+1}" aria-label="podział po literze ${i+1}"></button>`});
+    h+=`<button class="zero" data-i="${w.length}">końcówka zerowa ø</button></div><p class="small muted" id="sp"></p>`;
+    el.innerHTML=h;
+    const bs=[...el.querySelectorAll('[data-i]')];const sp=$('#sp',el);
+    const show=i=>i===w.length?`${q.word}|ø`:`${q.word.slice(0,i)}|${q.word.slice(i)}`;
+    bs.forEach(b=>b.onclick=()=>{if(CUR.done)return;bs.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=+b.dataset.i;sp.textContent='Twój podział: '+show(sel)});
+    return{check:()=>sel===null?{incomplete:'Kliknij miejsce podziału.'}:{ok:sel===q.idx,correct:show(q.idx),your:show(sel)},
+      reveal(ok){bs.forEach(b=>{b.disabled=true;if(+b.dataset.i===q.idx){b.classList.remove('sel');b.classList.add('ans')}});
+        sp.innerHTML=`Temat: <b>${q.idx===w.length?q.word:q.word.slice(0,q.idx)}</b>, końcówka: <b>${q.idx===w.length?'ø (zerowa)':'-'+q.word.slice(q.idx)}</b>`}};
+  },
+  table(q,el){
+    el.innerHTML=`<div class="grid">${CASES.map((c,i)=>`<div class="lab"><b>${c[0]}.</b> ${c[1]}<small>${c[2]}</small></div><div>${i===0?`<input class="txt" value="${q.forms[0]}" disabled>`:`<input class="txt" data-i="${i}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="${c[1]}">`}<span class="fix" data-f="${i}"></span></div>`).join('')}</div>`;
+    const ins=[...el.querySelectorAll('input[data-i]')];
+    ins.forEach((inp,k)=>inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&k<ins.length-1){e.preventDefault();e.stopPropagation();ins[k+1].focus()}}));
+    return{check(){if(ins.some(i=>!i.value.trim()))return{incomplete:'Uzupełnij wszystkie przypadki.'};
+        const res=ins.map(i=>norm(i.value)===norm(q.forms[+i.dataset.i]));
+        const almost=!res.every(Boolean)&&ins.every(i=>flat(i.value)===flat(q.forms[+i.dataset.i]));
+        this._res=res;
+        return{ok:res.every(Boolean),almost,correct:q.forms.join(', '),your:ins.map(i=>i.value.trim()).join(', ')}},
+      clearMarks(){},
+      reveal(){ins.forEach((i,k)=>{i.disabled=true;const ok=this._res[k];i.classList.add(ok?'good':'wrong');if(!ok)el.querySelector(`[data-f="${i.dataset.i}"]`).textContent=q.forms[+i.dataset.i]})}};
+  },
+  parse(q,el){
+    const sel={};
+    el.innerHTML=PFIELDS.map(([k,l,vals,lab])=>`<div class="prow"><div class="lab">${l}</div><div class="chips" data-k="${k}">${vals.map(v=>`<button class="chip" data-v="${v}">${lab(v)}</button>`).join('')}</div></div>`).join('');
+    el.querySelectorAll('.chips').forEach(g=>{const k=g.dataset.k;g.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{if(CUR.done)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel[k]=b.dataset.v})});
+    const desc=a=>PFIELDS.map(([k,,, lab])=>lab(a[k])).filter(x=>x!=='nie określamy').join(', ')+(a.cz==='–'?' (czasu nie określamy)':'');
+    return{check(){if(PFIELDS.some(([k])=>!sel[k]))return{incomplete:'Wybierz odpowiedź w każdym wierszu.'};
+        const ok=PFIELDS.every(([k])=>sel[k]===q.ans[k]);return{ok,correct:desc(q.ans),your:desc(sel)}},
+      reveal(){el.querySelectorAll('.chips').forEach(g=>{const k=g.dataset.k;g.querySelectorAll('.chip').forEach(b=>{b.disabled=true;const v=b.dataset.v;if(v===q.ans[k]){b.classList.remove('sel');b.classList.add('good')}else if(v===sel[k]){b.classList.remove('sel');b.classList.add('wrong')}})})}};
+  }
+};
+
+/* ============ podsumowanie ============ */
+function grade(p){if(p===100)return['6','celujący'];if(p>=90)return['5','bardzo dobry'];if(p>=75)return['4','dobry'];if(p>=50)return['3','dostateczny'];if(p>=30)return['2','dopuszczający'];return['1','niedostateczny']}
+const BADGES=[
+  ['first','Pierwszy trening',()=>S.sessions.length>=1],
+  ['perfect','Sesja bez błędu',()=>S.sessions.some(s=>s.ok===s.n&&s.n>=10)],
+  ['q100','100 odpowiedzi',()=>S.total>=100],
+  ['q500','500 odpowiedzi',()=>S.total>=500],
+  ['s3','3 dni z rzędu',()=>streak()>=3],
+  ['s7','7 dni z rzędu',()=>streak()>=7],
+  ['all','Każdy temat przećwiczony',()=>TOPIC_KEYS.every(t=>(S.hist[t]||[]).length>=10)],
+  ['test5','Kartkówka próbna na 5',()=>S.sessions.some(s=>s.mode==='test'&&s.pct>=90)]
+];
+function checkBadges(){const n=[];BADGES.forEach(([k,l,f])=>{if(!S.badges[k]&&f()){S.badges[k]=today();n.push(l)}});if(n.length)save();return n}
+function summary(){
+  const n=SES.res.length,ok=SES.res.filter(r=>r.ok).length,p=pct(ok,n);
+  const sess={d:new Date().toISOString(),mode:SES.mode,topic:SES.topic||null,n,ok,pct:p,sec:Math.round((Date.now()-SES.start)/1000)};
+  S.sessions.push(sess);if(S.sessions.length>300)S.sessions.shift();save();
+  const newB=checkBadges();
+  const wrong=SES.res.filter(r=>!r.ok);
+  const [g,gl]=grade(p);
+  const comment=p===100?'Bezbłędnie! Mistrz części mowy.':p>=90?'Świetnie! Tak trzymaj.':p>=75?'Dobra robota!':p>=50?'Nieźle. Powtórz błędy i będzie lepiej.':'Zajrzyj do ściągi i spróbuj jeszcze raz.';
+  setTC(SES.test||SES.mode==='errors'?'#1B2B4B':T[SES.topic].c);
+  app.innerHTML=`${topBar()}
+  <h1>${SES.test?'Kartkówka próbna':SES.mode==='errors'?'Powtórka błędów':T[SES.topic].n}</h1><div class="sub hand">wynik</div>
+  <div class="score"><div class="circle hand">${SES.test?`<span class="big">${g}</span><span class="lit">${ok}/${n}</span>`:`<span class="big">${ok}/${n}</span><span class="lit">${p}%</span>`}</div>
+    <div class="comment hand">${SES.test?gl+'. ':''}${comment}</div></div>
+  ${newB.length?`<p><b>Nowa odznaka:</b></p><div class="badgebar">${newB.map(b=>`<span class="badge">🏅 ${b}</span>`).join('')}</div>`:''}
+  ${wrong.length?`<h2>Do poprawy</h2><ul class="review">${wrong.map(r=>{const q=BYID[r.id];return `<li>${q.prompt}${q.toks?'<br><i>'+q.toks.map(x=>x.w+x.p).join(' ')+'</i>':''}<br>Twoja odpowiedź: ${esc(r.your||'–')}<br>Poprawnie: <span class="c">${r.correct}</span></li>`}).join('')}</ul>`:''}
+  <div class="actions">
+    ${SES.mode==='topic'?`<button class="btn tc" id="again">Ćwicz dalej</button><button class="btn ghost" id="lrn">Ściąga</button>`:`<button class="btn" id="again">${SES.test?'Nowa kartkówka':'Powtórz jeszcze raz'}</button>`}
+    ${errorPool().length&&SES.mode!=='errors'?`<button class="btn ghost" id="err">Powtórz błędy</button>`:''}
+    <button class="btn ghost" data-go="home">Start</button></div>`;
+  const m=SES.mode,t=SES.topic;
+  $('#again').onclick=()=>startSession(m,t);
+  if($('#lrn'))$('#lrn').onclick=()=>learn(t);
+  if($('#err'))$('#err').onclick=()=>startSession('errors');
+  CUR=null;window.scrollTo(0,0);
+}
+
+/* ============ postępy ============ */
+function progress(){
+  setTC();CUR=null;
+  const acc=pct(S.correct,S.total);
+  const worst=Object.entries(S.q).filter(([id,e])=>e.w>0&&BYID[id]).sort((a,b)=>(b[1].w-b[1].r*.5)-(a[1].w-a[1].r*.5)).slice(0,10);
+  const tests=S.sessions.filter(s=>s.mode==='test');
+  const fmt=s=>{const d=new Date(s.d);return d.toLocaleDateString('pl-PL',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'})};
+  const mname=s=>s.mode==='test'?'Kartkówka próbna':s.mode==='errors'?'Powtórka błędów':T[s.topic]?.n||s.topic;
+  app.innerHTML=`${topBar()}
+  <h1>Postępy</h1><div class="sub hand">${esc(S.name)}</div>
+  <div class="stats"><div><b>${S.total}</b><span>odpowiedzi</span></div><div><b>${acc}%</b><span>poprawnych</span></div><div><b>${streak()}</b><span>dni z rzędu</span></div><div><b>${S.days.length}</b><span>dni nauki</span></div></div>
+  <h2>Tematy</h2>
+  <div class="sheet">${TOPIC_KEYS.map(k=>{const m=mastery(k);const h=S.hist[k]||[];return `<div class="hlrow" style="--tc:${T[k].c};margin:8px 0"><span style="min-width:200px;font-weight:700">${T[k].n}</span><div class="hl" style="flex:1"><i style="width:${m??0}%"></i></div><span class="v hand">${m===null?(h.length?'za mało':'—'):m+'%'}</span></div>`}).join('')}</div>
+  <h2>Odznaki</h2><div class="badgebar">${BADGES.map(([k,l])=>`<span class="badge ${S.badges[k]?'':'off'}">${S.badges[k]?'🏅 ':''}${l}</span>`).join('')}</div>
+  <h2>Kartkówki próbne</h2>
+  ${tests.length?`<div class="tw"><table class="hist"><tr><th>kiedy</th><th>wynik</th><th>ocena</th></tr>${tests.slice(-10).reverse().map(s=>`<tr><td>${fmt(s)}</td><td>${s.ok}/${s.n} (${s.pct}%)</td><td>${grade(s.pct)[0]} – ${grade(s.pct)[1]}</td></tr>`).join('')}</table></div>`:'<p class="muted">Jeszcze nie było kartkówki próbnej.</p>'}
+  <h2>Ostatnie treningi</h2>
+  ${S.sessions.length?`<div class="tw"><table class="hist"><tr><th>kiedy</th><th>co</th><th>wynik</th><th>czas</th></tr>${S.sessions.slice(-15).reverse().map(s=>`<tr><td>${fmt(s)}</td><td>${mname(s)}</td><td>${s.ok}/${s.n}</td><td>${Math.max(1,Math.round(s.sec/60))} min</td></tr>`).join('')}</table></div>`:'<p class="muted">Tu pojawi się historia treningów.</p>'}
+  <h2>Najtrudniejsze pytania</h2>
+  ${worst.length?`<div class="tw"><table class="hist"><tr><th>pytanie</th><th>błędy</th><th>dobrze</th></tr>${worst.map(([id,e])=>`<tr><td>${esc(BYID[id].label||stripTags(BYID[id].prompt))}</td><td>${e.w}</td><td>${e.r}</td></tr>`).join('')}</table></div>`:'<p class="muted">Brak błędów – albo jeszcze nie zacząłeś.</p>'}
+  <h2>Dla rodzica</h2>
+  <div class="sheet">
+    <p class="small">Postępy zapisują się w tej przeglądarce na tym urządzeniu. Przed zmianą komputera lub czyszczeniem przeglądarki pobierz kopię.</p>
+    <div class="row"><button class="btn small" id="copy">Kopiuj podsumowanie</button><button class="btn ghost small" id="exp">Pobierz kopię postępów</button><label class="btn ghost small" for="imp">Wczytaj kopię</label><input type="file" id="imp" accept=".json,application/json" hidden></div>
+    <textarea id="sumtxt" readonly aria-label="Podsumowanie" style="margin-top:10px">${esc(summaryText())}</textarea>
+    <div class="row" style="margin-top:10px"><button class="btn ghost small" id="rename">Zmień imię</button><button class="btn ghost small" id="reset" style="color:var(--bad);border-color:var(--bad)">Wyczyść postępy</button></div>
+  </div>`;
+  $('#copy').onclick=async()=>{const t=summaryText();try{await navigator.clipboard.writeText(t);toast('Skopiowano – wklej w wiadomości.')}catch(e){const a=$('#sumtxt');a.select();document.execCommand&&document.execCommand('copy');toast('Zaznaczono tekst – skopiuj Ctrl+C.')}};
+  $('#exp').onclick=()=>{const b=new Blob([JSON.stringify(S)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`postepy-${S.name||'uczen'}-${today()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
+  $('#imp').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d||typeof d.q!=='object'||!Array.isArray(d.sessions))throw 0;if(!confirm('Zastąpić obecne postępy wczytaną kopią?'))return;S=Object.assign(blank(),d);save();toast('Wczytano kopię postępów.');progress()}catch(err){toast('To nie jest plik z postępami z tej aplikacji.')}};r.readAsText(f)};
+  $('#rename').onclick=()=>{const v=prompt('Imię:',S.name);if(v&&v.trim()){S.name=v.trim();save();progress()}};
+  $('#reset').onclick=()=>{if(confirm('Na pewno usunąć wszystkie wyniki? Tego nie da się cofnąć.')){const nm=S.name;S=blank();S.name=nm;save();progress()}};
+  window.scrollTo(0,0);
+}
+function summaryText(){
+  const lastT=S.sessions.filter(s=>s.mode==='test').slice(-1)[0];
+  const lines=[`${S.name} – części mowy, stan na ${new Date().toLocaleDateString('pl-PL')}`,
+    `Odpowiedzi: ${S.total}, poprawnych: ${pct(S.correct,S.total)}%, dni nauki: ${S.days.length}, seria: ${streak()}`,
+    'Tematy (ostatnie 20 odpowiedzi):',...TOPIC_KEYS.map(k=>{const m=mastery(k);return `- ${T[k].n}: ${m===null?'jeszcze za mało ćwiczeń':m+'%'}`})];
+  if(lastT)lines.push(`Ostatnia kartkówka próbna: ${lastT.ok}/${lastT.n} (${lastT.pct}%), ocena ${grade(lastT.pct)[0]}`);
+  const w=errorPool().length;lines.push(`Pytań do poprawy: ${w}`);
+  return lines.join('\n');
+}
+
+/* ============ start ============ */
+if(!S.name)askName();else home();
+</script>
+</body>
+</html>

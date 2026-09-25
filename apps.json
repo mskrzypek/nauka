@@ -1,0 +1,97 @@
+{
+  "kids": [
+    {
+      "id": "wiktor",
+      "name": "Wiktor",
+      "color": "#E4572E"
+    },
+    {
+      "id": "igor",
+      "name": "Igor",
+      "color": "#2A4D9B"
+    },
+    {
+      "id": "zoja",
+      "name": "Zoja",
+      "color": "#1C7F54"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "polski",
+      "name": "Polski",
+      "emoji": "📖"
+    },
+    {
+      "id": "angielski",
+      "name": "Angielski",
+      "emoji": "🇬🇧"
+    },
+    {
+      "id": "matematyka",
+      "name": "Matematyka",
+      "emoji": "➗"
+    },
+    {
+      "id": "biologia",
+      "name": "Biologia",
+      "emoji": "🧬"
+    },
+    {
+      "id": "przyroda",
+      "name": "Przyroda",
+      "emoji": "🌿"
+    },
+    {
+      "id": "chemia",
+      "name": "Chemia",
+      "emoji": "⚗️"
+    },
+    {
+      "id": "fizyka",
+      "name": "Fizyka",
+      "emoji": "🧲"
+    },
+    {
+      "id": "geografia",
+      "name": "Geografia",
+      "emoji": "🌍"
+    },
+    {
+      "id": "historia",
+      "name": "Historia",
+      "emoji": "🏛️"
+    },
+    {
+      "id": "inne",
+      "name": "Inne",
+      "emoji": "✨"
+    }
+  ],
+  "apps": [
+    {
+      "id": "czesci-mowy",
+      "file": "apps/czesci-mowy.html",
+      "title": "Części mowy – trening przed kartkówką",
+      "emoji": "📒",
+      "subject": "polski",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-09-22",
+      "desc": "Trening przed kartkówką"
+    },
+    {
+      "id": "helisa",
+      "file": "apps/helisa.html",
+      "title": "Helisa – trening z DNA",
+      "emoji": "🧬",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-09-23",
+      "desc": "Budowa DNA krok po kroku"
+    }
+  ]
+}
