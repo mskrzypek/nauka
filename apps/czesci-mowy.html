@@ -422,7 +422,7 @@ const BYID=Object.fromEntries(BANK.map(q=>[q.id,q]));
 /* ============ stan i zapis ============ */
 const KEY='czesci-mowy-trening-v1';
 let storageOk=true;
-function blank(){return {v:1,name:'',q:{},hist:{},sessions:[],days:[],badges:{},total:0,correct:0,created:today()}}
+function blank(){return {v:1,name:'Igor',q:{},hist:{},sessions:[],days:[],badges:{},total:0,correct:0,created:today()}}
 function load(){try{const r=localStorage.getItem(KEY);return r?Object.assign(blank(),JSON.parse(r)):null}catch(e){storageOk=false;return null}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){storageOk=false}}
 let S=load()||blank();
@@ -469,15 +469,6 @@ function topBar(){
 }
 app.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;const g=b.dataset.go;
   if(g==='home')home();else if(g==='progress')progress();});
-
-/* ============ ekran imienia ============ */
-function askName(){
-  setTC();
-  app.innerHTML=`<h1>Części mowy</h1><div class="sub hand">trening przed kartkówką</div>
-  <div class="sheet name"><p>Jak masz na imię?</p><div class="row"><input class="txt" id="nm" value="Igor" autocomplete="off" aria-label="Imię"><button class="btn" id="ok">Zaczynamy</button></div></div>`;
-  const go=()=>{const v=$('#nm').value.trim();if(!v)return;S.name=v;save();home()};
-  $('#ok').onclick=go;$('#nm').onkeydown=e=>{if(e.key==='Enter')go()};$('#nm').focus();$('#nm').select();
-}
 
 /* ============ ekran główny ============ */
 function home(){
@@ -755,12 +746,11 @@ function progress(){
     <p class="small">Postępy zapisują się w tej przeglądarce na tym urządzeniu. Przed zmianą komputera lub czyszczeniem przeglądarki pobierz kopię.</p>
     <div class="row"><button class="btn small" id="copy">Kopiuj podsumowanie</button><button class="btn ghost small" id="exp">Pobierz kopię postępów</button><label class="btn ghost small" for="imp">Wczytaj kopię</label><input type="file" id="imp" accept=".json,application/json" hidden></div>
     <textarea id="sumtxt" readonly aria-label="Podsumowanie" style="margin-top:10px">${esc(summaryText())}</textarea>
-    <div class="row" style="margin-top:10px"><button class="btn ghost small" id="rename">Zmień imię</button><button class="btn ghost small" id="reset" style="color:var(--bad);border-color:var(--bad)">Wyczyść postępy</button></div>
+    <div class="row" style="margin-top:10px"><button class="btn ghost small" id="reset" style="color:var(--bad);border-color:var(--bad)">Wyczyść postępy</button></div>
   </div>`;
   $('#copy').onclick=async()=>{const t=summaryText();try{await navigator.clipboard.writeText(t);toast('Skopiowano – wklej w wiadomości.')}catch(e){const a=$('#sumtxt');a.select();document.execCommand&&document.execCommand('copy');toast('Zaznaczono tekst – skopiuj Ctrl+C.')}};
   $('#exp').onclick=()=>{const b=new Blob([JSON.stringify(S)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`postepy-${S.name||'uczen'}-${today()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
   $('#imp').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d||typeof d.q!=='object'||!Array.isArray(d.sessions))throw 0;if(!confirm('Zastąpić obecne postępy wczytaną kopią?'))return;S=Object.assign(blank(),d);save();toast('Wczytano kopię postępów.');progress()}catch(err){toast('To nie jest plik z postępami z tej aplikacji.')}};r.readAsText(f)};
-  $('#rename').onclick=()=>{const v=prompt('Imię:',S.name);if(v&&v.trim()){S.name=v.trim();save();progress()}};
   $('#reset').onclick=()=>{if(confirm('Na pewno usunąć wszystkie wyniki? Tego nie da się cofnąć.')){const nm=S.name;S=blank();S.name=nm;save();progress()}};
   window.scrollTo(0,0);
 }
@@ -775,7 +765,7 @@ function summaryText(){
 }
 
 /* ============ start ============ */
-if(!S.name)askName();else home();
+S.name='Igor';save();home();
 </script>
 </body>
 </html>
