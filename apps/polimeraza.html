@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Polimeraza – gra o replikacji DNA</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1D1535; --glow:#33245F; --panel:#2A2050; --line:#4B3D7C; --ink:#F2EDFF; --muted:#B9AEDB;
+  --mint:#3DDC97; --old:#4C7BE0; --new:#F08A24; --bad:#FF5C7A;
+  --A:#E4572E; --T:#F3B61F; --G:#3E6CD6; --C:#6FB1E0;
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font-family:var(--fb); font-size:17px; line-height:1.5;
+  background:radial-gradient(ellipse at 50% 35%, var(--glow) 0%, var(--bg) 70%) fixed, var(--bg);
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)}
+h1,h2,h3{font-family:var(--fh); line-height:1.1; margin:0 0 .45em}
+p{margin:0 0 .75em}
+button{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--mint); outline-offset:3px; border-radius:8px}
+.wrap{max-width:900px; margin:0 auto; padding:18px}
+[hidden]{display:none!important}
+
+/* menu */
+.title{font-size:clamp(2.6rem,9vw,4.6rem); font-weight:800; letter-spacing:-.035em; margin:.2em 0 .05em}
+.title span{display:inline-block}
+.sub{color:var(--muted); font-size:1.1rem; margin-bottom:22px}
+.how{background:var(--panel); border:1.5px solid var(--line); border-radius:16px; padding:16px 20px; margin-bottom:22px}
+.how ul{margin:0; padding-left:1.2em}
+.how li{margin-bottom:.4em}
+.b{display:inline-grid; place-items:center; width:1.55em; height:1.55em; border-radius:5px; font-family:var(--fh); font-weight:800; font-size:.9em; vertical-align:-.2em}
+.b-A{background:var(--A); color:#fff} .b-T{background:var(--T); color:#1B2A4A} .b-G{background:var(--G); color:#fff} .b-C{background:var(--C); color:#1B2A4A}
+.levels{list-style:none; margin:0 0 18px; padding:0; display:grid; gap:8px}
+.lvl{width:100%; display:grid; grid-template-columns:2.2em 1fr auto; align-items:center; gap:4px 14px; text-align:left; background:var(--panel); border:2px solid var(--line); border-radius:14px; padding:12px 16px; cursor:pointer}
+.lvl:hover:not(:disabled){border-color:var(--mint)}
+.lvl:disabled{opacity:.45; cursor:not-allowed}
+.lvl .num{font-family:var(--fh); font-weight:800; font-size:1.6rem; color:var(--mint)}
+.lvl .nm{font-family:var(--fh); font-weight:800; font-size:1.15rem; display:block}
+.lvl .ds{color:var(--muted); font-size:.92rem}
+.lvl .st{font-size:1.2rem; letter-spacing:.08em; color:var(--T); text-align:right; white-space:nowrap}
+.lvl .st small{display:block; letter-spacing:0; color:var(--muted); font-size:.8rem}
+.endless{border-style:dashed}
+.row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.btn{display:inline-flex; align-items:center; justify-content:center; border:2px solid var(--ink); background:transparent; color:var(--ink); border-radius:12px; padding:.6em 1.15em; font-family:var(--fh); font-weight:800; font-size:1rem; cursor:pointer}
+.btn.primary{background:var(--mint); border-color:var(--mint); color:#10261C}
+.btn.small{padding:.35em .8em; font-size:.9rem}
+.muted{color:var(--muted)} .small{font-size:.9rem}
+
+/* game */
+.hud{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px}
+.hud-l{display:flex; gap:14px; align-items:baseline; flex-wrap:wrap}
+.hud-l strong{font-family:var(--fh); font-size:1.25rem}
+.stat{font-family:var(--fh); font-weight:600; color:var(--muted)}
+.stat b{color:var(--ink); font-weight:800}
+.hud-r{display:flex; gap:10px; align-items:center}
+.muts{display:flex; gap:4px; align-items:center; font-family:var(--fh); color:var(--muted); font-weight:600}
+.mut{width:18px; height:18px; border-radius:50%; border:2px solid var(--bad)}
+.mut.on{background:var(--bad)}
+.prog{height:8px; background:var(--panel); border-radius:6px; overflow:hidden; margin-bottom:10px}
+.prog span{display:block; height:100%; width:0; background:var(--new)}
+.stage{position:relative; background:rgba(20,14,40,.55); border:1.5px solid var(--line); border-radius:18px; overflow:hidden}
+canvas{display:block; width:100%}
+.pads{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px}
+.pad{border:0; border-radius:16px; padding:10px 4px 8px; cursor:pointer; touch-action:manipulation; user-select:none; -webkit-user-select:none; transition:transform .08s}
+.pad .l{display:block; font-family:var(--fh); font-weight:800; font-size:2rem; line-height:1}
+.pad .n{display:block; font-size:.85rem}
+.pad.A{background:var(--A); color:#fff} .pad.T{background:var(--T); color:#1B2A4A} .pad.G{background:var(--G); color:#fff} .pad.C{background:var(--C); color:#1B2A4A}
+.pad.hit{transform:scale(.94)}
+.pad.good{box-shadow:0 0 0 4px var(--mint)}
+.pad.bad{box-shadow:0 0 0 4px var(--bad)}
+.hint{text-align:center; color:var(--muted); margin:10px 0 0; font-size:.95rem}
+
+/* modal */
+.modal{position:fixed; inset:0; background:rgba(12,8,26,.72); display:flex; align-items:center; justify-content:center; padding:16px; padding-top:calc(16px + env(safe-area-inset-top,0px)); z-index:10; overflow-y:auto}
+.card{background:var(--panel); border:2px solid var(--line); border-radius:20px; padding:22px 24px; width:100%; max-width:580px; max-height:100%; overflow-y:auto}
+.card h2{font-size:1.7rem; font-weight:800}
+.card .tag{font-family:var(--fh); font-weight:600; color:var(--mint); margin-bottom:6px}
+.fact{border-left:4px solid var(--new); padding-left:12px}
+.qopts{display:grid; gap:8px; margin:14px 0}
+.qopt{text-align:left; border:2px solid var(--line); background:rgba(255,255,255,.04); border-radius:12px; padding:.7em .9em; cursor:pointer; line-height:1.35}
+.qopt:hover:not(:disabled){border-color:var(--ink)}
+.qopt .k{font-family:var(--fh); font-weight:800; color:var(--muted); margin-right:.5em}
+.qopt.ok{border-color:var(--mint); background:rgba(61,220,151,.16)}
+.qopt.no{border-color:var(--bad); background:rgba(255,92,122,.16)}
+.qopt:disabled{cursor:default}
+.timer{height:6px; background:rgba(255,255,255,.08); border-radius:4px; overflow:hidden}
+.timer span{display:block; height:100%; background:var(--mint); width:100%}
+.qfb{margin-top:12px}
+.stars{font-size:2.4rem; letter-spacing:.1em; color:var(--T); line-height:1; margin:4px 0 12px}
+.stats{display:grid; grid-template-columns:auto auto; gap:2px 18px; margin:0 0 14px; justify-content:start}
+.stats dt{color:var(--muted)} .stats dd{margin:0; font-family:var(--fh); font-weight:800}
+@media (max-width:520px){ .pad .l{font-size:1.6rem} .card{padding:18px} }
+@media (prefers-reduced-motion: reduce){ .pad{transition:none} }
+</style>
+</head>
+<body>
+
+<div id="menu" class="wrap"></div>
+
+<div id="game" class="wrap" hidden>
+  <div class="hud">
+    <div class="hud-l">
+      <strong id="hLevel"></strong>
+      <span class="stat">Punkty <b id="hScore">0</b></span>
+      <span class="stat">Seria <b id="hCombo">0</b></span>
+    </div>
+    <div class="hud-r">
+      <span class="muts" id="hMut" role="img" aria-label="Mutacje"></span>
+      <button class="btn small" id="bPause" type="button">Pauza</button>
+    </div>
+  </div>
+  <div class="prog" id="progBox"><span id="hProg"></span></div>
+  <div class="stage" id="stage"><canvas id="cv" aria-label="Nić DNA: stara nić u góry, nowa nić budowana na dole"></canvas></div>
+  <div class="pads" id="pads">
+    <button class="pad A" data-b="A" type="button" aria-label="Wstaw adeninę"><span class="l">A</span><span class="n">adenina</span></button>
+    <button class="pad T" data-b="T" type="button" aria-label="Wstaw tyminę"><span class="l">T</span><span class="n">tymina</span></button>
+    <button class="pad C" data-b="C" type="button" aria-label="Wstaw cytozynę"><span class="l">C</span><span class="n">cytozyna</span></button>
+    <button class="pad G" data-b="G" type="button" aria-label="Wstaw guaninę"><span class="l">G</span><span class="n">guanina</span></button>
+  </div>
+  <p class="hint" id="hint"></p>
+</div>
+
+<div class="modal" id="modal" hidden><div class="card" id="card" role="dialog" aria-modal="true"></div></div>
+
+<script>
+"use strict";
+/* ============ DANE ============ */
+const PAIR={A:'T',T:'A',C:'G',G:'C'};
+const NAME={A:'adenina',T:'tymina',C:'cytozyna',G:'guanina'};
+const COL={A:'#E4572E',T:'#F3B61F',G:'#3E6CD6',C:'#6FB1E0'};
+const TXT={A:'#FFFFFF',T:'#1B2A4A',G:'#FFFFFF',C:'#1B2A4A'};
+const NOTE={A:523.3,T:587.3,C:659.3,G:784};
+
+const LEVELS=[
+ {name:'Zygota',len:24,speed:0.9,ramp:0.2,hint:true,quizzes:2,plus:false,desc:'24 nukleotydy, spokojne tempo, ze ściągą',
+  intro:'Każdy człowiek zaczyna jako jedna komórka – zapłodniona komórka jajowa. Żeby powstały z niej dwie, najpierw trzeba skopiować całe DNA. To jest replikacja, a Ty jesteś polimerazą DNA: białkiem, które buduje nową nić.',
+  fact:'Replikacja to powielanie DNA przed podziałem komórki.'},
+ {name:'Naskórek',len:32,speed:1.2,ramp:0.3,hint:true,quizzes:2,plus:false,desc:'32 nukleotydy, ze ściągą',
+  intro:'Naskórek cały czas się złuszcza i odrasta, a skaleczenie goi się, bo komórki wokół rany się dzielą. Przed każdym takim podziałem zachodzi replikacja.',
+  fact:'Nowa nić powstaje według reguły komplementarności: A łączy się z T, a C z G.'},
+ {name:'Wyściółka jelita',len:40,speed:1.5,ramp:0.35,hint:false,quizzes:2,plus:false,desc:'40 nukleotydów, bez ściągi',
+  intro:'Wyściółka jelita odnawia się co kilka dni. Od tego poziomu ściąga znika – pary musisz pamiętać sam.',
+  fact:'Po replikacji każda cząsteczka DNA ma jedną nić starą (macierzystą) i jedną nową. Obie cząsteczki są identyczne z wyjściową.'},
+ {name:'Szpik kostny',len:48,speed:1.85,ramp:0.4,hint:false,quizzes:3,plus:true,desc:'48 nukleotydów, szybko',
+  intro:'W szpiku kostnym bez przerwy dzielą się komórki, z których powstają krwinki. Ciało dorosłego człowieka wymienia ok. 330 miliardów komórek dziennie.',
+  fact:'Błąd w replikacji zmienia DNA i może zaburzyć pracę komórek potomnych. Dlatego polimeraza sprawdza swoją pracę, a komórka ma systemy naprawcze.'},
+ {name:'Faza S',len:60,speed:2.2,ramp:0.6,hint:false,quizzes:3,plus:true,desc:'60 nukleotydów, bardzo szybko',
+  intro:'W fazie S cyklu komórkowego kopiowane jest całe DNA – ok. 6,4 miliarda par nukleotydów. Trwa to ok. 8 godzin, bo kopiowanie rusza jednocześnie w dziesiątkach tysięcy miejsc. Pokaż, na co Cię stać.',
+  fact:'Zasady z przeciwległych nici łączą słabe wiązania wodorowe: A–T dwa, G–C trzy. Dzięki temu nici łatwo rozpiąć podczas replikacji.'}
+];
+const ENDLESS={name:'Bez końca',hint:false,plus:true,
+  intro:'Nić nie ma końca, a tempo stale rośnie. Kontrola jakości co 12 nukleotydów. Ile skopiujesz, zanim zrobisz trzy mutacje?'};
+
+// poprawna odpowiedź zawsze pierwsza – kolejność losowana przy wyświetlaniu
+const QUESTIONS=[
+ {q:'Jaka jest pełna nazwa DNA?',o:['kwas deoksyrybonukleinowy','kwas rybonukleinowy','kwas deoksynukleotydowy','deoksyryboza nukleinowa'],e:'Kwas + deoksyrybo (cukier deoksyryboza) + nukleinowy (od nucleus – jądro).'},
+ {q:'Gdzie w komórce znajduje się głównie DNA?',o:['w jądrze komórkowym','w błonie komórkowej','w cytoplazmie','w rybosomach'],e:'DNA jest najważniejszym składnikiem jądra komórkowego.'},
+ {q:'Jaki kształt ma cząsteczka DNA?',o:['podwójnej helisy','pojedynczej prostej nici','pierścienia','kulki'],e:'Dwie nici spiralnie skręcone wokół wspólnej osi – jak skręcona drabina.'},
+ {q:'Z ilu nici składa się cząsteczka DNA?',o:['z dwóch','z jednej','z trzech','z czterech'],e:'Dwie nici – stąd „podwójna” helisa.'},
+ {q:'Z czego składa się nukleotyd DNA?',o:['z deoksyrybozy, reszty kwasu fosforowego i zasady azotowej','z rybozy, reszty kwasu fosforowego i zasady azotowej','z deoksyrybozy, białka i zasady azotowej','z aminokwasu, cukru i zasady azotowej'],e:'Cukier deoksyryboza + reszta kwasu fosforowego + zasada azotowa.'},
+ {q:'Deoksyryboza to:',o:['cukier','zasada azotowa','białko','kwas'],e:'Deoksyryboza to cukier, który jest częścią każdego nukleotydu.'},
+ {q:'Ile rodzajów nukleotydów buduje DNA?',o:['4','2','3','20'],e:'Adeninowy, tyminowy, cytozynowy i guaninowy.'},
+ {q:'Czym różnią się od siebie nukleotydy w DNA?',o:['rodzajem zasady azotowej','rodzajem cukru','liczbą reszt kwasu fosforowego','kolorem'],e:'Cukier i fosforan są zawsze takie same – różni je zasada azotowa.'},
+ {q:'Które zasady azotowe budują DNA?',o:['adenina, tymina, cytozyna, guanina','adenina, uracyl, cytozyna, guanina','adenina, tymina, cytozyna, glukoza','alanina, tymina, cytozyna, guanina'],e:'A, T, C, G. Uracyl występuje w RNA, nie w DNA.'},
+ {q:'Litera C w DNA oznacza:',o:['cytozynę','cukier','celulozę','chlor'],e:'C – cytozyna.'},
+ {q:'Litera G w DNA oznacza:',o:['guaninę','glukozę','gen','glicerol'],e:'G – guanina.'},
+ {q:'Litera T w DNA oznacza:',o:['tyminę','tlen','tyrozynę','trypsynę'],e:'T – tymina.'},
+ {q:'Na czym polega reguła komplementarności?',o:['A łączy się tylko z T, a C tylko z G','każda zasada łączy się z dowolną inną','obie nici mają identyczną kolejność','zasady łączą się z takimi samymi'],e:'Dlatego kolejność nukleotydów w jednej nici wyznacza kolejność w drugiej.'},
+ {q:'Czym łączą się zasady z przeciwległych nici?',o:['słabymi wiązaniami wodorowymi','resztami kwasu fosforowego','cząsteczkami cukru','białkami'],e:'Wiązania wodorowe są słabe – dzięki temu nici można rozpiąć przy replikacji. W grze to kropki między parami.'},
+ {q:'Prawda czy fałsz: obie nici DNA mają identyczną kolejność nukleotydów.',o:['Fałsz – nici są komplementarne','Prawda'],e:'Naprzeciw A jest T, naprzeciw C jest G – kolejności są różne, ale do siebie dopasowane.'},
+ {q:'Co to jest replikacja?',o:['powielanie DNA przed podziałem komórki','rozpad DNA na nukleotydy','łączenie DNA mamy i taty','zwijanie DNA w jądrze'],e:'Dzięki replikacji każda komórka potomna dostaje pełną kopię DNA.'},
+ {q:'Kiedy zachodzi replikacja?',o:['przed podziałem komórki','po podziale komórki','tylko podczas snu','tylko w komórkach jajowych'],e:'Najpierw kopia, potem podział.'},
+ {q:'Co ma każda cząsteczka DNA po replikacji?',o:['jedną nić starą i jedną nową','dwie nowe nici','dwie stare nici','nici z losowych kawałków'],e:'Stara nić (w grze niebieska) jest wzorem dla nowej (pomarańczowej).'},
+ {q:'Cząsteczki DNA po replikacji w porównaniu z cząsteczką wyjściową są:',o:['identyczne','zupełnie inne','o połowę krótsze','odwrócone'],e:'Są identyczne z wyjściową. Na str. 8 podręcznik nieściśle pisze „komplementarne”.'},
+ {q:'Co przyłącza się do rozplecionych nici podczas replikacji?',o:['komplementarne nukleotydy','aminokwasy','gotowe chromosomy','cukry bez zasad'],e:'A do T, C do G – dokładnie to robisz w tej grze.'},
+ {q:'Co dzieje się na początku replikacji?',o:['podwójna helisa się rozplata','komórka dzieli się na dwie','DNA opuszcza jądro','powstają białka'],e:'Najpierw trzeba rozpiąć nici jak zamek błyskawiczny.'},
+ {q:'Dlaczego bezbłędny przebieg replikacji jest ważny?',o:['bo błąd w DNA może zaburzyć pracę komórek potomnych','bo błędy przyspieszają podział','bo błędy nie mają znaczenia','bo bez tego DNA nie zmieści się w jądrze'],e:'Komórki potomne działają według instrukcji zapisanych w DNA.'},
+ {q:'Jaką funkcję pełni DNA?',o:['przechowuje informację o cechach organizmu i przekazuje ją komórkom potomnym','dostarcza komórce energii','buduje błonę komórkową','transportuje tlen'],e:'DNA zawiera informację o budowie i funkcjonowaniu organizmu i kieruje pracą komórki.'},
+ {q:'W czym zapisana jest informacja o cechach organizmu?',o:['w kolejności nukleotydów w DNA','w kształcie komórki','w liczbie mitochondriów','w kolorze jądra'],e:'Jak słowa zapisane alfabetem z czterech liter.'},
+ {q:'Jaką łączną długość ma DNA z jednej komórki człowieka?',o:['ponad 2 metry','ok. 2 mm','ok. 2 cm','ok. 2 km'],e:'Mieści się w jądrze, bo jest nawinięte na białka i ciasno zwinięte.'},
+ {q:'Ile wiązań wodorowych łączy parę G–C?',o:['3','2','1','4'],e:'G–C: trzy, A–T: dwa. Policz kropki między parami w grze.',plus:true},
+ {q:'Ile wiązań wodorowych łączy parę A–T?',o:['2','3','1','4'],e:'Dwa – widać je jako dwie kropki.',plus:true},
+ {q:'Jak nazywa się białko, które dokleja nukleotydy podczas replikacji?',o:['polimeraza DNA','hemoglobina','insulina','histon'],e:'To Ty w tej grze.',plus:true},
+ {q:'W której fazie cyklu komórkowego zachodzi replikacja?',o:['S','M','G1','G2'],e:'Faza S (od „synteza”) trwa ok. 8 godzin.',plus:true},
+ {q:'Dlaczego całe DNA kopiuje się w kilka godzin, a nie w kilka lat?',o:['kopiowanie rusza jednocześnie w dziesiątkach tysięcy miejsc','polimeraza z czasem przyspiesza','DNA jest krótkie','kopiowana jest tylko połowa DNA'],e:'Jedna para polimeraz potrzebowałaby na to ponad 2 lat.',plus:true},
+ {q:'Ile par nukleotydów liczy DNA jednej komórki człowieka?',o:['ok. 6,4 miliarda','ok. 6400','ok. 64 tysiące','ok. 64 miliony'],e:'Wydrukowane dałoby bibliotekę ok. 6 tysięcy grubych książek.',plus:true},
+ {q:'Trwała zmiana (błąd) w DNA to:',o:['mutacja','replikacja','helisa','komplementarność'],e:'O mutacjach będzie w dziale 2.',plus:true},
+ {q:'Z atomów jakich pierwiastków zbudowane jest DNA?',o:['C, H, O, N, P','tylko C, H, O','C, H, O, N, S','Fe, Ca, Na, K'],e:'Węgiel, wodór, tlen, azot i fosfor.',plus:true},
+ {q:'Dlaczego to dobrze, że wiązania wodorowe w DNA są słabe?',o:['bo łatwo rozpiąć nici przy replikacji','bo DNA ma się samo rozpadać','bo łatwiej je narysować','to nie ma znaczenia'],e:'Rozpinanie działa jak suwak zamka błyskawicznego, a mocny szkielet nici zostaje nietknięty.',plus:true}
+];
+
+/* ============ ZAPIS ============ */
+const SKEY='polimeraza-v1';
+function freshSave(){return {stars:[0,0,0,0,0],best:[0,0,0,0,0],endlessBest:0,muted:false,total:0};}
+let SV=freshSave(), canSave=true;
+try{ const r=localStorage.getItem(SKEY); if(r) SV=Object.assign(freshSave(),JSON.parse(r)); }catch(e){ canSave=false; }
+function persist(){ if(!canSave) return; try{ localStorage.setItem(SKEY,JSON.stringify(SV)); }catch(e){ canSave=false; } }
+
+/* ============ POMOCNICZE ============ */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a;}
+function randSeq(n){let s=''; for(let i=0;i<n;i++) s+='ATCG'[Math.floor(Math.random()*4)]; return s;}
+const chip=b=>`<span class="b b-${b}">${b}</span>`;
+const fmt=(n,d=1)=>n.toLocaleString('pl-PL',{maximumFractionDigits:d});
+function plLat(n){ const d=n%10, dd=n%100; if(n===1) return 'rok'; return (d>=2&&d<=4&&!(dd>=12&&dd<=14))?'lata':'lat'; }
+function plNukl(n){ if(n===1) return 'nukleotyd'; const d=n%10, dd=n%100; return (d>=2&&d<=4&&!(dd>=12&&dd<=14))?'nukleotydy':'nukleotydów'; }
+const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============ DŹWIĘK ============ */
+let actx=null;
+function tone(freq,dur,type,vol,delay){
+  if(SV.muted) return;
+  try{
+    if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+    const t=actx.currentTime+(delay||0), o=actx.createOscillator(), g=actx.createGain();
+    o.type=type||'sine'; o.frequency.setValueAtTime(freq,t);
+    g.gain.setValueAtTime(vol||0.07,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t+dur+0.03);
+  }catch(e){}
+}
+const sGood=b=>tone(NOTE[b],0.12,'triangle',0.08);
+const sBad=()=>{ tone(150,0.22,'sawtooth',0.05); };
+const sWin=()=>{ [523,659,784,1047].forEach((f,i)=>tone(f,0.18,'triangle',0.07,i*0.1)); };
+const sFix=()=>{ tone(660,0.1,'sine',0.07); tone(990,0.16,'sine',0.07,0.09); };
+
+/* ============ STAN GRY ============ */
+const G={state:'menu',lv:0,endless:false,L:null,bases:'',built:[],idx:0,pos:0,mut:0,score:0,combo:0,maxCombo:0,correct:0,
+  playTime:0,quizAt:[],quizDone:0,nextQuiz:12,usedQ:new Set(),qOk:0,qTotal:0,repaired:0,pulse:0,shake:0,floats:[],endTimer:0,
+  SW:50,CS:40,zoneX:200,geo:{}};
+const MAXMUT=3, REACH=3;
+
+/* ============ MENU ============ */
+function renderMenu(){
+  G.state='menu'; $('game').hidden=true; $('menu').hidden=false; hideModal();
+  const unlocked=k=>k===0||SV.stars[k-1]>0;
+  const lv=LEVELS.map((L,k)=>{
+    const st=SV.stars[k], ok=unlocked(k);
+    return `<li><button class="lvl" type="button" data-lv="${k}" ${ok?'':'disabled'}>
+      <span class="num">${k+1}</span>
+      <span><span class="nm">${esc(L.name)}</span><span class="ds">${ok?esc(L.desc):'Przejdź poprzedni poziom, żeby odblokować'}</span></span>
+      <span class="st" aria-label="Gwiazdki: ${st} z 3">${ok?'★'.repeat(st)+'☆'.repeat(3-st):'🔒'}${SV.best[k]?`<small>rekord ${SV.best[k]}</small>`:''}</span>
+    </button></li>`; }).join('');
+  const endOk=SV.stars[0]>0;
+  $('menu').innerHTML=`
+    <h1 class="title">Polimeraza</h1>
+    <p class="sub">Gra o replikacji DNA. Jesteś białkiem, które buduje nową nić, zanim komórka się podzieli.</p>
+    <div class="how">
+      <ul>
+        <li>U góry przesuwa się <strong style="color:var(--old)">stara nić</strong>. Do każdej zasady dobierz parę do <strong style="color:var(--new)">nowej nici</strong>: ${chip('A')} z ${chip('T')}, ${chip('C')} z ${chip('G')}.</li>
+        <li>Klawisze <strong>A T C G</strong> albo duże przyciski pod nicią. Możesz wyprzedzać polimerazę najwyżej o 3 zasady.</li>
+        <li>Pomyłka albo spóźnienie to <strong>mutacja</strong>. Trzy mutacje i kopia nie przejdzie kontroli.</li>
+        <li>Co jakiś czas przychodzi <strong>kontrola jakości</strong> – dobra odpowiedź naprawia jedną mutację.</li>
+        <li>Kropki między parami to wiązania wodorowe: A–T mają dwa, G–C trzy.</li>
+      </ul>
+    </div>
+    <h2>Poziomy</h2>
+    <ul class="levels">${lv}
+      <li><button class="lvl endless" type="button" data-lv="endless" ${endOk?'':'disabled'}>
+        <span class="num">∞</span>
+        <span><span class="nm">Bez końca</span><span class="ds">${endOk?'Tempo rośnie bez przerwy. Graj na rekord.':'Przejdź poziom 1, żeby odblokować'}</span></span>
+        <span class="st">${SV.endlessBest?`<small>rekord ${SV.endlessBest}</small>`:''}</span>
+      </button></li>
+    </ul>
+    <div class="row">
+      <button class="btn small" type="button" id="bMute">${SV.muted?'Włącz dźwięk':'Wycisz dźwięk'}</button>
+      <span class="muted small">Łącznie skopiowane: ${SV.total} ${plNukl(SV.total)}.${canSave?'':' Ta przeglądarka nie zapisze wyników.'}</span>
+    </div>`;
+  $('menu').querySelectorAll('.lvl').forEach(b=>b.addEventListener('click',()=>{ const v=b.dataset.lv; if(v==='endless') startLevel(0,true); else startLevel(+v,false); }));
+  $('bMute').onclick=()=>{ SV.muted=!SV.muted; persist(); renderMenu(); };
+}
+
+/* ============ MODAL ============ */
+function showModal(html){ $('card').innerHTML=html; $('modal').hidden=false; const p=$('card').querySelector('[data-primary]'); if(p) setTimeout(()=>p.focus(),30); }
+function hideModal(){ $('modal').hidden=true; $('card').innerHTML=''; }
+
+/* ============ START POZIOMU ============ */
+function startLevel(k,endless){
+  G.endless=endless; G.lv=k; G.L=endless?ENDLESS:LEVELS[k];
+  G.bases=randSeq(endless?40:G.L.len); G.built=[]; G.idx=0; G.pos=-4.5; G.mut=0; G.score=0; G.combo=0; G.maxCombo=0; G.correct=0;
+  G.playTime=0; G.quizDone=0; G.qOk=0; G.qTotal=0; G.repaired=0; G.floats=[]; G.endTimer=0; G.pulse=0; G.shake=0;
+  G.quizAt=endless?[]:Array.from({length:G.L.quizzes},(_,i)=>Math.round(G.L.len*(i+1)/(G.L.quizzes+1)));
+  G.nextQuiz=12;
+  $('menu').hidden=true; $('game').hidden=false;
+  $('hLevel').textContent=endless?'Bez końca':`${k+1}. ${G.L.name}`;
+  $('progBox').hidden=endless;
+  $('hint').innerHTML=G.L.hint?`Ściąga: ${chip('A')}–${chip('T')} &nbsp; ${chip('C')}–${chip('G')}`:'Bez ściągi. Klawisze A T C G, pauza: Esc';
+  resize(); hud(); G.state='intro';
+  const goal=endless?'Kopiuj jak najdłużej.':`Skopiuj ${G.L.len} nukleotydów, robiąc mniej niż ${MAXMUT} mutacje.`;
+  showModal(`<p class="tag">${endless?'Tryb bez końca':'Poziom '+(k+1)}</p><h2>${esc(G.L.name)}</h2>
+    <p>${esc(G.L.intro)}</p><p><strong>${goal}</strong></p>
+    <div class="row"><button class="btn primary" type="button" data-primary id="bGo">Start</button><button class="btn" type="button" id="bBack">Menu</button></div>`);
+  $('bGo').onclick=()=>{ hideModal(); G.state='play'; lastT=performance.now(); };
+  $('bBack').onclick=renderMenu;
+}
+
+/* ============ LOGIKA ============ */
+function speedNow(){ return G.endless?Math.min(4,1.1+0.028*G.idx):G.L.speed+G.L.ramp*(G.idx/G.L.len); }
+function press(b){
+  if(G.state!=='play') return null;
+  if(G.idx>=G.bases.length||(!G.endless&&G.idx>=G.L.len)) return null;
+  if(G.idx-G.pos>REACH){ floatText('Za wcześnie',G.zoneX+REACH*G.SW,G.geo.nC,'#B9AEDB'); return null; }
+  const i=G.idx, need=PAIR[G.bases[i]], ok=b===need;
+  G.built[i]={b,ok}; G.idx++;
+  if(ok){
+    G.combo++; G.maxCombo=Math.max(G.maxCombo,G.combo); G.correct++;
+    const mult=Math.min(5,1+Math.floor(G.combo/8)); G.score+=10*mult; G.pulse=1; sGood(b);
+    floatText('+'+10*mult+(mult>1?' ×'+mult:''),xOf(i),G.geo.nC-G.CS,'#3DDC97');
+  } else {
+    addMut('Mutacja!',i);
+  }
+  hud(); checkQuiz(); return ok;
+}
+function addMut(text,i){
+  G.mut++; G.combo=0; G.shake=1; sBad();
+  floatText(text,xOf(i),G.geo.nC-G.CS,'#FF5C7A');
+  if(G.mut>=MAXMUT){ G.state='ending'; setTimeout(()=>endGame(false),800); }
+}
+function update(dt){
+  if(G.state!=='play') return;
+  G.playTime+=dt; G.pos+=speedNow()*dt;
+  if(G.endless&&G.bases.length<G.idx+30) G.bases+=randSeq(30);
+  const limit=G.endless?Infinity:G.L.len;
+  while(G.state==='play'&&G.idx<limit&&G.pos>G.idx+0.5){ const i=G.idx; G.built[i]={b:null,ok:false,miss:true}; G.idx++; addMut('Za późno!',i); hud(); }
+  if(G.state==='play'&&!G.endless&&G.idx>=G.L.len){ G.endTimer+=dt; if(G.endTimer>0.9) endGame(true); return; }
+  checkQuiz();
+}
+function checkQuiz(){
+  if(G.state!=='play') return;
+  if(G.endless){ if(G.idx>=G.nextQuiz){ G.nextQuiz+=12; openQuiz(); } }
+  else if(G.quizDone<G.quizAt.length&&G.idx>=G.quizAt[G.quizDone]&&G.idx<G.L.len){ G.quizDone++; openQuiz(); }
+}
+
+/* ============ KONTROLA JAKOŚCI ============ */
+let qTimer=null;
+function openQuiz(){
+  G.state='quiz';
+  const allowPlus=G.L.plus;
+  let pool=QUESTIONS.map((q,i)=>({q,i})).filter(x=>(allowPlus||!x.q.plus)&&!G.usedQ.has(x.i));
+  if(!pool.length){ G.usedQ.clear(); pool=QUESTIONS.map((q,i)=>({q,i})).filter(x=>allowPlus||!x.q.plus); }
+  const pick=pool[Math.floor(Math.random()*pool.length)]; G.usedQ.add(pick.i);
+  const Q=pick.q, order=shuffle(Q.o.map((_,i)=>i));
+  showModal(`<p class="tag">Kontrola jakości${Q.plus?' ⭐':''}</p><h2 style="font-size:1.35rem">${esc(Q.q)}</h2>
+    <div class="qopts">${order.map((oi,k)=>`<button class="qopt" type="button" data-oi="${oi}"><span class="k">${k+1}</span>${esc(Q.o[oi])}</button>`).join('')}</div>
+    <div class="timer" aria-hidden="true"><span id="qBar"></span></div>
+    <div class="qfb" id="qFb" aria-live="polite"></div>`);
+  const btns=[...$('card').querySelectorAll('.qopt')];
+  setTimeout(()=>btns[0].focus(),30);
+  const T=15, t0=performance.now();
+  qTimer=setInterval(()=>{ const left=Math.max(0,1-(performance.now()-t0)/(T*1000)); const bar=$('qBar'); if(bar) bar.style.width=(left*100)+'%'; if(left<=0) answer(null); },100);
+  btns.forEach(b=>b.onclick=()=>answer(+b.dataset.oi));
+  function answer(oi){
+    clearInterval(qTimer); qTimer=null;
+    if(btns[0].disabled) return;
+    const ok=oi===0; G.qTotal++; if(ok) G.qOk++;
+    btns.forEach(b=>{ b.disabled=true; const v=+b.dataset.oi; if(v===0) b.classList.add('ok'); else if(v===oi) b.classList.add('no'); });
+    let msg;
+    if(ok){
+      let j=-1; for(let k=G.built.length-1;k>=0;k--){ const x=G.built[k]; if(x&&!x.ok&&!x.repaired){ j=k; break; } }
+      if(j>=0){ G.mut--; G.repaired++; G.built[j]={b:PAIR[G.bases[j]],ok:true,repaired:true}; msg='<strong>Naprawa DNA!</strong> Jedna mutacja usunięta.'; sFix(); }
+      else { G.score+=30; msg='<strong>Dobrze! +30 punktów.</strong>'; sFix(); }
+    } else {
+      msg=`<strong>${oi===null?'Czas minął.':'Nie tym razem.'}</strong> Poprawnie: ${esc(Q.o[0])}.`; sBad();
+    }
+    $('qFb').innerHTML=`<p>${msg}</p><p class="fact">${esc(Q.e)}</p><div class="row"><button class="btn primary" type="button" data-primary id="bRes">Wracam do kopiowania</button></div>`;
+    hud(); setTimeout(()=>$('bRes')&&$('bRes').focus(),30);
+    $('bRes').onclick=()=>{ hideModal(); G.state='play'; lastT=performance.now(); };
+  }
+}
+
+/* ============ PAUZA I KONIEC ============ */
+function pause(){
+  if(G.state!=='play') return;
+  G.state='pause';
+  showModal(`<h2>Pauza</h2><p class="muted">Skopiowane: ${G.idx} ${G.endless?'':'z '+G.L.len}, mutacje: ${G.mut} z ${MAXMUT}.</p>
+    <div class="row"><button class="btn primary" type="button" data-primary id="bRes">Wznów</button><button class="btn" type="button" id="bMenu">Wyjdź do menu</button></div>`);
+  $('bRes').onclick=resume; $('bMenu').onclick=renderMenu;
+}
+function resume(){ hideModal(); G.state='play'; lastT=performance.now(); }
+function endGame(pass){
+  if(G.state==='end') return;
+  G.state='end'; SV.total+=G.correct;
+  const rate=G.playTime>0?G.correct/G.playTime:0;
+  let rateLine='';
+  if(rate>0){ const years=Math.round(6.4e9/rate/31557600); rateLine=`<p>Twoje tempo: <strong>${fmt(rate)} nukleotydu na sekundę</strong>. Prawdziwa polimeraza w komórce człowieka dokleja ich kilkadziesiąt na sekundę. Całe DNA jednej komórki (6,4 mld par) kopiowałbyś w tym tempie ok. <strong>${years.toLocaleString('pl-PL')} ${plLat(years)}</strong>${years>90?' – dłużej niż trwa ludzkie życie':''}. Dlatego komórka kopiuje DNA w dziesiątkach tysięcy miejsc naraz.</p>`; }
+  let head, stars=0, extra='';
+  if(G.endless){
+    const rec=G.score>SV.endlessBest; if(rec) SV.endlessBest=G.score;
+    head=`<p class="tag">Bez końca</p><h2>${rec?'Nowy rekord!':'Koniec gry'}</h2>`;
+    extra=`<p class="muted">Rekord: ${SV.endlessBest} punktów.</p>`;
+  } else if(pass){
+    stars=G.mut===0?3:G.mut===1?2:1;
+    SV.stars[G.lv]=Math.max(SV.stars[G.lv],stars); SV.best[G.lv]=Math.max(SV.best[G.lv],G.score);
+    head=`<p class="tag">Poziom ${G.lv+1}: ${esc(G.L.name)}</p><h2>Kopia gotowa! Komórka może się podzielić.</h2><div class="stars" aria-label="${stars} z 3 gwiazdek">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</div>`;
+    extra=`<p class="fact"><strong>Zapamiętaj:</strong> ${esc(G.L.fact)}</p>`;
+    sWin();
+  } else {
+    head=`<p class="tag">Poziom ${G.lv+1}: ${esc(G.L.name)}</p><h2>Za dużo mutacji. Ta kopia nie przeszła kontroli.</h2>`;
+    extra=`<p class="fact"><strong>Zapamiętaj:</strong> ${esc(G.L.fact)}</p>`;
+  }
+  persist();
+  const hasNext=!G.endless&&pass&&G.lv<LEVELS.length-1;
+  showModal(`${head}
+    <dl class="stats">
+      <dt>Punkty</dt><dd>${G.score}</dd>
+      <dt>Poprawnie dobrane</dt><dd>${G.correct}${G.endless?'':' z '+G.L.len}</dd>
+      <dt>Mutacje na koniec</dt><dd>${G.mut}${G.repaired?` (naprawione: ${G.repaired})`:''}</dd>
+      <dt>Najdłuższa seria</dt><dd>${G.maxCombo}</dd>
+      <dt>Kontrola jakości</dt><dd>${G.qOk} z ${G.qTotal}</dd>
+    </dl>
+    ${extra}${rateLine}
+    <div class="row">
+      ${hasNext?`<button class="btn primary" type="button" data-primary id="bNext">Następny poziom</button><button class="btn" type="button" id="bAgain">Jeszcze raz</button>`:`<button class="btn primary" type="button" data-primary id="bAgain">Jeszcze raz</button>`}
+      <button class="btn" type="button" id="bMenu">Menu</button>
+    </div>`);
+  if(hasNext) $('bNext').onclick=()=>startLevel(G.lv+1,false);
+  $('bAgain').onclick=()=>startLevel(G.lv,G.endless);
+  $('bMenu').onclick=renderMenu;
+}
+
+/* ============ HUD ============ */
+function hud(){
+  $('hScore').textContent=G.score;
+  const mult=Math.min(5,1+Math.floor(G.combo/8));
+  $('hCombo').textContent=G.combo+(mult>1?' (×'+mult+')':'');
+  $('hMut').innerHTML='Mutacje '+Array.from({length:MAXMUT},(_,i)=>`<span class="mut${i<G.mut?' on':''}"></span>`).join('');
+  $('hMut').setAttribute('aria-label',`Mutacje: ${G.mut} z ${MAXMUT}`);
+  if(!G.endless&&G.L) $('hProg').style.width=Math.min(100,100*G.idx/G.L.len)+'%';
+}
+
+/* ============ RYSOWANIE ============ */
+const cv=$('cv'), ctx=cv.getContext('2d');
+let dpr=1;
+function resize(){
+  const w=$('stage').clientWidth||600; dpr=Math.min(2,window.devicePixelRatio||1);
+  const SW=Math.max(40,Math.min(60,w/11)), CS=SW*0.78;
+  const topB=34, tC=topB+10+CS/2, nC=tC+CS+30, botB=nC+CS/2+10, H=botB+34;
+  Object.assign(G,{SW,CS,zoneX:Math.round(w*0.3)}); G.geo={topB,tC,nC,botB,H,W:w};
+  cv.style.height=H+'px'; cv.width=Math.round(w*dpr); cv.height=Math.round(H*dpr);
+}
+window.addEventListener('resize',()=>{ if(!$('game').hidden) resize(); });
+const xOf=i=>G.zoneX+(i-G.pos)*G.SW;
+function rr(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function line(x1,y1,x2,y2){ ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); }
+function drawChip(x,y,b,alpha){
+  const CS=G.CS; ctx.globalAlpha=alpha; rr(x-CS/2,y-CS/2,CS,CS,CS*0.2); ctx.fillStyle=COL[b]; ctx.fill();
+  ctx.fillStyle=TXT[b]; ctx.font=`800 ${Math.round(CS*0.52)}px "Bricolage Grotesque", system-ui, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(b,x,y+1);
+  ctx.globalAlpha=1;
+}
+function floatText(t,x,y,c){ if(RM&&G.floats.length>2) G.floats.shift(); G.floats.push({t,x,y,c,life:1}); }
+function draw(){
+  const {topB,tC,nC,botB,H,W}=G.geo, SW=G.SW, CS=G.CS, zx=G.zoneX;
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+  const sx=(!RM&&G.shake>0)?(Math.random()-0.5)*10*G.shake:0;
+  ctx.save(); ctx.translate(sx,0);
+  // strefa polimerazy
+  rr(zx-SW*0.55,10,SW*1.1,H-20,14); ctx.fillStyle='rgba(61,220,151,0.09)'; ctx.fill();
+  ctx.setLineDash([5,6]); ctx.strokeStyle='rgba(61,220,151,0.5)'; ctx.lineWidth=2; ctx.stroke(); ctx.setLineDash([]);
+  const pr=CS*0.8*(1+0.14*G.pulse);
+  ctx.beginPath(); ctx.arc(zx,nC,pr,0,Math.PI*2); ctx.fillStyle=`rgba(61,220,151,${0.22+0.3*G.pulse})`; ctx.fill();
+  ctx.fillStyle='#3DDC97'; ctx.font='600 13px "Bricolage Grotesque", system-ui, sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+  ctx.fillText('polimeraza',zx,H-9);
+  ctx.fillStyle='rgba(185,174,219,.8)'; ctx.textAlign='left'; ctx.fillText('stara nić',8,16); ctx.fillText('nowa nić',8,H-9);
+  if(G.bases.length){
+    const n=G.endless?G.bases.length:G.L.len;
+    const first=Math.max(0,Math.floor(G.pos-zx/SW)-1), last=Math.min(n-1,Math.ceil(G.pos+(W-zx)/SW)+1);
+    const bx0=Math.max(-10,xOf(0)-SW/2), bx1=Math.min(W+10,xOf(n-1)+SW/2);
+    ctx.lineCap='round';
+    if(bx1>bx0){ ctx.strokeStyle='#4C7BE0'; ctx.lineWidth=6; line(bx0,topB,bx1,topB); }
+    for(let i=first;i<=last;i++){
+      const x=xOf(i), b=G.bases[i], bt=G.built[i];
+      ctx.strokeStyle='#4C7BE0'; ctx.lineWidth=3; line(x,topB,x,tC-CS/2);
+      let a=1; if(!bt&&i-G.pos>REACH) a=0.42;
+      drawChip(x,tC,b,a);
+      if(i===G.idx&&(G.state==='play'||G.state==='intro')){
+        ctx.strokeStyle='#FFFFFF'; ctx.lineWidth=3; rr(x-CS/2-4,tC-CS/2-4,CS+8,CS+8,CS*0.26); ctx.stroke();
+        ctx.setLineDash([4,4]); ctx.strokeStyle='rgba(242,237,255,.6)'; ctx.lineWidth=2; rr(x-CS/2,nC-CS/2,CS,CS,CS*0.2); ctx.stroke(); ctx.setLineDash([]);
+      }
+      if(bt){
+        ctx.strokeStyle='#F08A24'; ctx.lineWidth=6; line(x-SW/2,botB,x+SW/2,botB);
+        ctx.lineWidth=3; line(x,nC+CS/2,x,botB);
+        const y1=tC+CS/2+3, y2=nC-CS/2-3, ym=(y1+y2)/2;
+        if(bt.miss){
+          ctx.setLineDash([4,4]); ctx.strokeStyle='#FF5C7A'; ctx.lineWidth=2.5; rr(x-CS/2,nC-CS/2,CS,CS,CS*0.2); ctx.stroke(); ctx.setLineDash([]);
+          ctx.fillStyle='#FF5C7A'; ctx.font=`800 ${Math.round(CS*0.5)}px "Bricolage Grotesque", system-ui, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('!',x,nC+1);
+        } else {
+          drawChip(x,nC,bt.b,1);
+          if(bt.ok){
+            const k=(bt.b==='A'||bt.b==='T')?2:3;
+            ctx.fillStyle='#E8E2FF'; for(let d=1;d<=k;d++){ ctx.beginPath(); ctx.arc(x,y1+(y2-y1)*d/(k+1),2.7,0,Math.PI*2); ctx.fill(); }
+            if(bt.repaired){ ctx.strokeStyle='#3DDC97'; ctx.lineWidth=3; rr(x-CS/2-3,nC-CS/2-3,CS+6,CS+6,CS*0.26); ctx.stroke(); }
+          } else {
+            ctx.strokeStyle='#FF5C7A'; ctx.lineWidth=3; rr(x-CS/2-3,nC-CS/2-3,CS+6,CS+6,CS*0.26); ctx.stroke();
+            ctx.lineWidth=3; line(x-6,ym-6,x+6,ym+6); line(x+6,ym-6,x-6,ym+6);
+          }
+        }
+      }
+    }
+  }
+  G.floats.forEach(f=>{ ctx.globalAlpha=Math.max(0,f.life); ctx.fillStyle=f.c; ctx.font='800 16px "Bricolage Grotesque", system-ui, sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(f.t,f.x,f.y); });
+  ctx.globalAlpha=1; ctx.restore();
+}
+function fx(dt){
+  G.pulse=Math.max(0,G.pulse-dt*4); G.shake=Math.max(0,G.shake-dt*4);
+  G.floats.forEach(f=>{ f.life-=dt*1.1; if(!RM) f.y-=28*dt; }); G.floats=G.floats.filter(f=>f.life>0);
+}
+let lastT=performance.now();
+function loop(t){ const dt=Math.min(0.05,Math.max(0,(t-lastT)/1000)); lastT=t; if(!$('game').hidden){ update(dt); fx(dt); draw(); } requestAnimationFrame(loop); }
+
+/* ============ STEROWANIE ============ */
+document.querySelectorAll('.pad').forEach(p=>{
+  const hit=()=>{ const r=press(p.dataset.b); p.classList.add('hit'); if(r===true) p.classList.add('good'); if(r===false) p.classList.add('bad'); setTimeout(()=>p.classList.remove('hit','good','bad'),160); };
+  p.addEventListener('pointerdown',e=>{ e.preventDefault(); hit(); });
+  p.addEventListener('click',e=>{ if(e.detail===0) hit(); });
+});
+$('bPause').onclick=pause;
+document.addEventListener('keydown',e=>{
+  if(!$('modal').hidden){
+    if((e.key==='Enter'||e.key===' ')&&(!document.activeElement||document.activeElement.tagName!=='BUTTON')){ const p=$('card').querySelector('[data-primary]'); if(p){ e.preventDefault(); p.click(); } }
+    if(G.state==='quiz'&&/^[1-4]$/.test(e.key)){ const b=$('card').querySelectorAll('.qopt')[+e.key-1]; if(b&&!b.disabled){ e.preventDefault(); b.click(); } }
+    if(e.key==='Escape'&&G.state==='pause') resume();
+    return;
+  }
+  if(G.state==='play'){
+    const k=e.key.toUpperCase();
+    if(k.length===1&&'ATCG'.includes(k)){ e.preventDefault(); if(e.repeat) return; const r=press(k); const p=document.querySelector('.pad.'+k); if(p){ p.classList.add('hit'); if(r===true) p.classList.add('good'); if(r===false) p.classList.add('bad'); setTimeout(()=>p.classList.remove('hit','good','bad'),160); } }
+    else if(e.key==='Escape'||k==='P'){ e.preventDefault(); pause(); }
+  }
+});
+document.addEventListener('visibilitychange',()=>{ if(document.hidden) pause(); });
+
+renderMenu();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
