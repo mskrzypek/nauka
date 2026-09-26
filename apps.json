@@ -149,6 +149,18 @@
       ],
       "added": "2026-09-26",
       "desc": "Układanka z klocków w stylu Block Blast"
+    },
+    {
+      "id": "dino",
+      "file": "apps/dino.html",
+      "title": "Dino – skacz przez kaktusy",
+      "emoji": "🦖",
+      "subject": "rozrywka",
+      "kids": [
+        "igor"
+      ],
+      "added": "2026-09-26",
+      "desc": "Biegnij, skacz i unikaj ptaków"
     }
   ]
 }
