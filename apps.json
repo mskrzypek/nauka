@@ -66,6 +66,11 @@
       "id": "inne",
       "name": "Inne",
       "emoji": "✨"
+    },
+    {
+      "id": "rozrywka",
+      "name": "Rozrywka",
+      "emoji": "🎮"
     }
   ],
   "apps": [
@@ -130,6 +135,18 @@
       ],
       "added": "2026-09-26",
       "desc": "Kartkówka: praca, moc, energia"
+    },
+    {
+      "id": "blast",
+      "file": "apps/blast.html",
+      "title": "Blast – układanka z klocków",
+      "emoji": "🧩",
+      "subject": "rozrywka",
+      "kids": [
+        "igor"
+      ],
+      "added": "2026-09-26",
+      "desc": "Układanka z klocków w stylu Block Blast"
     }
   ]
 }
