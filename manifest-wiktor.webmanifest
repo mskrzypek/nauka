@@ -1,0 +1,32 @@
+{
+  "id": "./?dla=wiktor",
+  "name": "Nauka – Wiktor",
+  "short_name": "Nauka",
+  "lang": "pl",
+  "start_url": "./?dla=wiktor",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F9FC",
+  "theme_color": "#E4572E",
+  "icons": [
+    {
+      "src": "icons/wiktor-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/wiktor-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/wiktor-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -6,6 +6,28 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Nasze apki do nauki</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+<!-- PWA: ikonka na ekranie początkowym. Strona dziecka podmienia manifest i ikonkę na jego własne. -->
+<link rel="manifest" id="pwa-manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" id="pwa-icon" href="icons/nauka-180.png">
+<meta name="apple-mobile-web-app-title" content="Nauka">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#F6F9FC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1627" media="(prefers-color-scheme: dark)">
+<script>
+// Dziecko z adresu: #/wiktor albo ?dla=wiktor (start_url ikonki). Samo "#/" to ekran wyboru.
+function kidFromUrl() {
+  const dla = new URLSearchParams(location.search).get("dla") || "";
+  return (location.hash ? location.hash.replace(/^#\/?/, "") : dla).toLowerCase();
+}
+function setPwa(kid) {
+  const ok = /^[a-z0-9-]+$/.test(kid || "");
+  document.getElementById("pwa-manifest").href = ok ? `manifest-${kid}.webmanifest` : "manifest.webmanifest";
+  document.getElementById("pwa-icon").href = ok ? `icons/${kid}-180.png` : "icons/nauka-180.png";
+}
+setPwa(kidFromUrl());
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
@@ -168,15 +190,22 @@ function renderKid(kid) {
 }
 
 function route() {
-  const kid = location.hash.replace(/^#\/?/, "");
+  let kid = kidFromUrl();
+  if (kid && !data.kids.some(k => k.id === kid)) kid = "";
+  setPwa(kid);
   kid ? renderKid(kid) : renderHome();
   window.scrollTo(0, 0);
 }
 
-fetch("apps.json", { cache: "no-cache" })
-  .then(r => r.json())
+const loadData = () => fetch("apps.json", { cache: "no-cache" }).then(r => r.json());
+loadData()
   .then(j => { data = j; addEventListener("hashchange", () => { filter = "all"; route(); }); route(); })
   .catch(() => { $app.innerHTML = `<p class="lead">Nie udało się wczytać listy apek. Odśwież stronę.</p>`; });
+// Ikonka na ekranie początkowym wraca z tła bez przeładowania – dociągnij nowe apki.
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && data)
+    loadData().then(j => { if (JSON.stringify(j) !== JSON.stringify(data)) { data = j; route(); } }).catch(() => {});
+});
 </script>
 </body>
 </html>

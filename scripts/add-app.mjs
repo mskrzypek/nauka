@@ -72,6 +72,10 @@ if (!/<meta[^>]+name=["']robots["']/i.test(html)) {
     : `<meta name="robots" content="noindex, nofollow">\n${html}`;
 }
 
+// Przycisk powrotu do listy w trybie ikonki (PWA) – patrz nav.js.
+const NAV = `<script src="../nav.js" defer></script>`;
+if (!html.includes(NAV)) html = /<\/body>/i.test(html) ? html.replace(/<\/body>/i, `${NAV}\n</body>`) : `${html}\n${NAV}\n`;
+
 const existing = manifest.apps.find((a) => a.id === slug);
 if (existing && !args.replace)
   die(`Apka "${slug}" już istnieje. Użyj --replace (poprawka) albo --slug inna-nazwa (nowa apka).`);

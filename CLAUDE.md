@@ -16,12 +16,18 @@ node scripts/add-app.mjs --file /ścieżka/apka.html --kids wiktor --subject bio
 - `--kids` – jedno lub kilka id po przecinku (`wiktor,igor`).
 - Tytuł i emoji brane są z `<title>` i favicony-emoji; nadpisz `--title` / `--emoji`.
 - Poprawka istniejącej apki: ten sam plik/slug + `--replace` (zachowuje datę dodania, dziecko widzi „NOWE”).
-- Nowy przedmiot lub dziecko: dopisz do `subjects` / `kids` w `apps.json`.
+- Nowy przedmiot lub dziecko: dopisz do `subjects` / `kids` w `apps.json`. Po dodaniu dziecka (lub zmianie koloru) uruchom `node scripts/pwa.mjs` – wygeneruje jego manifest i ikonki.
 
 Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
+
+## PWA (ikonka na ekranie iPhone'a)
+
+- `manifest.webmanifest` + `icons/nauka-*.png` – ogólne; `manifest-<dziecko>.webmanifest` + `icons/<dziecko>-*.png` – per dziecko (start `./?dla=<dziecko>`, etykieta „Nauka”). Generuje je `scripts/pwa.mjs` z szablonu `tools/icon.html` (headless Chrome + ImageMagick).
+- `index.html` podmienia manifest i `apple-touch-icon` na dziecięce na stronie `#/<dziecko>`, więc „Dodaj do ekranu początkowego” z tej strony daje ikonkę dziecka.
+- `nav.js` – przycisk 🎒 powrotu do listy (lewy dolny róg), widoczny tylko w trybie ikonki; `add-app.mjs` wstawia go do każdej apki. Podgląd w przeglądarce: `&nav=1`.
 
 ## Zasady dla apek
 
 - Jeden plik HTML, bez zewnętrznych plików lokalnych (dozwolone CDN i Google Fonts).
 - Strona-matka otwiera apkę z `?dla=<id dziecka>` (np. `apps/x.html?dla=zoja`). Apka dla kilkorga dzieci powinna z tego brać imię i klucz `localStorage` (np. `nazwa-v1:zoja`), żeby postępy się nie mieszały; bez parametru – krótki wybór „Kto ćwiczy?” spośród dzieci, dla których jest apka. Apka dla jednego dziecka może mieć imię wpisane na sztywno – nie pytaj o imię.
-- Po polsku, działa na telefonie (viewport, duże przyciski), bez danych osobowych poza imieniem dziecka.
+- Po polsku, działa na telefonie od 375 px szerokości (viewport, duże przyciski, bez poziomego scrolla); nie kładź ważnych przycisków w lewym dolnym rogu (tam jest 🎒), bez danych osobowych poza imieniem dziecka.

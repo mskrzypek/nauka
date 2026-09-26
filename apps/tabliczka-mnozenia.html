@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tabliczka mnożenia – trening</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✖️</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
@@ -223,7 +223,7 @@ function bindBack(fn){ $('bBack').onclick=fn||home; }
 /* ============ KTO ĆWICZY (bez ?dla) ============ */
 function chooseKid(){
   onKey=null;
-  $app.innerHTML=`<h1>✖️ Tabliczka mnożenia</h1><p class="muted" style="margin-top:8px">Kto ćwiczy?</p>
+  $app.innerHTML=`<h1>🔢 Tabliczka mnożenia</h1><p class="muted" style="margin-top:8px">Kto ćwiczy?</p>
     <div class="who">${FOR.map(k=>`<button class="btn big" data-k="${k}">${KIDS[k]}</button>`).join('')}</div>`;
   $app.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
     kid=b.dataset.k; history.replaceState(null,'','?dla='+kid); load(); home();
@@ -437,5 +437,6 @@ function map(){
 /* ============ START ============ */
 if(kid){ load(); home(); } else chooseKid();
 </script>
+<script src="../nav.js" defer></script>
 </body>
 </html>
