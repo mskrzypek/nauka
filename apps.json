@@ -118,6 +118,18 @@
       ],
       "added": "2026-09-25",
       "desc": "Trening, wyzwanie na czas i mapa postępów"
+    },
+    {
+      "id": "praca-moc-energia",
+      "file": "apps/praca-moc-energia.html",
+      "title": "Praca, moc, energia – trening przed kartkówką",
+      "emoji": "⚡",
+      "subject": "fizyka",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-09-26",
+      "desc": "Kartkówka: praca, moc, energia"
     }
   ]
 }

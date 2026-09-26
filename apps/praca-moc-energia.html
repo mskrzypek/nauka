@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Praca, moc, energia – trening przed kartkówką</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F7FB; --grid:#E1E7F0; --ink:#172238; --muted:#566280; --line:#CCD5E3; --surface:#FFFFFF; --soft:#EEF2F8;
+  --accent:#E8A317; --accent-ink:#1B1400; --blue:#2F5BD3; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warnbg:#FFF4D6;
+  --shadow:0 1px 2px rgba(23,34,56,.06),0 6px 18px rgba(23,34,56,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1626; --grid:#18223A; --ink:#E7ECF6; --muted:#9DAAC4; --line:#2C3A58; --surface:#152036; --soft:#1B2842;
+    --accent:#FFC14D; --accent-ink:#1B1400; --blue:#8FB0FF; --ok:#52CF94; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warnbg:#3A3116;
+    --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100vh; color:var(--ink); font:17px/1.5 var(--fb);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.wrap{max-width:720px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2,h3{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(28px,7.5vw,40px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:22px; font-weight:800; margin:0 0 10px}
+h3{font-size:18px; font-weight:800; margin:18px 0 6px}
+p{margin:0 0 .7em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:not-allowed; opacity:.45}
+:focus-visible{outline:3px solid var(--blue); outline-offset:2px}
+[hidden]{display:none!important}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.sub{color:var(--muted); margin:4px 0 12px}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.tabs{display:flex; gap:6px; overflow-x:auto; padding:12px 2px 14px; margin:0 -2px; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:.45em .85em; font:700 16px var(--fh)}
+.tab[aria-selected="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:14px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.small{padding:5px 12px; font-size:14px}
+.btn.wide{width:100%; padding:13px}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px 16px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .ico{font-size:30px; width:40px; text-align:center; flex:none}
+.big .t{font:800 19px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:15px}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+
+/* postęp tematów */
+.topic{display:grid; grid-template-columns:1fr auto; gap:4px 12px; align-items:center; padding:12px 0; border-top:1px solid var(--line)}
+.topic:first-of-type{border-top:0}
+.topic .n{font-weight:700; line-height:1.3}
+.topic .bar{grid-column:1/2; height:8px; background:var(--soft); border-radius:6px; overflow:hidden}
+.topic .bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.topic .pct{font:800 15px var(--fh); color:var(--muted); text-align:right}
+.topic .go{grid-row:1/3; grid-column:2}
+
+/* pytanie */
+.qhead{display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:10px; font:700 15px var(--fh); color:var(--muted)}
+.prog{height:8px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+.qtext{font-size:19px; line-height:1.45; margin-bottom:14px}
+.qtext b{color:var(--blue)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.ok{border-color:var(--ok); background:var(--okbg)}
+.opt.no{border-color:var(--bad); background:var(--badbg)}
+.opt:disabled{cursor:default; opacity:1}
+.tf{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.tf .opt{text-align:center; font:800 18px var(--fh)}
+.numrow{display:flex; gap:8px; align-items:stretch}
+.num{flex:1; min-width:0; font:800 24px var(--fh); padding:10px 12px; border:2px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink)}
+.num:focus{border-color:var(--blue); outline:none}
+.fixu{display:grid; place-items:center; padding:0 14px; border-radius:12px; background:var(--soft); font:800 20px var(--fh)}
+.units{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 12px}
+.unit{border:2px solid var(--line); background:var(--surface); border-radius:10px; padding:6px 0; width:calc((100% - 30px)/6); font:800 16px var(--fh)}
+.unit[aria-pressed="true"]{background:var(--blue); border-color:var(--blue); color:#fff}
+.fb{margin-top:12px; border-radius:12px; padding:12px 14px}
+.fb.ok{background:var(--okbg)} .fb.bad{background:var(--badbg)}
+.fb .h{font:800 18px var(--fh); margin-bottom:4px}
+.sol{margin-top:8px; font-size:16px; background:var(--surface); border:1px dashed var(--line); border-radius:10px; padding:10px 12px}
+.sol div{margin:2px 0}
+.sol .k{font-weight:700; color:var(--muted)}
+.next{margin-top:12px}
+
+/* krok po kroku */
+.steps{margin:12px 0 0; background:var(--soft); border-radius:12px; padding:10px 12px; font-size:16px}
+.steps .ln{margin:3px 0} .steps .k{font-weight:700}
+.steps .ok{color:var(--ok)} .steps .bad{color:var(--bad)}
+.stepq{margin-top:14px; padding-top:12px; border-top:1px solid var(--line)}
+.stepq .lab{font:800 16px var(--fh); color:var(--blue); margin-bottom:8px}
+
+/* przemiany */
+.forms{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
+.form{border:2px solid var(--line); background:var(--surface); border-radius:99px; padding:6px 12px; font-size:15px; font-weight:700}
+.chain{min-height:54px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; background:var(--soft); border-radius:12px; padding:10px; font-weight:700}
+.chain .f{background:var(--accent); color:var(--accent-ink); border-radius:99px; padding:4px 10px; font-size:15px}
+.chain .ar{color:var(--muted)}
+.scen{font-size:20px; font-weight:700; margin:4px 0 2px}
+
+/* ściąga */
+.cheat h3:first-child{margin-top:0}
+.def{background:var(--soft); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:10px 12px; margin:8px 0}
+.formula{font:800 28px var(--fh); text-align:center; margin:8px 0}
+.warn{background:var(--warnbg); border-radius:12px; padding:12px 14px; margin:10px 0}
+.warn ul,.cheat ul{margin:.3em 0 .3em; padding-left:1.2em} li{margin:.25em 0}
+table{border-collapse:collapse; width:100%; font-size:15px}
+td,th{border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top}
+th{background:var(--soft)}
+.tri{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin:8px 0}
+.tri svg{width:130px; height:auto}
+.tri text{font-family:var(--fh); font-weight:800; fill:var(--ink)}
+.tri path{fill:none; stroke:var(--ink); stroke-width:3}
+details{margin:6px 0} summary{cursor:pointer; font-weight:700}
+
+.grade{font:800 60px/1 var(--fh)}
+.review{border-top:1px solid var(--line); padding:10px 0}
+.review .q{font-weight:700}
+.toast{position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom)); transform:translateX(-50%); background:var(--ink); color:var(--paper); padding:10px 16px; border-radius:12px; z-index:50; font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>⚡ Praca, moc, energia</h1>
+  <div class="sub" id="hello"></div>
+  <div class="pills" id="pills"></div>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+  <div id="view"></div>
+</main>
+<script>
+"use strict";
+/* ============ KTO ĆWICZY ============ */
+const KIDS={wiktor:'Wiktor'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+const NAME=KIDS[kid];
+
+/* ============ ZAPIS ============ */
+const SKEY='fizyka-pme-v1:'+kid;
+const blank=()=>({q:{},days:[],tests:[],total:0,correct:0});
+let S=blank(), canSave=true;
+try{ const r=localStorage.getItem(SKEY); if(r) S=Object.assign(blank(),JSON.parse(r)); }catch(e){ canSave=false; }
+function save(){ if(!canSave) return; try{ localStorage.setItem(SKEY,JSON.stringify(S)); }catch(e){ canSave=false; } }
+const today=()=>new Date().toLocaleDateString('sv');
+function streak(){ let n=0; const d=new Date(); if(!S.days.includes(d.toLocaleDateString('sv'))) d.setDate(d.getDate()-1); while(S.days.includes(d.toLocaleDateString('sv'))){ n++; d.setDate(d.getDate()-1); } return n; }
+function record(id,ok){
+  const e=S.q[id]||(S.q[id]={b:0,r:0,w:0});
+  if(ok){ e.r++; e.b=Math.min(3,e.b+1); } else { e.w++; e.b=0; }
+  S.total++; if(ok) S.correct++;
+  const d=today(); if(!S.days.includes(d)) S.days.push(d);
+  save();
+}
+
+/* ============ POMOCNICZE ============ */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function toast(m){ const t=document.createElement('div'); t.className='toast'; t.textContent=m; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); }
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+
+/* ============ JEDNOSTKI ============ */
+const U={J:{d:'E',f:1},kJ:{d:'E',f:1e3},MJ:{d:'E',f:1e6},mJ:{d:'E',f:1e-3},
+  W:{d:'P',f:1},kW:{d:'P',f:1e3},MW:{d:'P',f:1e6},
+  N:{d:'F',f:1},kN:{d:'F',f:1e3},
+  m:{d:'s',f:1},cm:{d:'s',f:.01},km:{d:'s',f:1e3},
+  s:{d:'t',f:1},min:{d:'t',f:60},h:{d:'t',f:3600},
+  'm/s':{d:'v',f:1},'km/h':{d:'v',f:1/3.6},kg:{d:'m',f:1}};
+const BASE={E:'J',P:'W',F:'N',s:'m',t:'s',v:'m/s',m:'kg'};
+const DIMNAME={E:'pracę (dżule)',P:'moc (waty)',F:'siłę (niutony)',s:'drogę (metry)',t:'czas (sekundy)',v:'prędkość (m/s)'};
+const CHIPS=['J','kJ','MJ','W','kW','N','kN','m','cm','km','s','min','h'];
+const UNAME={kJ:'kilodżulach',J:'dżulach',MJ:'megadżulach',W:'watach',kW:'kilowatach',min:'minutach',s:'sekundach',h:'godzinach',m:'metrach',km:'kilometrach',N:'niutonach',kN:'kiloniutonach'};
+const fmtN=x=>{ const r=Math.round(x*10000)/10000; return r.toLocaleString('pl-PL',{maximumFractionDigits:4}); };
+const V=(val,u)=>`${fmtN(val/U[u].f)} ${u}`;
+const niceIn=(val,u)=>{ const x=val/U[u].f; return x>=0.01 && Math.abs(x*100-Math.round(x*100))<1e-6; };
+const pickU=(val,c)=>{ const ok=c.filter(u=>niceIn(val,u)); return ok.length?rnd(ok):c[0]; };
+function parseNum(str){
+  const s=String(str).replace(/[\s ]/g,'').replace(',', '.');
+  const m=s.match(/^-?\d*\.?\d+/); return m?parseFloat(m[0]):NaN;
+}
+
+/* ============ TEMATY ============ */
+const TOPICS=[
+  {id:'praca',  n:'Kiedy siła wykonuje pracę', e:'🧱'},
+  {id:'wzorW',  n:'Wzór na pracę W = F · s', e:'📐'},
+  {id:'wzorP',  n:'Wzór na moc P = W / t', e:'⚙️'},
+  {id:'jedn',   n:'Jednostki i ich zamiana', e:'📏'},
+  {id:'mocUrz', n:'Co oznacza moc urządzenia', e:'🔌'},
+  {id:'zlozone',n:'Zadania złożone (przekształcanie wzorów)', e:'🧠'},
+  {id:'energia',n:'Energia i jej przemiany', e:'🔋'},
+];
+const TN=Object.fromEntries(TOPICS.map(t=>[t.id,t]));
+
+/* ============ PYTANIA ZAMKNIĘTE ============ */
+// Poprawna odpowiedź zawsze pierwsza – kolejność losowana przy wyświetlaniu.
+const QS=[];
+const mc=(id,t,q,o,e,star)=>QS.push({id,t,type:'mc',q,o,e,star:!!star});
+const tf=(id,t,q,truth,e)=>QS.push({id,t,type:'tf',q,o:truth?['Prawda','Fałsz']:['Fałsz','Prawda'],e});
+
+// --- kiedy praca
+mc('p1','praca','Kiedy siła wykonuje pracę mechaniczną?',['gdy działa na ciało, a ciało przemieszcza się w kierunku innym niż prostopadły do kierunku działania siły','zawsze, gdy działa na jakieś ciało','gdy przy działaniu siły ktoś się mocno zmęczy','tylko wtedy, gdy ciało stoi w miejscu'],'Potrzebne są dwie rzeczy: siła i przemieszczenie, które nie jest prostopadłe do siły. Sam wysiłek to nie praca w sensie fizycznym.');
+tf('p2','praca','Chłopiec z całej siły napiera na ścianę, która się nie przesuwa. Chłopiec wykonuje pracę mechaniczną.',false,'Ściana się nie przesuwa, więc s = 0 i W = F · 0 = 0 J. Chłopiec się męczy, ale praca mechaniczna jest równa zero.');
+mc('p3','praca','Kto wykonuje większą pracę mechaniczną?',['dziewczynka, która przesuwa książkę po stole','chłopiec, który z całej siły napiera na ścianę','obaj tyle samo','nie da się tego ocenić'],'Książka się przesuwa (s > 0), więc praca jest wykonana. Ściana stoi (s = 0), więc praca chłopca to 0 J. To zadanie z Waszej karty pracy.');
+mc('p4','praca','Na lampę wiszącą pod sufitem działa siła ciężkości, a mimo to praca tej siły jest równa zero, bo:',['lampa się nie przemieszcza (s = 0)','siła ciężkości jest równa zero (F = 0)','siła jest prostopadła do ruchu','lampa jest za lekka'],'Siła działa (F ≠ 0), ale droga s = 0, więc W = F · 0 = 0.');
+mc('p5','praca','Idziesz po poziomym chodniku i niesiesz torbę. Siła, którą trzymasz torbę (skierowana w górę), nie wykonuje pracy, bo:',['kierunek siły jest prostopadły do kierunku ruchu','torba się nie przemieszcza','siła jest równa zero','idziesz za wolno'],'Siła działa pionowo, a torba przesuwa się poziomo – kierunki są prostopadłe (F ⊥ s), więc ta siła nie wykonuje pracy.');
+mc('p6','praca','Które zdanie to trzy przypadki, gdy praca NIE jest wykonywana?',['F = 0, s = 0 albo siła prostopadła do przemieszczenia','F = 0, s = 0 albo ciało porusza się szybko','siła jest duża, droga długa albo czas krótki','ciało jest ciężkie, lekkie albo średnie'],'Z karty pracy: praca nie jest wykonywana, gdy 1) F = 0, 2) s = 0, 3) F ⊥ s.');
+tf('p7','praca','Stoisz w miejscu i trzymasz w ręce siatkę z zakupami. Wykonujesz przy tym pracę mechaniczną.',false,'Siatka się nie przemieszcza (s = 0), więc W = 0 J – choć ręka się męczy.');
+tf('p8','praca','Mocno zgniatając gąbkę, wykonujesz pracę mechaniczną.',true,'Tak – gąbka się odkształca, czyli jej części przesuwają się pod wpływem siły. Odkształcanie ciała też jest wykonywaniem pracy.');
+tf('p9','praca','Podnosząc plecak z podłogi na biurko, wykonujesz pracę mechaniczną.',true,'Działasz siłą w górę, a plecak przesuwa się w górę – kierunek siły i ruchu jest zgodny.');
+tf('p10','praca','Uczeń, który przez godzinę rozwiązuje zadania z matematyki, wykonuje pracę mechaniczną.',false,'To praca umysłowa, nie mechaniczna. W fizyce praca wymaga siły i przemieszczenia.');
+mc('p11','praca','Krążek hokejowy sunie po idealnie gładkim lodzie ruchem jednostajnym. Nic go nie popycha ani nie hamuje. Praca w kierunku ruchu jest równa zero, bo:',['w kierunku ruchu nie działa żadna siła (F = 0)','krążek się nie przemieszcza (s = 0)','krążek jest za lekki','lód jest zimny'],'Krążek się przemieszcza, ale w kierunku ruchu nie działa żadna siła – przypadek F = 0.');
+mc('p12','praca','Satelita krąży wokół Ziemi po okręgu. Siła grawitacji działa na niego zawsze prostopadle do kierunku ruchu. Praca siły grawitacji jest:',['równa zero','bardzo duża','ujemna','równa energii satelity'],'Siła prostopadła do kierunku ruchu nie wykonuje pracy (F ⊥ s).',true);
+mc('p13','praca','Od czego zależy praca mechaniczna (gdy siła działa w kierunku ruchu)?',['od wartości siły i od drogi','od czasu i zmęczenia','tylko od siły','od masy i koloru ciała'],'W = F · s – liczy się siła i droga. Czas nie ma wpływu na pracę (ma wpływ na moc).');
+mc('p14','praca','Przesuwasz tę samą skrzynię tą samą siłą na tę samą odległość – raz idąc, raz biegnąc. Wykonana praca:',['jest taka sama (biegnąc, pracujesz z większą mocą)','jest większa, gdy biegniesz','jest większa, gdy idziesz','jest równa zero'],'Praca W = F · s nie zależy od czasu. Szybciej = ta sama praca w krótszym czasie = większa moc.');
+tf('p15','praca','Wzór W = F · s stosujemy wtedy, gdy przemieszczenie ciała jest zgodne z kierunkiem i zwrotem działającej siły.',true,'Tak brzmi definicja z Waszej karty pracy.');
+mc('p16','praca','Wiadro wyciągane ze studni na linie do góry. Czy siła naciągu liny wykonuje pracę?',['tak – siła i przemieszczenie mają ten sam kierunek i zwrot','nie – bo wiadro jest ciężkie','nie – bo siła działa w górę','tak, ale tylko gdy wiadro jest puste'],'Lina ciągnie w górę i wiadro jedzie w górę – praca jest wykonywana.');
+
+// --- wzór na pracę
+mc('w1','wzorW','Wzór na pracę mechaniczną to:',['W = F · s','W = F / s','W = s / F','W = F + s'],'Praca = siła · droga.');
+mc('w2','wzorW','W wzorze W = F · s litera s oznacza:',['drogę (przesunięcie) w metrach','czas w sekundach','siłę w niutonach','szybkość'],'Uwaga na pułapkę: w tym wzorze s to droga, a nie sekundy.');
+mc('w3','wzorW','Jak obliczyć siłę, znając pracę i drogę?',['F = W / s','F = W · s','F = s / W','F = W − s'],'Z W = F · s dzielimy obie strony przez s: F = W / s. Pomaga trójkąt: W na górze, F i s na dole.');
+mc('w4','wzorW','Jak obliczyć drogę, znając pracę i siłę?',['s = W / F','s = W · F','s = F / W','s = W − F'],'Z W = F · s dzielimy obie strony przez F: s = W / F.');
+mc('w5','wzorW','Praca to:',['iloczyn siły i drogi','iloraz siły i drogi','iloczyn mocy i drogi','suma siły i drogi'],'Iloczyn = wynik mnożenia. W = F · s.');
+mc('w6','wzorW','Przy tej samej sile droga wzrosła 3 razy. Praca:',['wzrosła 3 razy','zmalała 3 razy','nie zmieniła się','wzrosła 9 razy'],'Praca jest wprost proporcjonalna do drogi.');
+mc('w7','wzorW','Wykonano tę samą pracę, ale siła była 2 razy większa. Droga była:',['2 razy mniejsza','2 razy większa','taka sama','4 razy mniejsza'],'s = W / F – większy dzielnik, mniejszy wynik.');
+mc('w8','wzorW','Symbol pracy W pochodzi od angielskiego słowa:',['work','watt','weight','wave'],'Work – praca. (Uwaga: wat to jednostka mocy, też oznaczana literą W!)');
+
+// --- wzór na moc
+mc('m1','wzorP','Wzór na moc to:',['P = W / t','P = W · t','P = t / W','P = F · s'],'Moc = praca / czas.');
+mc('m2','wzorP','Moc informuje o tym:',['jak szybko wykonywana jest praca','jak dużą siłą działa ciało','jaką drogę przebyło ciało','jak ciężkie jest ciało'],'Tak jest na Waszej karcie pracy: moc informuje o tym, jak szybko wykonywana jest praca.');
+mc('m3','wzorP','Moc to:',['iloraz pracy i czasu, w którym ta praca została wykonana','iloczyn pracy i czasu','iloraz czasu i pracy','iloczyn siły i drogi'],'Iloraz = wynik dzielenia. P = W / t.');
+mc('m4','wzorP','Jak obliczyć pracę, znając moc i czas?',['W = P · t','W = P / t','W = t / P','W = P + t'],'Z P = W / t mnożymy obie strony przez t: W = P · t.');
+mc('m5','wzorP','Jak obliczyć czas, znając pracę i moc?',['t = W / P','t = W · P','t = P / W','t = P − W'],'Z W = P · t dzielimy przez P: t = W / P.');
+mc('m6','wzorP','Symbol mocy P pochodzi od angielskiego słowa:',['power','pressure','push','point'],'Power – moc.');
+mc('m7','wzorP','Koń i traktor zaorały takie samo pole. Traktor zrobił to 5 razy szybciej. Co jest prawdą?',['wykonały taką samą pracę, ale moc traktora była 5 razy większa','traktor wykonał 5 razy większą pracę','koń miał większą moc, bo pracował dłużej','moc obu była taka sama'],'Ta sama praca w 5 razy krótszym czasie → 5 razy większa moc.');
+mc('m8','wzorP','Dwa dźwigi podniosły jednakowe ładunki na tę samą wysokość: pierwszy w 10 s, drugi w 20 s. Większą moc ma:',['pierwszy – tę samą pracę wykonał w krótszym czasie','drugi – bo pracował dłużej','oba mają taką samą moc','nie da się tego ocenić'],'Praca obu jest taka sama. P = W / t – krótszy czas to większa moc (2 razy).');
+mc('m9','wzorP','Urządzenie pracuje z tą samą mocą, ale dwa razy dłużej. Wykonana praca jest:',['dwa razy większa','dwa razy mniejsza','taka sama','cztery razy większa'],'W = P · t – praca rośnie proporcjonalnie do czasu.');
+mc('m10','wzorP','Moc chwilową, gdy siła działa w kierunku ruchu, można też obliczyć ze wzoru:',['P = F · v','P = F / v','P = v / F','P = F · s'],'P = W / t = F · s / t, a s / t = v, więc P = F · v. (To jest w podręczniku Nowej Ery.)',true);
+
+// --- jednostki
+mc('j1','jedn','Jednostką pracy w układzie SI jest:',['dżul (J)','wat (W)','niuton (N)','kilogram (kg)'],'Praca [J]. Wat to jednostka mocy, niuton – siły.');
+mc('j2','jedn','Jednostką mocy w układzie SI jest:',['wat (W)','dżul (J)','niuton (N)','koń mechaniczny (KM)'],'Moc [W]. Koń mechaniczny to jednostka spoza układu SI.');
+mc('j3','jedn','1 J to praca, jaką wykonuje siła:',['1 N na drodze 1 m','1 W w czasie 1 s','1 N w czasie 1 s','1 kg na drodze 1 m'],'1 J = 1 N · 1 m.');
+mc('j4','jedn','1 J = ',['1 N · 1 m','1 N / 1 m','1 W · 1 m','1 N · 1 s'],'Bo W = F · s, więc [J] = [N] · [m].');
+mc('j5','jedn','1 W = ',['1 J / 1 s','1 J · 1 s','1 N · 1 m','1 s / 1 J'],'Bo P = W / t, więc [W] = [J] / [s].');
+mc('j6','jedn','1 W to moc urządzenia, które:',['w ciągu 1 s wykonuje pracę 1 J','w ciągu 1 h wykonuje pracę 1 J','działa siłą 1 N','w ciągu 1 s przebywa 1 m'],'Definicja z karty pracy: 1 W to moc urządzenia, które wykonuje pracę 1 J w ciągu 1 s.');
+mc('j7','jedn','W zapisie P = 60 W litera W po liczbie oznacza:',['wat – jednostkę mocy','pracę','wagę','wysokość'],'Pułapka! „W” jako symbol to praca, a „W” jako jednostka (po liczbie) to wat.');
+mc('j8','jedn','W zapisie W = 600 J litera W oznacza:',['pracę (symbol wielkości)','wat','wysokość','wagę'],'Przed znakiem = stoi symbol wielkości (praca), po liczbie – jednostka (dżul).');
+mc('j9','jedn','Przedrostek kilo (k) oznacza:',['1000 razy więcej (np. 1 kJ = 1000 J)','100 razy więcej','1 000 000 razy więcej','1000 razy mniej'],'k = 1000. 1 kJ = 1000 J, 1 kW = 1000 W, 1 kN = 1000 N.');
+mc('j10','jedn','Przedrostek mega (M) oznacza:',['1 000 000 razy więcej (1 MJ = 1 000 000 J)','1000 razy więcej','1000 razy mniej','100 razy więcej'],'M = milion. Nie myl z małym m!');
+mc('j11','jedn','250 mJ (milidżuli) to:',['0,25 J','250 000 J','250 000 000 J','2,5 J'],'m (mili) = 1/1000. 250 mJ = 250 : 1000 J = 0,25 J. Pułapka: mJ ≠ MJ!');
+mc('j12','jedn','Nazwa jednostki mocy pochodzi od nazwiska:',['Jamesa Watta','Jamesa Joule’a','Isaaca Newtona','Alessandra Volty'],'Wat – od Jamesa Watta, szkockiego inżyniera z XVIII w., który udoskonalił silnik parowy.');
+mc('j13','jedn','Nazwa jednostki pracy (dżul) pochodzi od nazwiska:',['Jamesa Prescotta Joule’a','Jamesa Watta','Isaaca Newtona','Blaise’a Pascala'],'Dżul – od angielskiego fizyka Jamesa Prescotta Joule’a (XIX w.).');
+mc('j14','jedn','Koń mechaniczny (1 KM) to około:',['735 W','1 W','100 W','1 kJ'],'1 KM ≈ 735 W. Używa się go np. do podawania mocy silników samochodów.');
+mc('j15','jedn','Która para to jednostki tej samej wielkości fizycznej?',['J i kJ','J i W','W i N','kW i kJ'],'J i kJ to jednostki pracy (energii). W i kW – mocy.');
+mc('j16','jedn','W tych samych jednostkach (dżulach) wyrażamy:',['pracę i energię','pracę i moc','moc i energię','siłę i pracę'],'Praca i energia – dżule. Moc – waty. Siła – niutony.');
+mc('j17','jedn','Która jednostka NIE jest jednostką mocy?',['kJ','W','kW','MW'],'kJ (kilodżul) to jednostka pracy/energii.');
+mc('j18','jedn','1 h to:',['3600 s','60 s','100 s','360 s'],'1 h = 60 min = 60 · 60 s = 3600 s.');
+
+// --- moc urządzenia
+mc('u1','mocUrz','Czajnik ma moc 2000 W. Oznacza to, że:',['w każdej sekundzie wykonuje pracę 2000 J','w ciągu godziny wykonuje pracę 2000 J','działa siłą 2000 N','zagotuje wodę w 2000 s'],'Moc urządzenia mówi, jaką pracę wykonuje ono w ciągu 1 s. 2000 W = 2000 J w każdej sekundzie.');
+mc('u2','mocUrz','Moc urządzenia informuje o tym:',['jaką pracę urządzenie wykonuje w jednostce czasu (w 1 s)','jak ciężkie jest urządzenie','jak długo urządzenie może pracować','jaką siłą działa urządzenie'],'Tak to ujmuje podręcznik: moc urządzenia informuje o tym, jaką pracę wykonuje ono w jednostce czasu.');
+mc('u3','mocUrz','Silnik A ma moc 1 kW, a silnik B – 500 W. W tym samym czasie:',['A wykona 2 razy większą pracę niż B','B wykona 2 razy większą pracę niż A','wykonają taką samą pracę','A wykona 500 razy większą pracę'],'1 kW = 1000 W, czyli 2 razy więcej niż 500 W. W = P · t.');
+mc('u4','mocUrz','Odkurzacz o mocy 1,5 kW w ciągu 1 s wykonuje pracę:',['1500 J','1,5 J','15 J','150 J'],'1,5 kW = 1500 W = 1500 J na każdą sekundę.');
+mc('u5','mocUrz','Na określenie mocy pojazdów często używa się jednostki:',['koń mechaniczny (KM)','dżul (J)','niuton (N)','kilogram (kg)'],'Z Waszej karty pracy. 1 KM ≈ 735 W.');
+mc('u6','mocUrz','James Watt to:',['szkocki inżynier z XVIII w., konstruktor silnika parowego – od jego nazwiska pochodzi jednostka mocy','polski fizyk, który wymyślił dżula','twórca pierwszej żarówki','angielski fizyk od jednostki pracy'],'Na karcie: „odkrywca silnika parowego, urodzony w XVIII wieku”. Dokładniej: Watt znacząco udoskonalił maszynę parową (1763–1769).');
+mc('u7','mocUrz','Które urządzenie wykona pracę 6000 J najszybciej?',['suszarka o mocy 2000 W','żarówka o mocy 60 W','laptop o mocy 50 W','ładowarka o mocy 20 W'],'Największa moc = najkrótszy czas. Suszarka: t = 6000 J / 2000 W = 3 s.');
+mc('u8','mocUrz','Urządzenie o mocy 100 W pracuje przez 1 minutę. Wykona pracę:',['6000 J','100 J','1,67 J','60 J'],'1 min = 60 s. W = P · t = 100 W · 60 s = 6000 J.');
+mc('u9','mocUrz','Wchodzisz na 3. piętro raz powoli, a raz biegiem. Co jest prawdą?',['praca jest taka sama, a moc większa, gdy biegniesz','biegnąc, wykonujesz większą pracę','idąc powoli, masz większą moc','praca i moc są takie same'],'Ta sama siła (ciężar) i ta sama wysokość → ta sama praca. Krótszy czas → większa moc.');
+mc('u10','mocUrz','Większa moc urządzenia oznacza, że:',['tę samą pracę wykona w krótszym czasie','zawsze wykona mniejszą pracę','działa wolniej','zużywa mniej energii'],'P = W / t. Przy tej samej pracy większa moc = krótszy czas.');
+
+// --- zadania złożone (zamknięte)
+mc('z1','zlozone','Urządzenie działa siłą 500 N i przesuwa ładunek na odległość 8 m w czasie 20 s. Moc urządzenia to:',['200 W','200 000 W','4000 W','80 W'],'W = F · s = 500 N · 8 m = 4000 J. P = W / t = 4000 J / 20 s = 200 W. (Zadanie 5 z kartki – sprawdź swój zeszyt!)');
+mc('z2','zlozone','Silnik wykonał pracę 7 200 000 J w czasie 2 h. Wynik w kilowatach. Który zapis jest poprawny i kompletny?',['t = 2 h = 7200 s; P = 7 200 000 J / 7200 s = 1000 W = 1 kW','P = 7 200 000 / 2 = 3 600 000 kW','P = 1000','P = 7 200 000 J / 7200 s = 1000 W'],'Czas trzeba zamienić na sekundy, a wynik podać w kW, bo tego żąda polecenie. Ostatnia odpowiedź jest dobrze policzona, ale nie w kilowatach – pani by to obcięła.');
+mc('z3','zlozone','Czajnik ma moc 2100 W. W jakim czasie wykona pracę 10,5 kJ?',['5 s','0,005 s','22 050 s','0,2 s'],'10,5 kJ = 10 500 J. t = W / P = 10 500 J / 2100 W = 5 s.');
+mc('z4','zlozone','Samochód jedzie ruchem jednostajnym. Siła oporów ruchu wynosi 600 N. Jaką siłę napędu wstawisz do wzoru W = F · s?',['600 N – w ruchu jednostajnym siła napędu równoważy opory','0 N – bo ruch jest jednostajny','1200 N – bo trzeba pokonać opory dwa razy','nie da się tego ustalić'],'I zasada dynamiki: w ruchu jednostajnym prostoliniowym siły się równoważą, więc siła napędu = siła oporów.');
+mc('z5','zlozone','Koń ciągnie wóz siłą 500 N i w czasie 2 h pokonuje drogę 5 km. Moc konia to około:',['347 W','1250 W','0,35 W','2 500 000 W'],'s = 5 km = 5000 m, t = 2 h = 7200 s. W = 500 N · 5000 m = 2 500 000 J. P = 2 500 000 J / 7200 s ≈ 347 W.');
+mc('z6','zlozone','Silnik A w ciągu 1 min wykonuje pracę 12 kJ, a silnik B w ciągu 1 s – pracę 300 J. Który ma większą moc?',['B – ma moc 300 W, a A tylko 200 W','A – bo wykonuje większą pracę','są równe','nie da się porównać'],'A: 12 000 J / 60 s = 200 W. B: 300 J / 1 s = 300 W. Porównujemy moce, nie same prace!');
+mc('z7','zlozone','Pewne urządzenie wykonuje pracę 180 J w ciągu 1 minuty. Jego moc wynosi:',['3 W','180 W','10 800 W','0,33 W'],'1 min = 60 s. P = 180 J / 60 s = 3 W. Najczęstszy błąd: niezamieniona minuta.');
+mc('z8','zlozone','Samochód jedzie ze stałą prędkością 20 m/s, a siła ciągu silnika wynosi 2000 N. Moc silnika to:',['40 kW','100 W','40 J','4 kW'],'P = F · v = 2000 N · 20 m/s = 40 000 W = 40 kW.',true);
+mc('z9','zlozone','Dźwig podnosi ruchem jednostajnym płytę o masie 600 kg na wysokość 25 m (g = 10 N/kg). Wykonuje pracę:',['150 kJ','15 kJ','15 000 kJ','625 J'],'Najpierw siła: F = m · g = 600 kg · 10 N/kg = 6000 N. W = F · h = 6000 N · 25 m = 150 000 J = 150 kJ.');
+mc('z10','zlozone','Dwie osoby wniosły na 2. piętro takie same paczki: Ola w 30 s, Kuba w 60 s. Co jest prawdą?',['wykonali taką samą pracę, moc Oli była 2 razy większa','Ola wykonała 2 razy większą pracę','moc Kuby była 2 razy większa','praca Kuby była 2 razy większa'],'Ta sama siła i wysokość → ta sama praca. Połowa czasu → dwa razy większa moc.');
+
+// --- energia
+mc('e1','energia','Energia to:',['zdolność ciała do wykonania pracy','siła, z jaką działa ciało','szybkość wykonywania pracy','droga przebyta przez ciało'],'Ciało, które ma energię, może wykonać pracę. Szybkość wykonywania pracy to moc.');
+mc('e2','energia','Symbol i jednostka energii to:',['E, dżul (J)','E, wat (W)','P, dżul (J)','W, niuton (N)'],'Energia: symbol E, jednostka dżul – taka sama jak pracy.');
+mc('e3','energia','Energia mechaniczna to suma energii:',['potencjalnej i kinetycznej','chemicznej i elektrycznej','wewnętrznej i jądrowej','kinetycznej i wewnętrznej'],'E mechaniczna = E potencjalna + E kinetyczna.');
+mc('e4','energia','Energię kinetyczną ma ciało, które:',['porusza się','jest uniesione na pewną wysokość','jest ściśnięte','jest gorące'],'Kinetyczna = energia ruchu. Im szybciej i im większa masa, tym jest większa.');
+mc('e5','energia','Energię potencjalną grawitacji ma ciało, które:',['jest uniesione na pewną wysokość','porusza się','jest naelektryzowane','świeci'],'Im wyżej ciało i im większa jego masa, tym większa energia potencjalna grawitacji.');
+mc('e6','energia','Energię potencjalną sprężystości ma:',['napięty łuk albo ściśnięta sprężyna','spadający kamień','świecąca żarówka','gorąca herbata'],'Ciało sprężyste odkształcone – wracając do kształtu, może wykonać pracę.');
+mc('e7','energia','Energia wewnętrzna ciała jest związana z:',['jego temperaturą (ruchem cząsteczek) i stanem skupienia','jego prędkością','jego wysokością','jego kolorem'],'Gdy ciało się nagrzewa, rośnie jego energia wewnętrzna. W podręczniku mówi się „energia wewnętrzna”, a nie „cieplna”.');
+mc('e8','energia','Zasada zachowania energii mówi, że:',['energia nie znika i nie powstaje z niczego – zmienia tylko formę','energia zawsze zanika podczas ruchu','energia powstaje, gdy ciało przyspiesza','energia to to samo co moc'],'Całkowita energia układu izolowanego jest stała, zmieniają się tylko jej formy.');
+tf('e9','energia','Na dole górki sanki się zatrzymały. Ich energia kinetyczna zniknęła bez śladu.',false,'Energia nie znika! Przez tarcie zamieniła się w energię wewnętrzną płóz i śniegu (lekko się ogrzały).');
+tf('e10','energia','Podczas spadania swobodnego (bez oporu powietrza) suma energii potencjalnej i kinetycznej ciała się nie zmienia.',true,'To zasada zachowania energii mechanicznej: potencjalna maleje, kinetyczna rośnie o tyle samo.');
+mc('e11','energia','Piłka rzucona pionowo w górę w najwyższym punkcie ma:',['największą energię potencjalną, a kinetyczną równą zero','największą energię kinetyczną','zerową energię potencjalną','zerową energię mechaniczną'],'Na górze piłka na chwilę się zatrzymuje (v = 0 → E kinetyczna = 0), a wysokość jest największa.');
+mc('e12','energia','Zjazd na sankach z górki – główna przemiana energii to:',['potencjalna grawitacji → kinetyczna (i część w wewnętrzną przez tarcie)','kinetyczna → potencjalna grawitacji','chemiczna → elektryczna','wewnętrzna → potencjalna sprężystości'],'Tracisz wysokość, zyskujesz prędkość. Tarcie o śnieg zamienia część energii w wewnętrzną.');
+mc('e13','energia','Samochód z silnikiem spalinowym jedzie. Przemiany energii:',['chemiczna paliwa → wewnętrzna (spalanie) → kinetyczna samochodu','elektryczna → kinetyczna','kinetyczna → chemiczna','potencjalna → chemiczna'],'Paliwo spala się w silniku, gorące gazy pchają tłoki – samochód jedzie.');
+mc('e14','energia','Samochód hamuje i się zatrzymuje. Energia kinetyczna zamienia się głównie w:',['energię wewnętrzną (hamulce i opony się nagrzewają)','energię chemiczną paliwa','energię potencjalną sprężystości','nic – znika'],'Tarcie w hamulcach zamienia energię ruchu na energię wewnętrzną.');
+mc('e15','energia','Człowiek biegnie. Skąd bierze energię i na co ją zamienia?',['chemiczna z pożywienia → kinetyczna ruchu i wewnętrzna (ciało się rozgrzewa)','elektryczna → kinetyczna','potencjalna → chemiczna','kinetyczna → chemiczna'],'Energia chemiczna z jedzenia pozwala mięśniom pracować i utrzymuje stałą temperaturę ciała.');
+mc('e16','energia','Łucznik puszcza cięciwę. Przemiana energii:',['potencjalna sprężystości łuku → kinetyczna strzały','kinetyczna → potencjalna grawitacji','chemiczna → elektryczna','wewnętrzna → kinetyczna'],'Napięty łuk wraca do kształtu i nadaje strzale prędkość.');
+mc('e17','energia','Czajnik elektryczny gotuje wodę. Przemiana energii:',['elektryczna → wewnętrzna wody','wewnętrzna → elektryczna','chemiczna → kinetyczna','kinetyczna → elektryczna'],'Prąd płynie przez grzałkę, a ta ogrzewa wodę.');
+mc('e18','energia','Świecąca żarówka zamienia energię elektryczną na:',['energię promieniowania (światło) i wewnętrzną (nagrzewa się)','energię chemiczną','energię kinetyczną','energię jądrową'],'Żarówka świeci i się grzeje.');
+mc('e19','energia','Elektrownia wodna – woda spada z tamy na turbinę. Kolejne przemiany:',['potencjalna grawitacji wody → kinetyczna → elektryczna','chemiczna → wewnętrzna → elektryczna','elektryczna → kinetyczna → potencjalna','jądrowa → elektryczna'],'Woda z wysokości nabiera prędkości, obraca turbinę, prądnica wytwarza prąd.');
+mc('e20','energia','Wchodzisz po schodach na wyższe piętro. Przemiana energii:',['chemiczna (mięśnie) → potencjalna grawitacji','potencjalna → kinetyczna','elektryczna → potencjalna','kinetyczna → chemiczna'],'Mięśnie korzystają z energii chemicznej, a Ty zyskujesz wysokość – rośnie Twoja energia potencjalna.');
+mc('e21','energia','Większość energii wykorzystywanej przez ludzi (poza jądrową, geotermalną i pływów) pochodzi od:',['Słońca','Księżyca','wnętrza Ziemi','wiatru'],'Nawet węgiel i ropa to energia Słońca zmagazynowana przez dawne organizmy.');
+mc('e22','energia','Przemiany energii mogą zachodzić dzięki:',['wykonaniu pracy albo przepływowi ciepła','tylko dzięki prądowi','tylko dzięki Słońcu','wyłącznie w elektrowniach'],'Energię można przekazać przez pracę albo w postaci ciepła (gdy ciała mają różne temperatury).');
+mc('e23','energia','Huśtawka zjeżdża z najwyższego punktu w dół. Co się dzieje z energią?',['potencjalna grawitacji maleje, a kinetyczna rośnie','kinetyczna maleje, a potencjalna rośnie','obie rosną','obie maleją do zera'],'W dół: wysokość maleje, prędkość rośnie. W górę – odwrotnie.');
+mc('e24','energia','Pocierasz szybko dłonie i robią się ciepłe. Przemiana:',['kinetyczna → wewnętrzna','wewnętrzna → kinetyczna','chemiczna → elektryczna','potencjalna → kinetyczna'],'Tarcie zamienia energię ruchu na energię wewnętrzną (wzrost temperatury).');
+
+/* ============ ZADANIA RACHUNKOWE (losowane) ============ */
+const Flist=[5,10,12,15,18,20,25,40,50,60,80,100,120,150,200,240,250,300,400,500,800,1000,1500,2000,2500];
+const slist=[0.2,0.5,1.5,2,3,4,5,8,10,12,15,20,25,50,100];
+const Plist=[20,30,40,50,60,75,80,100,120,150,200,250,300,400,500,600,750,800,1000,1200,1500,2000,2500,3000];
+const tlist=[2,4,5,8,10,12,15,20,25,30,40,50,60,90,120,180,240,300,600,1800,3600,7200];
+const G=(sym,val,u)=>({sym,val,u});
+const uE=W=>pickU(W, W>=1e6?['J','kJ','MJ']:W>=1000?['J','kJ','kJ']:['J']);
+const uT=t=>pickU(t, t%3600===0?['s','h','h']:t%60===0?['s','min','min']:['s']);
+const uPw=P=>pickU(P, P>=1000?['W','kW','kW']:['W']);
+const uF=F=>pickU(F, F>=1000?['N','kN']:['N']);
+const uS=s=>pickU(s, s<1?['m','cm','cm']:s>=1000?['m','km']:s<=3?['m','m','cm']:['m']);
+const maybe=(p,u,val)=>Math.random()<p&&niceIn(val,u)?u:null;
+const GENS=[
+ {id:'gW',t:'wzorW',build(){
+   const F=rnd(Flist), s=rnd(slist), W=F*s, fu=uF(F), su=uS(s), force=W>=1000?maybe(.3,'kJ',W):null;
+   const [txt,subj]=rnd([
+     ...(F<=300?[[`Chłopiec pcha wózek siłą ${V(F,fu)} na odległość ${V(s,su)}. Oblicz wykonaną pracę.`,'Chłopiec wykonał pracę']]:[]),
+     [`Oblicz pracę, jaką wykonuje siła ${V(F,fu)}, przesuwając ciało na odległość ${V(s,su)} zgodnie z kierunkiem działania siły.`,'Siła wykonuje pracę'],
+     [`Robot magazynowy przesuwa paczkę siłą ${V(F,fu)} na drodze ${V(s,su)}. Jaką pracę wykonuje?`,'Robot wykonuje pracę']]);
+   return {text:txt,given:[G('F',F,fu),G('s',s,su)],find:{sym:'W',dim:'E',val:W,force},subj,
+     formula:'W = F · s',wrongF:['W = F / s','W = s / F','F = W · s'],calc:[`W = ${V(F,'N')} · ${V(s,'m')} = ${V(W,'J')}`]};
+ }},
+ {id:'gF',t:'wzorW',build(){
+   const F=rnd(Flist), s=rnd(slist.filter(x=>x>=1)), W=F*s, Wu=uE(W), su=uS(s);
+   const [txt,subj]=rnd([
+     [`Oblicz siłę, jaką działano na ciało, jeśli przesunięto je na odległość ${V(s,su)}, wykonując pracę ${V(W,Wu)}.`,'Działano siłą'],
+     [`Dźwig podniósł płytę ruchem jednostajnym na wysokość ${V(s,su)}, wykonując pracę ${V(W,Wu)}. Jaką siłą działał dźwig?`,'Dźwig działał siłą']]);
+   return {text:txt,given:[G('W',W,Wu),G('s',s,su)],find:{sym:'F',dim:'F',val:F,force:null},subj,
+     formula:'F = W / s',wrongF:['F = W · s','F = s / W','W = F / s'],calc:[`F = ${V(W,'J')} / ${V(s,'m')} = ${V(F,'N')}`]};
+ }},
+ {id:'gS',t:'wzorW',build(){
+   if(Math.random()<.5){
+     const F=rnd([100,150,200,240,250,300,400,500,600,800]), s=rnd([2,3,4,5,8,10,12,15,20,25]), W=F*s, Wu=uE(W);
+     return {text:`Oblicz odległość, na jaką przesunięto skrzynię, jeśli działając siłą ${V(F,'N')}, wykonano pracę ${V(W,Wu)}.`,
+       given:[G('F',F,'N'),G('W',W,Wu)],find:{sym:'s',dim:'s',val:s,force:null},subj:'Skrzynię przesunięto na odległość',
+       formula:'s = W / F',wrongF:['s = W · F','s = F / W','W = s / F'],calc:[`s = ${V(W,'J')} / ${V(F,'N')} = ${V(s,'m')}`]};
+   }
+   const F=rnd([20,25,30,40,50,60,80,100]), s=rnd([100,200,250,400,500,800,1000,1200,1500,2000,3000]), W=F*s, Wu=uE(W);
+   return {text:`Rowerzysta jechał ruchem jednostajnym i wykonał pracę ${V(W,Wu)}. Siła oporów ruchu wynosiła ${V(F,'N')}. Jaką drogę przejechał?`,
+     given:[G('W',W,Wu),G('F',F,'N')],find:{sym:'s',dim:'s',val:s,force:null},subj:'Rowerzysta przejechał',
+     formula:'s = W / F',wrongF:['s = W · F','s = F / W','W = s / F'],
+     note:'Ruch jednostajny → siła napędu równa sile oporów (I zasada dynamiki), więc F = '+V(F,'N')+'.',
+     calc:[`s = ${V(W,'J')} / ${V(F,'N')} = ${V(s,'m')}`+(s>=1000?` = ${V(s,'km')}`:'')]};
+ }},
+ {id:'gP',t:'wzorP',build(){
+   const P=rnd(Plist), t=rnd(tlist), W=P*t, Wu=uE(W), tu=uT(t), force=P>=1000?maybe(.35,'kW',P):null;
+   const [txt,subj]=rnd([
+     [`Silnik wykonał pracę ${V(W,Wu)} w czasie ${V(t,tu)}. Oblicz jego moc.`,'Moc silnika wynosi'],
+     [`Dźwig podniósł ładunek, wykonując pracę ${V(W,Wu)} w czasie ${V(t,tu)}. Oblicz moc dźwigu.`,'Moc dźwigu wynosi'],
+     [`Pompa w ciągu ${V(t,tu)} wykonała pracę ${V(W,Wu)}. Z jaką mocą pracowała?`,'Moc pompy wynosi'],
+     [`Silnik windy wykonał pracę ${V(W,Wu)}, a winda jechała na górę przez ${V(t,tu)}. Oblicz moc silnika windy.`,'Moc silnika windy wynosi']]);
+   return {text:txt,given:[G('W',W,Wu),G('t',t,tu)],find:{sym:'P',dim:'P',val:P,force},subj,
+     formula:'P = W / t',wrongF:['P = W · t','P = t / W','W = P / t'],calc:[`P = ${V(W,'J')} / ${V(t,'s')} = ${V(P,'W')}`]};
+ }},
+ {id:'gWPt',t:'wzorP',build(){
+   const P=rnd(Plist), t=rnd(tlist.filter(x=>x<=600)), W=P*t, Pu=uPw(P), tu=uT(t), force=W>=1000?maybe(.3,'kJ',W):null;
+   const [txt,subj]=rnd([
+     [`Maszyna ma moc ${V(P,Pu)}. W ciągu ${V(t,tu)} wykonała pewną pracę. Oblicz, jaką pracę wykonała maszyna w tym czasie.`,'Maszyna wykonała pracę'],
+     ...(P>=300&&P<=1500?[[`Wiertarka o mocy ${V(P,Pu)} pracowała przez ${V(t,tu)}. Jaką pracę wykonała?`,'Wiertarka wykonała pracę'],
+     [`Mikser o mocy ${V(P,Pu)} był włączony przez ${V(t,tu)}. Oblicz wykonaną przez niego pracę.`,'Mikser wykonał pracę']]:[])]);
+   return {text:txt,given:[G('P',P,Pu),G('t',t,tu)],find:{sym:'W',dim:'E',val:W,force},subj,
+     formula:'W = P · t',wrongF:['W = P / t','W = t / P','P = W · t'],calc:[`W = ${V(P,'W')} · ${V(t,'s')} = ${V(W,'J')}`]};
+ }},
+ {id:'gt',t:'wzorP',build(){
+   const P=rnd([50,100,200,250,400,500,1000,1500,2000,2100,2500]), t=rnd([2,3,4,5,6,8,10,12,15,20,30,40,60,90,120,300,600]), W=P*t, Pu=uPw(P), Wu=uE(W);
+   const force=(t%60===0&&t>=120)?maybe(.5,'min',t):null;
+   const [txt,subj]=rnd([
+     ...(P>=1000?[[`Czajnik elektryczny ma moc ${V(P,Pu)}. Oblicz, w jakim czasie wykona on pracę ${V(W,Wu)}.`,'Czajnik wykona tę pracę w czasie']]:[]),
+     [`Silnik o mocy ${V(P,Pu)} wykonał pracę ${V(W,Wu)}. Jak długo pracował?`,'Silnik pracował przez']]);
+   return {text:txt,given:[G('P',P,Pu),G('W',W,Wu)],find:{sym:'t',dim:'t',val:t,force},subj,
+     formula:'t = W / P',wrongF:['t = W · P','t = P / W','W = t / P'],calc:[`t = ${V(W,'J')} / ${V(P,'W')} = ${V(t,'s')}`]};
+ }},
+ {id:'gFsT',t:'zlozone',build(){
+   let F,s,t,P,n=0;
+   do{ F=rnd([50,80,100,120,150,200,250,300,400,500,600,800,1000,1200,1500,2000]); s=rnd([2,3,4,5,6,8,10,12,15,20,25,30,40,50]); t=rnd([2,4,5,8,10,15,20,25,30,40,50,60,120]); P=F*s/t; n++; } while(!(niceIn(P,'W')&&P>=1)&&n<80);
+   const Fu=uF(F), tu=uT(t), W=F*s;
+   const human=F<=400&&P<=800;
+   const [txt,subj]=rnd([
+     [`Urządzenie działa siłą ${V(F,Fu)} i przesuwa ładunek na odległość ${V(s,'m')} w czasie ${V(t,tu)}. Oblicz moc urządzenia.`,'Moc urządzenia wynosi'],
+     ...(human?[[`Chłopiec wciąga sanki pod górkę siłą ${V(F,Fu)} (równoległą do stoku) na odległość ${V(s,'m')} w czasie ${V(t,tu)}. Z jaką mocą pracuje?`,'Chłopiec pracuje z mocą'],
+     [`Człowiek przesuwa szafę siłą ${V(F,Fu)} na odległość ${V(s,'m')} w czasie ${V(t,tu)}. Jaką moc przy tym rozwija?`,'Człowiek rozwija moc']]:[])]);
+   return {text:txt,given:[G('F',F,Fu),G('s',s,'m'),G('t',t,tu)],find:{sym:'P',dim:'P',val:P,force:null},subj,
+     formula:'P = W / t, gdzie W = F · s',wrongF:['P = F · s · t','P = F / (s · t)','P = W · t, gdzie W = F / s'],
+     calc:[`W = F · s = ${V(F,'N')} · ${V(s,'m')} = ${V(W,'J')}`,`P = W / t = ${V(W,'J')} / ${V(t,'s')} = ${V(P,'W')}`]};
+ }},
+ {id:'gPts',t:'zlozone',build(){
+   let P,t,s,F,n=0;
+   do{ P=rnd([50,100,150,200,250,300,400,500,600,800,1000,1200,1500,2000]); t=rnd([2,4,5,8,10,12,15,20,30,60]); s=rnd([2,4,5,8,10,12,15,20,25,40,50]); F=P*t/s; n++; } while(!(niceIn(F,'N')&&F>=1)&&n<80);
+   const Pu=uPw(P), tu=uT(t), W=P*t;
+   return {text:`Silnik o mocy ${V(P,Pu)} w ciągu ${V(t,tu)} przesunął ładunek ruchem jednostajnym na odległość ${V(s,'m')}. Jaką siłą działał silnik?`,
+     given:[G('P',P,Pu),G('t',t,tu),G('s',s,'m')],find:{sym:'F',dim:'F',val:F,force:null},subj:'Silnik działał siłą',
+     formula:'F = W / s, gdzie W = P · t',wrongF:['F = P · t · s','F = P / (t · s)','F = W · s, gdzie W = P / t'],
+     calc:[`W = P · t = ${V(P,'W')} · ${V(t,'s')} = ${V(W,'J')}`,`F = W / s = ${V(W,'J')} / ${V(s,'m')} = ${V(F,'N')}`]};
+ }},
+ {id:'gmgh',t:'zlozone',build(){
+   const m=rnd([2,5,10,20,25,40,50,80,100,150,200,250,500,600,800,1000,1500,2000]), h=rnd([1,1.5,2,3,4,5,8,10,12,15,20,25,30]), F=m*10, W=F*h;
+   const force=W>=1000?maybe(.3,'kJ',W):null;
+   return {text:`Dźwig podnosi ruchem jednostajnym ładunek o masie ${fmtN(m)} kg na wysokość ${V(h,'m')}. Jaką pracę wykonuje? Przyjmij g = 10 N/kg.`,
+     given:[G('m',m,'kg'),G('h',h,'m'),{sym:'g',val:10,u:'N/kg',raw:true}],find:{sym:'W',dim:'E',val:W,force},subj:'Dźwig wykonuje pracę',
+     formula:'W = F · h, gdzie F = m · g',wrongF:['W = m · h','W = m · g / h','W = F / h, gdzie F = m · g'],
+     calc:[`F = m · g = ${fmtN(m)} kg · 10 N/kg = ${V(F,'N')}`,`W = F · h = ${V(F,'N')} · ${V(h,'m')} = ${V(W,'J')}`]};
+ }},
+ {id:'gmghP',t:'zlozone',build(){
+   let m,h,t,P,n=0;
+   do{ m=rnd([20,40,50,80,100,200,250,500,600,1000]); h=rnd([2,3,4,5,6,8,10,12,15,20,30]); t=rnd([2,4,5,8,10,15,20,30,40,60]); P=m*10*h/t; n++; } while(!niceIn(P,'W')&&n<80);
+   const F=m*10, W=F*h;
+   return {text:`Dźwig podniósł ruchem jednostajnym ładunek o masie ${fmtN(m)} kg na wysokość ${V(h,'m')} w czasie ${V(t,'s')}. Oblicz moc dźwigu. Przyjmij g = 10 N/kg.`,
+     given:[G('m',m,'kg'),G('h',h,'m'),G('t',t,'s'),{sym:'g',val:10,u:'N/kg',raw:true}],find:{sym:'P',dim:'P',val:P,force:null},subj:'Moc dźwigu wynosi',
+     formula:'P = W / t, gdzie W = m · g · h',wrongF:['P = m · g · h · t','P = m · h / t','P = W · t, gdzie W = m · g · h'],
+     calc:[`F = m · g = ${V(F,'N')}`,`W = F · h = ${V(F,'N')} · ${V(h,'m')} = ${V(W,'J')}`,`P = W / t = ${V(W,'J')} / ${V(t,'s')} = ${V(P,'W')}`]};
+ }},
+ {id:'gFv',t:'zlozone',star:true,build(){
+   const [v,kmh]=rnd([[10,36],[15,54],[20,72],[25,90],[30,108]]), F=rnd([400,500,600,800,1000,1200,1500,2000,2500,3000]), P=F*v;
+   const useKmh=Math.random()<.5, force=maybe(.5,'kW',P);
+   return {text:`Samochód jedzie ze stałą prędkością ${useKmh?kmh+' km/h':v+' m/s'}. Siła ciągu silnika wynosi ${V(F,uF(F))}. Oblicz moc silnika.`,
+     given:[G('v',v,useKmh?'km/h':'m/s'),G('F',F,'N')],find:{sym:'P',dim:'P',val:P,force},subj:'Moc silnika wynosi',
+     formula:'P = F · v',wrongF:['P = F / v','P = v / F','P = W · t'],calc:[`P = ${V(F,'N')} · ${fmtN(v)} m/s = ${V(P,'W')}`]};
+ }},
+];
+const CONV=[
+  ()=>[rnd([1.5,2,2.5,3,4.2,10.5,12,0.8,0.25]),'kJ','J'], ()=>[rnd([500,1200,2500,7500,18000,36000]),'J','kJ'],
+  ()=>[rnd([1,2,1.5,0.5,7.2]),'MJ','J'], ()=>[rnd([250,500,1500,20]),'mJ','J'],
+  ()=>[rnd([0.5,1.2,2,2.1,3.5,55.2]),'kW','W'], ()=>[rnd([500,1500,2100,750,40000]),'W','kW'],
+  ()=>[rnd([0.5,2,2.76,3,12]),'kN','N'], ()=>[rnd([20,50,75,150,250,5]),'cm','m'],
+  ()=>[rnd([0.5,1.2,2,5,12]),'km','m'], ()=>[rnd([2,3,5,10,15,1.5,0.5]),'min','s'],
+  ()=>[rnd([1,2,0.5,1.5,3]),'h','s'], ()=>[rnd([120,180,300,90,600]),'s','min'],
+  ()=>[rnd([36,54,72,90]),'km/h','m/s']
+];
+GENS.push({id:'gConv',t:'jedn',conv:true,build(){
+  const [x,from,to]=rnd(CONV)(), val=x*U[from].f;
+  return {conv:true,text:`Zamień jednostki: <b>${fmtN(x)} ${from}</b> = ? ${to}`,fixed:to,find:{sym:'',dim:U[to].d,val,force:to},
+    calc:[`${fmtN(x)} ${from} = ${V(val,to)}`+(from==='km/h'?' (dzielimy przez 3,6)':'')]};
+}});
+const GN=Object.fromEntries(GENS.map(g=>[g.id,g]));
+
+function daneLines(g){ return (g.given||[]).map(x=>{ if(x.raw) return `${x.sym} = ${fmtN(x.val)} ${x.u}`; const b=BASE[U[x.u].d]; return x.u===b?`${x.sym} = ${V(x.val,x.u)}`:`${x.sym} = ${V(x.val,x.u)} = ${V(x.val,b)}`; }); }
+function answerText(g){ const f=g.find, b=BASE[f.dim]; let s=V(f.val,f.force||b); if(!f.force&&f.dim==='E'&&f.val>=1000&&niceIn(f.val,'kJ')) s+=` (= ${V(f.val,'kJ')})`; if(!f.force&&f.dim==='P'&&f.val>=1000&&niceIn(f.val,'kW')) s+=` (= ${V(f.val,'kW')})`; return s; }
+function solutionHtml(g){
+  if(g.conv) return `<div class="sol">${g.calc.map(esc).join('<br>')}</div>`;
+  const f=g.find;
+  let calc=g.calc.slice(); if(f.force&&f.force!==BASE[f.dim]) calc[calc.length-1]+=` = ${V(f.val,f.force)}`;
+  return `<div class="sol">
+    <div><span class="k">Dane:</span> ${daneLines(g).map(esc).join('; ')}</div>
+    <div><span class="k">Szukane:</span> ${f.sym} = ?</div>
+    <div><span class="k">Wzór:</span> ${esc(g.formula)}</div>
+    ${g.note?`<div class="muted small">${esc(g.note)}</div>`:''}
+    <div><span class="k">Obliczenia:</span> ${calc.map(esc).join('<br>')}</div>
+    <div><span class="k">Odpowiedź:</span> ${esc(g.subj)} ${esc(answerText(g))}.</div></div>`;
+}
+function genQ(id){ const gen=GN[id], g=gen.build(); if(g.find.force&&!g.conv) g.text+=` Wynik podaj w ${UNAME[g.find.force]||g.find.force}.`; return {id,t:gen.t,type:'num',q:g.text,g,star:!!gen.star}; }
+
+/* ============ SPRAWDZANIE LICZB ============ */
+function checkNum(g,numStr,unit){
+  const n=parseNum(numStr), f=g.find;
+  if(isNaN(n)) return {ok:false,empty:true};
+  const u=g.fixed||unit;
+  if(!u) return {ok:false,msg:'Brak jednostki! Wynik bez jednostki to na kartkówce błąd.'};
+  if(U[u].d!==f.dim) return {ok:false,msg:`Zła jednostka: szukasz ${DIMNAME[f.dim]}, a wybrałeś „${u}”.`};
+  const val=n*U[u].f, good=Math.abs(val-f.val)<=Math.max(1e-9,Math.abs(f.val)*0.002);
+  if(good&&f.force&&u!==f.force) return {ok:false,msg:`Liczba się zgadza, ale polecenie każe podać wynik w ${UNAME[f.force]||f.force} (${f.force}). Pani by to obcięła!`};
+  if(!good){
+    const ratio=val/f.val; let hint='';
+    if([1000,0.001,60,1/60,3600,1/3600,100,0.01].some(r=>Math.abs(ratio-r)<1e-6)) hint=' Wygląda na niezamienioną jednostkę (k, min, h albo cm)!';
+    return {ok:false,msg:'Zły wynik.'+hint};
+  }
+  return {ok:true};
+}
+
+/* ============ UI: ZAKŁADKI ============ */
+const TABS=[['start','Start'],['nauka','Ściąga'],['trening','Trening'],['kroki','Krok po kroku'],['przemiany','Przemiany energii'],['kartkowka','Kartkówka próbna']];
+let tab='start';
+function renderTabs(){
+  $('tabs').innerHTML=TABS.map(([k,n])=>`<button class="tab" role="tab" data-t="${k}" aria-selected="${tab===k}">${n}</button>`).join('');
+  $('tabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.t));
+}
+function header(){
+  const st=streak();
+  $('hello').innerHTML=`Cześć, ${esc(NAME)}! Trening przed kartkówką z fizyki – tak, żeby nie było się do czego przyczepić.`;
+  $('pills').innerHTML=`<span class="pill">🔥 ${st} ${st===1?'dzień':'dni'} z rzędu</span><span class="pill">✅ ${pct(S.correct,S.total)}% dobrze</span><span class="pill">🎯 opanowane: ${overall()}%</span>`;
+}
+function go(t){ tab=t; renderTabs(); header(); window.scrollTo(0,0); ({start:vStart,nauka:vNauka,trening:vTrening,kroki:vKroki,przemiany:vPrzemiany,kartkowka:vKartkowka})[t](); }
+
+/* ============ POSTĘP ============ */
+function itemsOf(t){ return [...QS.filter(q=>q.t===t).map(q=>({id:q.id,need:2})), ...GENS.filter(g=>g.t===t).map(g=>({id:g.id,need:3})), ...(t==='energia'?BUILD.map(b=>({id:'b:'+b.id,need:1})):[])]; }
+function mastery(t){ const it=itemsOf(t); return Math.round(100*it.reduce((a,x)=>a+Math.min(1,((S.q[x.id]||{}).b||0)/x.need),0)/it.length); }
+function overall(){ return Math.round(TOPICS.reduce((a,t)=>a+mastery(t.id),0)/TOPICS.length); }
+const errorIds=()=>Object.keys(S.q).filter(id=>S.q[id].w>0&&S.q[id].b<2&&(QS.some(q=>q.id===id)||GN[id]));
+
+/* ============ START ============ */
+function vStart(){
+  const last=S.tests.slice(-1)[0], errs=errorIds().length;
+  $('view').innerHTML=`
+    <button class="big dark" id="bTest"><span class="ico">📝</span><span><span class="t">Kartkówka próbna</span><span class="d">15 pytań ze wszystkich zagadnień, ocena na koniec${last?` · ostatnio ${last.p}%`:''}</span></span></button>
+    <button class="big" id="bSteps"><span class="ico">🪜</span><span><span class="t">Zadanie krok po kroku</span><span class="d">Dane → Szukane → Wzór → Obliczenia → Odpowiedź. Tak jak chce pani.</span></span></button>
+    <button class="big" id="bErr" ${errs?'':'disabled'}><span class="ico">🩹</span><span><span class="t">Powtórka błędów</span><span class="d">${errs?`${errs} do poprawy`:'Na razie nie masz błędów do poprawy'}</span></span></button>
+    <div class="card"><h2>Zagadnienia na kartkówkę</h2>
+      ${TOPICS.map(t=>{ const m=mastery(t.id); return `<div class="topic"><span class="n">${t.e} ${esc(t.n)}</span><button class="btn small go" data-t="${t.id}">Ćwicz</button><span class="bar"><span style="width:${m}%"></span></span></div>`; }).join('')}
+      <p class="muted small" style="margin:10px 0 0">Pasek rośnie, gdy odpowiadasz dobrze kilka razy z rzędu. Najpierw przeczytaj <a href="#" id="lNauka">ściągę</a>.</p>
+    </div>
+    <p class="muted small">${canSave?'Postępy zapisują się na tym urządzeniu.':'Ta przeglądarka nie zapisze postępów.'}</p>`;
+  $('bTest').onclick=()=>go('kartkowka'); $('bSteps').onclick=()=>go('kroki');
+  $('bErr').onclick=()=>startRound(errorIds().map(id=>GN[id]?{gen:id}:{id}),'Powtórka błędów');
+  $('lNauka').onclick=e=>{ e.preventDefault(); go('nauka'); };
+  $('view').querySelectorAll('.go').forEach(b=>b.onclick=()=>{ tab='trening'; renderTabs(); startTopic(b.dataset.t); });
+}
+
+/* ============ TRENING ============ */
+function vTrening(){
+  $('view').innerHTML=`<div class="card"><h2>Wybierz zagadnienie</h2><p class="muted small">10 pytań. Najczęściej wracają te, które jeszcze nie są opanowane.</p>
+    ${TOPICS.map(t=>`<button class="big" data-t="${t.id}"><span class="ico">${t.e}</span><span><span class="t">${esc(t.n)}</span><span class="d">opanowane: ${mastery(t.id)}%</span></span></button>`).join('')}
+    <button class="big dark" data-t="mix"><span class="ico">🎲</span><span><span class="t">Wszystko naraz</span><span class="d">Mieszanka ze wszystkich zagadnień</span></span></button></div>`;
+  $('view').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>startTopic(b.dataset.t));
+}
+function weightOf(id,need){ const b=(S.q[id]||{}).b||0; return b>=need?0.35:1+(need-b); }
+function pickItems(topics,n){
+  const pool=[];
+  topics.forEach(t=>{
+    QS.filter(q=>q.t===t).forEach(q=>pool.push({ref:{id:q.id},w:weightOf(q.id,2)}));
+    GENS.filter(g=>g.t===t).forEach(g=>pool.push({ref:{gen:g.id},w:weightOf(g.id,3)*1.6,gen:true}));
+  });
+  const out=[], used=new Set();
+  for(let k=0;k<n&&pool.length;k++){
+    const c=pool.filter((p,i)=>!used.has(i)||p.gen);
+    let r=Math.random()*c.reduce((a,p)=>a+p.w,0), pick=c[c.length-1];
+    for(const p of c){ r-=p.w; if(r<=0){ pick=p; break; } }
+    used.add(pool.indexOf(pick)); out.push(pick.ref);
+    if(pick.gen) pick.w*=0.5;
+  }
+  return out;
+}
+function startTopic(t){ const topics=t==='mix'?TOPICS.map(x=>x.id):[t]; startRound(pickItems(topics,10),t==='mix'?'Wszystko naraz':TN[t].n); }
+const materialize=ref=>ref.gen?genQ(ref.gen):QS.find(q=>q.id===ref.id);
+
+/* ============ RUNDA (trening / kartkówka) ============ */
+function startRound(refs,title,test){
+  window.scrollTo(0,0);
+  const R={items:refs.map(materialize).filter(Boolean),i:0,ok:0,log:[]};
+  if(!R.items.length){ go('start'); return; }
+  function show(){
+    const q=R.items[R.i];
+    $('view').innerHTML=`<div class="card">
+      <div class="qhead"><span>${esc(title)}</span><span>${R.i+1} / ${R.items.length}</span></div>
+      <div class="prog"><span style="width:${100*R.i/R.items.length}%"></span></div>
+      <div class="muted small" style="margin-bottom:4px">${TN[q.t].e} ${esc(TN[q.t].n)}${q.star?' · ⭐ z podręcznika':''}</div>
+      <div id="qbox"></div>
+      <div class="row" style="margin-top:14px"><button class="btn small" id="bQuit">Przerwij</button></div></div>`;
+    $('bQuit').onclick=()=>{ if(!test||confirm('Przerwać kartkówkę?')) go(tab); };
+    askQ(q,$('qbox'),(ok,given)=>{
+      record(q.id,ok); R.log.push({q,ok,given}); if(ok) R.ok++;
+      if(test){ R.i++; R.i<R.items.length?show():finish(); return true; }
+      return false;
+    },()=>{ R.i++; R.i<R.items.length?show():finish(); },test);
+  }
+  function finish(){
+    const p=pct(R.ok,R.items.length);
+    if(test){ S.tests.push({d:today(),p}); save(); }
+    const gr=grade(p), wrong=R.log.filter(x=>!x.ok);
+    $('view').innerHTML=`<div class="card" style="text-align:center">
+      <p class="muted" style="margin-bottom:4px">${esc(title)}</p>
+      ${test?`<div class="grade">${gr[0]}</div><p><b>${gr[1]}</b></p>`:''}
+      <h2>${R.ok} z ${R.items.length} dobrze (${p}%)</h2>
+      <p>${p===100?'Perfekcyjnie! Nie ma się do czego przyczepić. 🏆':p>=90?'Bardzo dobrze – dopracuj szczegóły poniżej.':p>=70?'Nieźle, ale pani znalazłaby, do czego się przyczepić. Przejrzyj błędy.':'Trzeba jeszcze poćwiczyć – zacznij od ściągi i treningu zagadnień.'}</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="bAgain">${test?'Nowa kartkówka':'Jeszcze raz'}</button><button class="btn" id="bHome">Start</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Błędy do przejrzenia</h2>${wrong.map(x=>reviewHtml(x)).join('')}</div>`:''}
+      ${test?`<p class="muted small">Ocena orientacyjna według typowej skali: poniżej 40% – 1, od 40% – 2, od 55% – 3, od 75% – 4, od 90% – 5. Na 6 zwykle trzeba mieć 100% i zadanie dodatkowe.</p>`:''}`;
+    $('bAgain').onclick=()=>test?vKartkowka(true):startRound(refs,title,test);
+    $('bHome').onclick=()=>go('start');
+    header();
+  }
+  show();
+}
+function grade(p){ return p>=90?['5','bardzo dobry']:p>=75?['4','dobry']:p>=55?['3','dostateczny']:p>=40?['2','dopuszczający']:['1','niedostateczny']; }
+function reviewHtml(x){
+  const q=x.q;
+  if(q.type==='num') return `<div class="review"><div class="q">${q.q}</div><div class="muted small">Twoja odpowiedź: ${esc(x.given||'—')}</div>${solutionHtml(q.g)}</div>`;
+  return `<div class="review"><div class="q">${q.q}</div><div class="muted small">Twoja odpowiedź: ${esc(x.given||'—')}</div><div>✅ <b>${esc(q.o[0])}</b></div><div class="muted small">${esc(q.e)}</div></div>`;
+}
+
+/* ============ JEDNO PYTANIE ============ */
+// onAnswer(ok, given) → true gdy runda sama przechodzi dalej (kartkówka: bez podpowiedzi)
+function askQ(q,box,onAnswer,onNext,test){
+  box.innerHTML=`<div class="qtext">${q.q}</div><div id="ans"></div><div id="fb"></div>`;
+  const ans=$('ans');
+  const after=(ok,given,msg)=>{
+    if(onAnswer(ok,given)) return;
+    const expl=q.type==='num'?solutionHtml(q.g):`<div class="muted" style="margin-top:4px">${esc(q.e)}</div>`;
+    $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Nie tym razem'}</div>${msg?`<div>${esc(msg)}</div>`:''}${!ok&&q.type!=='num'?`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`:''}${expl}</div>
+      <button class="btn primary wide next" id="bNext">Dalej</button>`;
+    $('bNext').onclick=onNext; $('bNext').focus({preventScroll:true});
+    $('fb').scrollIntoView({block:'nearest',behavior:'smooth'});
+  };
+  if(q.type==='num'){
+    const g=q.g; let unit=null;
+    ans.innerHTML=`<div class="numrow"><input class="num" id="inp" inputmode="decimal" autocomplete="off" placeholder="wynik" aria-label="Wynik">${g.fixed?`<span class="fixu">${esc(g.fixed)}</span>`:''}</div>
+      ${g.fixed?'':`<div class="muted small" style="margin-top:8px">Jednostka:</div><div class="units">${CHIPS.concat(g.find.dim==='v'?['m/s']:[]).map(u=>`<button class="unit" data-u="${u}" aria-pressed="false">${u}</button>`).join('')}</div>`}
+      <button class="btn primary wide" id="bCheck" style="margin-top:${g.fixed?'12px':'0'}">Sprawdź</button>`;
+    ans.querySelectorAll('.unit').forEach(b=>b.onclick=()=>{ unit=b.dataset.u; ans.querySelectorAll('.unit').forEach(x=>x.setAttribute('aria-pressed',x===b)); });
+    const check=()=>{
+      const r=checkNum(g,$('inp').value,unit);
+      if(r.empty){ $('inp').focus(); return; }
+      $('inp').disabled=true; $('bCheck').disabled=true; ans.querySelectorAll('.unit').forEach(b=>b.disabled=true);
+      after(r.ok,`${$('inp').value} ${g.fixed||unit||'(bez jednostki)'}`,r.msg);
+    };
+    $('bCheck').onclick=check; $('inp').onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); check(); } };
+    if(!matchMedia('(pointer:coarse)').matches) $('inp').focus();
+    return;
+  }
+  const order=q.type==='tf'?(q.o[0]==='Prawda'?[0,1]:[1,0]):shuffle(q.o.map((_,i)=>i));
+  ans.innerHTML=`<div class="${q.type==='tf'?'tf':'opts'}">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...ans.querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i, ok=i===0;
+    btns.forEach(x=>{ x.disabled=true; if(!test){ if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); } });
+    after(ok,q.o[i]);
+  });
+}
+
+/* ============ KROK PO KROKU ============ */
+const STEP_GENS=['gW','gF','gS','gP','gWPt','gt','gFsT','gPts','gmgh','gmghP','gFv'];
+function vKroki(){ window.scrollTo(0,0); const id=rnd(STEP_GENS), gen=GN[id], g=gen.build(); g.__id=id; g.__star=!!gen.star; runSteps(g); }
+function runSteps(g){
+  const genId=g.__id;
+  const steps=[], lines=[];
+  let score=0, total=0;
+  const conv=(g.given||[]).filter(x=>!x.raw&&x.u!==BASE[U[x.u].d]);
+  conv.forEach(x=>steps.push({kind:'conv',x}));
+  steps.push({kind:'find'},{kind:'formula'},{kind:'calc'},{kind:'answer'});
+  if(g.find.force) g.text+=` Wynik podaj w ${UNAME[g.find.force]||g.find.force}.`;
+  let k=0;
+  const daneInit=(g.given||[]).map(x=>x.raw?`${x.sym} = ${fmtN(x.val)} ${x.u}`:x.u===BASE[U[x.u].d]?`${x.sym} = ${V(x.val,x.u)}`:`${x.sym} = ${V(x.val,x.u)} = …`).join('; ');
+  $('view').innerHTML=`<div class="card"><div class="qhead"><span>🪜 Zadanie krok po kroku${g.__star?' · ⭐':''}</span><button class="btn small" id="bNew">Inne zadanie</button></div>
+    <div class="qtext">${g.text}</div>
+    <div class="steps" id="steps"><div class="ln"><span class="k">Dane:</span> ${esc(daneInit)}</div></div>
+    <div class="stepq" id="stepq"></div></div>`;
+  $('bNew').onclick=vKroki;
+  const addLine=(html)=>{ const d=document.createElement('div'); d.className='ln'; d.innerHTML=html; $('steps').appendChild(d); };
+  function done(ok,label,correctHtml){
+    total++; if(ok) score++;
+    addLine(`<span class="${ok?'ok':'bad'}">${ok?'✔':'✘'}</span> <span class="k">${label}</span> ${correctHtml}`);
+    k++; k<steps.length?next():finish();
+  }
+  function mcStep(label,prompt,opts,correct,explain){
+    const order=shuffle(opts.map((_,i)=>i));
+    $('stepq').innerHTML=`<div class="lab">${label}</div><p>${prompt}</p><div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(opts[i])}</button>`).join('')}</div><div id="sfb"></div>`;
+    const btns=[...$('stepq').querySelectorAll('.opt')];
+    btns.forEach(b=>b.onclick=()=>{
+      const ok=+b.dataset.i===0;
+      btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+      const cont=()=>done(ok,label,esc(correct));
+      if(ok){ setTimeout(cont,550); }
+      else { $('sfb').innerHTML=`<div class="fb bad">${explain?esc(explain):''}</div><button class="btn primary wide next" id="bGoOn">Dalej</button>`; $('bGoOn').onclick=cont; }
+    });
+  }
+  function numStep(label,prompt,sub,correctText,explain){
+    $('stepq').innerHTML=`<div class="lab">${label}</div><p>${prompt}</p><div id="nbox"></div>`;
+    askQ({type:'num',q:'',g:sub,t:'jedn'},$('nbox'),(ok)=>{
+      const cont=()=>done(ok,label,esc(correctText));
+      if(ok){ setTimeout(cont,550); return true; }
+      return false;
+    },()=>done(false,label,esc(correctText)));
+    $('nbox').querySelector('.qtext').remove();
+  }
+  function next(){
+    const st=steps[k];
+    if(st.kind==='conv'){
+      const x=st.x, b=BASE[U[x.u].d];
+      numStep('Dane – zamiana jednostek',`Zamień na jednostkę podstawową: <b>${x.sym} = ${esc(V(x.val,x.u))}</b> = ? ${b}`,{fixed:b,find:{dim:U[b].d,val:x.val,force:b},conv:true,calc:[`${x.sym} = ${V(x.val,x.u)} = ${V(x.val,b)}`]},`${x.sym} = ${V(x.val,x.u)} = ${V(x.val,b)}`);
+    } else if(st.kind==='find'){
+      const syms=['P','W','t','F','s'].filter(s=>s!==g.find.sym);
+      mcStep('Szukane','Czego szukamy?',[`${g.find.sym} = ?`,...shuffle(syms).slice(0,3).map(s=>`${s} = ?`)],`${g.find.sym} = ?`,'Przeczytaj jeszcze raz, o co pyta polecenie.');
+    } else if(st.kind==='formula'){
+      mcStep('Wzór','Który wzór zastosujesz?',[g.formula,...g.wrongF],g.formula,'Pomaga trójkąt: W na górze; na dole F i s albo P i t. Zakryj szukaną wielkość.');
+    } else if(st.kind==='calc'){
+      const c=g.calc.slice(); if(g.find.force) c[c.length-1]+=` = ${V(g.find.val,g.find.force)}`;
+      numStep('Obliczenia',`Oblicz <b>${g.find.sym}</b> i wybierz jednostkę.${g.find.force?` Pamiętaj: wynik w <b>${g.find.force}</b>.`:''}${g.note?`<br><span class="muted small">${esc(g.note)}</span>`:''}`,{find:g.find,given:g.given,formula:g.formula,subj:g.subj,calc:g.calc,note:g.note,text:''},c.join('; '));
+    } else {
+      const f=g.find, target=f.force||BASE[f.dim], num=fmtN(f.val/U[target].f);
+      const wrongUnit={E:'W',P:'J',F:'J',s:'s',t:'m',v:'m'}[f.dim];
+      const opts=[`${g.subj} ${answerText(g)}.`,`${g.subj} ${num}.`,`${g.subj} ${num} ${wrongUnit}.`];
+      if(f.force) opts.push(`${g.subj} ${V(f.val,BASE[f.dim])}.`); else opts.push(`${g.subj} ${fmtN(f.val/1000)} ${BASE[f.dim]}.`);
+      mcStep('Odpowiedź','Wybierz poprawną odpowiedź słowną:',opts,opts[0],'Odpowiedź pełnym zdaniem, z właściwą liczbą i jednostką (i w tej jednostce, której żąda polecenie).');
+    }
+  }
+  function finish(){
+    const ok=score===total;
+    if(genId) record(genId,ok);
+    $('stepq').innerHTML=`<div class="fb ${ok?'ok':'bad'}"><div class="h">${ok?'Komplet – tak to ma wyglądać w zeszycie! 🏆':`${score} z ${total} kroków dobrze`}</div>${ok?'':'<div>Przepisz sobie poprawne rozwiązanie:</div>'}${solutionHtml(g)}</div>
+      <button class="btn primary wide next" id="bMore">Następne zadanie</button>`;
+    $('bMore').onclick=vKroki;
+  }
+  next();
+}
+
+/* ============ PRZEMIANY ENERGII ============ */
+const FORMS={pot:'potencjalna grawitacji',spr:'potencjalna sprężystości',kin:'kinetyczna',wew:'wewnętrzna',chem:'chemiczna',el:'elektryczna',prom:'promieniowania (światło)',ak:'akustyczna (dźwięk)',jad:'jądrowa'};
+const BUILD=[
+ {id:'sanki',e:'🛷',t:'Zjazd na sankach z górki (płozy trą o śnieg)',c:['pot','kin'],x:['wew'],ex:'Na górze sanki mają energię potencjalną grawitacji. Zjeżdżając, tracą wysokość i nabierają prędkości: potencjalna → kinetyczna. Przez tarcie część energii zamienia się w wewnętrzną.'},
+ {id:'czajnik',e:'🫖',t:'Czajnik elektryczny gotuje wodę',c:['el','wew'],ex:'Energia elektryczna zamienia się w energię wewnętrzną grzałki i wody – rośnie temperatura.'},
+ {id:'auto',e:'🚗',t:'Samochód z silnikiem spalinowym rusza i jedzie',c:['chem','wew','kin'],alt:[['chem','kin']],x:['ak'],ex:'Paliwo ma energię chemiczną. Spala się w silniku → energia wewnętrzna gorących gazów → pchają tłoki → energia kinetyczna samochodu. Najpełniej: chemiczna → wewnętrzna → kinetyczna.'},
+ {id:'hamulce',e:'🛑',t:'Hamujący samochód zatrzymuje się',c:['kin','wew'],x:['ak'],ex:'Tarcie klocków o tarcze zamienia energię kinetyczną w wewnętrzną – hamulce się nagrzewają.'},
+ {id:'bieg',e:'🏃',t:'Człowiek biegnie',c:['chem','kin'],x:['wew'],ex:'Organizm czerpie energię chemiczną z pożywienia. Mięśnie zamieniają ją na energię kinetyczną i wewnętrzną (ciało się rozgrzewa).'},
+ {id:'luk',e:'🏹',t:'Łucznik puszcza cięciwę, strzała leci',c:['spr','kin'],ex:'Napięty łuk ma energię potencjalną sprężystości. Wracając do kształtu, nadaje strzale energię kinetyczną.'},
+ {id:'pilka',e:'⚽',t:'Piłka spada z balkonu (do chwili tuż przed uderzeniem)',c:['pot','kin'],x:['wew'],ex:'Wysokość maleje, prędkość rośnie: potencjalna grawitacji → kinetyczna.'},
+ {id:'rzut',e:'🤾',t:'Piłka rzucona pionowo w górę (w czasie wznoszenia)',c:['kin','pot'],x:['wew'],ex:'Piłka zwalnia i się wznosi: kinetyczna → potencjalna grawitacji. Na samej górze kinetyczna = 0.'},
+ {id:'zarowka',e:'💡',t:'Świeci żarówka',c:['el','prom'],x:['wew'],ex:'Elektryczna → promieniowania (światło) i wewnętrzna (żarówka się grzeje).'},
+ {id:'hydro',e:'🌊',t:'Elektrownia wodna – woda spada z tamy na turbinę',c:['pot','kin','el'],ex:'Woda z wysokości (potencjalna) nabiera prędkości (kinetyczna), obraca turbinę, a prądnica wytwarza energię elektryczną.'},
+ {id:'wegiel',e:'🏭',t:'Elektrownia węglowa',c:['chem','wew','kin','el'],ex:'Spalanie węgla (chemiczna) → gorąca para (wewnętrzna) → obraca turbinę (kinetyczna) → prądnica (elektryczna).'},
+ {id:'panel',e:'☀️',t:'Panel fotowoltaiczny na dachu',c:['prom','el'],ex:'Światło słoneczne (promieniowania) → elektryczna.'},
+ {id:'dynamo',e:'🚲',t:'Rowerzysta jedzie, dynamo zasila lampkę',c:['chem','kin','el','prom'],ex:'Mięśnie (chemiczna) → ruch (kinetyczna) → dynamo (elektryczna) → lampka (światło).'},
+ {id:'schody',e:'🪜',t:'Wchodzisz po schodach na 3. piętro',c:['chem','pot'],x:['wew','kin'],ex:'Energia chemiczna mięśni zamienia się w potencjalną grawitacji (jesteś wyżej) i wewnętrzną (rozgrzewasz się).'},
+ {id:'trampolina',e:'🤸',t:'Wybicie z trampoliny: od ugiętej siatki do najwyższego punktu',c:['spr','kin','pot'],ex:'Ugięta siatka (sprężystości) wyrzuca Cię w górę (kinetyczna), a wznosząc się, zyskujesz potencjalną grawitacji.'},
+ {id:'bungee',e:'🪢',t:'Skok na bungee: od skoku do najniższego punktu',c:['pot','kin','spr'],ex:'Spadasz (potencjalna → kinetyczna), potem lina się rozciąga i hamuje Cię (kinetyczna → sprężystości liny).'},
+ {id:'fotosynteza',e:'🌱',t:'Liść w słońcu (fotosynteza)',c:['prom','chem'],ex:'Roślina zamienia energię światła na energię chemiczną cukrów.'},
+ {id:'glosnik',e:'🔊',t:'Głośnik gra muzykę',c:['el','ak'],x:['wew'],ex:'Elektryczna → akustyczna (dźwięk).'},
+ {id:'slonce',e:'🌞',t:'Słońce świeci',c:['jad','prom'],x:['wew'],ex:'W jądrze Słońca zachodzą przemiany jądrowe → promieniowanie (światło).'},
+ {id:'zabawka',e:'🧸',t:'Nakręcany samochodzik-zabawka jedzie',c:['spr','kin'],x:['wew'],ex:'Nakręcona sprężyna (sprężystości) napędza koła (kinetyczna).'},
+ {id:'hustawka',e:'🎠',t:'Huśtawka z najwyższego punktu w dół',c:['pot','kin'],x:['wew'],ex:'W dół: potencjalna → kinetyczna. Opory powoli zamieniają część w wewnętrzną, dlatego huśtawka sama się zatrzymuje.'},
+ {id:'dlonie',e:'🙌',t:'Pocierasz szybko dłonie – robią się ciepłe',c:['kin','wew'],ex:'Ruch i tarcie → energia wewnętrzna.'},
+ {id:'wiatrak',e:'🌬️',t:'Turbina wiatrowa',c:['kin','el'],ex:'Energia kinetyczna wiatru obraca wirnik, prądnica daje energię elektryczną.'},
+];
+function okChain(ch,sc){
+  if(new Set(ch).size!==ch.length) return false;
+  return [sc.c,...(sc.alt||[])].some(core=>{
+    if(ch[0]!==core[0]) return false;
+    const allowed=new Set([...core,...(sc.x||[])]); if(ch.some(f=>!allowed.has(f))) return false;
+    const idx=core.map(f=>ch.indexOf(f)); return idx.every(i=>i>=0)&&idx.every((v,i)=>i===0||v>idx[i-1]);
+  });
+}
+function vPrzemiany(){
+  const pool=shuffle(BUILD.filter(b=>((S.q['b:'+b.id]||{}).b||0)<1)); const sc=(pool.length?pool:shuffle(BUILD))[0];
+  let ch=[];
+  const done=BUILD.filter(b=>((S.q['b:'+b.id]||{}).b||0)>=1).length;
+  function draw(){
+    $('view').innerHTML=`<div class="card"><div class="qhead"><span>🔋 Ułóż przemianę energii</span><span>${done} / ${BUILD.length}</span></div>
+      <div class="scen">${sc.e} ${esc(sc.t)}</div>
+      <p class="muted small">Klikaj formy energii po kolei – od tej, która była na początku.</p>
+      <div class="chain" id="chain">${ch.length?ch.map(f=>`<span class="f">${esc(FORMS[f])}</span>`).join('<span class="ar">→</span>'):'<span class="muted">…</span>'}</div>
+      <div class="forms">${Object.keys(FORMS).map(f=>`<button class="form" data-f="${f}" ${ch.includes(f)?'disabled':''}>${esc(FORMS[f])}</button>`).join('')}</div>
+      <div class="row"><button class="btn small" id="bUndo" ${ch.length?'':'disabled'}>Cofnij</button><button class="btn primary" id="bChk" ${ch.length>=2?'':'disabled'}>Sprawdź</button><button class="btn small" id="bSkip">Inny przykład</button></div>
+      <div id="pfb"></div></div>`;
+    $('view').querySelectorAll('.form').forEach(b=>b.onclick=()=>{ ch.push(b.dataset.f); draw(); });
+    $('bUndo').onclick=()=>{ ch.pop(); draw(); };
+    $('bSkip').onclick=vPrzemiany;
+    $('bChk').onclick=()=>{
+      const ok=okChain(ch,sc); record('b:'+sc.id,ok);
+      const full=sc.c.map(f=>FORMS[f]).join(' → ')+(sc.x&&sc.x.length?` (dodatkowo: ${sc.x.map(f=>FORMS[f]).join(', ')})`:'');
+      $('view').querySelectorAll('button').forEach(b=>b.disabled=true);
+      $('pfb').innerHTML=`<div class="fb ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Jeszcze nie'}</div><div><b>${esc(full)}</b></div><div class="muted" style="margin-top:4px">${esc(sc.ex)}</div></div>
+        <button class="btn primary wide next" id="bNextP">Następny przykład</button>`;
+      $('bNextP').onclick=vPrzemiany; header();
+    };
+  }
+  draw();
+}
+
+/* ============ KARTKÓWKA ============ */
+function vKartkowka(start){
+  if(!start){
+    const hist=S.tests.slice(-5).reverse();
+    $('view').innerHTML=`<div class="card"><h2>📝 Kartkówka próbna</h2>
+      <p>15 pytań ze wszystkich zagadnień – także zadania rachunkowe z jednostkami. Podpowiedzi zobaczysz dopiero na końcu, tak jak na prawdziwej kartkówce.</p>
+      <p class="muted small">Przygotuj kartkę i kalkulator. Liczby możesz wpisywać z przecinkiem.</p>
+      <button class="btn primary wide" id="bStart">Zaczynam</button>
+      ${hist.length?`<h3>Ostatnie wyniki</h3><p>${hist.map(h=>`${h.d}: <b>${h.p}%</b> (${grade(h.p)[0]})`).join('<br>')}</p>`:''}</div>`;
+    $('bStart').onclick=()=>vKartkowka(true); return;
+  }
+  const plan={praca:2,wzorW:2,wzorP:2,jedn:2,mocUrz:2,zlozone:2,energia:3};
+  let refs=[];
+  for(const [t,n] of Object.entries(plan)){
+    const st=shuffle(QS.filter(q=>q.t===t&&!q.star)), gs=GENS.filter(g=>g.t===t&&!g.star);
+    if(gs.length){ refs.push({gen:rnd(gs).id}); refs.push(...st.slice(0,n-1).map(q=>({id:q.id}))); }
+    else refs.push(...st.slice(0,n).map(q=>({id:q.id})));
+  }
+  startRound(refs,'Kartkówka próbna',true);
+}
+
+/* ============ ŚCIĄGA ============ */
+function vNauka(){
+  $('view').innerHTML=`<div class="card cheat">
+  <h3>🧱 Praca mechaniczna</h3>
+  <div class="def">Praca jest wykonywana, gdy <b>na ciało działa siła</b>, a ciało <b>przemieszcza się</b> w kierunku innym niż prostopadły do kierunku siły.</div>
+  <p>Gdy przemieszczenie jest zgodne z kierunkiem i zwrotem siły:</p>
+  <div class="formula">W = F · s</div>
+  <p>W – praca [J], F – siła [N], s – droga [m]. Praca to <b>iloczyn siły i drogi</b>. (W od ang. <i>work</i>.)</p>
+  <p><b>Praca NIE jest wykonywana, gdy:</b></p>
+  <ol><li><b>F = 0</b> – brak siły (krążek sunie po idealnie gładkim lodzie),</li>
+  <li><b>s = 0</b> – ciało się nie przesuwa (pchasz ścianę, trzymasz siatkę w miejscu, wisi lampa),</li>
+  <li><b>F ⊥ s</b> – siła prostopadła do ruchu (niesiesz torbę po poziomym chodniku).</li></ol>
+  <p class="muted small">Zgniatanie gąbki to praca – ciało się odkształca. Nauka do klasówki to praca umysłowa, nie mechaniczna.</p>
+
+  <h3>📏 Jednostka pracy – dżul</h3>
+  <div class="def"><b>1 J</b> to praca wykonana przez siłę <b>1 N</b> na drodze <b>1 m</b>: &nbsp;<b>1 J = 1 N · 1 m</b></div>
+  <p class="muted small">Od nazwiska Jamesa Prescotta Joule’a.</p>
+
+  <h3>⚙️ Moc</h3>
+  <div class="def">Moc informuje o tym, <b>jak szybko wykonywana jest praca</b>. Moc to iloraz pracy i czasu, w którym ta praca została wykonana.</div>
+  <div class="formula">P = W / t</div>
+  <p>P – moc [W], W – praca [J], t – czas [s]. (P od ang. <i>power</i>.)</p>
+  <div class="def"><b>1 W</b> to moc urządzenia, które w ciągu <b>1 s</b> wykonuje pracę <b>1 J</b>: &nbsp;<b>1 W = 1 J / 1 s</b></div>
+  <p><b>Moc urządzenia</b> mówi, jaką pracę wykonuje ono w ciągu 1 s. Czajnik 2000 W wykonuje w każdej sekundzie pracę 2000 J.</p>
+  <p>Wat – od nazwiska Jamesa Watta (XVIII w.), konstruktora silnika parowego. Moc pojazdów podaje się często w koniach mechanicznych: <b>1 KM ≈ 735 W</b>.</p>
+  <p class="muted small">⭐ Z podręcznika: moc chwilowa P = F · v (siła · prędkość).</p>
+
+  <h3>🔺 Trójkąty – przekształcanie wzorów</h3>
+  <div class="tri">
+    <svg viewBox="0 0 130 112" role="img" aria-label="Trójkąt: W na górze, F i s na dole"><path d="M65 4 L126 108 L4 108 Z M24 72 L106 72 M65 72 L65 108"/><text x="65" y="56" text-anchor="middle" font-size="26">W</text><text x="40" y="99" text-anchor="middle" font-size="22">F</text><text x="90" y="99" text-anchor="middle" font-size="22">s</text></svg>
+    <svg viewBox="0 0 130 112" role="img" aria-label="Trójkąt: W na górze, P i t na dole"><path d="M65 4 L126 108 L4 108 Z M24 72 L106 72 M65 72 L65 108"/><text x="65" y="56" text-anchor="middle" font-size="26">W</text><text x="40" y="99" text-anchor="middle" font-size="22">P</text><text x="90" y="99" text-anchor="middle" font-size="22">t</text></svg>
+  </div>
+  <p>Zakryj szukaną wielkość: obok siebie – <b>mnożysz</b>, jedna nad drugą – <b>dzielisz</b>.</p>
+  <table><tr><th>Szukam</th><th>Wzór</th><th>Szukam</th><th>Wzór</th></tr>
+  <tr><td>praca</td><td>W = F · s</td><td>praca</td><td>W = P · t</td></tr>
+  <tr><td>siła</td><td>F = W / s</td><td>moc</td><td>P = W / t</td></tr>
+  <tr><td>droga</td><td>s = W / F</td><td>czas</td><td>t = W / P</td></tr></table>
+
+  <h3>🔁 Zamiana jednostek</h3>
+  <table><tr><th>Przedrostek</th><th>Znaczy</th><th>Przykład</th></tr>
+  <tr><td>k (kilo)</td><td>· 1000</td><td>2,5 kJ = 2500 J; 1,2 kW = 1200 W; 2 kN = 2000 N</td></tr>
+  <tr><td>M (mega)</td><td>· 1 000 000</td><td>1,5 MJ = 1 500 000 J</td></tr>
+  <tr><td>m (mili)</td><td>: 1000</td><td>250 mJ = 0,25 J &nbsp;(<b>mJ ≠ MJ!</b>)</td></tr></table>
+  <table style="margin-top:8px"><tr><th>Czas</th><th>Długość</th></tr>
+  <tr><td>1 min = 60 s<br>1 h = 60 min = 3600 s<br>2 min = 120 s<br>1,5 h = 5400 s</td><td>1 km = 1000 m<br>1 m = 100 cm<br>50 cm = 0,5 m<br>20 cm = 0,2 m</td></tr></table>
+  <p class="muted small">⭐ Prędkość: km/h → m/s dzielimy przez 3,6 (72 km/h = 20 m/s).</p>
+
+  <h3>✍️ Jak zapisać zadanie, żeby pani nie miała się do czego przyczepić</h3>
+  <div class="sol">
+    <div class="muted small">Przykład z zeszytu: Oblicz pracę, jaką wykonuje siła 2 kN, przesuwając ciało na odległość 50 cm.</div>
+    <div><span class="k">Dane:</span> F = 2 kN = 2000 N; s = 50 cm = 0,5 m</div>
+    <div><span class="k">Szukane:</span> W = ?</div>
+    <div><span class="k">Wzór:</span> W = F · s</div>
+    <div><span class="k">Obliczenia:</span> W = 2000 N · 0,5 m = 1000 J</div>
+    <div><span class="k">Odpowiedź:</span> Siła wykonuje pracę 1000 J (1 kJ).</div>
+  </div>
+  <div class="sol" style="margin-top:8px">
+    <div class="muted small">Z kartki: Dźwig podniósł ładunek, wykonując pracę 18 000 J w czasie 2 min. Oblicz moc dźwigu.</div>
+    <div><span class="k">Dane:</span> W = 18 000 J; t = 2 min = 120 s</div>
+    <div><span class="k">Szukane:</span> P = ?</div>
+    <div><span class="k">Wzór:</span> P = W / t</div>
+    <div><span class="k">Obliczenia:</span> P = 18 000 J / 120 s = 150 W</div>
+    <div><span class="k">Odpowiedź:</span> Moc dźwigu wynosi 150 W.</div>
+  </div>
+
+  <div class="warn"><b>⚠️ Pułapki – za to najczęściej lecą punkty:</b><ul>
+    <li>Brak <b>Dane / Szukane / Odpowiedź</b> albo odpowiedź bez zdania.</li>
+    <li><b>Wynik bez jednostki</b> albo z błędną (moc w J, praca w W).</li>
+    <li><b>Niezamienione jednostki</b>: kJ, kW, kN, cm, min, h – zamieniaj w Danych, zanim podstawisz do wzoru.</li>
+    <li>Polecenie „wyraź w kW/kJ” – wynik <b>musi</b> być w tej jednostce (1000 W = 1 kW).</li>
+    <li><b>W</b> jako symbol = praca, <b>W</b> po liczbie = wat. <b>s</b> we wzorze W = F · s to droga, a po liczbie – sekunda.</li>
+    <li>Jednostki w obliczeniach: pisz je przy liczbach (2000 N · 0,5 m = 1000 J).</li>
+    <li>Ruch jednostajny → siła napędu = siła oporów (I zasada dynamiki).</li>
+    <li>Podnoszenie ciała o masie m: najpierw F = m · g (g = 10 N/kg), a droga to wysokość h.</li>
+  </ul></div>
+
+  <div class="warn"><b>🔎 Sprawdź swój zeszyt – „Moc – zadania”:</b><ul>
+    <li><b>Zad. 5</b>: w zeszycie jest 5000 · 800 = 4 000 000 J i moc 200 000. Poprawnie: W = 500 N · 8 m = <b>4000 J</b>, P = 4000 J / 20 s = <b>200 W</b>.</li>
+    <li><b>Zad. 6</b>: w zeszycie wynik 1000 W, a polecenie mówi „wyraź wynik w kilowatach”. Poprawnie: t = 2 h = 7200 s, P = 7 200 000 J / 7200 s = 1000 W = <b>1 kW</b>. Brakuje też zamiany 2 h na sekundy w Danych.</li>
+  </ul></div>
+
+  <h3>🔋 Energia</h3>
+  <div class="def">Energia to <b>zdolność ciała do wykonania pracy</b>. Symbol: <b>E</b>, jednostka: <b>dżul (J)</b> – taka sama jak pracy.</div>
+  <table><tr><th>Forma energii</th><th>Kiedy ją ma ciało / przykład</th></tr>
+  <tr><td>kinetyczna</td><td>ciało się porusza (im szybciej i większa masa, tym więcej)</td></tr>
+  <tr><td>potencjalna grawitacji</td><td>ciało uniesione na wysokość (im wyżej, tym więcej)</td></tr>
+  <tr><td>potencjalna sprężystości</td><td>ciało odkształcone: napięty łuk, ściśnięta sprężyna</td></tr>
+  <tr><td>wewnętrzna</td><td>związana z temperaturą i stanem skupienia (piszemy „wewnętrzna”, nie „cieplna”)</td></tr>
+  <tr><td>chemiczna</td><td>paliwa, pożywienie, baterie</td></tr>
+  <tr><td>elektryczna</td><td>prąd zasilający urządzenia</td></tr>
+  <tr><td>promieniowania</td><td>światło, mikrofale, promienie słoneczne</td></tr>
+  <tr><td>jądrowa</td><td>elektrownie jądrowe, wnętrze Słońca</td></tr></table>
+  <p style="margin-top:8px"><b>Energia mechaniczna</b> = potencjalna + kinetyczna.</p>
+  <div class="def"><b>Zasada zachowania energii:</b> energia nie znika i nie powstaje z niczego – zmienia tylko formę. W układzie izolowanym (bez oporów ruchu) całkowita energia mechaniczna jest stała.</div>
+  <table><tr><th>Sytuacja</th><th>Przemiana energii</th></tr>
+  <tr><td>🧍 ciało człowieka</td><td>chemiczna (pożywienie) → kinetyczna (ruch) + wewnętrzna (stała temperatura ciała); po schodach: → potencjalna</td></tr>
+  <tr><td>🚗 samochód jedzie</td><td>chemiczna (paliwo) → wewnętrzna (spalanie) → kinetyczna</td></tr>
+  <tr><td>🛑 samochód hamuje</td><td>kinetyczna → wewnętrzna (nagrzane hamulce)</td></tr>
+  <tr><td>🛷 zjazd na sankach</td><td>potencjalna grawitacji → kinetyczna (+ wewnętrzna przez tarcie); na dole, gdy sanki stają: kinetyczna → wewnętrzna</td></tr>
+  <tr><td>🛷 wciąganie sanek pod górę</td><td>chemiczna (mięśnie) → potencjalna grawitacji</td></tr>
+  <tr><td>🏹 łuk</td><td>potencjalna sprężystości → kinetyczna strzały</td></tr>
+  <tr><td>⚽ piłka w górę / w dół</td><td>w górę: kinetyczna → potencjalna; w dół: potencjalna → kinetyczna</td></tr>
+  <tr><td>🫖 czajnik / 💡 żarówka</td><td>elektryczna → wewnętrzna / elektryczna → promieniowania + wewnętrzna</td></tr>
+  <tr><td>🌊 elektrownia wodna</td><td>potencjalna wody → kinetyczna → elektryczna</td></tr></table>
+  </div>`;
+}
+
+/* ============ START ============ */
+go('start');
+</script>
+<script src="../nav.js" defer></script>
+</body>
+</html>
