@@ -166,6 +166,18 @@
       ],
       "added": "2026-09-26",
       "desc": "Biegnij, skacz i unikaj ptaków"
+    },
+    {
+      "id": "tabliczka-dodawania",
+      "file": "apps/tabliczka-dodawania.html",
+      "title": "Tabliczka dodawania – krok po kroku",
+      "emoji": "➕",
+      "subject": "matematyka",
+      "kids": [
+        "zoja"
+      ],
+      "added": "2026-09-26",
+      "desc": "Poziomy krok po kroku, kropki i naklejki"
     }
   ]
 }
