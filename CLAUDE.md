@@ -26,6 +26,14 @@ Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
 - `index.html` podmienia manifest i `apple-touch-icon` na dziecięce na stronie `#/<dziecko>`, więc „Dodaj do ekranu początkowego” z tej strony daje ikonkę dziecka.
 - `nav.js` – przycisk 🎒 powrotu do listy (lewy dolny róg), widoczny tylko w trybie ikonki; `add-app.mjs` wstawia go do każdej apki. Podgląd w przeglądarce: `&nav=1`.
 
+## Rozrywka zablokowana do czasu nauki
+
+- `learn.js` – w każdej apce do nauki liczy **aktywny** czas (apka na ekranie + klik/przewinięcie w ciągu 30 s) do `localStorage["nauka-czas-v1:<dziecko>"]`; pokazuje komunikat po przekroczeniu progu.
+- `gate.js` – w każdej apce z przedmiotu `rozrywka` zasłania grę, dopóki dziecko nie uzbiera dziś progu; próg: `kids[].unlockMinutes` w `apps.json` (teraz 5 min). Odblokowanie trwa do końca dnia.
+- `index.html` pokazuje „Dzisiaj nauki: X min” i kłódkę z paskiem postępu w sekcji Rozrywka.
+- `add-app.mjs` sam wstawia `learn.js` albo `gate.js` zależnie od `--subject` – nie dodawaj ich ręcznie.
+- Postęp jest na urządzeniu (osobno w ikonce PWA i w Safari) – to blokada dla dzieci, nie zabezpieczenie.
+
 ## Zasady dla apek
 
 - Jeden plik HTML, bez zewnętrznych plików lokalnych (dozwolone CDN i Google Fonts).

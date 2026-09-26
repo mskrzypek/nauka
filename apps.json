@@ -3,17 +3,20 @@
     {
       "id": "wiktor",
       "name": "Wiktor",
-      "color": "#E4572E"
+      "color": "#E4572E",
+      "unlockMinutes": 5
     },
     {
       "id": "igor",
       "name": "Igor",
-      "color": "#2A4D9B"
+      "color": "#2A4D9B",
+      "unlockMinutes": 5
     },
     {
       "id": "zoja",
       "name": "Zoja",
-      "color": "#1C7F54"
+      "color": "#1C7F54",
+      "unlockMinutes": 5
     }
   ],
   "subjects": [

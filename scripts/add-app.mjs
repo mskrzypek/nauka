@@ -72,9 +72,12 @@ if (!/<meta[^>]+name=["']robots["']/i.test(html)) {
     : `<meta name="robots" content="noindex, nofollow">\n${html}`;
 }
 
-// Przycisk powrotu do listy w trybie ikonki (PWA) – patrz nav.js.
-const NAV = `<script src="../nav.js" defer></script>`;
-if (!html.includes(NAV)) html = /<\/body>/i.test(html) ? html.replace(/<\/body>/i, `${NAV}\n</body>`) : `${html}\n${NAV}\n`;
+// Wspólne skrypty: nav.js (powrót do listy w PWA) oraz learn.js (licznik nauki) albo gate.js (blokada Rozrywki).
+const LEARN = `<script src="../learn.js" defer></script>`, GATE = `<script src="../gate.js" defer></script>`;
+html = html.replace(LEARN + "\n", "").replace(LEARN, "").replace(GATE + "\n", "").replace(GATE, "");
+const inject = (tag) => { if (!html.includes(tag)) html = /<\/body>/i.test(html) ? html.replace(/<\/body>/i, `${tag}\n</body>`) : `${html}\n${tag}\n`; };
+inject(`<script src="../nav.js" defer></script>`);
+inject(subject === "rozrywka" ? GATE : LEARN);
 
 const existing = manifest.apps.find((a) => a.id === slug);
 if (existing && !args.replace)

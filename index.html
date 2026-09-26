@@ -100,6 +100,17 @@ section h2{font-size:20px; font-weight:600; margin:0 0 10px; display:flex; gap:8
 .app .d{color:var(--muted); font-size:15px}
 .app .go{margin-left:auto; color:var(--muted); font-size:22px}
 .badge{background:var(--new); color:#fff; font-size:12px; font-weight:700; padding:2px 8px; border-radius:99px; margin-left:6px; vertical-align:2px; letter-spacing:.03em}
+.gate{display:flex; gap:12px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; margin-bottom:10px; box-shadow:var(--shadow)}
+.gate .lk{font-size:28px; flex:none}
+.gate .tx{flex:1; font-size:15px; line-height:1.35}
+.gate .bar{display:block; height:8px; background:var(--line); border-radius:6px; overflow:hidden; margin-top:6px}
+.gate .bar span{display:block; height:100%; background:#3DDC97; border-radius:6px}
+.gate.open{border-color:#3DDC97}
+.app.locked{opacity:.5; filter:grayscale(.6)}
+.app.locked .go{font-size:18px}
+.today{color:var(--muted); font-size:15px; margin:-8px 0 16px}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .empty{padding:28px; text-align:center; color:var(--muted); border:2px dashed var(--line); border-radius:16px; background:var(--surface)}
 :focus-visible{outline:3px solid var(--accent); outline-offset:2px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
@@ -147,6 +158,14 @@ function plural(n) {
   return d >= 2 && d <= 4 && (t < 12 || t > 14) ? "apki" : "apek";
 }
 
+// Aktywny czas nauki dziś (zapisuje go learn.js w apkach do nauki) i próg odblokowania Rozrywki.
+const GATED = "rozrywka";
+function learnedToday(kid) {
+  const r = store.get("nauka-czas-v1:" + kid, {}) || {};
+  return r.d === new Date().toLocaleDateString("sv") ? r.s || 0 : 0;
+}
+const needSec = k => (k.unlockMinutes || 5) * 60;
+
 function renderKid(kid) {
   const k = data.kids.find(x => x.id === kid);
   if (!k) return renderHome();
@@ -162,6 +181,7 @@ function renderKid(kid) {
       <span class="avatar" style="--c:${k.color}" aria-hidden="true">${esc(k.name[0])}</span>
       <h1>${esc(k.name)}</h1>
     </div>
+    <p class="today">📚 Dzisiaj nauki: <b>${Math.floor(learnedToday(kid) / 60)} min</b></p>
     ${subjects.length > 1 ? `<div class="chips" role="group" aria-label="Przedmiot">
       <button class="chip" data-f="all" aria-pressed="${filter === "all"}">Wszystko</button>
       ${subjects.map(s => `<button class="chip" data-f="${s.id}" aria-pressed="${filter === s.id}">${s.emoji} ${esc(s.name)}</button>`).join("")}
@@ -169,19 +189,24 @@ function renderKid(kid) {
     ${list.length ? shown.map(s => `
       <section>
         <h2><span aria-hidden="true">${s.emoji}</span> ${esc(s.name)}</h2>
+        ${s.id === GATED ? gateHtml(k) : ""}
         <div class="apps">${list.filter(a => a.subject === s.id).map(a => `
-          <a class="app" href="${esc(a.file)}?dla=${kid}" data-id="${esc(a.id)}" data-v="${esc(a.updated || a.added)}">
+          <a class="app${s.id === GATED && learnedToday(kid) < needSec(k) ? " locked" : ""}" href="${esc(a.file)}?dla=${kid}" data-id="${esc(a.id)}" data-v="${esc(a.updated || a.added)}">
             <span class="ico" aria-hidden="true">${esc(a.emoji)}</span>
             <span>
               <span class="t">${esc(a.title)}</span>${isNew(a, kid) ? `<span class="badge">NOWE</span>` : ""}<br>
               <span class="d">${a.desc ? esc(a.desc) + " · " : ""}${a.updated ? "poprawiona " + fmtDate(a.updated) : fmtDate(a.added)}</span>
             </span>
-            <span class="go" aria-hidden="true">›</span>
+            <span class="go" aria-hidden="true">${s.id === GATED && learnedToday(kid) < needSec(k) ? "🔒" : "›"}</span>
           </a>`).join("")}
         </div>
       </section>`).join("") : `<div class="empty">Jeszcze nie ma tu apek. Wkrótce będą! 🚀</div>`}`;
 
   $app.querySelectorAll(".chip").forEach(b => b.onclick = () => { filter = b.dataset.f; renderKid(kid); });
+  $app.querySelectorAll(".app.locked").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault(); e.stopImmediatePropagation();
+    const g = $app.querySelector(".gate"); g.classList.remove("shake"); void g.offsetWidth; g.classList.add("shake");
+  }));
   $app.querySelectorAll(".app").forEach(a => a.addEventListener("click", () => {
     const seen = store.get(seenKey(kid), []);
     const tag = a.dataset.id + "@" + a.dataset.v;
@@ -189,22 +214,31 @@ function renderKid(kid) {
   }));
 }
 
+function gateHtml(k) {
+  const s = learnedToday(k.id), need = needSec(k);
+  if (s >= need) return `<div class="gate open"><span class="lk">🔓</span><span class="tx"><b>Odblokowane na dziś!</b> Dobra robota – miłej zabawy.</span></div>`;
+  const left = Math.max(1, Math.ceil((need - s) / 60));
+  return `<div class="gate"><span class="lk">🔒</span><span class="tx"><b>Najpierw nauka, potem zabawa.</b> Poucz się jeszcze ${left} min w dowolnej apce do nauki, a gry odblokują się do końca dnia.
+    <span class="bar"><span style="width:${Math.min(100, Math.round(100 * s / need))}%"></span></span></span></div>`;
+}
+
 function route() {
   let kid = kidFromUrl();
   if (kid && !data.kids.some(k => k.id === kid)) kid = "";
   setPwa(kid);
   kid ? renderKid(kid) : renderHome();
-  window.scrollTo(0, 0);
 }
 
 const loadData = () => fetch("apps.json", { cache: "no-cache" }).then(r => r.json());
 loadData()
-  .then(j => { data = j; addEventListener("hashchange", () => { filter = "all"; route(); }); route(); })
+  .then(j => { data = j; addEventListener("hashchange", () => { filter = "all"; route(); window.scrollTo(0, 0); }); route(); })
   .catch(() => { $app.innerHTML = `<p class="lead">Nie udało się wczytać listy apek. Odśwież stronę.</p>`; });
 // Ikonka na ekranie początkowym wraca z tła bez przeładowania – dociągnij nowe apki.
 document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible" && data)
+  if (document.visibilityState === "visible" && data) {
+    route(); // odśwież licznik nauki i kłódkę Rozrywki
     loadData().then(j => { if (JSON.stringify(j) !== JSON.stringify(data)) { data = j; route(); } }).catch(() => {});
+  }
 });
 </script>
 </body>
