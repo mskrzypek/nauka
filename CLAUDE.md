@@ -29,6 +29,7 @@ Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
 ## Państwa świata
 
 - `apps/panstwa.html` czyta kraje z `apps/panstwa.json` (edytuj bezpośrednio w repo). Kontury, mapy i sąsiedzi są liczeni z mapy `world-atlas` (CDN), flagi z `flag-icons` (CDN) – dla nowego kraju wystarczy wpis w JSON z poprawnym kodem `iso` (alfa-2).
+- Stan: komplet 193 państw ONZ + Watykan (194). Pominięte kraje o spornym statusie: Kosowo, Tajwan, Palestyna.
 - Pola i zasady opisuje `_opis` w pliku. Ciekawostka (`fact`) nie może zawierać nazwy kraju. Sąsiadów przez terytoria zamorskie wyklucz w `noNeighbors`.
 
 ## PWA (ikonka na ekranie iPhone'a)

@@ -1,5 +1,5 @@
 {
-  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., CAR – Ameryka Środkowa i Karaiby, WAF – Afryka Zachodnia, GG – Zatoka Gwinejska, IO – wyspy Oceanu Indyjskiego, RU); noOutline: true – kraj za mały na pytanie o kształt.",
+  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., CAR – Ameryka Środkowa i Karaiby, WAF – Afryka Zachodnia, GG – Zatoka Gwinejska, IO – wyspy Oceanu Indyjskiego, PAC – wyspy Pacyfiku, RU); noOutline: true – kraj za mały na pytanie o kształt. point: [lon,lat] – dla kraju, którego nie ma na mapie (np. Tuvalu), rysowana jest kropka w tym miejscu.",
   "countries": [
     {
       "iso": "PL",
@@ -313,6 +313,7 @@
       "continent": [
         "OC"
       ],
+      "view": "OC",
       "fact": "Zajmuje cały kontynent, żyją tu kangury i koale, a przy wybrzeżu ciągnie się Wielka Rafa Koralowa."
     },
     {
@@ -322,6 +323,7 @@
       "continent": [
         "OC"
       ],
+      "view": "OC",
       "fact": "Składa się z dwóch dużych wysp, a jej symbolem jest nielot kiwi – od niego mieszkańców nazywa się „Kiwi”."
     },
     {
@@ -2145,6 +2147,178 @@
       ],
       "view": "SEA",
       "fact": "To jedno z najmłodszych państw świata – niepodległe od 2002 roku – leży na wschodniej części wyspy na północ od Australii."
+    },
+    {
+      "iso": "PG",
+      "name": "Papua-Nowa Gwinea",
+      "alt": [
+        "Papua Nowa Gwinea"
+      ],
+      "capital": "Port Moresby",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Mówi się tu ponad 800 językami – więcej niż w jakimkolwiek innym kraju, a w lasach żyją rajskie ptaki."
+    },
+    {
+      "iso": "FJ",
+      "name": "Fidżi",
+      "alt": [
+        "Fidzi",
+        "Fiji"
+      ],
+      "capital": "Suva",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Kraj leży na ponad 300 wyspach, przez jedną z nich przebiega południk 180 stopni, a najpopularniejszym sportem jest rugby."
+    },
+    {
+      "iso": "SB",
+      "name": "Wyspy Salomona",
+      "capital": "Honiara",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Na wyspie Guadalcanal toczyła się jedna z najważniejszych bitew II wojny światowej na Pacyfiku."
+    },
+    {
+      "iso": "VU",
+      "name": "Vanuatu",
+      "capital": "Port Vila",
+      "capAlt": [
+        "Port-Vila"
+      ],
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Na wyspie Pentecost mężczyźni skaczą z wysokich drewnianych wież z lianami przywiązanymi do nóg – to pierwowzór skoków na bungee."
+    },
+    {
+      "iso": "WS",
+      "name": "Samoa",
+      "capital": "Apia",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "W 2011 roku kraj przeniósł się na drugą stronę linii zmiany daty i „przeskoczył” cały piątek 30 grudnia."
+    },
+    {
+      "iso": "TO",
+      "name": "Tonga",
+      "capital": "Nukuʻalofa",
+      "capAlt": [
+        "Nuku'alofa",
+        "Nukualofa",
+        "Nuku’alofa"
+      ],
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "To jedyne królestwo na Pacyfiku, które nigdy nie było kolonią.",
+      "noOutline": true
+    },
+    {
+      "iso": "KI",
+      "name": "Kiribati",
+      "capital": "Tarawa",
+      "capAlt": [
+        "Południowa Tarawa",
+        "South Tarawa"
+      ],
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Jego wyspy leżą po obu stronach równika i linii zmiany daty, a to tu najwcześniej na świecie wita się Nowy Rok.",
+      "noOutline": true,
+      "clip": [
+        169,
+        -3,
+        178,
+        4
+      ]
+    },
+    {
+      "iso": "FM",
+      "name": "Mikronezja",
+      "alt": [
+        "Sfederowane Stany Mikronezji"
+      ],
+      "capital": "Palikir",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Na wyspie Yap jako pieniędzy używano ogromnych kamiennych kół – niektóre są większe od człowieka.",
+      "noOutline": true
+    },
+    {
+      "iso": "MH",
+      "name": "Wyspy Marshalla",
+      "capital": "Majuro",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Na atolu Bikini przeprowadzano próby bomb atomowych, a od jego nazwy wziął się strój kąpielowy bikini.",
+      "noOutline": true
+    },
+    {
+      "iso": "PW",
+      "name": "Palau",
+      "capital": "Ngerulmud",
+      "capNote": "To jedna z najmniej znanych stolic świata – mała osada na wyspie Babeldaob.",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Leży tu Jezioro Meduz, w którym można pływać wśród milionów meduz, które prawie nie parzą.",
+      "noOutline": true
+    },
+    {
+      "iso": "NR",
+      "name": "Nauru",
+      "capital": "Yaren",
+      "capNote": "Ten kraj nie ma oficjalnej stolicy – urzędy mieszczą się w Yaren.",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "To najmniejsza republika świata – całą wyspę można objechać samochodem w mniej niż pół godziny.",
+      "noOutline": true
+    },
+    {
+      "iso": "TV",
+      "name": "Tuvalu",
+      "capital": "Funafuti",
+      "continent": [
+        "OC"
+      ],
+      "view": "PAC",
+      "fact": "Ten kraj zarabia na sprzedaży swojej końcówki adresów internetowych .tv, a jego wyspy wznoszą się najwyżej kilka metrów nad morze.",
+      "noOutline": true,
+      "point": [
+        179.2,
+        -8.52
+      ]
+    },
+    {
+      "iso": "SM",
+      "name": "San Marino",
+      "capital": "San Marino",
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To jedno z najstarszych państw świata – według tradycji powstało w 301 roku – i leży na górze Titano, ze wszystkich stron otoczone przez Włochy.",
+      "noOutline": true
     }
   ]
 }
