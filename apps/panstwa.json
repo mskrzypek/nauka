@@ -1,35 +1,641 @@
 {
-  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie).",
+  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); noOutline: true – kraj za mały na pytanie o kształt.",
   "countries": [
-    { "iso": "PL", "name": "Polska", "capital": "Warszawa", "continent": ["EU"], "fact": "Najdłuższą rzeką jest tu Wisła, a w Wieliczce można zwiedzić kopalnię soli z kaplicą wyrzeźbioną w soli." },
-    { "iso": "DE", "name": "Niemcy", "capital": "Berlin", "continent": ["EU"], "fact": "To kraj z największą liczbą mieszkańców w Unii Europejskiej, a na wielu odcinkach jego autostrad nie ma ograniczenia prędkości." },
-    { "iso": "CZ", "name": "Czechy", "alt": ["Republika Czeska"], "capital": "Praga", "continent": ["EU"], "fact": "Stąd pochodzi bajkowy Krecik, a na rynku w stolicy działa jeden z najstarszych zegarów astronomicznych świata – Orloj." },
-    { "iso": "SK", "name": "Słowacja", "capital": "Bratysława", "continent": ["EU"], "fact": "Leży tu Gerlach – najwyższy szczyt całych Karpat." },
-    { "iso": "UA", "name": "Ukraina", "capital": "Kijów", "continent": ["EU"], "fact": "To największy kraj leżący w całości w Europie, a jego niebiesko-żółta flaga przypomina niebo nad polem zboża." },
-    { "iso": "LT", "name": "Litwa", "capital": "Wilno", "continent": ["EU"], "fact": "To jeden z trzech krajów bałtyckich, a sportem narodowym jest tu koszykówka." },
-    { "iso": "FR", "name": "Francja", "capital": "Paryż", "continent": ["EU"], "fact": "Stoi tu Wieża Eiffla, a kuchnia słynie z bagietek, rogalików i setek gatunków serów.", "noNeighbors": ["BR", "SR"] },
-    { "iso": "IT", "name": "Włochy", "capital": "Rzym", "continent": ["EU"], "fact": "Na mapie ma kształt buta, a w jego stolicy leży najmniejsze państwo świata – Watykan." },
-    { "iso": "ES", "name": "Hiszpania", "capital": "Madryt", "continent": ["EU"], "fact": "Stąd pochodzą paella i flamenco, a w Barcelonie od 1882 roku buduje się kościół Sagrada Família." },
-    { "iso": "GB", "name": "Wielka Brytania", "alt": ["Zjednoczone Królestwo", "UK"], "capital": "Londyn", "continent": ["EU"], "fact": "Składa się z Anglii, Szkocji, Walii i Irlandii Północnej, a w stolicy bije słynny dzwon Big Ben." },
-    { "iso": "GR", "name": "Grecja", "capital": "Ateny", "continent": ["EU"], "fact": "Tu w starożytności narodziły się igrzyska olimpijskie, a kraj ma kilka tysięcy wysp i wysepek." },
-    { "iso": "SE", "name": "Szwecja", "capital": "Sztokholm", "continent": ["EU"], "fact": "Stąd pochodzą Pippi Pończoszanka i sklepy IKEA, a zimą na dalekiej północy słońce w ogóle nie wschodzi." },
-    { "iso": "RU", "name": "Rosja", "capital": "Moskwa", "continent": ["EU", "AS"], "fact": "To największy kraj świata – leży na dwóch kontynentach i ma aż 11 stref czasowych." },
-    { "iso": "CN", "name": "Chiny", "capital": "Pekin", "continent": ["AS"], "fact": "Ciągnie się tu Wielki Mur, a w górskich lasach żyją pandy wielkie.", "noNeighbors": ["HK", "MO"] },
-    { "iso": "JP", "name": "Japonia", "capital": "Tokio", "continent": ["AS"], "fact": "Kraj leży na tysiącach wysp, a jego symbolami są góra Fudżi i superszybkie pociągi Shinkansen." },
-    { "iso": "IN", "name": "Indie", "capital": "Nowe Delhi", "capAlt": ["Delhi"], "continent": ["AS"], "fact": "To kraj z największą liczbą mieszkańców na świecie, a w Agrze stoi biały marmurowy grobowiec Tadż Mahal." },
-    { "iso": "TR", "name": "Turcja", "capital": "Ankara", "capNote": "Uwaga: stolicą nie jest Stambuł!", "continent": ["AS", "EU"], "fact": "Jego największe miasto, Stambuł, leży na dwóch kontynentach – w Europie i w Azji." },
-    { "iso": "TH", "name": "Tajlandia", "capital": "Bangkok", "continent": ["AS"], "fact": "Nazywa się ją Krainą Uśmiechu, a słoń jest tu zwierzęciem narodowym." },
-    { "iso": "EG", "name": "Egipt", "capital": "Kair", "continent": ["AF"], "fact": "Stoją tu piramidy w Gizie, a przez cały kraj płynie Nil – jedna z najdłuższych rzek świata." },
-    { "iso": "ZA", "name": "Republika Południowej Afryki", "alt": ["RPA"], "capital": "Pretoria", "capAlt": ["Kapsztad", "Bloemfontein"], "capNote": "Ten kraj ma trzy stolice: Pretoria (rząd), Kapsztad (parlament) i Bloemfontein (sądy).", "continent": ["AF"], "fact": "Ma aż trzy stolice, a na jego południowym krańcu leży Przylądek Igielny, gdzie spotykają się dwa oceany." },
-    { "iso": "KE", "name": "Kenia", "capital": "Nairobi", "continent": ["AF"], "fact": "Słynie z safari i świetnych biegaczy długodystansowych, a przez środek kraju przebiega równik." },
-    { "iso": "MA", "name": "Maroko", "capital": "Rabat", "continent": ["AF"], "fact": "Od Hiszpanii dzieli go tylko wąska Cieśnina Gibraltarska, a na południu i wschodzie zaczynają się piaski Sahary." },
-    { "iso": "US", "name": "Stany Zjednoczone", "alt": ["USA", "Stany Zjednoczone Ameryki"], "capital": "Waszyngton", "capAlt": ["Washington"], "capNote": "Uwaga: stolicą nie jest Nowy Jork!", "continent": ["NA"], "fact": "Składa się z 50 stanów, dlatego na fladze jest 50 gwiazdek – po jednej na każdy stan." },
-    { "iso": "CA", "name": "Kanada", "capital": "Ottawa", "capNote": "Uwaga: stolicą nie jest Toronto!", "continent": ["NA"], "fact": "Na fladze ma czerwony liść klonu, a jego wybrzeże jest najdłuższe na świecie." },
-    { "iso": "MX", "name": "Meksyk", "capital": "Meksyk", "capAlt": ["Miasto Meksyk", "Ciudad de México"], "capNote": "Stolica nazywa się tak samo jak kraj.", "continent": ["NA"], "fact": "Majowie i Aztekowie budowali tu piramidy, a stąd pochodzą tacos i kukurydziane tortille." },
-    { "iso": "BR", "name": "Brazylia", "capital": "Brasília", "capAlt": ["Brasilia", "Brazylia"], "capNote": "Uwaga: stolicą nie jest Rio de Janeiro!", "continent": ["SA"], "fact": "Rośnie tu największa część Puszczy Amazońskiej, a piłkarze tego kraju wygrali mundial aż 5 razy – najwięcej na świecie.", "noNeighbors": ["FR"] },
-    { "iso": "AR", "name": "Argentyna", "capital": "Buenos Aires", "continent": ["SA"], "fact": "To ojczyzna tanga i Leo Messiego, a na dalekim południu leży Ziemia Ognista – blisko Antarktydy." },
-    { "iso": "PE", "name": "Peru", "capital": "Lima", "continent": ["SA"], "fact": "Wysoko w Andach leżą tu ruiny miasta Inków – Machu Picchu." },
-    { "iso": "AU", "name": "Australia", "capital": "Canberra", "capNote": "Uwaga: stolicą nie jest Sydney!", "continent": ["OC"], "fact": "Zajmuje cały kontynent, żyją tu kangury i koale, a przy wybrzeżu ciągnie się Wielka Rafa Koralowa." },
-    { "iso": "NZ", "name": "Nowa Zelandia", "capital": "Wellington", "continent": ["OC"], "fact": "Składa się z dwóch dużych wysp, a jej symbolem jest nielot kiwi – od niego mieszkańców nazywa się „Kiwi”." }
+    {
+      "iso": "PL",
+      "name": "Polska",
+      "capital": "Warszawa",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Najdłuższą rzeką jest tu Wisła, a w Wieliczce można zwiedzić kopalnię soli z kaplicą wyrzeźbioną w soli."
+    },
+    {
+      "iso": "DE",
+      "name": "Niemcy",
+      "capital": "Berlin",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To kraj z największą liczbą mieszkańców w Unii Europejskiej, a na wielu odcinkach jego autostrad nie ma ograniczenia prędkości."
+    },
+    {
+      "iso": "CZ",
+      "name": "Czechy",
+      "alt": [
+        "Republika Czeska"
+      ],
+      "capital": "Praga",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Stąd pochodzi bajkowy Krecik, a na rynku w stolicy działa jeden z najstarszych zegarów astronomicznych świata – Orloj."
+    },
+    {
+      "iso": "SK",
+      "name": "Słowacja",
+      "capital": "Bratysława",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Leży tu Gerlach – najwyższy szczyt całych Karpat."
+    },
+    {
+      "iso": "UA",
+      "name": "Ukraina",
+      "capital": "Kijów",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To największy kraj leżący w całości w Europie, a jego niebiesko-żółta flaga przypomina niebo nad polem zboża."
+    },
+    {
+      "iso": "LT",
+      "name": "Litwa",
+      "capital": "Wilno",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To jeden z trzech krajów bałtyckich, a sportem narodowym jest tu koszykówka."
+    },
+    {
+      "iso": "FR",
+      "name": "Francja",
+      "capital": "Paryż",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Stoi tu Wieża Eiffla, a kuchnia słynie z bagietek, rogalików i setek gatunków serów.",
+      "noNeighbors": [
+        "BR",
+        "SR"
+      ]
+    },
+    {
+      "iso": "IT",
+      "name": "Włochy",
+      "capital": "Rzym",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Na mapie ma kształt buta, a w jego stolicy leży najmniejsze państwo świata – Watykan."
+    },
+    {
+      "iso": "ES",
+      "name": "Hiszpania",
+      "capital": "Madryt",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Stąd pochodzą paella i flamenco, a w Barcelonie od 1882 roku buduje się kościół Sagrada Família."
+    },
+    {
+      "iso": "GB",
+      "name": "Wielka Brytania",
+      "alt": [
+        "Zjednoczone Królestwo",
+        "UK"
+      ],
+      "capital": "Londyn",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Składa się z Anglii, Szkocji, Walii i Irlandii Północnej, a w stolicy bije słynny dzwon Big Ben."
+    },
+    {
+      "iso": "GR",
+      "name": "Grecja",
+      "capital": "Ateny",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Tu w starożytności narodziły się igrzyska olimpijskie, a kraj ma kilka tysięcy wysp i wysepek."
+    },
+    {
+      "iso": "SE",
+      "name": "Szwecja",
+      "capital": "Sztokholm",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Stąd pochodzą Pippi Pończoszanka i sklepy IKEA, a zimą na dalekiej północy słońce w ogóle nie wschodzi."
+    },
+    {
+      "iso": "RU",
+      "name": "Rosja",
+      "capital": "Moskwa",
+      "continent": [
+        "EU",
+        "AS"
+      ],
+      "fact": "To największy kraj świata – leży na dwóch kontynentach i ma aż 11 stref czasowych."
+    },
+    {
+      "iso": "CN",
+      "name": "Chiny",
+      "capital": "Pekin",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Ciągnie się tu Wielki Mur, a w górskich lasach żyją pandy wielkie.",
+      "noNeighbors": [
+        "HK",
+        "MO"
+      ]
+    },
+    {
+      "iso": "JP",
+      "name": "Japonia",
+      "capital": "Tokio",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Kraj leży na tysiącach wysp, a jego symbolami są góra Fudżi i superszybkie pociągi Shinkansen."
+    },
+    {
+      "iso": "IN",
+      "name": "Indie",
+      "capital": "Nowe Delhi",
+      "capAlt": [
+        "Delhi"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "To kraj z największą liczbą mieszkańców na świecie, a w Agrze stoi biały marmurowy grobowiec Tadż Mahal."
+    },
+    {
+      "iso": "TR",
+      "name": "Turcja",
+      "capital": "Ankara",
+      "capNote": "Uwaga: stolicą nie jest Stambuł!",
+      "continent": [
+        "AS",
+        "EU"
+      ],
+      "fact": "Jego największe miasto, Stambuł, leży na dwóch kontynentach – w Europie i w Azji."
+    },
+    {
+      "iso": "TH",
+      "name": "Tajlandia",
+      "capital": "Bangkok",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Nazywa się ją Krainą Uśmiechu, a słoń jest tu zwierzęciem narodowym."
+    },
+    {
+      "iso": "EG",
+      "name": "Egipt",
+      "capital": "Kair",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Stoją tu piramidy w Gizie, a przez cały kraj płynie Nil – jedna z najdłuższych rzek świata."
+    },
+    {
+      "iso": "ZA",
+      "name": "Republika Południowej Afryki",
+      "alt": [
+        "RPA"
+      ],
+      "capital": "Pretoria",
+      "capAlt": [
+        "Kapsztad",
+        "Bloemfontein"
+      ],
+      "capNote": "Ten kraj ma trzy stolice: Pretoria (rząd), Kapsztad (parlament) i Bloemfontein (sądy).",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Ma aż trzy stolice, a na jego południowym krańcu leży Przylądek Igielny, gdzie spotykają się dwa oceany."
+    },
+    {
+      "iso": "KE",
+      "name": "Kenia",
+      "capital": "Nairobi",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Słynie z safari i świetnych biegaczy długodystansowych, a przez środek kraju przebiega równik."
+    },
+    {
+      "iso": "MA",
+      "name": "Maroko",
+      "capital": "Rabat",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Od Hiszpanii dzieli go tylko wąska Cieśnina Gibraltarska, a na południu i wschodzie zaczynają się piaski Sahary."
+    },
+    {
+      "iso": "US",
+      "name": "Stany Zjednoczone",
+      "alt": [
+        "USA",
+        "Stany Zjednoczone Ameryki"
+      ],
+      "capital": "Waszyngton",
+      "capAlt": [
+        "Washington"
+      ],
+      "capNote": "Uwaga: stolicą nie jest Nowy Jork!",
+      "continent": [
+        "NA"
+      ],
+      "fact": "Składa się z 50 stanów, dlatego na fladze jest 50 gwiazdek – po jednej na każdy stan."
+    },
+    {
+      "iso": "CA",
+      "name": "Kanada",
+      "capital": "Ottawa",
+      "capNote": "Uwaga: stolicą nie jest Toronto!",
+      "continent": [
+        "NA"
+      ],
+      "fact": "Na fladze ma czerwony liść klonu, a jego wybrzeże jest najdłuższe na świecie."
+    },
+    {
+      "iso": "MX",
+      "name": "Meksyk",
+      "capital": "Meksyk",
+      "capAlt": [
+        "Miasto Meksyk",
+        "Ciudad de México"
+      ],
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "NA"
+      ],
+      "fact": "Majowie i Aztekowie budowali tu piramidy, a stąd pochodzą tacos i kukurydziane tortille."
+    },
+    {
+      "iso": "BR",
+      "name": "Brazylia",
+      "capital": "Brasília",
+      "capAlt": [
+        "Brasilia",
+        "Brazylia"
+      ],
+      "capNote": "Uwaga: stolicą nie jest Rio de Janeiro!",
+      "continent": [
+        "SA"
+      ],
+      "fact": "Rośnie tu największa część Puszczy Amazońskiej, a piłkarze tego kraju wygrali mundial aż 5 razy – najwięcej na świecie.",
+      "noNeighbors": [
+        "FR"
+      ]
+    },
+    {
+      "iso": "AR",
+      "name": "Argentyna",
+      "capital": "Buenos Aires",
+      "continent": [
+        "SA"
+      ],
+      "fact": "To ojczyzna tanga i Leo Messiego, a na dalekim południu leży Ziemia Ognista – blisko Antarktydy."
+    },
+    {
+      "iso": "PE",
+      "name": "Peru",
+      "capital": "Lima",
+      "continent": [
+        "SA"
+      ],
+      "fact": "Wysoko w Andach leżą tu ruiny miasta Inków – Machu Picchu."
+    },
+    {
+      "iso": "AU",
+      "name": "Australia",
+      "capital": "Canberra",
+      "capNote": "Uwaga: stolicą nie jest Sydney!",
+      "continent": [
+        "OC"
+      ],
+      "fact": "Zajmuje cały kontynent, żyją tu kangury i koale, a przy wybrzeżu ciągnie się Wielka Rafa Koralowa."
+    },
+    {
+      "iso": "NZ",
+      "name": "Nowa Zelandia",
+      "capital": "Wellington",
+      "continent": [
+        "OC"
+      ],
+      "fact": "Składa się z dwóch dużych wysp, a jej symbolem jest nielot kiwi – od niego mieszkańców nazywa się „Kiwi”."
+    },
+    {
+      "iso": "AL",
+      "name": "Albania",
+      "capital": "Tirana",
+      "continent": [
+        "EU"
+      ],
+      "fact": "W górach i na plażach stoją tu tysiące betonowych bunkrów zbudowanych w czasach komunizmu."
+    },
+    {
+      "iso": "AD",
+      "name": "Andora",
+      "capital": "Andora",
+      "capAlt": [
+        "Andora la Vella",
+        "Andorra la Vella"
+      ],
+      "capNote": "Stolica nazywa się Andora la Vella – w skrócie tak jak kraj.",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To małe górskie państwo leży wysoko w Pirenejach, między Francją a Hiszpanią.",
+      "noOutline": true
+    },
+    {
+      "iso": "AT",
+      "name": "Austria",
+      "capital": "Wiedeń",
+      "continent": [
+        "EU"
+      ],
+      "fact": "W Salzburgu urodził się tu kompozytor Mozart, a w Alpach jest mnóstwo tras narciarskich."
+    },
+    {
+      "iso": "BY",
+      "name": "Białoruś",
+      "capital": "Mińsk",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Dzieli z Polską Puszczę Białowieską, w której żyją żubry."
+    },
+    {
+      "iso": "BE",
+      "name": "Belgia",
+      "capital": "Bruksela",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Słynie z czekolady, gofrów i frytek, a w stolicy mają siedzibę najważniejsze instytucje Unii Europejskiej."
+    },
+    {
+      "iso": "BA",
+      "name": "Bośnia i Hercegowina",
+      "alt": [
+        "Bośnia"
+      ],
+      "capital": "Sarajewo",
+      "continent": [
+        "EU"
+      ],
+      "fact": "W Mostarze stoi słynny kamienny Stary Most, z którego odważni skaczą do rzeki Neretwy."
+    },
+    {
+      "iso": "BG",
+      "name": "Bułgaria",
+      "capital": "Sofia",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Słynie z olejku różanego z Doliny Róż, a kiwnięcie głową w górę i w dół oznacza tu często „nie”."
+    },
+    {
+      "iso": "HR",
+      "name": "Chorwacja",
+      "capital": "Zagrzeb",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Ma ponad tysiąc wysp na Adriatyku, a to stąd pochodzi krawat."
+    },
+    {
+      "iso": "DK",
+      "name": "Dania",
+      "capital": "Kopenhaga",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Stąd pochodzą klocki LEGO, a w stolicy siedzi na kamieniu pomnik Małej Syrenki z baśni Andersena."
+    },
+    {
+      "iso": "EE",
+      "name": "Estonia",
+      "capital": "Tallinn",
+      "capAlt": [
+        "Talin"
+      ],
+      "continent": [
+        "EU"
+      ],
+      "fact": "To najmniejszy z trzech krajów bałtyckich, a prawie każdą sprawę w urzędzie można tu załatwić przez internet."
+    },
+    {
+      "iso": "FI",
+      "name": "Finlandia",
+      "capital": "Helsinki",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Nazywa się ją krainą tysięcy jezior, a w Laponii, za kołem podbiegunowym, według legendy mieszka Święty Mikołaj."
+    },
+    {
+      "iso": "HU",
+      "name": "Węgry",
+      "capital": "Budapeszt",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Stąd pochodzi kostka Rubika, a stolicę przecina Dunaj."
+    },
+    {
+      "iso": "IS",
+      "name": "Islandia",
+      "capital": "Reykjavík",
+      "capAlt": [
+        "Reykjavik",
+        "Rejkiawik"
+      ],
+      "continent": [
+        "EU"
+      ],
+      "fact": "Na tej wyspie są czynne wulkany, gorące gejzery i wielkie lodowce – to kraina ognia i lodu."
+    },
+    {
+      "iso": "IE",
+      "name": "Irlandia",
+      "capital": "Dublin",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Nazywa się ją Zieloną Wyspą, a jej symbolami są koniczyna i święty Patryk."
+    },
+    {
+      "iso": "LV",
+      "name": "Łotwa",
+      "capital": "Ryga",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Ponad połowę kraju pokrywają lasy, a stolica słynie z pięknych secesyjnych kamienic."
+    },
+    {
+      "iso": "LI",
+      "name": "Liechtenstein",
+      "capital": "Vaduz",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To malutkie księstwo w Alpach, wciśnięte między Szwajcarię i Austrię, nie ma nawet własnego lotniska."
+    },
+    {
+      "iso": "LU",
+      "name": "Luksemburg",
+      "capital": "Luksemburg",
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To jedno z najmniejszych i najbogatszych państw Europy, a autobusy i pociągi są tu dla wszystkich za darmo."
+    },
+    {
+      "iso": "MT",
+      "name": "Malta",
+      "capital": "Valletta",
+      "capAlt": [
+        "Valetta"
+      ],
+      "continent": [
+        "EU"
+      ],
+      "fact": "To wyspiarski kraj na Morzu Śródziemnym, a jego stolica jest najmniejszą stolicą w Unii Europejskiej."
+    },
+    {
+      "iso": "MD",
+      "name": "Mołdawia",
+      "capital": "Kiszyniów",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Leży między Rumunią a Ukrainą, a pod ziemią ma ogromne piwnice z winem, ciągnące się przez wiele kilometrów."
+    },
+    {
+      "iso": "MC",
+      "name": "Monako",
+      "capital": "Monako",
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To drugie najmniejsze państwo świata, słynne z kasyna i wyścigu Formuły 1 ulicami miasta.",
+      "noOutline": true
+    },
+    {
+      "iso": "ME",
+      "name": "Czarnogóra",
+      "capital": "Podgorica",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Nazwa kraju pochodzi od ciemnych, zalesionych gór, a nad Adriatykiem leży piękna Zatoka Kotorska."
+    },
+    {
+      "iso": "NL",
+      "name": "Holandia",
+      "alt": [
+        "Niderlandy"
+      ],
+      "capital": "Amsterdam",
+      "capNote": "Stolicą jest Amsterdam, choć rząd i król urzędują w Hadze.",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Duża część kraju leży poniżej poziomu morza, a słynie z wiatraków, tulipanów i rowerów."
+    },
+    {
+      "iso": "MK",
+      "name": "Macedonia Północna",
+      "alt": [
+        "Macedonia"
+      ],
+      "capital": "Skopje",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Nad Jeziorem Ochrydzkim, jednym z najstarszych jezior Europy, stoją średniowieczne cerkwie."
+    },
+    {
+      "iso": "NO",
+      "name": "Norwegia",
+      "capital": "Oslo",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Słynie z głębokich fiordów, a latem na dalekiej północy słońce świeci nawet o północy.",
+      "clip": [
+        4,
+        57,
+        32,
+        72
+      ]
+    },
+    {
+      "iso": "PT",
+      "name": "Portugalia",
+      "capital": "Lizbona",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Stąd wyruszali wielcy żeglarze odkrywcy, a w Nazaré surferzy pływają na jednych z największych fal świata.",
+      "clip": [
+        -10,
+        36.8,
+        -6,
+        42.3
+      ]
+    },
+    {
+      "iso": "RO",
+      "name": "Rumunia",
+      "capital": "Bukareszt",
+      "continent": [
+        "EU"
+      ],
+      "fact": "W górach Transylwanii stoi zamek Bran, nazywany zamkiem Drakuli."
+    },
+    {
+      "iso": "RS",
+      "name": "Serbia",
+      "capital": "Belgrad",
+      "continent": [
+        "EU"
+      ],
+      "fact": "W stolicy łączą się dwie wielkie rzeki – Dunaj i Sawa."
+    },
+    {
+      "iso": "SI",
+      "name": "Słowenia",
+      "capital": "Lublana",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Ma tylko krótki kawałek wybrzeża, a w Alpach Julijskich leży jezioro Bled z wysepką i kościołem."
+    },
+    {
+      "iso": "CH",
+      "name": "Szwajcaria",
+      "capital": "Berno",
+      "capNote": "Uwaga: stolicą nie jest Zurych ani Genewa!",
+      "continent": [
+        "EU"
+      ],
+      "fact": "Słynie z zegarków, czekolady i serów z dziurami, a urzędowo mówi się tu aż czterema językami."
+    },
+    {
+      "iso": "VA",
+      "name": "Watykan",
+      "capital": "Watykan",
+      "capNote": "To państwo-miasto: stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "EU"
+      ],
+      "fact": "To najmniejsze państwo świata – leży w środku Rzymu, a rządzi nim papież.",
+      "noOutline": true
+    }
   ]
 }
