@@ -195,6 +195,20 @@
       ],
       "added": "2026-09-27",
       "desc": "Słówka ze wszystkich lekcji, PL → DE"
+    },
+    {
+      "id": "panstwa",
+      "file": "apps/panstwa.html",
+      "title": "Państwa świata – flagi, stolice, mapa",
+      "emoji": "🌍",
+      "subject": "geografia",
+      "kids": [
+        "wiktor",
+        "igor",
+        "zoja"
+      ],
+      "added": "2026-09-27",
+      "desc": "Flagi, stolice, kontury, mapa – na razie 30 krajów"
     }
   ]
 }

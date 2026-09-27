@@ -26,6 +26,11 @@ Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
 - Nowa lekcja = nowy obiekt **na końcu** `lessons` (`id`, `title`, `words`). Ostatnia lekcja jest pokazywana jako „Na najbliższą lekcję”, starsze wracają w powtórkach (odstępy 1–2–4–7–14–30 dni).
 - Nie zmieniaj `id` lekcji ani `pl`/`de` istniejących słówek – po nich zapisany jest postęp. Rzeczowniki z rodzajnikiem (`die Blumen`), `note` np. „l.mn.”, `alt` – inne poprawne odpowiedzi, `type: "zdanie"` – bez wielkości liter i interpunkcji.
 
+## Państwa świata
+
+- `apps/panstwa.html` czyta kraje z `apps/panstwa.json` (edytuj bezpośrednio w repo). Kontury, mapy i sąsiedzi są liczeni z mapy `world-atlas` (CDN), flagi z `flag-icons` (CDN) – dla nowego kraju wystarczy wpis w JSON z poprawnym kodem `iso` (alfa-2).
+- Pola i zasady opisuje `_opis` w pliku. Ciekawostka (`fact`) nie może zawierać nazwy kraju. Sąsiadów przez terytoria zamorskie wyklucz w `noNeighbors`.
+
 ## PWA (ikonka na ekranie iPhone'a)
 
 - `manifest.webmanifest` + `icons/nauka-*.png` – ogólne; `manifest-<dziecko>.webmanifest` + `icons/<dziecko>-*.png` – per dziecko (start `./?dla=<dziecko>`, etykieta „Nauka”). Generuje je `scripts/pwa.mjs` z szablonu `tools/icon.html` (headless Chrome + ImageMagick).

@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Państwa świata – flagi, stolice, mapa</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3/dist/d3-array.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<style>
+:root{
+  --paper:#F3F7FA; --grid:#E0E9F0; --ink:#17283A; --muted:#5A6B7D; --line:#CFDBE6; --surface:#FFFFFF; --soft:#EAF1F7;
+  --accent:#F26B1D; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warnbg:#FFF4D6;
+  --sea:#CFE6F5; --land:#E4DCCB; --border:#FFFFFF; --hi:#F26B1D; --shape:#2E7D5B;
+  --shadow:0 1px 2px rgba(23,40,58,.06),0 6px 18px rgba(23,40,58,.07);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0E1822; --grid:#15222F; --ink:#E6EEF6; --muted:#9DB0C3; --line:#2A3B4D; --surface:#14212E; --soft:#1A2A39;
+    --accent:#FF8A3D; --accent-ink:#0E1822; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warnbg:#3A3116;
+    --sea:#12324A; --land:#4A5663; --border:#14212E; --hi:#FF8A3D; --shape:#5CC99A;
+    --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:680px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2,h3{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(28px,7.5vw,38px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:not-allowed; opacity:.45}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.small{padding:5px 12px; font-size:14px}
+.btn.wide{width:100%; padding:13px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.chips{display:flex; gap:6px; overflow-x:auto; padding:2px 2px 8px; margin:0 -2px 6px; scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none; border:1px solid var(--line); background:var(--surface); border-radius:99px; padding:6px 12px; font-size:15px; font-weight:700}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.seg{display:grid; grid-template-columns:1fr 1fr; background:var(--soft); border-radius:12px; padding:4px; gap:4px; margin:10px 0 14px}
+.seg button{border:0; background:transparent; border-radius:9px; padding:8px 6px; font:700 15px var(--fh)}
+.seg button[aria-pressed="true"]{background:var(--surface); box-shadow:var(--shadow)}
+.tiles{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.tile{text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; box-shadow:var(--shadow)}
+.tile .i{font-size:26px; display:block} .tile .t{font:800 17px var(--fh); display:block} .tile .d{color:var(--muted); font-size:14px; line-height:1.3; display:block}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--ink); color:var(--paper); border:0; border-radius:16px; padding:14px 16px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:30px} .big .t{font:800 19px var(--fh); display:block} .big .d{opacity:.8; font-size:15px}
+.cont{display:grid; grid-template-columns:1fr auto; gap:2px 10px; padding:8px 0; border-top:1px solid var(--line); font-size:16px}
+.cont:first-of-type{border-top:0}
+.bar{grid-column:1/3; height:8px; background:var(--soft); border-radius:6px; overflow:hidden}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+
+/* mapa, kontur, flaga */
+.map{display:block; width:100%; height:auto; border-radius:14px; background:var(--sea); touch-action:manipulation}
+.map path.l{fill:var(--land); stroke:var(--border); stroke-width:.6; vector-effect:non-scaling-stroke}
+.map path.h{fill:var(--hi)}
+.map path.s{fill:var(--sea)}
+.map circle.mk{fill:none; stroke:var(--hi); stroke-width:3}
+.map path.ok{fill:var(--ok)} .map path.no{fill:var(--bad)}
+.shape{display:block; width:100%; max-width:360px; height:auto; margin:0 auto}
+.shape path{fill:var(--shape); stroke:var(--ink); stroke-width:1.2; stroke-linejoin:round; vector-effect:non-scaling-stroke}
+.flag{display:block; margin:0 auto; width:min(260px,70%); aspect-ratio:4/3; object-fit:cover; border-radius:8px; box-shadow:0 0 0 1px var(--line), var(--shadow); background:var(--soft)}
+.fl{width:30px; aspect-ratio:4/3; object-fit:cover; border-radius:3px; box-shadow:0 0 0 1px var(--line); vertical-align:-5px; flex:none}
+
+/* pytanie */
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:14px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)} .q.warn{border-color:#E0A800}
+.qt{font:800 21px/1.25 var(--fh); margin:0 0 10px}
+.qt .n{color:var(--accent)}
+.vis{margin:6px 0 12px}
+.inp{width:100%; font:700 22px var(--fb); padding:12px 14px; border:2px solid var(--line); border-radius:14px; background:var(--surface); color:var(--ink)}
+.inp:focus{outline:none; border-color:var(--accent)}
+.opts{display:grid; gap:8px}
+.opt{display:flex; gap:10px; align-items:center; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; font-weight:700; line-height:1.3}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.opt:disabled{opacity:1; cursor:default}
+.fb{margin-top:12px; border-radius:14px; padding:12px 14px}
+.fb.ok{background:var(--okbg)} .fb.bad{background:var(--badbg)} .fb.warn{background:var(--warnbg)}
+.fb .h{font:800 19px var(--fh)}
+.info{display:flex; gap:10px; align-items:flex-start; margin-top:8px}
+.info .fl{width:44px; margin-top:3px}
+.hint{border:0; background:transparent; color:var(--accent); font:800 15px var(--fh); padding:6px 0}
+
+/* atlas */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px}
+.cty{display:flex; flex-direction:column; gap:6px; align-items:flex-start; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:10px; box-shadow:var(--shadow); font-weight:700; line-height:1.25}
+.cty .fl{width:100%; max-width:none}
+.cty .m{font-size:13px; color:var(--muted); font-weight:400}
+.facts{display:grid; grid-template-columns:auto 1fr; gap:6px 12px; margin:12px 0}
+.facts dt{color:var(--muted)} .facts dd{margin:0; font-weight:700}
+.nb{display:flex; flex-wrap:wrap; gap:6px}
+.nb span{display:flex; gap:6px; align-items:center; background:var(--soft); border-radius:99px; padding:3px 10px 3px 4px; font-size:15px; font-weight:700}
+.nb .fl{width:24px; border-radius:50%; aspect-ratio:1}
+.twocol{display:grid; grid-template-columns:1fr; gap:10px}
+@media (min-width:620px){ .twocol{grid-template-columns:1fr 1fr} }
+.load{padding:40px 0; text-align:center; color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"><div class="load">🌍 Ładuję mapę świata…</div></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+const KEY='panstwa-v1:'+kid;
+let S={q:{},days:[],easy:kid==='zoja',cont:'all'}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const today=()=>new Date().toLocaleDateString('sv');
+
+/* ============ SŁOWNIKI ============ */
+const CONT={EU:'Europa',AS:'Azja',AF:'Afryka',NA:'Ameryka Północna',SA:'Ameryka Południowa',OC:'Australia i Oceania'};
+// Widoki map: prostokąt [lon,lat] do pokazania.
+const VIEWS={EU:[[-25,34],[45,71]],AS:[[25,-10],[150,60]],AF:[[-20,-36],[53,38]],NA:[[-168,8],[-52,72]],SA:[[-85,-56],[-33,13]],OC:[[110,-48],[180,-8]],RU:[[20,38],[190,78]]};
+// Kody liczbowe ISO (z mapy) → kody dwuliterowe.
+const N2A=(()=>{ const s='004AF008AL012DZ016AS020AD024AO660AI010AQ028AG032AR051AM533AW036AU040AT031AZ044BS048BH050BD052BB112BY056BE084BZ204BJ060BM064BT068BO070BA072BW076BR086IO096BN100BG854BF108BI116KH120CM124CA132CV136KY140CF148TD152CL156CN170CO174KM178CG180CD184CK188CR384CI191HR192CU196CY203CZ208DK262DJ212DM214DO218EC818EG222SV226GQ232ER233EE231ET238FK234FO242FJ246FI250FR258PF260TF266GA270GM268GE276DE288GH300GR304GL308GD316GU320GT324GN624GW328GY332HT334HM336VA340HN344HK348HU352IS356IN360ID364IR368IQ372IE376IL380IT388JM392JP400JO398KZ404KE296KI408KP410KR414KW417KG418LA428LV422LB426LS430LR434LY438LI440LT442LU446MO450MG454MW458MY462MV466ML470MT584MH478MR480MU484MX583FM498MD492MC496MN500MS504MA508MZ104MM516NA520NR524NP528NL540NC554NZ558NI562NE566NG570NU574NF580MP807MK578NO512OM586PK585PW275PS591PA598PG600PY604PE608PH612PN616PL620PT630PR634QA642RO643RU646RW654SH659KN662LC666PM670VC882WS674SM678ST682SA686SN690SC694SL702SG703SK705SI090SB706SO710ZA239GS724ES144LK729SD740SR748SZ752SE756CH760SY158TW762TJ834TZ764TH626TL768TG776TO780TT788TN792TR795TM796TC800UG804UA784AE826GB840US858UY860UZ548VU862VE704VN092VG850VI876WF732EH887YE894ZM716ZW248AX531CW831GG833IM832JE499ME652BL663MF688RS534SX728SS';
+  const m={}; for(let i=0;i<s.length;i+=5) m[s.slice(i,i+3)]=s.slice(i+3,i+5); return m; })();
+const NAME2CODE={Kosovo:'XK'};
+const NAME_FIX={PS:'Palestyna',CI:'Wybrzeże Kości Słoniowej',VA:'Watykan',CZ:'Czechy',MK:'Macedonia Północna'};
+const PLN=typeof Intl!=='undefined'&&Intl.DisplayNames?new Intl.DisplayNames(['pl'],{type:'region'}):null;
+const flagUrl=c=>`https://cdn.jsdelivr.net/npm/flag-icons@7/flags/4x3/${c.toLowerCase()}.svg`;
+
+/* ============ DANE ============ */
+let DATA=[], BY={}, GEO={}, FEATS=[], NEIGH={};
+const plName=c=>BY[c]?BY[c].name:(NAME_FIX[c]||(PLN?PLN.of(c):c));
+const contLabel=c=>c.continent.map(k=>CONT[k]).join(' i ');
+const viewOf=c=>c.view||(c.iso==='RU'?'RU':c.continent[0]);
+const neighbors=c=>(NEIGH[c.iso]||[]).filter(x=>!(c.noNeighbors||[]).includes(x));
+
+async function loadAll(){
+  const j=u=>fetch(u,{cache:'no-cache'}).then(r=>{ if(!r.ok) throw 0; return r.json(); });
+  const [topo,data]=await Promise.all([
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json').then(r=>r.json()),
+    j('panstwa.json').catch(()=>j('https://mskrzypek.github.io/nauka/apps/panstwa.json'))]);
+  DATA=data.countries; DATA.forEach(c=>BY[c.iso]=c);
+  const geoms=topo.objects.countries.geometries;
+  FEATS=topojson.feature(topo,topo.objects.countries).features;
+  FEATS.forEach(rewind);
+  // Ten sam kod może mieć kilka obiektów (np. Australia i Wyspy Ashmore) – kraj to ten największy.
+  FEATS.forEach((f,i)=>{ f.code=N2A[geoms[i].id]||NAME2CODE[f.properties.name]||null; f.area=d3.geoArea(f);
+    if(f.code&&(!GEO[f.code]||GEO[f.code].area<f.area)) GEO[f.code]=f; });
+  FEATS.forEach(f=>{ if(f.code&&GEO[f.code]!==f) f.code=null; });
+  const nb=topojson.neighbors(geoms);
+  FEATS.forEach((f,i)=>{ if(f.code) NEIGH[f.code]=[...new Set(nb[i].map(k=>FEATS[k].code).filter(Boolean))].sort((a,b)=>plName(a).localeCompare(plName(b),'pl')); });
+  DATA=DATA.filter(c=>GEO[c.iso]);
+}
+
+/* ============ GEOMETRIA ============ */
+// Wielokąt z odwrotnym kierunkiem obrysu d3 traktuje jako „cały glob poza krajem” – odwracamy takie obrysy.
+function rewind(f){
+  const g=f.geometry; if(!g) return;
+  const fix=poly=>d3.geoArea({type:'Polygon',coordinates:poly})>2*Math.PI?poly.map(r=>r.slice().reverse()):poly;
+  if(g.type==='Polygon') g.coordinates=fix(g.coordinates);
+  if(g.type==='MultiPolygon') g.coordinates=g.coordinates.map(fix);
+}
+const mainCache={};
+function mainFeature(code){ // bez dalekich wysp i terytoriów zamorskich (np. Gujana Francuska, Alaska)
+  if(mainCache[code]) return mainCache[code];
+  const f=GEO[code]; let out=f;
+  if(f.geometry.type==='MultiPolygon'){
+    const ps=f.geometry.coordinates.map(p=>({type:'Polygon',coordinates:p})).map(p=>({p,a:d3.geoArea(p),c:d3.geoCentroid(p)}));
+    const big=ps.reduce((a,b)=>b.a>a.a?b:a), bb=d3.geoBounds(big.p), rad=d3.geoDistance(bb[0],bb[1])/2;
+    const keep=ps.filter(x=>x.a>=big.a*.25||d3.geoDistance(x.c,big.c)<=Math.max(.2,rad));
+    out={type:'Feature',geometry:{type:'MultiPolygon',coordinates:keep.map(x=>x.p.coordinates)}};
+  }
+  return mainCache[code]=out;
+}
+const centroid=code=>d3.geoCentroid(mainFeature(code));
+function outlineSvg(code){
+  const W=360,H=260, f=mainFeature(code), c=d3.geoCentroid(f);
+  const proj=d3.geoOrthographic().rotate([-c[0],-c[1]]).fitExtent([[12,12],[W-12,H-12]],f);
+  return `<svg class="shape" viewBox="0 0 ${W} ${H}" role="img" aria-label="Kontur kraju"><path d="${d3.geoPath(proj)(f)}"/></svg>`;
+}
+const viewCache={};
+function view(key){
+  if(viewCache[key]) return viewCache[key];
+  const W=640,H=key==='RU'?330:(key==='SA'||key==='AF'?560:440);
+  let proj;
+  if(key==='W') proj=d3.geoNaturalEarth1().fitExtent([[4,4],[W-4,H-4]],{type:'Sphere'});
+  else { const [a,b]=VIEWS[key], cl=(a[0]+b[0])/2, cy=(a[1]+b[1])/2;
+    proj=d3.geoNaturalEarth1().rotate([-cl,0]).fitExtent([[4,4],[W-4,H-4]],{type:'MultiPoint',coordinates:[a,[b[0],a[1]],b,[a[0],b[1]],[cl,a[1]],[cl,b[1]],[a[0],cy],[b[0],cy]]}); }
+  proj.clipExtent([[0,0],[W,H]]);
+  const path=d3.geoPath(proj);
+  const paths=FEATS.map(f=>({code:f.code,d:path(f)})).filter(x=>x.d);
+  return viewCache[key]={W,H,proj,path,paths,sphere:path({type:'Sphere'})};
+}
+function mapSvg(key,hi,opts={}){
+  const v=view(key); let mk='';
+  if(hi){ const a=v.path.area(mainFeature(hi)); if(a<90){ const p=v.proj(centroid(hi)); if(p) mk=`<circle class="mk" cx="${p[0]}" cy="${p[1]}" r="13"/>`; } }
+  return `<svg class="map" id="${opts.id||''}" viewBox="0 0 ${v.W} ${v.H}" role="img" aria-label="Mapa">
+    <path class="s" d="${v.sphere}"/>${v.paths.map(x=>`<path class="l${x.code===hi&&!opts.noHi?' h':''}" data-c="${x.code||''}" d="${x.d}"/>`).join('')}${opts.noHi?'':mk}</svg>`;
+}
+
+/* ============ POSTĘP ============ */
+const MAIN=['flaga','stolica','kontur','mapa','wskaz'];
+const SKILLS={flaga:{n:'Flagi',i:'🏳️',d:'Po fladze zgadnij kraj'},stolica:{n:'Stolice',i:'🏛️',d:'Jaka jest stolica?'},kontur:{n:'Kontury',i:'✏️',d:'Rozpoznaj kształt kraju'},
+  mapa:{n:'Co to za kraj?',i:'🗺️',d:'Zaznaczony na mapie'},wskaz:{n:'Wskaż na mapie',i:'👆',d:'Dotknij właściwego kraju'},
+  kontynent:{n:'Kontynenty',i:'🌐',d:'Gdzie leży kraj?'},sasiedzi:{n:'Sąsiedzi',i:'🤝',d:'Z kim graniczy?'},fakt:{n:'Ciekawostki',i:'💡',d:'O jakim kraju mowa?'}};
+const box=(c,s)=>(S.q[c.iso+':'+s]||{}).b||0;
+function record(c,s,res){
+  const k=c.iso+':'+s, e=S.q[k]||(S.q[k]={b:0,r:0,w:0});
+  if(res==='ok'){ e.r++; e.b=Math.min(3,e.b+1); } else if(res==='warn'){ e.r++; e.b=Math.max(1,e.b); } else { e.w++; e.b=0; }
+  const d=today(); if(!S.days.includes(d)) S.days.push(d); save();
+}
+const skillsOf=c=>Object.keys(SKILLS).filter(s=>s!=='sasiedzi'||neighbors(c).length);
+const mastery=c=>MAIN.reduce((a,s)=>a+Math.min(1,box(c,s)/2),0)/MAIN.length;
+const known=list=>list.filter(c=>mastery(c)>=.8).length;
+const inCont=c=>S.cont==='all'||c.continent.includes(S.cont);
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const fl=(c,cls,lazy)=>`<img class="${cls||'fl'}" src="${flagUrl(c)}" alt=""${lazy?' loading="lazy"':''}>`;
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ł/g,'l').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+function lev(a,b){ const m=a.length,n=b.length, d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]); for(let j=1;j<=n;j++) d[0][j]=j;
+  for(let i=1;i<=m;i++) for(let j=1;j<=n;j++) d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[m][n]; }
+function checkText(input,main,alts){
+  const a=String(input).trim(); if(!a) return {res:'empty'};
+  const all=[main,...(alts||[])];
+  if(all.some(x=>x.toLowerCase()===a.toLowerCase())) return {res:'ok'};
+  if(all.some(x=>norm(x)===norm(a))) return {res:'warn',msg:`Pisz z polskimi znakami: ${main}.`};
+  if(all.some(x=>norm(x).length>=5&&lev(norm(x),norm(a))<=1)) return {res:'warn',msg:`Mała literówka – poprawnie: ${main}.`};
+  return {res:'bad'};
+}
+function similar(c,n,pool){ // kraje „podobne” do c: najpierw z tego samego kontynentu
+  const same=shuffle((pool||DATA).filter(x=>x.iso!==c.iso&&x.continent.some(k=>c.continent.includes(k))));
+  const rest=shuffle((pool||DATA).filter(x=>x.iso!==c.iso&&!same.includes(x)));
+  return same.concat(rest).slice(0,n);
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const list=DATA.filter(inCont), conts=Object.keys(CONT).filter(k=>DATA.some(c=>c.continent.includes(k)));
+  $app.innerHTML=`<h1>🌍 Państwa świata</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Znasz już <b>${known(DATA)} z ${DATA.length}</b> krajów. Flagi, stolice, kontury, mapa i ciekawostki.</p>
+    <div class="seg" role="group" aria-label="Poziom"><button data-e="1" aria-pressed="${S.easy}">🟢 Łatwiej – wybierz z 4</button><button data-e="0" aria-pressed="${!S.easy}">✍️ Trudniej – wpisz</button></div>
+    <div class="chips" role="group" aria-label="Kontynent"><button class="chip" data-c="all" aria-pressed="${S.cont==='all'}">Cały świat</button>${conts.map(k=>`<button class="chip" data-c="${k}" aria-pressed="${S.cont===k}">${CONT[k]}</button>`).join('')}</div>
+    <button class="big" id="bMix"><span class="i">🎲</span><span><span class="t">Quiz mieszany</span><span class="d">12 pytań z wszystkiego${S.cont==='all'?'':' · '+CONT[S.cont]}</span></span></button>
+    <div class="tiles">${Object.entries(SKILLS).map(([k,s])=>`<button class="tile" data-s="${k}"><span class="i">${s.i}</span><span class="t">${s.n}</span><span class="d">${s.d}</span></button>`).join('')}</div>
+    <button class="big" id="bAtlas" style="margin-top:12px;background:var(--surface);color:var(--ink);border:1px solid var(--line)"><span class="i">📖</span><span><span class="t">Atlas</span><span class="d" style="opacity:1;color:var(--muted)">Przeglądaj kraje: flaga, stolica, mapa, sąsiedzi</span></span></button>
+    <div class="card"><h2>Twoje postępy</h2>${conts.map(k=>{ const l=DATA.filter(c=>c.continent[0]===k), m=l.reduce((a,c)=>a+mastery(c),0)/l.length;
+      return `<div class="cont"><span>${CONT[k]}</span><span class="muted small">${known(l)}/${l.length}</span><span class="bar"><span style="width:${Math.round(100*m)}%"></span></span></div>`; }).join('')}</div>`;
+  $app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{ S.easy=b.dataset.e==='1'; save(); home(); });
+  $app.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{ S.cont=b.dataset.c; save(); home(); });
+  $('bMix').onclick=()=>round(null); $('bAtlas').onclick=atlas;
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>round(b.dataset.s));
+}
+
+/* ============ PYTANIA ============ */
+function pickCountry(pool,last){
+  const c=pool.filter(x=>x!==last), w=c.map(x=>1.2-mastery(x));
+  let r=Math.random()*w.reduce((a,b)=>a+b,0); for(let i=0;i<c.length;i++){ r-=w[i]; if(r<=0) return c[i]; } return c[c.length-1];
+}
+function pickSkill(c){ const s=skillsOf(c), w=s.map(k=>(MAIN.includes(k)?1.4:.8)*(4-box(c,k))); let r=Math.random()*w.reduce((a,b)=>a+b,0); for(let i=0;i<s.length;i++){ r-=w[i]; if(r<=0) return s[i]; } return s[0]; }
+function makeQ(c,skill){
+  const name=c.name, easy=S.easy, Q={c,skill};
+  const nameAns={main:name,alts:c.alt,options:()=>[c,...similar(c,3)].map(x=>({label:x.name,flag:x.iso,ok:x===c}))};
+  if(skill==='flaga') Object.assign(Q,{title:'Który kraj ma taką flagę?',vis:fl(c.iso,'flag'),...nameAns});
+  if(skill==='kontur') Object.assign(Q,{title:'Jaki kraj ma taki kształt?',vis:outlineSvg(c.iso),hint:`Leży na kontynencie: ${contLabel(c)}.`,...nameAns,noFlags:true});
+  if(skill==='mapa') Object.assign(Q,{title:'Jaki kraj jest zaznaczony na mapie?',vis:mapSvg(viewOf(c),c.iso),...nameAns,noFlags:true});
+  if(skill==='stolica') Object.assign(Q,{title:`Jaka jest stolica kraju: <span class="n">${esc(name)}</span>?`,vis:fl(c.iso,'flag'),main:c.capital,alts:c.capAlt,
+    options:()=>[c,...similar(c,3)].map(x=>({label:x.capital,ok:x===c}))});
+  if(skill==='wskaz') Object.assign(Q,{type:'tap',title:`Wskaż na mapie: <span class="n">${esc(name)}</span>`,vis:mapSvg(viewOf(c),c.iso,{noHi:true,id:'tapmap'})});
+  if(skill==='kontynent'){ const ok=contLabel(c), others=shuffle(Object.keys(CONT).filter(k=>!c.continent.includes(k))).slice(0,3).map(k=>CONT[k]);
+    Object.assign(Q,{type:'mc',title:`Na jakim kontynencie leży: <span class="n">${esc(name)}</span>?`,vis:fl(c.iso,'flag'),options:()=>[{label:ok,ok:true},...others.map(l=>({label:l}))]}); }
+  if(skill==='sasiedzi'){ const nb=neighbors(c), good=rnd(nb), cc=centroid(c.iso);
+    const near=FEATS.filter(f=>f.code&&f.code!==c.iso&&!nb.includes(f.code)&&!['HK','MO'].includes(f.code)&&d3.geoDistance(d3.geoCentroid(f),cc)<.5).map(f=>f.code);
+    const wrong=shuffle(near.length>=3?near:near.concat(similar(c,6).map(x=>x.iso).filter(x=>!nb.includes(x)))).slice(0,3);
+    Object.assign(Q,{type:'mc',title:`Który z tych krajów graniczy z krajem: <span class="n">${esc(name)}</span>?`,vis:fl(c.iso,'flag'),
+      options:()=>[{label:plName(good),flag:good,ok:true},...wrong.map(x=>({label:plName(x),flag:x}))]}); }
+  if(skill==='fakt') Object.assign(Q,{type:'mc',title:'O jakim kraju mowa?',vis:`<p style="font-size:19px;margin:0">„${esc(c.fact)}”</p>`,options:nameAns.options});
+  if(!Q.type) Q.type=easy?'mc':'text';
+  return Q;
+}
+
+/* ============ RUNDA ============ */
+function round(skill){
+  window.scrollTo(0,0);
+  let pool=DATA.filter(inCont); if(skill==='sasiedzi') pool=pool.filter(c=>neighbors(c).length);
+  if(!pool.length){ home(); return; }
+  const N=12, log=[]; let i=0, last=null;
+  const title=skill?SKILLS[skill].n:'Quiz mieszany';
+  function next(){
+    if(i>=N) return finish();
+    const c=pickCountry(pool,last); last=c;
+    const q=makeQ(c,skill||pickSkill(c));
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/N}%"></span></div>
+      <div class="q" id="q"><div class="muted small">${SKILLS[q.skill].i} ${SKILLS[q.skill].n} · ${i+1}/${N}</div>
+      <p class="qt">${q.title}</p><div class="vis">${q.vis}</div><div id="ans"></div><div id="fb" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    askQ(q,(res,given)=>{ record(q.c,q.skill,res); log.push({q,res,given}); i++; },next);
+  }
+  function finish(){
+    const ok=log.filter(x=>x.res!=='bad').length, wrong=log.filter(x=>x.res==='bad');
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div style="font:800 56px/1 var(--fh)">${ok}/${N}</div>
+      <h2 style="margin-top:8px">${ok===N?'Mistrz geografii! 🏆':ok>=9?'Świetnie! 🌟':ok>=6?'Dobrze – ćwicz dalej!':'Nie szkodzi – zajrzyj do Atlasu i spróbuj jeszcze raz!'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px"><button class="btn primary" id="bAgain">Jeszcze raz</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do zapamiętania</h2>${wrong.map(x=>`<div class="info" style="border-top:1px solid var(--line);padding-top:8px">${fl(x.q.c.iso)}<div><b>${esc(x.q.c.name)}</b> · stolica: ${esc(x.q.c.capital)} · ${esc(contLabel(x.q.c))}<br><span class="small muted">${SKILLS[x.q.skill].n}${x.given?` · Twoja odpowiedź: ${esc(x.given)}`:''}</span></div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home; $('bAgain').onclick=()=>round(skill);
+  }
+  next();
+}
+
+function askQ(q,done,next){ // wspólne odpowiadanie: tekst, wybór z 4 albo dotknięcie mapy
+  const ans=$('ans'); let answered=false;
+  const after=(res,msg,given)=>{
+    if(answered) return; answered=true; done(res,given);
+    $('q').classList.add(res==='ok'?'ok':res==='warn'?'warn':'bad');
+    const c=q.c;
+    $('fb').innerHTML=`<div class="fb ${res==='ok'?'ok':res==='warn'?'warn':'bad'}"><div class="h">${res==='ok'?'Brawo! ✅':res==='warn'?'Prawie dobrze 🙂':'Nie tym razem'}</div>
+      ${msg?`<div>${esc(msg)}</div>`:''}
+      <div class="info">${fl(c.iso)}<div><b>${esc(c.name)}</b> · stolica: <b>${esc(c.capital)}</b><br><span class="small">${esc(c.fact)}</span>${q.skill==='stolica'&&c.capNote?`<br><span class="small"><b>${esc(c.capNote)}</b></span>`:''}</div></div></div>
+      <button class="btn primary wide" id="bNext" style="margin-top:10px">Dalej</button>`;
+    $('bNext').onclick=next; $('bNext').focus({preventScroll:true});
+    $('fb').scrollIntoView({block:'nearest',behavior:'smooth'});
+  };
+  if(q.type==='text'){
+    ans.innerHTML=`<input class="inp" id="inp" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="${q.skill==='stolica'?'stolica…':'nazwa kraju…'}" aria-label="Odpowiedź">
+      <div class="row" style="margin-top:8px"><button class="btn primary" id="bOk" style="flex:1">Sprawdź</button>${q.hint?'<button class="btn" id="bHint">💡</button>':''}<button class="btn" id="bSkip">Nie wiem</button></div>`;
+    const inp=$('inp'); if(!matchMedia('(pointer:coarse)').matches) inp.focus();
+    const go=()=>{ const r=checkText(inp.value,q.main,q.alts); if(r.res==='empty') return inp.focus(); inp.disabled=true; lockBtns(); after(r.res,r.res==='bad'?`Poprawnie: ${q.main}.`:r.msg,inp.value); };
+    const lockBtns=()=>ans.querySelectorAll('button').forEach(b=>b.disabled=true);
+    $('bOk').onclick=go; inp.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); answered?next():go(); } };
+    $('bSkip').onclick=()=>{ inp.disabled=true; lockBtns(); after('bad',`Poprawnie: ${q.main}.`,''); };
+    if($('bHint')) $('bHint').onclick=()=>{ $('bHint').disabled=true; ans.insertAdjacentHTML('beforeend',`<p class="small muted" style="margin:8px 0 0">💡 ${esc(q.hint)}</p>`); };
+  } else if(q.type==='mc'){
+    const opts=shuffle(q.options());
+    ans.innerHTML=`<div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}">${o.flag&&!q.noFlags?fl(o.flag):''}<span>${esc(o.label)}</span></button>`).join('')}</div>`;
+    const btns=[...ans.querySelectorAll('.opt')];
+    btns.forEach(b=>b.onclick=()=>{ const o=opts[+b.dataset.k]; btns.forEach((x,k)=>{ x.disabled=true; if(opts[k].ok) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+      after(o.ok?'ok':'bad',o.ok?'':`Poprawnie: ${opts.find(x=>x.ok).label}.`,o.label); });
+  } else { // wskaż na mapie
+    ans.innerHTML=`<p class="small muted" style="margin:0">Dotknij kraju na mapie.</p>`;
+    const svg=$('tapmap'), v=view(viewOf(q.c));
+    svg.addEventListener('click',e=>{
+      if(answered) return;
+      const pt=svg.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY; const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+      const tgt=v.proj(centroid(q.c.iso)), near=tgt&&Math.hypot(p.x-tgt[0],p.y-tgt[1])<22;
+      const hit=e.target.closest&&e.target.closest('path[data-c]'), code=hit&&hit.dataset.c;
+      const ok=code===q.c.iso||near;
+      svg.querySelectorAll(`path[data-c="${q.c.iso}"]`).forEach(x=>x.classList.add('ok'));
+      if(!ok&&hit&&code) hit.classList.add('no');
+      after(ok?'ok':'bad',ok?'':(code?`To jest: ${plName(code)}. Właściwy kraj jest zaznaczony na zielono.`:'Właściwy kraj jest zaznaczony na zielono.'),code?plName(code):'');
+    });
+  }
+}
+
+/* ============ ATLAS ============ */
+function atlas(){
+  window.scrollTo(0,0);
+  const conts=Object.keys(CONT).filter(k=>DATA.some(c=>c.continent.includes(k)));
+  const list=DATA.filter(inCont).sort((a,b)=>a.name.localeCompare(b.name,'pl'));
+  $app.innerHTML=`${topBar('📖 Atlas')}
+    <div class="chips"><button class="chip" data-c="all" aria-pressed="${S.cont==='all'}">Cały świat</button>${conts.map(k=>`<button class="chip" data-c="${k}" aria-pressed="${S.cont===k}">${CONT[k]}</button>`).join('')}</div>
+    <div class="grid">${list.map(c=>`<button class="cty" data-i="${c.iso}">${fl(c.iso,'fl',true)}<span>${esc(c.name)}<br><span class="m">${esc(c.capital)}</span></span></button>`).join('')}</div>`;
+  $('bBack').onclick=home;
+  $app.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{ S.cont=b.dataset.c; save(); atlas(); });
+  $app.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>country(b.dataset.i));
+}
+function country(iso){
+  window.scrollTo(0,0);
+  const c=BY[iso], nb=neighbors(c);
+  $app.innerHTML=`${topBar(`${fl(c.iso)} ${esc(c.name)}`)}
+    <div class="card">${fl(c.iso,'flag')}
+      <dl class="facts"><dt>Stolica</dt><dd>${esc(c.capital)}</dd><dt>Kontynent</dt><dd>${esc(contLabel(c))}</dd></dl>
+      ${c.capNote?`<p class="small"><b>${esc(c.capNote)}</b></p>`:''}
+      <p>💡 ${esc(c.fact)}</p></div>
+    <div class="twocol">
+      <div class="card"><h2>Kształt</h2>${outlineSvg(c.iso)}</div>
+      <div class="card"><h2>Na mapie</h2>${mapSvg(viewOf(c),c.iso)}</div>
+    </div>
+    <div class="card"><h2>Sąsiedzi</h2>${nb.length?`<div class="nb">${nb.map(x=>`<span>${fl(x)}${esc(plName(x))}</span>`).join('')}</div>`:'<p class="muted">Nie graniczy lądowo z żadnym krajem – dookoła jest morze.</p>'}</div>
+    <button class="btn primary wide" id="bQuiz">Sprawdź się z tego kraju</button>`;
+  $('bBack').onclick=atlas;
+  $('bQuiz').onclick=()=>roundOne(c);
+}
+function roundOne(c){ // krótki quiz: wszystkie umiejętności dla jednego kraju
+  const skills=shuffle(skillsOf(c)).slice(0,5); let i=0; const log=[];
+  function next(){
+    if(i>=skills.length) return country(c.iso);
+    const q=makeQ(c,skills[i]);
+    $app.innerHTML=`${topBar(`${fl(c.iso)} ${esc(c.name)}`)}<div class="prog"><span style="width:${100*i/skills.length}%"></span></div>
+      <div class="q" id="q"><div class="muted small">${SKILLS[q.skill].i} ${SKILLS[q.skill].n} · ${i+1}/${skills.length}</div><p class="qt">${q.title}</p><div class="vis">${q.vis}</div><div id="ans"></div><div id="fb"></div></div>`;
+    $('bBack').onclick=()=>country(c.iso);
+    askQ(q,(res)=>{ record(c,q.skill,res); log.push(res); i++; },next);
+  }
+  next();
+}
+/* ============ START ============ */
+loadAll().then(home).catch(e=>{ console.error(e); $app.innerHTML='<div class="load">Nie udało się wczytać mapy. Sprawdź internet i odśwież stronę.</div>'; });
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>
