@@ -294,7 +294,9 @@ function list(id){
 }
 
 /* ============ START ============ */
-fetch('niemiecki-slowka.json',{cache:'no-cache'}).then(r=>r.json()).then(j=>{
+// Plik ze słówkami leży obok apki; gdy apka jest otwarta z dysku (podgląd), bierzemy go ze strony.
+const load=u=>fetch(u,{cache:'no-cache'}).then(r=>{ if(!r.ok) throw 0; return r.json(); });
+load('niemiecki-slowka.json').catch(()=>load('https://mskrzypek.github.io/nauka/apps/niemiecki-slowka.json')).then(j=>{
   LESSONS=j.lessons; LESSONS.forEach(l=>l.words.forEach(w=>{ w.id=wid(l,w); w.lesson=l.id; }));
   WORDS=LESSONS.flatMap(l=>l.words); home();
 }).catch(()=>{ $app.innerHTML='<p>Nie udało się wczytać słówek. Sprawdź internet i odśwież stronę.</p>'; });
