@@ -1,0 +1,620 @@
+{
+  "_opis": "Słówka z niemieckiego (Wiktor). Nowa lekcja = nowy obiekt NA KOŃCU 'lessons'. Nie zmieniaj 'id' lekcji ani pól 'pl'/'de' istniejących słówek – po nich zapisuje się postęp. Pola: pl (pytanie po polsku), de (odpowiedź), alt (inne poprawne odpowiedzi), note (dopisek przy pytaniu), type: 'zdanie' (sprawdzane bez wielkości liter i interpunkcji).",
+  "lessons": [
+    {
+      "id": "liczby-miesiace",
+      "title": "Liczby i miesiące",
+      "words": [
+        {
+          "pl": "miesiące",
+          "de": "die Monate",
+          "note": "l.mn."
+        },
+        {
+          "pl": "styczeń",
+          "de": "Januar",
+          "alt": [
+            "der Januar"
+          ]
+        },
+        {
+          "pl": "luty",
+          "de": "Februar",
+          "alt": [
+            "der Februar"
+          ]
+        },
+        {
+          "pl": "marzec",
+          "de": "März",
+          "alt": [
+            "der März"
+          ]
+        },
+        {
+          "pl": "kwiecień",
+          "de": "April",
+          "alt": [
+            "der April"
+          ]
+        },
+        {
+          "pl": "maj",
+          "de": "Mai",
+          "alt": [
+            "der Mai"
+          ]
+        },
+        {
+          "pl": "czerwiec",
+          "de": "Juni",
+          "alt": [
+            "der Juni"
+          ]
+        },
+        {
+          "pl": "lipiec",
+          "de": "Juli",
+          "alt": [
+            "der Juli"
+          ]
+        },
+        {
+          "pl": "sierpień",
+          "de": "August",
+          "alt": [
+            "der August"
+          ]
+        },
+        {
+          "pl": "wrzesień",
+          "de": "September",
+          "alt": [
+            "der September"
+          ]
+        },
+        {
+          "pl": "październik",
+          "de": "Oktober",
+          "alt": [
+            "der Oktober"
+          ]
+        },
+        {
+          "pl": "listopad",
+          "de": "November",
+          "alt": [
+            "der November"
+          ]
+        },
+        {
+          "pl": "grudzień",
+          "de": "Dezember",
+          "alt": [
+            "der Dezember"
+          ]
+        },
+        {
+          "pl": "sto",
+          "de": "hundert",
+          "alt": [
+            "einhundert"
+          ]
+        },
+        {
+          "pl": "tysiąc",
+          "de": "tausend",
+          "alt": [
+            "eintausend"
+          ]
+        },
+        {
+          "pl": "536",
+          "de": "fünfhundertsechsunddreißig",
+          "note": "słownie"
+        },
+        {
+          "pl": "888",
+          "de": "achthundertachtundachtzig",
+          "note": "słownie"
+        },
+        {
+          "pl": "645",
+          "de": "sechshundertfünfundvierzig",
+          "note": "słownie"
+        },
+        {
+          "pl": "789",
+          "de": "siebenhundertneunundachtzig",
+          "note": "słownie"
+        }
+      ]
+    },
+    {
+      "id": "zaimki",
+      "title": "Wer macht die Torte? – zaimki osobowe",
+      "words": [
+        {
+          "pl": "Kto robi tort?",
+          "de": "Wer macht die Torte?",
+          "type": "zdanie"
+        },
+        {
+          "pl": "tort",
+          "de": "die Torte"
+        },
+        {
+          "pl": "robić",
+          "de": "machen"
+        },
+        {
+          "pl": "ja",
+          "de": "ich",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "ty",
+          "de": "du",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "on",
+          "de": "er",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "ona",
+          "de": "sie",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "ono",
+          "de": "es",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "my",
+          "de": "wir",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "wy",
+          "de": "ihr",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "oni / one",
+          "de": "sie",
+          "note": "kto? – Nominativ"
+        },
+        {
+          "pl": "Pan / Pani",
+          "de": "Sie",
+          "note": "grzecznościowo – Nominativ"
+        },
+        {
+          "pl": "mnie",
+          "de": "mir",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "tobie",
+          "de": "dir",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "jemu (on)",
+          "de": "ihm",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "jej",
+          "de": "ihr",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "jemu (ono)",
+          "de": "ihm",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "nam",
+          "de": "uns",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "wam",
+          "de": "euch",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "im",
+          "de": "ihnen",
+          "note": "komu? – Dativ"
+        },
+        {
+          "pl": "Panu / Pani",
+          "de": "Ihnen",
+          "note": "komu? – Dativ, grzecznościowo"
+        },
+        {
+          "pl": "mnie",
+          "de": "mich",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "ciebie",
+          "de": "dich",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "jego",
+          "de": "ihn",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "ją",
+          "de": "sie",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "je (ono)",
+          "de": "es",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "nas",
+          "de": "uns",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "was",
+          "de": "euch",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "ich / je",
+          "de": "sie",
+          "note": "kogo? co? – Akkusativ"
+        },
+        {
+          "pl": "Pana / Panią",
+          "de": "Sie",
+          "note": "kogo? co? – Akkusativ, grzecznościowo"
+        },
+        {
+          "pl": "dawać",
+          "de": "geben"
+        },
+        {
+          "pl": "dawać w prezencie, podarować",
+          "de": "schenken"
+        },
+        {
+          "pl": "widzieć",
+          "de": "sehen"
+        },
+        {
+          "pl": "pokazywać",
+          "de": "zeigen"
+        },
+        {
+          "pl": "potrzebować",
+          "de": "brauchen"
+        },
+        {
+          "pl": "miasto",
+          "de": "die Stadt"
+        },
+        {
+          "pl": "ojciec, tata",
+          "de": "der Vater"
+        },
+        {
+          "pl": "matka, mama",
+          "de": "die Mutter"
+        },
+        {
+          "pl": "rodzice",
+          "de": "die Eltern",
+          "note": "l.mn."
+        },
+        {
+          "pl": "der Vater = ?",
+          "de": "er",
+          "note": "jaki zaimek?"
+        },
+        {
+          "pl": "die Mutter = ?",
+          "de": "sie",
+          "note": "jaki zaimek?"
+        },
+        {
+          "pl": "das Buch = ?",
+          "de": "es",
+          "note": "jaki zaimek?"
+        },
+        {
+          "pl": "die Eltern = ?",
+          "de": "sie",
+          "note": "jaki zaimek?"
+        },
+        {
+          "pl": "On daje jej kwiaty.",
+          "de": "Er gibt ihr Blumen.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Daję im prezent.",
+          "de": "Ich schenke ihnen ein Geschenk.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "On nas widzi.",
+          "de": "Er sieht uns.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Pokazuję wam miasto.",
+          "de": "Ich zeige euch die Stadt.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "On ich potrzebuje.",
+          "de": "Er braucht sie.",
+          "type": "zdanie"
+        }
+      ]
+    },
+    {
+      "id": "einladung",
+      "title": "Danke für die Einladung – zaproszenie",
+      "words": [
+        {
+          "pl": "zaproszenie",
+          "de": "die Einladung"
+        },
+        {
+          "pl": "zapraszać",
+          "de": "einladen"
+        },
+        {
+          "pl": "odbywać się",
+          "de": "stattfinden"
+        },
+        {
+          "pl": "zaczynać (się)",
+          "de": "beginnen"
+        },
+        {
+          "pl": "dla",
+          "de": "für"
+        },
+        {
+          "pl": "Dziękuję za zaproszenie.",
+          "de": "Danke für die Einladung.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "twój / twoja",
+          "de": "dein / deine",
+          "alt": [
+            "dein/deine",
+            "dein, deine"
+          ]
+        },
+        {
+          "pl": "przyjęcie urodzinowe",
+          "de": "die Geburtstagsparty"
+        },
+        {
+          "pl": "impreza, przyjęcie",
+          "de": "die Party"
+        },
+        {
+          "pl": "jedzenie",
+          "de": "das Essen"
+        },
+        {
+          "pl": "ogród",
+          "de": "der Garten"
+        },
+        {
+          "pl": "w domu",
+          "de": "zu Hause"
+        },
+        {
+          "pl": "u mnie",
+          "de": "bei mir"
+        },
+        {
+          "pl": "w piątek",
+          "de": "am Freitag"
+        },
+        {
+          "pl": "o 16:00 (o szesnastej)",
+          "de": "um 16 Uhr",
+          "alt": [
+            "um sechzehn Uhr"
+          ]
+        },
+        {
+          "pl": "pierwszego maja",
+          "de": "am ersten Mai"
+        },
+        {
+          "pl": "chciał(a)bym",
+          "de": "ich möchte"
+        },
+        {
+          "pl": "dzwonić (do kogoś)",
+          "de": "anrufen"
+        },
+        {
+          "pl": "przynieść (ze sobą)",
+          "de": "mitbringen"
+        },
+        {
+          "pl": "Zapraszam cię na imprezę.",
+          "de": "Ich lade dich zur Party ein.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Moja impreza odbywa się u mnie w domu.",
+          "de": "Meine Party findet bei mir zu Hause statt.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Impreza zaczyna się o 16:00.",
+          "de": "Die Party beginnt um 16 Uhr.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Przyjdziesz?",
+          "de": "Kommst du?",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Zadzwoń do mnie!",
+          "de": "Ruf mich an!",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Przynieś proszę jedzenie!",
+          "de": "Bring bitte Essen mit!",
+          "type": "zdanie"
+        }
+      ]
+    },
+    {
+      "id": "geschenke",
+      "title": "Wer mag keine Geschenke? – prezenty",
+      "words": [
+        {
+          "pl": "Kto nie lubi prezentów?",
+          "de": "Wer mag keine Geschenke?",
+          "type": "zdanie"
+        },
+        {
+          "pl": "prezent",
+          "de": "das Geschenk"
+        },
+        {
+          "pl": "prezenty",
+          "de": "die Geschenke",
+          "note": "l.mn."
+        },
+        {
+          "pl": "płyta CD",
+          "de": "die CD"
+        },
+        {
+          "pl": "książka",
+          "de": "das Buch"
+        },
+        {
+          "pl": "kwiaty",
+          "de": "die Blumen",
+          "note": "l.mn."
+        },
+        {
+          "pl": "pies",
+          "de": "der Hund"
+        },
+        {
+          "pl": "gitara",
+          "de": "die Gitarre"
+        },
+        {
+          "pl": "rower",
+          "de": "das Fahrrad"
+        },
+        {
+          "pl": "garnek",
+          "de": "der Topf"
+        },
+        {
+          "pl": "skarpetki",
+          "de": "die Socken",
+          "note": "l.mn."
+        },
+        {
+          "pl": "pralinki",
+          "de": "die Pralinen",
+          "note": "l.mn."
+        },
+        {
+          "pl": "kolczyki",
+          "de": "die Ohrringe",
+          "note": "l.mn."
+        },
+        {
+          "pl": "świeczka",
+          "de": "die Kerze"
+        },
+        {
+          "pl": "okulary słoneczne",
+          "de": "die Sonnenbrille"
+        },
+        {
+          "pl": "album na zdjęcia",
+          "de": "das Fotoalbum"
+        },
+        {
+          "pl": "pomadka, szminka",
+          "de": "der Lippenstift"
+        },
+        {
+          "pl": "ananas",
+          "de": "die Ananas"
+        },
+        {
+          "pl": "bilet do kina",
+          "de": "die Kinokarte"
+        },
+        {
+          "pl": "kamera",
+          "de": "die Kamera"
+        },
+        {
+          "pl": "zegarek",
+          "de": "die Uhr"
+        },
+        {
+          "pl": "budzik",
+          "de": "der Wecker"
+        },
+        {
+          "pl": "słownik",
+          "de": "das Wörterbuch"
+        },
+        {
+          "pl": "papeteria",
+          "de": "das Briefpapier"
+        },
+        {
+          "pl": "ciekawy",
+          "de": "interessant"
+        },
+        {
+          "pl": "gruby",
+          "de": "dick"
+        },
+        {
+          "pl": "kolorowy",
+          "de": "bunt"
+        },
+        {
+          "pl": "To jest książka.",
+          "de": "Das ist ein Buch.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Książka jest ciekawa, gruba i kolorowa.",
+          "de": "Das Buch ist interessant, dick und bunt.",
+          "type": "zdanie"
+        }
+      ]
+    }
+  ]
+}

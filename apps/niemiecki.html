@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Niemiecki – słówka z lekcji</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇩🇪</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F6F2; --grid:#E8E5DC; --ink:#1E1E24; --muted:#5F6070; --line:#D8D4C8; --surface:#FFFFFF; --soft:#F0EEE7;
+  --accent:#D62828; --accent-ink:#FFFFFF; --gold:#F2B705; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#8A5A00; --warnbg:#FFF2CC;
+  --shadow:0 1px 2px rgba(30,30,36,.06),0 6px 18px rgba(30,30,36,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#131318; --grid:#1C1C23; --ink:#EDEDF2; --muted:#A3A3B3; --line:#30303C; --surface:#1B1B22; --soft:#23232C;
+    --accent:#FF5A5A; --accent-ink:#131318; --gold:#FFC93C; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.flag{height:6px; background:linear-gradient(90deg,#000 0 33.3%,#DD0000 33.3% 66.6%,#FFCE00 66.6%); border-radius:3px; margin-bottom:14px}
+.wrap{max-width:640px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2,h3{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(28px,7.5vw,38px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:not-allowed; opacity:.45}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.card.hot{border:2px solid var(--accent)}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.small{padding:5px 12px; font-size:14px}
+.btn.wide{width:100%; padding:13px}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.tag{font:700 13px var(--fh); color:var(--accent); text-transform:uppercase; letter-spacing:.05em}
+.bar{height:8px; background:var(--soft); border-radius:6px; overflow:hidden; margin:8px 0}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.lesson{display:grid; grid-template-columns:1fr auto; gap:4px 10px; align-items:center; padding:12px 0; border-top:1px solid var(--line)}
+.lesson:first-of-type{border-top:0}
+.lesson .n{font-weight:700; line-height:1.3}
+.lesson .bar{grid-column:1/2; margin:2px 0 0}
+.lesson .acts{grid-row:1/3; grid-column:2; display:flex; gap:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+
+/* pytanie */
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+.qcard{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:18px 16px; box-shadow:var(--shadow); transition:border-color .2s, background .2s}
+.qcard.ok{border-color:var(--ok); background:var(--okbg)} .qcard.bad{border-color:var(--bad); background:var(--badbg)} .qcard.warn{border-color:var(--gold); background:var(--warnbg)}
+.qlab{font:700 14px var(--fh); color:var(--muted); margin-bottom:2px}
+.qpl{font:800 clamp(26px,7.5vw,36px)/1.15 var(--fh); margin:2px 0 4px}
+.qnote{display:inline-block; background:var(--soft); border-radius:8px; padding:1px 8px; font-size:14px; font-weight:700; color:var(--muted)}
+.inp{width:100%; margin-top:14px; font:700 24px var(--fb); padding:12px 14px; border:2px solid var(--line); border-radius:14px; background:var(--surface); color:var(--ink)}
+.inp:focus{outline:none; border-color:var(--accent)}
+.uml{display:flex; gap:8px; margin:10px 0}
+.uml button{flex:1; border:1px solid var(--line); background:var(--soft); border-radius:10px; padding:8px 0; font:800 20px var(--fh)}
+.fb{margin-top:12px; font-size:17px}
+.fb .h{font:800 19px var(--fh)}
+.fb .de{font:800 24px var(--fh); margin:4px 0; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.say{border:0; background:var(--soft); border-radius:10px; padding:4px 10px; font-size:18px}
+.diff ins{background:var(--okbg); color:var(--ok); text-decoration:none; font-weight:800; border-radius:3px}
+.diff del{background:var(--badbg); color:var(--bad); border-radius:3px}
+.list{width:100%; border-collapse:collapse; font-size:16px}
+.list td{border-top:1px solid var(--line); padding:8px 4px; vertical-align:middle}
+.list td.de{font-weight:700}
+.dots{white-space:nowrap; letter-spacing:1px; color:var(--ok); font-size:12px}
+.dots .off{color:var(--line)}
+.big{font:800 56px/1 var(--fh)}
+.miss{border-top:1px solid var(--line); padding:8px 0}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"><p class="muted">Ładuję słówka…</p></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ ZAPIS ============ */
+// Postęp słówka: S.w[id] = {b: pudełko 0–6, due: "RRRR-MM-DD", r, w}. Powtórki według odstępów INT (dni).
+const KEY='niemiecki-v1:'+kid, INT=[0,1,2,4,7,14,30], MASTER=3;
+let S={w:{},days:[],tests:{},speak:true}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const dayStr=d=>d.toLocaleDateString('sv');
+const today=()=>dayStr(new Date());
+const addDays=n=>{ const d=new Date(); d.setDate(d.getDate()+n); return dayStr(d); };
+function streak(){ let n=0; const d=new Date(); if(!S.days.includes(dayStr(d))) d.setDate(d.getDate()-1); while(S.days.includes(dayStr(d))){ n++; d.setDate(d.getDate()-1); } return n; }
+
+/* ============ DANE ============ */
+let LESSONS=[], WORDS=[];
+const wid=(l,w)=>l.id+'|'+w.pl+'|'+w.de;
+const st=w=>S.w[w.id];
+const box=w=>(st(w)||{}).b||0;
+const seen=w=>!!st(w);
+const due=w=>seen(w)&&st(w).due<=today();
+const mastered=w=>box(w)>=MASTER;
+function record(w,res){
+  const e=S.w[w.id]||(S.w[w.id]={b:0,due:today(),r:0,w:0});
+  if(res==='ok'){ e.r++; e.b=Math.min(6,e.b+1); e.due=addDays(INT[e.b]); }
+  else if(res==='warn'){ e.r++; e.b=Math.max(1,e.b); e.due=addDays(1); }
+  else { e.w++; e.b=0; e.due=today(); }
+  const d=today(); if(!S.days.includes(d)) S.days.push(d);
+  save();
+}
+
+/* ============ SPRAWDZANIE ============ */
+const clean=s=>String(s).replace(/[’’`]/g,"'").replace(/\s+/g,' ').trim();
+const stripPunct=s=>s.replace(/[.,!?;:„”"«»()]/g,'').replace(/\s+/g,' ').trim();
+const translit=s=>s.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/Ä/g,'Ae').replace(/Ö/g,'Oe').replace(/Ü/g,'Ue').replace(/ß/g,'ss');
+const ART=/^(der|die|das)\s+(.+)$/i;
+function lev(a,b){ const m=a.length,n=b.length, d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]); for(let j=1;j<=n;j++) d[0][j]=j;
+  for(let i=1;i<=m;i++) for(let j=1;j<=n;j++) d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[m][n]; }
+function check(w,input){
+  const raw=clean(input); if(!raw) return {res:'empty'};
+  const answers=[w.de,...(w.alt||[])].map(clean);
+  const sent=w.type==='zdanie';
+  const N=s=>sent?stripPunct(s).toLowerCase():s.replace(/[.!?]+$/,'');
+  const a=N(raw);
+  for(const x of answers){
+    const e=N(x);
+    if(a===e) return {res:'ok'};
+    if(translit(a)===translit(e)) return {res:'warn',msg:'Dobrze, ale pisz niemieckie litery: ä, ö, ü, ß (są przyciski pod polem).'};
+  }
+  const e=N(answers[0]);
+  if(!sent){
+    if(a.toLowerCase()===e.toLowerCase()||translit(a).toLowerCase()===translit(e).toLowerCase()) return {res:'bad',msg:'Uwaga na wielką literę! W niemieckim rzeczowniki (i grzecznościowe Sie/Ihnen) piszemy wielką literą.'};
+    const me=e.match(ART), ma=a.match(ART);
+    if(me&&!ma&&a.toLowerCase()===me[2].toLowerCase()) return {res:'bad',msg:`Brakuje rodzajnika! To jest „${me[1]}”.`};
+    if(me&&ma&&ma[2].toLowerCase()===me[2].toLowerCase()&&ma[1].toLowerCase()!==me[1].toLowerCase()) return {res:'bad',msg:`Zły rodzajnik: nie „${ma[1]}”, tylko „${me[1]}”.`};
+  }
+  const dist=lev(translit(a.toLowerCase()),translit(e.toLowerCase()));
+  if(dist===1&&e.length>=4) return {res:'bad',msg:'Prawie! Jedna literka się nie zgadza.'};
+  return {res:'bad'};
+}
+function diffHtml(a,e){ // zaznacza litery poprawnej odpowiedzi, których brakuje/są złe u dziecka (LCS)
+  const m=a.length, n=e.length, L=Array.from({length:m+1},()=>Array(n+1).fill(0));
+  for(let i=m-1;i>=0;i--) for(let j=n-1;j>=0;j--) L[i][j]=a[i]===e[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  const keep=Array(n).fill(false); let i=0,j=0;
+  while(i<m&&j<n){ if(a[i]===e[j]){ keep[j]=true; i++; j++; } else if(L[i+1][j]>=L[i][j+1]) i++; else j++; }
+  let out='', run=false;
+  for(let k=0;k<n;k++){ if(!keep[k]&&!run){ out+='<ins>'; run=true; } if(keep[k]&&run){ out+='</ins>'; run=false; } out+=esc(e[k]); }
+  if(run) out+='</ins>';
+  return `<span class="diff">${out}</span>`;
+}
+
+/* ============ WYMOWA ============ */
+let voice=null;
+function pickVoice(){ const vs=speechSynthesis.getVoices(); voice=vs.find(v=>/^de(-|_)DE/i.test(v.lang))||vs.find(v=>/^de/i.test(v.lang))||null; }
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function say(t){ try{ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,', ')); u.lang='de-DE'; if(voice) u.voice=voice; u.rate=.9; speechSynthesis.speak(u); }catch(e){} }
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const topBar=t=>`<div class="flag"></div><div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const latest=()=>LESSONS[LESSONS.length-1];
+const dueWords=()=>WORDS.filter(due).sort((a,b)=>st(a).due.localeCompare(st(b).due)||box(a)-box(b));
+const dots=w=>{ const b=Math.min(box(w),MASTER); return `<span class="dots" aria-label="postęp">${'●'.repeat(b)}<span class="off">${'●'.repeat(MASTER-b)}</span></span>`; };
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const L=latest(), lw=L.words, lm=lw.filter(mastered).length, dw=dueWords().length, st_=streak();
+  const allM=WORDS.filter(mastered).length;
+  $app.innerHTML=`<div class="flag"></div><h1>🇩🇪 Deutsch – słówka</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Tłumaczysz z polskiego na niemiecki. Nowe słówka ćwiczysz z ostatniej lekcji, a stare wracają same, kiedy trzeba je odświeżyć.</p>
+    <div class="pills"><span class="pill">🔥 ${st_} ${st_===1?'dzień':'dni'} z rzędu</span><span class="pill">✅ umiem ${allM} z ${WORDS.length}</span></div>
+    <div class="card hot"><div class="tag">📌 Na najbliższą lekcję</div><h2 style="margin-top:4px">${esc(L.title)}</h2>
+      <div class="bar"><span style="width:${pct(lm,lw.length)}%"></span></div>
+      <p class="muted small">Ćwiczone: ${lw.filter(seen).length} · umiesz: ${lm} z ${lw.length}${S.tests[L.id]!=null?` · ostatni sprawdzian: ${S.tests[L.id]}%`:''}</p>
+      <div class="row"><button class="btn primary" data-learn="${L.id}">Ucz się</button><button class="btn" data-test="${L.id}">Sprawdzian</button><button class="btn" data-list="${L.id}">Lista 🔊</button></div></div>
+    <div class="card"><h2>🔁 Powtórka starych słówek</h2>
+      <p class="muted small">${dw?`${dw} ${dw===1?'słówko czeka':dw<5?'słówka czekają':'słówek czeka'} na odświeżenie.`:'Nic nie czeka – wszystko świeże! Słówka wrócą, gdy zaczną się zapominać.'}</p>
+      <button class="btn ${dw?'primary':''}" id="bRev" ${dw?'':'disabled'}>Powtórz</button></div>
+    <div class="card"><h2>📚 Wszystkie lekcje</h2>
+      ${LESSONS.slice().reverse().map(l=>{ const m=l.words.filter(mastered).length; return `<div class="lesson"><span class="n">${esc(l.title)} <span class="muted small">· ${m}/${l.words.length}</span></span>
+        <span class="acts"><button class="btn small" data-learn="${l.id}">Ucz się</button><button class="btn small" data-list="${l.id}" aria-label="Lista">🔊</button></span>
+        <span class="bar"><span style="width:${pct(m,l.words.length)}%"></span></span></div>`; }).join('')}
+    </div>
+    <div class="row"><button class="btn small" id="bSpeak">${S.speak?'🔊 Czytanie na głos: wł.':'🔇 Czytanie na głos: wył.'}</button>
+    ${canSave?'':'<span class="muted small">Ta przeglądarka nie zapisze postępów.</span>'}</div>`;
+  $app.querySelectorAll('[data-learn]').forEach(b=>b.onclick=()=>learn(b.dataset.learn));
+  $app.querySelectorAll('[data-test]').forEach(b=>b.onclick=()=>test(b.dataset.test));
+  $app.querySelectorAll('[data-list]').forEach(b=>b.onclick=()=>list(b.dataset.list));
+  $('bRev').onclick=review;
+  $('bSpeak').onclick=()=>{ S.speak=!S.speak; save(); home(); };
+}
+
+/* ============ RUNDY ============ */
+function learn(id){
+  const L=LESSONS.find(l=>l.id===id);
+  const order=w=>(mastered(w)?2:seen(w)?0:1)+Math.random()*.5; // najpierw słabe, potem nowe, na końcu opanowane
+  const pick=L.words.slice().sort((a,b)=>order(a)-order(b)).slice(0,12);
+  run(shuffle(pick),{title:L.title,retry:true});
+}
+function review(){ run(shuffle(dueWords().slice(0,15)),{title:'Powtórka',retry:true}); }
+function test(id){ const L=LESSONS.find(l=>l.id===id); run(shuffle(L.words),{title:'Sprawdzian: '+L.title,retry:false,test:L.id}); }
+
+function run(items,opt){
+  window.scrollTo(0,0);
+  const queue=items.map(w=>({w,first:true,tries:0})), total=items.length, log=[];
+  let cur=null, answered=false, done=0;
+  function next(){
+    if(!queue.length) return finish();
+    cur=queue.shift(); answered=false;
+    const w=cur.w;
+    $app.innerHTML=`${topBar(esc(opt.title))}
+      <div class="prog"><span style="width:${100*done/total}%"></span></div>
+      <div class="qcard" id="qc">
+        <div class="qlab">${cur.first?'Przetłumacz na niemiecki':'Jeszcze raz 💪'} · ${done+1}/${total}</div>
+        <div class="qpl">${esc(w.pl)}</div>${w.note?`<span class="qnote">${esc(w.note)}</span>`:''}${w.type==='zdanie'?' <span class="qnote">zdanie</span>':''}
+        <input class="inp" id="inp" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="de" placeholder="po niemiecku…" aria-label="Odpowiedź po niemiecku">
+        <div class="uml">${['ä','ö','ü','ß'].map(c=>`<button data-c="${c}" tabindex="-1">${c}</button>`).join('')}</div>
+        <div class="row"><button class="btn primary" id="bOk" style="flex:1">Sprawdź</button><button class="btn" id="bHint">💡</button><button class="btn" id="bSkip">Nie wiem</button></div>
+        <div class="fb" id="fb" aria-live="polite"></div>
+      </div>`;
+    $('bBack').onclick=home;
+    const inp=$('inp');
+    if(!matchMedia('(pointer:coarse)').matches) inp.focus();
+    $app.querySelectorAll('.uml button').forEach(b=>{ b.addEventListener('pointerdown',e=>e.preventDefault()); b.onclick=()=>{ const s=inp.selectionStart??inp.value.length, e=inp.selectionEnd??s; inp.value=inp.value.slice(0,s)+b.dataset.c+inp.value.slice(e); inp.focus(); inp.setSelectionRange(s+1,s+1); }; });
+    let hints=0;
+    $('bHint').onclick=()=>{ if(answered) return; hints++; const d=w.de, m=d.match(ART); const show=d.slice(0,(m?m[1].length+1:0)+hints); /* rodzajnik + kolejne litery */ inp.value=show; inp.focus(); cur.hinted=true; };
+    $('bOk').onclick=submit; $('bSkip').onclick=()=>{ if(!answered) grade({res:'bad'},''); };
+    inp.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); answered?go():submit(); } };
+    function submit(){ if(answered) return go(); const r=check(w,inp.value); if(r.res==='empty'){ inp.focus(); return; } grade(r,inp.value); }
+  }
+  function grade(r,given){
+    answered=true; const w=cur.w, res=cur.hinted&&r.res==='ok'?'warn':r.res;
+    if(cur.first) record(w,res);
+    if(cur.first) log.push({w,res,given});
+    const good=res==='ok'||res==='warn';
+    if(!good&&opt.retry&&cur.tries<2) queue.splice(Math.min(queue.length,3),0,{w,first:false,tries:cur.tries+1});
+    if(good||!(opt.retry&&cur.tries<2)) done++; // słówko zaliczone albo wyczerpane próby
+    $('qc').className='qcard '+(res==='ok'?'ok':res==='warn'?'warn':'bad');
+    $('inp').disabled=true; $('bHint').disabled=true; $('bSkip').disabled=true; $('bOk').textContent='Dalej';
+    const g=clean(given);
+    $('fb').innerHTML=opt.test&&!good
+      ? `<div class="h">✗</div><div class="muted small">Poprawną odpowiedź zobaczysz na końcu sprawdzianu.</div>`
+      : `<div class="h">${res==='ok'?'Richtig! ✅':res==='warn'?'Prawie dobrze 🙂':'Nie tym razem'}</div>
+        ${r.msg?`<div>${esc(r.msg)}</div>`:''}
+        <div class="de">${good&&res==='ok'?esc(w.de):diffHtml(g,w.de)} <button class="say" id="bSay" aria-label="Posłuchaj">🔊</button></div>
+        ${!good&&g?`<div class="muted small">Twoja odpowiedź: ${esc(g)}</div>`:''}`;
+    if($('bSay')) $('bSay').onclick=()=>say(w.de);
+    if(S.speak&&!(opt.test&&!good)) say(w.de);
+    $('bOk').focus({preventScroll:true});
+    if(res==='ok'&&!opt.test) setTimeout(()=>{ if(answered&&$('qc')&&$('qc').classList.contains('ok')) go(); },1400);
+  }
+  function go(){ if(!answered) return; next(); }
+  function finish(){
+    const okN=log.filter(x=>x.res==='ok'||x.res==='warn').length, p=pct(okN,log.length), wrong=log.filter(x=>!(x.res==='ok'||x.res==='warn'));
+    if(opt.test){ S.tests[opt.test]=p; save(); }
+    $app.innerHTML=`${topBar(esc(opt.title))}<div class="card" style="text-align:center">
+      <div class="big">${p}%</div><h2 style="margin-top:8px">${p===100?'Perfekt! 🏆':p>=80?'Sehr gut! 👏':p>=50?'Gut – jeszcze trochę praktyki.':'Nicht schlimm – ćwiczymy dalej!'}</h2>
+      <p>${okN} z ${log.length} dobrze za pierwszym razem</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="bAgain">Jeszcze raz</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórki</h2>${wrong.map(x=>`<div class="miss"><b>${esc(x.w.pl)}</b> → ${esc(x.w.de)} <button class="say" data-say="${esc(x.w.de)}">🔊</button>${x.given?`<div class="muted small">Twoja odpowiedź: ${esc(x.given)}</div>`:''}</div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>opt.test?test(opt.test):run(shuffle(items),opt);
+    $app.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>say(b.dataset.say));
+  }
+  next();
+}
+
+/* ============ LISTA ============ */
+function list(id){
+  const L=LESSONS.find(l=>l.id===id); window.scrollTo(0,0);
+  $app.innerHTML=`${topBar(esc(L.title))}<div class="card"><p class="muted small">Dotknij 🔊, żeby usłyszeć wymowę. Kropki: ile razy z rzędu dobrze (3 = umiesz).</p>
+    <table class="list">${L.words.map((w,i)=>`<tr><td>${esc(w.pl)}${w.note?` <span class="muted small">(${esc(w.note)})</span>`:''}</td><td class="de">${esc(w.de)}</td><td>${dots(w)}</td><td><button class="say" data-i="${i}" aria-label="Posłuchaj">🔊</button></td></tr>`).join('')}</table>
+    <button class="btn primary wide" id="bLearn" style="margin-top:12px">Ucz się tej lekcji</button></div>`;
+  $('bBack').onclick=home; $('bLearn').onclick=()=>learn(id);
+  $app.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>say(L.words[+b.dataset.i].de));
+}
+
+/* ============ START ============ */
+fetch('niemiecki-slowka.json',{cache:'no-cache'}).then(r=>r.json()).then(j=>{
+  LESSONS=j.lessons; LESSONS.forEach(l=>l.words.forEach(w=>{ w.id=wid(l,w); w.lesson=l.id; }));
+  WORDS=LESSONS.flatMap(l=>l.words); home();
+}).catch(()=>{ $app.innerHTML='<p>Nie udało się wczytać słówek. Sprawdź internet i odśwież stronę.</p>'; });
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>

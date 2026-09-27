@@ -20,6 +20,12 @@ node scripts/add-app.mjs --file /ścieżka/apka.html --kids wiktor --subject bio
 
 Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
 
+## Słówka z niemieckiego (Wiktor)
+
+- `apps/niemiecki.html` czyta słówka z `apps/niemiecki-slowka.json` (tego pliku nie kopiuje `add-app.mjs` – edytuj go bezpośrednio w repo).
+- Nowa lekcja = nowy obiekt **na końcu** `lessons` (`id`, `title`, `words`). Ostatnia lekcja jest pokazywana jako „Na najbliższą lekcję”, starsze wracają w powtórkach (odstępy 1–2–4–7–14–30 dni).
+- Nie zmieniaj `id` lekcji ani `pl`/`de` istniejących słówek – po nich zapisany jest postęp. Rzeczowniki z rodzajnikiem (`die Blumen`), `note` np. „l.mn.”, `alt` – inne poprawne odpowiedzi, `type: "zdanie"` – bez wielkości liter i interpunkcji.
+
 ## PWA (ikonka na ekranie iPhone'a)
 
 - `manifest.webmanifest` + `icons/nauka-*.png` – ogólne; `manifest-<dziecko>.webmanifest` + `icons/<dziecko>-*.png` – per dziecko (start `./?dla=<dziecko>`, etykieta „Nauka”). Generuje je `scripts/pwa.mjs` z szablonu `tools/icon.html` (headless Chrome + ImageMagick).

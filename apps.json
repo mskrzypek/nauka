@@ -31,6 +31,11 @@
       "emoji": "🇬🇧"
     },
     {
+      "id": "niemiecki",
+      "name": "Niemiecki",
+      "emoji": "🇩🇪"
+    },
+    {
       "id": "matematyka",
       "name": "Matematyka",
       "emoji": "➗"
@@ -178,6 +183,18 @@
       ],
       "added": "2026-09-26",
       "desc": "Poziomy krok po kroku, kropki i naklejki"
+    },
+    {
+      "id": "niemiecki",
+      "file": "apps/niemiecki.html",
+      "title": "Niemiecki – słówka z lekcji",
+      "emoji": "🇩🇪",
+      "subject": "niemiecki",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-09-27",
+      "desc": "Słówka ze wszystkich lekcji, PL → DE"
     }
   ]
 }
