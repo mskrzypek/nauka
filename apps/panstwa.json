@@ -1,5 +1,5 @@
 {
-  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., RU); noOutline: true – kraj za mały na pytanie o kształt.",
+  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., CAR – Ameryka Środkowa i Karaiby, RU); noOutline: true – kraj za mały na pytanie o kształt.",
   "countries": [
     {
       "iso": "PL",
@@ -1342,6 +1342,372 @@
         "AF"
       ],
       "fact": "Prawie jedną piątą kraju zajmuje długie jezioro, w którym żyje najwięcej gatunków ryb na świecie."
+    },
+    {
+      "iso": "CO",
+      "name": "Kolumbia",
+      "capital": "Bogota",
+      "capAlt": [
+        "Bogotá"
+      ],
+      "continent": [
+        "SA"
+      ],
+      "fact": "Słynie z kawy, a to jedyny kraj Ameryki Południowej, który leży nad dwoma oceanami – Pacyfikiem i Atlantykiem.",
+      "clip": [
+        -80,
+        -5,
+        -66,
+        13
+      ]
+    },
+    {
+      "iso": "VE",
+      "name": "Wenezuela",
+      "capital": "Caracas",
+      "capAlt": [
+        "Karakas"
+      ],
+      "continent": [
+        "SA"
+      ],
+      "fact": "Spada tu Salto Ángel – najwyższy wodospad na świecie, mający prawie kilometr wysokości."
+    },
+    {
+      "iso": "GY",
+      "name": "Gujana",
+      "capital": "Georgetown",
+      "continent": [
+        "SA"
+      ],
+      "fact": "To jedyny kraj Ameryki Południowej, w którym językiem urzędowym jest angielski, a w dżungli huczy wodospad Kaieteur."
+    },
+    {
+      "iso": "SR",
+      "name": "Surinam",
+      "capital": "Paramaribo",
+      "continent": [
+        "SA"
+      ],
+      "fact": "To najmniejszy kraj Ameryki Południowej, a mówi się tu po niderlandzku.",
+      "noNeighbors": [
+        "FR"
+      ]
+    },
+    {
+      "iso": "EC",
+      "name": "Ekwador",
+      "capital": "Quito",
+      "capAlt": [
+        "Kito"
+      ],
+      "continent": [
+        "SA"
+      ],
+      "fact": "Przebiega tu równik, od którego kraj wziął nazwę, a należą do niego Wyspy Galapagos z olbrzymimi żółwiami.",
+      "clip": [
+        -82,
+        -6,
+        -75,
+        2
+      ]
+    },
+    {
+      "iso": "BO",
+      "name": "Boliwia",
+      "capital": "Sucre",
+      "capAlt": [
+        "La Paz"
+      ],
+      "capNote": "Konstytucyjną stolicą jest Sucre, ale rząd i parlament urzędują w La Paz.",
+      "continent": [
+        "SA"
+      ],
+      "fact": "Leży tu Salar de Uyuni – największe solnisko świata, które po deszczu zamienia się w gigantyczne lustro."
+    },
+    {
+      "iso": "PY",
+      "name": "Paragwaj",
+      "capital": "Asunción",
+      "capAlt": [
+        "Asuncion"
+      ],
+      "continent": [
+        "SA"
+      ],
+      "fact": "Razem z Boliwią to jedyne kraje Ameryki Południowej bez dostępu do morza, a jego flaga ma inny herb z przodu i z tyłu."
+    },
+    {
+      "iso": "UY",
+      "name": "Urugwaj",
+      "capital": "Montevideo",
+      "continent": [
+        "SA"
+      ],
+      "fact": "Zorganizował i wygrał pierwszy w historii mundial – w 1930 roku."
+    },
+    {
+      "iso": "CL",
+      "name": "Chile",
+      "capital": "Santiago",
+      "capAlt": [
+        "Santiago de Chile"
+      ],
+      "continent": [
+        "SA"
+      ],
+      "fact": "To jeden z najdłuższych i najwęższych krajów świata, a leży tu pustynia Atakama – najsuchsze miejsce na Ziemi poza Antarktydą."
+    },
+    {
+      "iso": "GT",
+      "name": "Gwatemala",
+      "capital": "Gwatemala",
+      "capAlt": [
+        "Guatemala",
+        "Ciudad de Guatemala"
+      ],
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "W dżungli stoją tu ruiny majańskiego miasta Tikal z wysokimi piramidami."
+    },
+    {
+      "iso": "BZ",
+      "name": "Belize",
+      "capital": "Belmopan",
+      "capNote": "Uwaga: stolicą nie jest miasto Belize!",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "To jedyny kraj Ameryki Środkowej z angielskim jako językiem urzędowym, a przy brzegu leży Wielka Błękitna Dziura – ogromny podwodny lej."
+    },
+    {
+      "iso": "HN",
+      "name": "Honduras",
+      "capital": "Tegucigalpa",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "W ruinach majańskiego miasta Copán zachowały się tu jedne z najpiękniejszych rzeźb Majów."
+    },
+    {
+      "iso": "SV",
+      "name": "Salwador",
+      "alt": [
+        "El Salvador"
+      ],
+      "capital": "San Salvador",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "To najmniejszy kraj Ameryki Środkowej, nazywany krainą wulkanów."
+    },
+    {
+      "iso": "NI",
+      "name": "Nikaragua",
+      "capital": "Managua",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "To największy kraj Ameryki Środkowej, a w jego wielkim jeziorze żyją nawet rekiny, które wpływają tu z morza rzeką."
+    },
+    {
+      "iso": "CR",
+      "name": "Kostaryka",
+      "capital": "San José",
+      "capAlt": [
+        "San Jose"
+      ],
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Ten kraj nie ma armii, a w lasach deszczowych żyją leniwce i kolorowe żaby."
+    },
+    {
+      "iso": "PA",
+      "name": "Panama",
+      "capital": "Panama",
+      "capAlt": [
+        "Ciudad de Panamá"
+      ],
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Przecina go słynny kanał, którym statki skracają sobie drogę z Atlantyku na Pacyfik."
+    },
+    {
+      "iso": "CU",
+      "name": "Kuba",
+      "capital": "Hawana",
+      "capAlt": [
+        "La Habana"
+      ],
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "To największa wyspa na Karaibach, słynąca ze starych kolorowych samochodów na ulicach stolicy."
+    },
+    {
+      "iso": "JM",
+      "name": "Jamajka",
+      "capital": "Kingston",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Stąd pochodzi muzyka reggae i Usain Bolt – najszybszy człowiek świata."
+    },
+    {
+      "iso": "HT",
+      "name": "Haiti",
+      "capital": "Port-au-Prince",
+      "capAlt": [
+        "Port au Prince"
+      ],
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "To pierwszy kraj na świecie, w którym niewolnicy sami wywalczyli niepodległość – w 1804 roku."
+    },
+    {
+      "iso": "DO",
+      "name": "Dominikana",
+      "alt": [
+        "Republika Dominikańska"
+      ],
+      "capital": "Santo Domingo",
+      "capNote": "Nie myl z Dominiką – to dwa różne kraje!",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Zajmuje wschodnią część wyspy, którą dzieli z sąsiadem, a najpopularniejszym sportem jest tu baseball."
+    },
+    {
+      "iso": "BS",
+      "name": "Bahamy",
+      "capital": "Nassau",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Składa się z około 700 wysp, a na jednej z plaż mieszkają świnie, które pływają w morzu."
+    },
+    {
+      "iso": "TT",
+      "name": "Trynidad i Tobago",
+      "alt": [
+        "Trinidad i Tobago"
+      ],
+      "capital": "Port of Spain",
+      "capAlt": [
+        "Port-of-Spain"
+      ],
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Wynaleziono tu stalowy bęben – instrument zrobiony z beczki po ropie."
+    },
+    {
+      "iso": "BB",
+      "name": "Barbados",
+      "capital": "Bridgetown",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "To najdalej na wschód wysunięta wyspa Karaibów, a urodziła się tu piosenkarka Rihanna.",
+      "noOutline": true
+    },
+    {
+      "iso": "LC",
+      "name": "Saint Lucia",
+      "alt": [
+        "Święta Lucja"
+      ],
+      "capital": "Castries",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Wznoszą się tu dwie strome góry wulkaniczne – Pitony, które widać nawet na fladze.",
+      "noOutline": true
+    },
+    {
+      "iso": "VC",
+      "name": "Saint Vincent i Grenadyny",
+      "capital": "Kingstown",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Kraj tworzy wulkaniczna wyspa i łańcuch małych wysepek, a kręcono tu filmy o piratach z Karaibów.",
+      "noOutline": true
+    },
+    {
+      "iso": "GD",
+      "name": "Grenada",
+      "capital": "Saint George's",
+      "capAlt": [
+        "St. George's",
+        "St George's"
+      ],
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Nazywa się ją Wyspą Przypraw, bo rośnie tu mnóstwo gałki muszkatołowej – jest nawet na fladze.",
+      "noOutline": true
+    },
+    {
+      "iso": "DM",
+      "name": "Dominika",
+      "capital": "Roseau",
+      "capNote": "Nie myl z Dominikaną – to dwa różne kraje!",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Ta górzysta wyspa ma na fladze papugę, a w jej górach bulgocze Wrzące Jezioro.",
+      "noOutline": true
+    },
+    {
+      "iso": "AG",
+      "name": "Antigua i Barbuda",
+      "capital": "Saint John's",
+      "capAlt": [
+        "St. John's",
+        "St John's"
+      ],
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "Mówi się, że ma 365 plaż – po jednej na każdy dzień roku.",
+      "noOutline": true
+    },
+    {
+      "iso": "KN",
+      "name": "Saint Kitts i Nevis",
+      "capital": "Basseterre",
+      "continent": [
+        "NA"
+      ],
+      "view": "CAR",
+      "fact": "To najmniejsze państwo obu Ameryk, złożone z dwóch wysp.",
+      "noOutline": true
     }
   ]
 }
