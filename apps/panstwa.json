@@ -1,5 +1,5 @@
 {
-  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., CAR – Ameryka Środkowa i Karaiby, RU); noOutline: true – kraj za mały na pytanie o kształt.",
+  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., CAR – Ameryka Środkowa i Karaiby, WAF – Afryka Zachodnia, GG – Zatoka Gwinejska, IO – wyspy Oceanu Indyjskiego, RU); noOutline: true – kraj za mały na pytanie o kształt.",
   "countries": [
     {
       "iso": "PL",
@@ -1289,6 +1289,7 @@
       "continent": [
         "AF"
       ],
+      "view": "IO",
       "fact": "Na tej wielkiej wyspie żyją lemury, których na wolności nie spotyka się nigdzie indziej na świecie."
     },
     {
@@ -1707,6 +1708,277 @@
       ],
       "view": "CAR",
       "fact": "To najmniejsze państwo obu Ameryk, złożone z dwóch wysp.",
+      "noOutline": true
+    },
+    {
+      "iso": "ER",
+      "name": "Erytrea",
+      "capital": "Asmara",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Jej stolica słynie z budynków z czasów włoskich, w tym stacji benzynowej w kształcie samolotu."
+    },
+    {
+      "iso": "DJ",
+      "name": "Dżibuti",
+      "alt": [
+        "Dzibuti",
+        "Djibouti"
+      ],
+      "capital": "Dżibuti",
+      "capAlt": [
+        "Dzibuti",
+        "Djibouti"
+      ],
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Leży tu Jezioro Asal – najniżej położone miejsce Afryki, ponad 150 metrów poniżej poziomu morza."
+    },
+    {
+      "iso": "BI",
+      "name": "Burundi",
+      "capital": "Gitega",
+      "capNote": "Uwaga: od 2019 roku stolicą jest Gitega, a nie Bużumbura!",
+      "continent": [
+        "AF"
+      ],
+      "fact": "W jego górach bierze początek jedno z najdalszych źródeł Nilu, a kraj słynie z widowiskowych tańców bębniarzy."
+    },
+    {
+      "iso": "CF",
+      "name": "Republika Środkowoafrykańska",
+      "alt": [
+        "RŚA"
+      ],
+      "capital": "Bangi",
+      "capAlt": [
+        "Bangui"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Leży prawie w samym środku kontynentu, a w lasach żyją goryle nizinne i słonie leśne."
+    },
+    {
+      "iso": "GA",
+      "name": "Gabon",
+      "capital": "Libreville",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Prawie cały kraj porastają lasy deszczowe, a w parku Loango na plażę wychodzą słonie i hipopotamy."
+    },
+    {
+      "iso": "GQ",
+      "name": "Gwinea Równikowa",
+      "capital": "Malabo",
+      "continent": [
+        "AF"
+      ],
+      "view": "GG",
+      "fact": "To jedyny kraj Afryki, w którym językiem urzędowym jest hiszpański, a jego stolica leży na wyspie."
+    },
+    {
+      "iso": "ST",
+      "name": "Wyspy Świętego Tomasza i Książęca",
+      "alt": [
+        "Wyspy Św. Tomasza i Książęca",
+        "São Tomé i Príncipe",
+        "Sao Tome i Principe"
+      ],
+      "capital": "São Tomé",
+      "capAlt": [
+        "Sao Tome",
+        "San Tome"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "GG",
+      "fact": "Ten wyspiarski kraj leży prawie na równiku w Zatoce Gwinejskiej i słynie z uprawy kakao.",
+      "noOutline": true
+    },
+    {
+      "iso": "BJ",
+      "name": "Benin",
+      "capital": "Porto-Novo",
+      "capAlt": [
+        "Porto Novo",
+        "Kotonu",
+        "Cotonou"
+      ],
+      "capNote": "Oficjalną stolicą jest Porto-Novo, ale rząd urzęduje w Kotonu.",
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "To tu narodziła się religia voodoo, a w dawnym królestwie Dahomeju walczyły słynne wojowniczki."
+    },
+    {
+      "iso": "TG",
+      "name": "Togo",
+      "capital": "Lomé",
+      "capAlt": [
+        "Lome"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "To bardzo wąski kraj – przy wybrzeżu ma tylko około 50 kilometrów szerokości."
+    },
+    {
+      "iso": "BF",
+      "name": "Burkina Faso",
+      "alt": [
+        "Burkina"
+      ],
+      "capital": "Wagadugu",
+      "capAlt": [
+        "Ouagadougou"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "Nazwa kraju oznacza „ojczyznę uczciwych ludzi”, a w stolicy odbywa się największy festiwal filmowy Afryki."
+    },
+    {
+      "iso": "GN",
+      "name": "Gwinea",
+      "capital": "Konakry",
+      "capAlt": [
+        "Conakry"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "W górach Futa Dżalon mają źródła wielkie rzeki Niger, Senegal i Gambia, dlatego nazywa się go wieżą ciśnień Afryki Zachodniej."
+    },
+    {
+      "iso": "GW",
+      "name": "Gwinea Bissau",
+      "alt": [
+        "Gwinea-Bissau"
+      ],
+      "capital": "Bissau",
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "Na przybrzeżnym archipelagu Bijagós żyją hipopotamy, które pływają w słonej wodzie morskiej."
+    },
+    {
+      "iso": "SL",
+      "name": "Sierra Leone",
+      "capital": "Freetown",
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "Słynie z diamentów, a jego nazwa oznacza po portugalsku „Lwie Góry”."
+    },
+    {
+      "iso": "LR",
+      "name": "Liberia",
+      "capital": "Monrowia",
+      "capAlt": [
+        "Monrovia"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "To najstarsza republika Afryki, założona przez wyzwolonych niewolników z USA – dlatego flaga przypomina amerykańską."
+    },
+    {
+      "iso": "GM",
+      "name": "Gambia",
+      "capital": "Bandżul",
+      "capAlt": [
+        "Banjul",
+        "Bandzul"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "To najmniejszy kraj kontynentalnej Afryki – wąski pas lądu wzdłuż rzeki, prawie w całości otoczony przez Senegal."
+    },
+    {
+      "iso": "CV",
+      "name": "Republika Zielonego Przylądka",
+      "alt": [
+        "Wyspy Zielonego Przylądka",
+        "Cabo Verde",
+        "Zielony Przylądek"
+      ],
+      "capital": "Praia",
+      "continent": [
+        "AF"
+      ],
+      "view": "WAF",
+      "fact": "Te wulkaniczne wyspy na Atlantyku były bezludne, dopóki w XV wieku nie przypłynęli tu Portugalczycy.",
+      "noOutline": true
+    },
+    {
+      "iso": "SZ",
+      "name": "Eswatini",
+      "alt": [
+        "Suazi",
+        "Swaziland"
+      ],
+      "capital": "Mbabane",
+      "capAlt": [
+        "Lobamba"
+      ],
+      "capNote": "Siedzibą rządu jest Mbabane, a parlament i dwór królewski są w Lobambie.",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To jedna z ostatnich monarchii absolutnych świata – pełnię władzy ma tu król."
+    },
+    {
+      "iso": "KM",
+      "name": "Komory",
+      "capital": "Moroni",
+      "continent": [
+        "AF"
+      ],
+      "view": "IO",
+      "fact": "Na tych wulkanicznych wyspach uprawia się tyle roślin do perfum, że nazywa się je Wyspami Perfum.",
+      "noOutline": true
+    },
+    {
+      "iso": "SC",
+      "name": "Seszele",
+      "capital": "Victoria",
+      "capAlt": [
+        "Wiktoria"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "IO",
+      "fact": "Na tych wyspach rośnie palma, której orzech jest największym nasionem na świecie, a żyją tu olbrzymie żółwie.",
+      "noOutline": true
+    },
+    {
+      "iso": "MU",
+      "name": "Mauritius",
+      "capital": "Port Louis",
+      "capAlt": [
+        "Port-Louis"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "view": "IO",
+      "fact": "Żył tu kiedyś ptak dodo, który wyginął ponad 300 lat temu i jest dziś symbolem wyspy.",
       "noOutline": true
     }
   ]
