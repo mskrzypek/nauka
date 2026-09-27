@@ -1002,6 +1002,346 @@
       ],
       "view": "ME",
       "fact": "To mały kraj na półwyspie w Zatoce Perskiej, który w 2022 roku jako pierwszy kraj arabski zorganizował mundial."
+    },
+    {
+      "iso": "DZ",
+      "name": "Algieria",
+      "capital": "Algier",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To największy kraj Afryki, a większą część jego powierzchni zajmuje Sahara."
+    },
+    {
+      "iso": "TN",
+      "name": "Tunezja",
+      "capital": "Tunis",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To najdalej na północ wysunięty kraj Afryki, a nad morzem leżą ruiny starożytnej Kartaginy."
+    },
+    {
+      "iso": "LY",
+      "name": "Libia",
+      "capital": "Trypolis",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Prawie cały kraj to pustynia – ponad 90 procent powierzchni zajmuje Sahara."
+    },
+    {
+      "iso": "SD",
+      "name": "Sudan",
+      "capital": "Chartum",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Stoi tu więcej piramid niż w Egipcie – zbudowali je dawni królowie Nubii."
+    },
+    {
+      "iso": "SS",
+      "name": "Sudan Południowy",
+      "capital": "Dżuba",
+      "capAlt": [
+        "Juba",
+        "Dzuba"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "To najmłodsze państwo świata – ogłosiło niepodległość w 2011 roku."
+    },
+    {
+      "iso": "ET",
+      "name": "Etiopia",
+      "capital": "Addis Abeba",
+      "capAlt": [
+        "Addis Ababa"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Według legendy to tu pasterz odkrył kawę, a kraj ma własny kalendarz, w którym rok ma 13 miesięcy."
+    },
+    {
+      "iso": "SO",
+      "name": "Somalia",
+      "capital": "Mogadiszu",
+      "capAlt": [
+        "Mogadishu",
+        "Mogadisz"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Ma najdłuższe wybrzeże w kontynentalnej Afryce – nad Oceanem Indyjskim i Zatoką Adeńską."
+    },
+    {
+      "iso": "TZ",
+      "name": "Tanzania",
+      "capital": "Dodoma",
+      "capNote": "Uwaga: stolicą jest Dodoma, a nie największe miasto – Dar es Salaam!",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Wznosi się tu Kilimandżaro – najwyższa góra Afryki, a przez równiny Serengeti wędrują miliony antylop gnu."
+    },
+    {
+      "iso": "UG",
+      "name": "Uganda",
+      "capital": "Kampala",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Nazywa się ją perłą Afryki, a z Jeziora Wiktorii wypływa tu Nil Biały."
+    },
+    {
+      "iso": "RW",
+      "name": "Rwanda",
+      "capital": "Kigali",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Nazywa się ją krainą tysiąca wzgórz, a w górskich lasach żyją goryle górskie."
+    },
+    {
+      "iso": "CD",
+      "name": "Demokratyczna Republika Konga",
+      "alt": [
+        "DR Konga",
+        "DRK",
+        "Kongo-Kinszasa"
+      ],
+      "capital": "Kinszasa",
+      "capAlt": [
+        "Kinshasa"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Płynie tu najgłębsza rzeka świata, a tylko w tutejszych lasach żyją okapi – krewniaki żyraf."
+    },
+    {
+      "iso": "CG",
+      "name": "Kongo",
+      "alt": [
+        "Republika Konga",
+        "Kongo-Brazzaville"
+      ],
+      "capital": "Brazzaville",
+      "capAlt": [
+        "Brazzawil",
+        "Brazzawila"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Jego stolica leży nad wielką rzeką naprzeciw stolicy sąsiedniego państwa – poza Rzymem i Watykanem to najbliżej siebie położone stolice świata."
+    },
+    {
+      "iso": "NG",
+      "name": "Nigeria",
+      "capital": "Abudża",
+      "capAlt": [
+        "Abuja",
+        "Abudza"
+      ],
+      "capNote": "Uwaga: stolicą nie jest Lagos!",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To kraj z największą liczbą mieszkańców w Afryce, a tutejsze filmy – Nollywood – oglądają miliony ludzi."
+    },
+    {
+      "iso": "GH",
+      "name": "Ghana",
+      "capital": "Akra",
+      "capAlt": [
+        "Accra"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "To jeden z największych producentów kakao na świecie, a dawniej nazywano ten kraj Złotym Wybrzeżem."
+    },
+    {
+      "iso": "CI",
+      "name": "Wybrzeże Kości Słoniowej",
+      "alt": [
+        "Côte d'Ivoire",
+        "Cote d'Ivoire"
+      ],
+      "capital": "Jamusukro",
+      "capAlt": [
+        "Yamoussoukro",
+        "Abidżan",
+        "Abidjan"
+      ],
+      "capNote": "Oficjalną stolicą jest Jamusukro, ale największym miastem i siedzibą wielu urzędów jest Abidżan.",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To największy producent kakao na świecie, a w stolicy stoi ogromna bazylika wzorowana na Bazylice św. Piotra w Rzymie."
+    },
+    {
+      "iso": "SN",
+      "name": "Senegal",
+      "capital": "Dakar",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To najdalej na zachód wysunięty kraj kontynentalnej Afryki, a niedaleko stolicy leży różowe jezioro Retba."
+    },
+    {
+      "iso": "ML",
+      "name": "Mali",
+      "capital": "Bamako",
+      "continent": [
+        "AF"
+      ],
+      "fact": "W Dżenne stoi największa budowla z gliny na świecie – Wielki Meczet, a dawniej słynęło z bogactwa miasto Timbuktu."
+    },
+    {
+      "iso": "NE",
+      "name": "Niger",
+      "capital": "Niamey",
+      "capAlt": [
+        "Niamej"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Większość kraju zajmuje Sahara, a na południu, w dolinie wielkiej rzeki, żyją ostatnie dzikie żyrafy Afryki Zachodniej."
+    },
+    {
+      "iso": "TD",
+      "name": "Czad",
+      "capital": "Ndżamena",
+      "capAlt": [
+        "N'Djamena",
+        "Ndjamena",
+        "Ndzamena"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Na północy wznoszą się góry Tibesti, a wielkie jezioro, od którego kraj wziął nazwę, skurczyło się w ostatnich dekadach o około 90 procent."
+    },
+    {
+      "iso": "CM",
+      "name": "Kamerun",
+      "capital": "Jaunde",
+      "capAlt": [
+        "Yaoundé",
+        "Yaounde"
+      ],
+      "capNote": "Uwaga: stolicą nie jest Duala!",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Nazywa się go Afryką w miniaturze, bo są tu pustynie, sawanny, lasy deszczowe, góry i plaże."
+    },
+    {
+      "iso": "AO",
+      "name": "Angola",
+      "capital": "Luanda",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Mówi się tu po portugalsku, a wodospady Kalandula należą do największych w Afryce."
+    },
+    {
+      "iso": "ZM",
+      "name": "Zambia",
+      "capital": "Lusaka",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Na jego granicy z Zimbabwe huczy wodospad Wiktorii – jeden z największych na świecie."
+    },
+    {
+      "iso": "ZW",
+      "name": "Zimbabwe",
+      "capital": "Harare",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Stoją tu ruiny średniowiecznego kamiennego miasta, od którego kraj wziął nazwę, a na granicy z Zambią huczy wodospad Wiktorii."
+    },
+    {
+      "iso": "MZ",
+      "name": "Mozambik",
+      "capital": "Maputo",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To jedyny kraj, który ma na fladze karabin, a jego długie wybrzeże ciągnie się wzdłuż Oceanu Indyjskiego."
+    },
+    {
+      "iso": "MG",
+      "name": "Madagaskar",
+      "capital": "Antananarywa",
+      "capAlt": [
+        "Antananarivo",
+        "Antananariwa"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Na tej wielkiej wyspie żyją lemury, których na wolności nie spotyka się nigdzie indziej na świecie."
+    },
+    {
+      "iso": "NA",
+      "name": "Namibia",
+      "capital": "Windhuk",
+      "capAlt": [
+        "Windhoek"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Wzdłuż wybrzeża Atlantyku ciągnie się jedna z najstarszych pustyń świata z ogromnymi czerwonymi wydmami."
+    },
+    {
+      "iso": "BW",
+      "name": "Botswana",
+      "capital": "Gaborone",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Żyje tu najwięcej słoni na świecie, a delta rzeki Okawango co roku zamienia się w ogromne mokradła pełne zwierząt."
+    },
+    {
+      "iso": "MR",
+      "name": "Mauretania",
+      "capital": "Nawakszut",
+      "capAlt": [
+        "Nouakchott",
+        "Nawakszot"
+      ],
+      "continent": [
+        "AF"
+      ],
+      "fact": "Na tutejszej pustyni leży Oko Sahary – ogromna okrągła formacja skalna, dobrze widoczna z kosmosu."
+    },
+    {
+      "iso": "LS",
+      "name": "Lesotho",
+      "capital": "Maseru",
+      "continent": [
+        "AF"
+      ],
+      "fact": "To królestwo leży w całości w środku innego państwa – RPA – i cały jego obszar jest położony ponad 1000 metrów nad morzem."
+    },
+    {
+      "iso": "MW",
+      "name": "Malawi",
+      "capital": "Lilongwe",
+      "continent": [
+        "AF"
+      ],
+      "fact": "Prawie jedną piątą kraju zajmuje długie jezioro, w którym żyje najwięcej gatunków ryb na świecie."
     }
   ]
 }
