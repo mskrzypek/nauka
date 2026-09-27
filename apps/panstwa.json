@@ -1,5 +1,5 @@
 {
-  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., CAR – Ameryka Środkowa i Karaiby, WAF – Afryka Zachodnia, GG – Zatoka Gwinejska, IO – wyspy Oceanu Indyjskiego, PAC – wyspy Pacyfiku, RU); noOutline: true – kraj za mały na pytanie o kształt. point: [lon,lat] – dla kraju, którego nie ma na mapie (np. Tuvalu), rysowana jest kropka w tym miejscu.",
+  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., CAR – Ameryka Środkowa i Karaiby, WAF – Afryka Zachodnia, GG – Zatoka Gwinejska, IO – wyspy Oceanu Indyjskiego, PAC – wyspy Pacyfiku, RU); noOutline: true – kraj za mały na pytanie o kształt. point: [lon,lat] – dla kraju, którego nie ma na mapie (np. Tuvalu), rysowana jest kropka w tym miejscu. status: dopisek o spornym statusie kraju (Kosowo, Tajwan, Palestyna) – pokazywany w Atlasie i po odpowiedzi.",
   "countries": [
     {
       "iso": "PL",
@@ -2237,13 +2237,13 @@
       ],
       "view": "PAC",
       "fact": "Jego wyspy leżą po obu stronach równika i linii zmiany daty, a to tu najwcześniej na świecie wita się Nowy Rok.",
-      "noOutline": true,
       "clip": [
         169,
         -3,
         178,
         4
-      ]
+      ],
+      "noOutline": true
     },
     {
       "iso": "FM",
@@ -2319,6 +2319,52 @@
       ],
       "fact": "To jedno z najstarszych państw świata – według tradycji powstało w 301 roku – i leży na górze Titano, ze wszystkich stron otoczone przez Włochy.",
       "noOutline": true
+    },
+    {
+      "iso": "XK",
+      "name": "Kosowo",
+      "capital": "Prisztina",
+      "capAlt": [
+        "Priština",
+        "Pristina",
+        "Prishtina"
+      ],
+      "continent": [
+        "EU"
+      ],
+      "status": "Kosowo ogłosiło niepodległość od Serbii w 2008 roku. Uznaje je około 100 państw, w tym Polska, ale Serbia i część innych krajów uważają je nadal za część Serbii.",
+      "fact": "To jedno z najmłodszych państw Europy, a większość mieszkańców mówi tu po albańsku."
+    },
+    {
+      "iso": "TW",
+      "name": "Tajwan",
+      "capital": "Tajpej",
+      "capAlt": [
+        "Taipei",
+        "Tajpei"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "status": "Tajwan ma własny rząd, wojsko i pieniądze, ale Chiny uważają go za swoją prowincję. Oficjalnie uznaje go tylko kilkanaście państw – Polska utrzymuje z nim kontakty, ale nie uznaje go jako państwa.",
+      "fact": "Na tej wyspie stoi wieżowiec Taipei 101, przez kilka lat najwyższy na świecie, a produkuje się tu większość najnowocześniejszych chipów komputerowych."
+    },
+    {
+      "iso": "PS",
+      "name": "Palestyna",
+      "capital": "Ramallah",
+      "capAlt": [
+        "Jerozolima Wschodnia",
+        "Wschodnia Jerozolima"
+      ],
+      "capNote": "Palestyńczycy za swoją stolicę uważają Wschodnią Jerozolimę, ale władze urzędują w Ramallah.",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "status": "Palestyna jest państwem-obserwatorem przy ONZ. Uznaje ją większość państw świata, w tym Polska, ale nie ma pełnej kontroli nad swoim terytorium – Zachodnim Brzegiem Jordanu i Strefą Gazy.",
+      "fact": "Leży tu Betlejem, w którym według Biblii urodził się Jezus, a w Jerychu – jednym z najstarszych miast świata – ludzie mieszkają od ponad 10 tysięcy lat."
     }
   ]
 }

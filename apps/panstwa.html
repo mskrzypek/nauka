@@ -350,7 +350,7 @@ function askQ(q,done,next){ // wspólne odpowiadanie: tekst, wybór z 4 albo dot
     const c=q.c;
     $('fb').innerHTML=`<div class="fb ${res==='ok'?'ok':res==='warn'?'warn':'bad'}"><div class="h">${res==='ok'?'Brawo! ✅':res==='warn'?'Prawie dobrze 🙂':'Nie tym razem'}</div>
       ${msg?`<div>${esc(msg)}</div>`:''}
-      <div class="info">${fl(c.iso)}<div><b>${esc(c.name)}</b> · stolica: <b>${esc(c.capital)}</b><br><span class="small">${esc(c.fact)}</span>${q.skill==='stolica'&&c.capNote?`<br><span class="small"><b>${esc(c.capNote)}</b></span>`:''}</div></div></div>
+      <div class="info">${fl(c.iso)}<div><b>${esc(c.name)}</b> · stolica: <b>${esc(c.capital)}</b><br><span class="small">${esc(c.fact)}</span>${q.skill==='stolica'&&c.capNote?`<br><span class="small"><b>${esc(c.capNote)}</b></span>`:''}${c.status?`<br><span class="small">⚖️ ${esc(c.status)}</span>`:''}</div></div></div>
       <button class="btn primary wide" id="bNext" style="margin-top:10px">Dalej</button>`;
     $('bNext').onclick=next; $('bNext').focus({preventScroll:true});
     $('fb').scrollIntoView({block:'nearest',behavior:'smooth'});
@@ -405,6 +405,7 @@ function country(iso){
     <div class="card">${fl(c.iso,'flag')}
       <dl class="facts"><dt>Stolica</dt><dd>${esc(c.capital)}</dd><dt>Kontynent</dt><dd>${esc(contLabel(c))}</dd></dl>
       ${c.capNote?`<p class="small"><b>${esc(c.capNote)}</b></p>`:''}
+      ${c.status?`<p class="small" style="background:var(--warnbg);border-radius:10px;padding:8px 10px">⚖️ <b>Sporny status:</b> ${esc(c.status)}</p>`:''}
       <p>💡 ${esc(c.fact)}</p></div>
     <div class="twocol">
       <div class="card"><h2>Kształt</h2>${c.noOutline?'<p class="muted">Ten kraj jest tak mały, że na mapie świata widać go tylko jako kropkę.</p>':outlineSvg(c.iso)}</div>
