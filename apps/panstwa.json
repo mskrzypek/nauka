@@ -1,5 +1,5 @@
 {
-  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); noOutline: true – kraj za mały na pytanie o kształt.",
+  "_opis": "Państwa w apce „Państwa świata”. Nowy kraj = nowy obiekt w 'countries' (kolejność dowolna). iso: kod ISO 3166-1 alfa-2 (po nim jest kontur, mapa, flaga, sąsiedzi i postęp – nie zmieniaj). name/capital: poprawna polska forma; alt/capAlt: inne akceptowane odpowiedzi; continent: EU, AS, AF, NA, SA, OC (kraj na dwóch kontynentach – dwa kody, pierwszy decyduje o widoku mapy); fact: jedno zdanie BEZ nazwy kraju (służy też jako zagadka); capNote: dopisek do stolicy; noNeighbors: kody sąsiadów do pominięcia (np. przez terytoria zamorskie). clip: [lonMin,latMin,lonMax,latMax] – przycięcie konturu (np. bez Svalbardu); view: widok mapy (EU, AS, AF, NA, SA, OC, ME – Bliski Wschód, SEA – Azja Płd.-Wsch., RU); noOutline: true – kraj za mały na pytanie o kształt.",
   "countries": [
     {
       "iso": "PL",
@@ -182,6 +182,7 @@
       "continent": [
         "AS"
       ],
+      "view": "SEA",
       "fact": "Nazywa się ją Krainą Uśmiechu, a słoń jest tu zwierzęciem narodowym."
     },
     {
@@ -636,6 +637,371 @@
       ],
       "fact": "To najmniejsze państwo świata – leży w środku Rzymu, a rządzi nim papież.",
       "noOutline": true
+    },
+    {
+      "iso": "KR",
+      "name": "Korea Południowa",
+      "alt": [
+        "Republika Korei"
+      ],
+      "capital": "Seul",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Stąd pochodzą telefony Samsung i zespoły K-pop, a pisze się tu własnym alfabetem hangul."
+    },
+    {
+      "iso": "KP",
+      "name": "Korea Północna",
+      "alt": [
+        "KRLD"
+      ],
+      "capital": "Pjongjang",
+      "capAlt": [
+        "Phenian"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "To jeden z najbardziej zamkniętych krajów świata – zwykli mieszkańcy prawie nie mogą korzystać z internetu."
+    },
+    {
+      "iso": "VN",
+      "name": "Wietnam",
+      "capital": "Hanoi",
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "Na mapie ma kształt długiej litery S, a słynie z zupy pho i Zatoki Ha Long z tysiącami skalnych wysepek."
+    },
+    {
+      "iso": "ID",
+      "name": "Indonezja",
+      "capital": "Dżakarta",
+      "capAlt": [
+        "Jakarta",
+        "Dzakarta"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "To największe państwo wyspiarskie świata – leży na ponad 17 tysiącach wysp, a żyją tu ogromne jaszczurki – warany z Komodo."
+    },
+    {
+      "iso": "PH",
+      "name": "Filipiny",
+      "capital": "Manila",
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "Kraj leży na ponad 7 tysiącach wysp, a żyje tu wyrak – maleńka małpka z ogromnymi oczami."
+    },
+    {
+      "iso": "MY",
+      "name": "Malezja",
+      "capital": "Kuala Lumpur",
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "W stolicy stoją słynne bliźniacze wieże Petronas, a w dżunglach na Borneo żyją orangutany."
+    },
+    {
+      "iso": "SG",
+      "name": "Singapur",
+      "capital": "Singapur",
+      "capNote": "To państwo-miasto: stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "To państwo-miasto na wyspie na końcu Półwyspu Malajskiego, słynące z czystości i ogrodów z wielkimi sztucznymi drzewami.",
+      "noOutline": true
+    },
+    {
+      "iso": "MM",
+      "name": "Mjanma",
+      "alt": [
+        "Birma",
+        "Myanmar"
+      ],
+      "capital": "Naypyidaw",
+      "capAlt": [
+        "Naypyitaw",
+        "Nepjido",
+        "Najpjidaw"
+      ],
+      "capNote": "Uwaga: stolicą nie jest już Rangun!",
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "Wznoszą się tu tysiące złotych pagód, a najsłynniejsza z nich, Szwedagon, stoi w Rangunie."
+    },
+    {
+      "iso": "KH",
+      "name": "Kambodża",
+      "capital": "Phnom Penh",
+      "capAlt": [
+        "Phnom Pen",
+        "Pnom Pen"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "Stoi tu Angkor Wat – największa świątynia na świecie, którą widać nawet na fladze."
+    },
+    {
+      "iso": "LA",
+      "name": "Laos",
+      "capital": "Wientian",
+      "capAlt": [
+        "Vientiane",
+        "Wientiane"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "To jedyny kraj Azji Południowo-Wschodniej bez dostępu do morza, a przez cały kraj płynie Mekong."
+    },
+    {
+      "iso": "BD",
+      "name": "Bangladesz",
+      "capital": "Dhaka",
+      "capAlt": [
+        "Dakka",
+        "Dhakka"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "To jeden z najgęściej zaludnionych krajów świata, a w namorzynowych lasach Sundarbanów żyją tygrysy bengalskie."
+    },
+    {
+      "iso": "PK",
+      "name": "Pakistan",
+      "capital": "Islamabad",
+      "capNote": "Uwaga: stolicą nie jest Karaczi!",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Na jego granicy z Chinami wznosi się K2 – drugi najwyższy szczyt świata."
+    },
+    {
+      "iso": "NP",
+      "name": "Nepal",
+      "capital": "Katmandu",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Na jego granicy wznosi się Mount Everest – najwyższa góra świata, a jego flaga jako jedyna na świecie nie jest prostokątem."
+    },
+    {
+      "iso": "LK",
+      "name": "Sri Lanka",
+      "capital": "Kolombo",
+      "capAlt": [
+        "Colombo",
+        "Sri Dźajawardanapura Kotte",
+        "Kotte"
+      ],
+      "capNote": "Oficjalną stolicą jest Sri Dźajawardanapura Kotte, ale największym miastem i siedzibą wielu urzędów jest Kolombo.",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Ta wyspa w kształcie kropli na Oceanie Indyjskim słynie z herbaty cejlońskiej i dzikich słoni."
+    },
+    {
+      "iso": "MN",
+      "name": "Mongolia",
+      "capital": "Ułan Bator",
+      "capAlt": [
+        "Ulan Bator",
+        "Ułan-Bator"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "Wiele rodzin koczowników mieszka tu w okrągłych namiotach – jurtach, a na południu leży pustynia Gobi."
+    },
+    {
+      "iso": "KZ",
+      "name": "Kazachstan",
+      "capital": "Astana",
+      "capNote": "Uwaga: stolicą nie jest Ałmaty!",
+      "continent": [
+        "AS",
+        "EU"
+      ],
+      "fact": "To największy kraj świata bez dostępu do oceanu, a z kosmodromu Bajkonur poleciał w kosmos Jurij Gagarin."
+    },
+    {
+      "iso": "UZ",
+      "name": "Uzbekistan",
+      "capital": "Taszkent",
+      "continent": [
+        "AS"
+      ],
+      "fact": "Leżą tu dawne miasta Jedwabnego Szlaku – Samarkanda i Buchara – z błękitnymi kopułami."
+    },
+    {
+      "iso": "AF",
+      "name": "Afganistan",
+      "capital": "Kabul",
+      "continent": [
+        "AS"
+      ],
+      "fact": "W górach Hindukuszu wydobywa się tu od tysięcy lat lapis lazuli – piękny niebieski kamień."
+    },
+    {
+      "iso": "IR",
+      "name": "Iran",
+      "capital": "Teheran",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Dawniej ten kraj nazywał się Persją, a słynie z ręcznie tkanych dywanów."
+    },
+    {
+      "iso": "IQ",
+      "name": "Irak",
+      "capital": "Bagdad",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Między rzekami Tygrys i Eufrat powstała tu Mezopotamia – jedna z pierwszych cywilizacji, która znała pismo."
+    },
+    {
+      "iso": "SA",
+      "name": "Arabia Saudyjska",
+      "capital": "Rijad",
+      "capAlt": [
+        "Riyadh",
+        "Ar-Rijad"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Leży tu Mekka – najświętsze miasto islamu, a większość kraju zajmuje pustynia."
+    },
+    {
+      "iso": "AE",
+      "name": "Zjednoczone Emiraty Arabskie",
+      "alt": [
+        "ZEA",
+        "Emiraty",
+        "Emiraty Arabskie"
+      ],
+      "capital": "Abu Zabi",
+      "capAlt": [
+        "Abu Dhabi",
+        "Abu Dabi"
+      ],
+      "capNote": "Uwaga: stolicą nie jest Dubaj!",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "W Dubaju stoi Burdż Chalifa – najwyższy budynek na świecie."
+    },
+    {
+      "iso": "IL",
+      "name": "Izrael",
+      "capital": "Jerozolima",
+      "capAlt": [
+        "Tel Awiw",
+        "Tel Aviv"
+      ],
+      "capNote": "Izrael uznaje za stolicę Jerozolimę, ale wiele państw ma swoje ambasady w Tel Awiwie.",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Leży nad Morzem Martwym, tak słonym, że można się na nim unosić bez pływania."
+    },
+    {
+      "iso": "JO",
+      "name": "Jordania",
+      "capital": "Amman",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "W skałach z różowego piaskowca wykuto tu starożytne miasto Petra."
+    },
+    {
+      "iso": "SY",
+      "name": "Syria",
+      "capital": "Damaszek",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Jego stolica jest jednym z najdłużej zamieszkanych miast na świecie – ludzie żyją tam od tysięcy lat."
+    },
+    {
+      "iso": "GE",
+      "name": "Gruzja",
+      "capital": "Tbilisi",
+      "continent": [
+        "AS",
+        "EU"
+      ],
+      "view": "ME",
+      "fact": "W górach Kaukazu stoją tu średniowieczne kamienne wieże, a winorośl uprawia się od około 8 tysięcy lat."
+    },
+    {
+      "iso": "AM",
+      "name": "Armenia",
+      "capital": "Erywań",
+      "capAlt": [
+        "Erewan",
+        "Jerewan"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Widać stąd górę Ararat, a był to pierwszy kraj, który przyjął chrześcijaństwo jako religię państwową."
+    },
+    {
+      "iso": "AZ",
+      "name": "Azerbejdżan",
+      "capital": "Baku",
+      "continent": [
+        "AS",
+        "EU"
+      ],
+      "view": "ME",
+      "fact": "Nazywa się go Krainą Ognia – na zboczu wzgórza Janardag gaz wydobywający się z ziemi płonie bez przerwy."
+    },
+    {
+      "iso": "CY",
+      "name": "Cypr",
+      "capital": "Nikozja",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Ta wyspa na Morzu Śródziemnym leży w Azji, ale należy do Unii Europejskiej, a według legendy narodziła się tu bogini Afrodyta."
+    },
+    {
+      "iso": "QA",
+      "name": "Katar",
+      "capital": "Doha",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "To mały kraj na półwyspie w Zatoce Perskiej, który w 2022 roku jako pierwszy kraj arabski zorganizował mundial."
     }
   ]
 }
