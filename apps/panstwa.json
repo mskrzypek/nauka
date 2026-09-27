@@ -1980,6 +1980,171 @@
       "view": "IO",
       "fact": "Żył tu kiedyś ptak dodo, który wyginął ponad 300 lat temu i jest dziś symbolem wyspy.",
       "noOutline": true
+    },
+    {
+      "iso": "BT",
+      "name": "Bhutan",
+      "capital": "Thimphu",
+      "capAlt": [
+        "Timphu",
+        "Thimpu"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "W tym himalajskim królestwie ważniejsze od bogactwa jest Szczęście Narodowe Brutto, a na fladze jest smok."
+    },
+    {
+      "iso": "BN",
+      "name": "Brunei",
+      "capital": "Bandar Seri Begawan",
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "To bogaty sułtanat na wyspie Borneo, a jego władca mieszka w jednym z największych pałaców świata."
+    },
+    {
+      "iso": "KW",
+      "name": "Kuwejt",
+      "alt": [
+        "Kuwait"
+      ],
+      "capital": "Kuwejt",
+      "capAlt": [
+        "Kuwait",
+        "Madinat al-Kuwajt"
+      ],
+      "capNote": "Stolica nazywa się tak samo jak kraj.",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Ten mały kraj jest bardzo bogaty dzięki ropie naftowej, a latem temperatura przekracza tu nawet 50 stopni."
+    },
+    {
+      "iso": "OM",
+      "name": "Oman",
+      "capital": "Maskat",
+      "capAlt": [
+        "Muscat",
+        "Maskat"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Na wybrzeżu i w górach stoją setki dawnych fortów, a na południu monsunowe deszcze co roku zamieniają góry w zieleń."
+    },
+    {
+      "iso": "YE",
+      "name": "Jemen",
+      "capital": "Sana",
+      "capAlt": [
+        "Sanaa",
+        "Sana'a"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Na wyspie Sokotra rosną tu smocze drzewa, a w mieście Szibam stoją gliniane wieżowce sprzed stuleci."
+    },
+    {
+      "iso": "LB",
+      "name": "Liban",
+      "capital": "Bejrut",
+      "capAlt": [
+        "Beirut"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Na fladze ma zielony cedr, a w Baalbek stoją ruiny wielkich rzymskich świątyń."
+    },
+    {
+      "iso": "TJ",
+      "name": "Tadżykistan",
+      "alt": [
+        "Tadzykistan"
+      ],
+      "capital": "Duszanbe",
+      "capAlt": [
+        "Dushanbe"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "Ponad 90 procent kraju zajmują góry, a na wschodzie wznosi się Pamir, nazywany Dachem Świata."
+    },
+    {
+      "iso": "KG",
+      "name": "Kirgistan",
+      "alt": [
+        "Kirgizja"
+      ],
+      "capital": "Biszkek",
+      "capAlt": [
+        "Bishkek"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "Leży tu wysokogórskie jezioro Issyk-kul, które nie zamarza nawet zimą, a pasterze od wieków mieszkają w jurtach."
+    },
+    {
+      "iso": "TM",
+      "name": "Turkmenistan",
+      "capital": "Aszchabad",
+      "capAlt": [
+        "Ashgabat",
+        "Aszgabat"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "Na pustyni Karakum od ponad 50 lat płonie krater z gazem, nazywany Wrotami Piekieł."
+    },
+    {
+      "iso": "BH",
+      "name": "Bahrajn",
+      "alt": [
+        "Bahrain"
+      ],
+      "capital": "Manama",
+      "continent": [
+        "AS"
+      ],
+      "view": "ME",
+      "fact": "Ten mały kraj leży na wyspach w Zatoce Perskiej, a z Arabią Saudyjską łączy go most długi na 25 kilometrów.",
+      "noOutline": true
+    },
+    {
+      "iso": "MV",
+      "name": "Malediwy",
+      "capital": "Male",
+      "capAlt": [
+        "Malé"
+      ],
+      "continent": [
+        "AS"
+      ],
+      "fact": "Kraj tworzy około 1200 wysp koralowych, a to najniżej położone państwo świata – średnio tylko około półtora metra nad morzem.",
+      "noOutline": true
+    },
+    {
+      "iso": "TL",
+      "name": "Timor Wschodni",
+      "alt": [
+        "Timor-Leste"
+      ],
+      "capital": "Dili",
+      "continent": [
+        "AS"
+      ],
+      "view": "SEA",
+      "fact": "To jedno z najmłodszych państw świata – niepodległe od 2002 roku – leży na wschodniej części wyspy na północ od Australii."
     }
   ]
 }
