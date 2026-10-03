@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Irregular verbs – trzy formy czasowników</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇬🇧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F6FB; --grid:#E2E7F1; --ink:#14213D; --muted:#56627A; --line:#D2D9E6; --surface:#FFFFFF; --soft:#EDF1F8;
+  --accent:#C8102E; --accent-ink:#FFFFFF; --navy:#012169; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warnbg:#FFF2CC;
+  --c2:#2F5BD3; --c3:#8A3FD1;
+  --shadow:0 1px 2px rgba(20,33,61,.06),0 6px 18px rgba(20,33,61,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1424; --grid:#171E33; --ink:#E8ECF6; --muted:#A1AAC2; --line:#2B3552; --surface:#161D31; --soft:#1D263E;
+    --accent:#FF5470; --accent-ink:#0F1424; --navy:#9DB4FF; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warnbg:#3A3116;
+    --c2:#8FB0FF; --c3:#C9A0FF; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2,h3{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(28px,7.5vw,38px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+h3{font-size:17px; font-weight:800; margin:16px 0 6px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:not-allowed; opacity:.45}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.small{padding:5px 12px; font-size:14px}
+.btn.wide{width:100%; padding:13px}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px 16px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:30px; width:40px; text-align:center; flex:none}
+.big .t{font:800 19px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:15px; line-height:1.35}
+.big.dark{background:var(--navy); color:#fff; border-color:var(--navy)}
+.big.dark .d{color:#fff; opacity:.85}
+@media (prefers-color-scheme: dark){ .big.dark{color:#0F1424} .big.dark .d{color:#0F1424} }
+.bar{height:8px; background:var(--soft); border-radius:6px; overflow:hidden; margin:6px 0}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.seg{display:grid; grid-template-columns:1fr 1fr; background:var(--soft); border-radius:12px; padding:4px; gap:4px; margin:4px 0 12px}
+.seg button{border:0; background:transparent; border-radius:9px; padding:8px 6px; font:700 15px var(--fh)}
+.seg button[aria-pressed="true"]{background:var(--surface); box-shadow:var(--shadow)}
+
+/* pytanie */
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)} .q.warn{border-color:#E0A800}
+.qlab{font:700 14px var(--fh); color:var(--muted)}
+.qmain{font:800 clamp(28px,8vw,40px)/1.15 var(--fh); margin:4px 0 2px}
+.qpl{color:var(--muted); font-size:17px}
+.sent{font-size:21px; line-height:1.45; margin:6px 0}
+.sent .gap{display:inline-block; min-width:4.5em; border-bottom:3px solid var(--accent); text-align:center; font-weight:800; color:var(--accent)}
+.fields{display:grid; gap:8px; margin-top:12px}
+.field label{display:block; font:700 13px var(--fh); color:var(--muted); margin-bottom:2px}
+.inp{width:100%; font:700 22px var(--fb); padding:10px 12px; border:2px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink)}
+.inp:focus{outline:none; border-color:var(--accent)}
+.inp.ok{border-color:var(--ok); background:var(--okbg)} .inp.bad{border-color:var(--bad); background:var(--badbg)}
+.fb{margin-top:12px; border-radius:14px; padding:12px 14px}
+.fb.ok{background:var(--okbg)} .fb.bad{background:var(--badbg)} .fb.warn{background:var(--warnbg)}
+.fb .h{font:800 19px var(--fh)}
+.forms{font:800 22px var(--fh); margin:4px 0; display:flex; gap:6px; flex-wrap:wrap; align-items:center}
+.forms .f2{color:var(--c2)} .forms .f3{color:var(--c3)} .forms .sep{color:var(--muted); font-weight:400}
+.say{border:0; background:var(--soft); border-radius:10px; padding:4px 10px; font-size:17px}
+.tag{display:inline-block; border-radius:8px; padding:1px 8px; font:700 13px var(--fh); background:var(--soft); color:var(--muted)}
+.tag.irr{background:#FDE2E7; color:#9E0F28} .tag.reg{background:#DFF3E8; color:#1C6B47}
+@media (prefers-color-scheme: dark){ .tag.irr{background:#4A1724; color:#FFB3C1} .tag.reg{background:#123A2A; color:#9FE3C1} }
+
+/* tabela */
+.search{width:100%; font:17px var(--fb); padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink); margin-bottom:10px}
+table.vt{width:100%; border-collapse:collapse; font-size:16px}
+.vt th{font:700 13px var(--fh); color:var(--muted); text-align:left; padding:6px 4px; border-bottom:2px solid var(--line)}
+.vt td{border-top:1px solid var(--line); padding:7px 4px; vertical-align:middle}
+.vt td.b{font-weight:800} .vt td.v2{color:var(--c2); font-weight:700} .vt td.v3{color:var(--c3); font-weight:700}
+.vt td.pl{color:var(--muted); font-size:14px}
+.dots{color:var(--ok); font-size:11px; letter-spacing:1px; white-space:nowrap} .dots .off{color:var(--line)}
+.rule{background:var(--soft); border-radius:12px; padding:10px 12px; margin:8px 0}
+.rule b{color:var(--accent)}
+.miss{border-top:1px solid var(--line); padding:8px 0}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+const KEY='irregular-v1:'+kid;
+let S={q:{},days:[],tests:[],speak:true,plMode:false}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const today=()=>new Date().toLocaleDateString('sv');
+function streak(){ let n=0; const d=new Date(); if(!S.days.includes(d.toLocaleDateString('sv'))) d.setDate(d.getDate()-1); while(S.days.includes(d.toLocaleDateString('sv'))){ n++; d.setDate(d.getDate()-1); } return n; }
+
+/* ============ CZASOWNIKI NIEREGULARNE ============ */
+// base | past simple | past participle | po polsku. Kilka poprawnych form rozdziela „/”.
+const IRR=`be|was/were|been|być
+beat|beat|beaten|bić, pokonać
+become|became|become|stawać się
+begin|began|begun|zaczynać
+bend|bent|bent|zginać
+bet|bet|bet|zakładać się
+bite|bit|bitten|gryźć
+blow|blew|blown|dmuchać, wiać
+break|broke|broken|łamać, psuć
+bring|brought|brought|przynosić
+build|built|built|budować
+burn|burnt/burned|burnt/burned|palić (się)
+buy|bought|bought|kupować
+catch|caught|caught|łapać
+choose|chose|chosen|wybierać
+come|came|come|przychodzić
+cost|cost|cost|kosztować
+cut|cut|cut|ciąć, kroić
+dig|dug|dug|kopać
+do|did|done|robić
+draw|drew|drawn|rysować
+dream|dreamt/dreamed|dreamt/dreamed|śnić, marzyć
+drink|drank|drunk|pić
+drive|drove|driven|prowadzić (samochód)
+eat|ate|eaten|jeść
+fall|fell|fallen|upadać, spadać
+feed|fed|fed|karmić
+feel|felt|felt|czuć (się)
+fight|fought|fought|walczyć, bić się
+find|found|found|znajdować
+fly|flew|flown|latać
+forget|forgot|forgotten|zapominać
+forgive|forgave|forgiven|wybaczać
+freeze|froze|frozen|zamarzać
+get|got|got/gotten|dostawać, stawać się
+give|gave|given|dawać
+go|went|gone|iść, jechać
+grow|grew|grown|rosnąć, uprawiać
+hang|hung|hung|wieszać
+have|had|had|mieć
+hear|heard|heard|słyszeć
+hide|hid|hidden|chować (się)
+hit|hit|hit|uderzać
+hold|held|held|trzymać
+hurt|hurt|hurt|ranić, boleć
+keep|kept|kept|trzymać, zatrzymywać
+know|knew|known|wiedzieć, znać
+lay|laid|laid|kłaść, nakrywać (do stołu)
+lead|led|led|prowadzić
+learn|learnt/learned|learnt/learned|uczyć się
+leave|left|left|opuszczać, wyjeżdżać, zostawiać
+lend|lent|lent|pożyczać (komuś)
+let|let|let|pozwalać
+lie|lay|lain|leżeć
+light|lit|lit|zapalać
+lose|lost|lost|gubić, przegrywać
+make|made|made|robić, wytwarzać
+mean|meant|meant|znaczyć
+meet|met|met|spotykać
+pay|paid|paid|płacić
+put|put|put|kłaść
+read|read|read|czytać
+ride|rode|ridden|jeździć (konno, rowerem)
+ring|rang|rung|dzwonić
+rise|rose|risen|wznosić się, wschodzić
+run|ran|run|biegać
+say|said|said|mówić, powiedzieć
+see|saw|seen|widzieć
+sell|sold|sold|sprzedawać
+send|sent|sent|wysyłać
+set|set|set|ustawiać, nastawiać
+shake|shook|shaken|trząść, potrząsać
+shine|shone|shone|świecić
+shoot|shot|shot|strzelać
+show|showed|shown/showed|pokazywać
+shut|shut|shut|zamykać
+sing|sang|sung|śpiewać
+sink|sank|sunk|tonąć
+sit|sat|sat|siedzieć
+sleep|slept|slept|spać
+smell|smelt/smelled|smelt/smelled|pachnieć, wąchać
+speak|spoke|spoken|mówić (językiem)
+spell|spelt/spelled|spelt/spelled|literować
+spend|spent|spent|spędzać, wydawać (pieniądze)
+stand|stood|stood|stać
+steal|stole|stolen|kraść
+stick|stuck|stuck|przyklejać, wbijać
+sting|stung|stung|żądlić, parzyć
+swim|swam|swum|pływać
+take|took|taken|brać, zabierać
+teach|taught|taught|uczyć (kogoś)
+tear|tore|torn|drzeć
+tell|told|told|mówić, opowiadać
+think|thought|thought|myśleć
+throw|threw|thrown|rzucać
+understand|understood|understood|rozumieć
+wake|woke|woken|budzić (się)
+wear|wore|worn|nosić (ubranie)
+win|won|won|wygrywać
+write|wrote|written|pisać`.split('\n').map(l=>{ const [b,v2,v3,pl]=l.split('|'); return {id:'i:'+b,b,v2:v2.split('/'),v3:v3.split('/'),pl,irr:true}; });
+
+/* ============ CZASOWNIKI REGULARNE ============ */
+// Zasady pisowni -ed: ed – zwykle; d – kończy się na -e; ied – spółgłoska + y; dbl – podwojenie ostatniej spółgłoski.
+const REG=`work|pracować|ed
+play|grać, bawić się|ed
+watch|oglądać|ed
+want|chcieć|ed
+help|pomagać|ed
+walk|spacerować|ed
+talk|rozmawiać|ed
+clean|sprzątać|ed
+cook|gotować|ed
+open|otwierać|ed
+visit|odwiedzać|ed
+listen|słuchać|ed
+look|patrzeć|ed
+finish|kończyć|ed
+wash|myć|ed
+start|zaczynać|ed
+ask|pytać|ed
+call|dzwonić, wołać|ed
+enjoy|lubić, cieszyć się|ed
+stay|zostawać|ed
+rain|padać (o deszczu)|ed
+answer|odpowiadać|ed
+happen|zdarzać się|ed
+need|potrzebować|ed
+paint|malować|ed
+jump|skakać|ed
+laugh|śmiać się|ed
+borrow|pożyczać (od kogoś)|ed
+explain|wyjaśniać|ed
+climb|wspinać się|ed
+fix|naprawiać|ed
+destroy|niszczyć|ed
+like|lubić|d
+live|mieszkać|d
+love|kochać|d
+dance|tańczyć|d
+hate|nienawidzić|d
+close|zamykać|d
+arrive|przybywać|d
+decide|decydować|d
+hope|mieć nadzieję|d
+use|używać|d
+smile|uśmiechać się|d
+move|ruszać się, przeprowadzać się|d
+change|zmieniać|d
+invite|zapraszać|d
+phone|dzwonić (telefonować)|d
+believe|wierzyć|d
+prepare|przygotowywać|d
+agree|zgadzać się|d
+die|umierać|d
+study|uczyć się, studiować|ied
+try|próbować|ied
+cry|płakać|ied
+carry|nieść|ied
+worry|martwić się|ied
+hurry|spieszyć się|ied
+tidy|sprzątać, porządkować|ied
+copy|kopiować, odpisywać|ied
+reply|odpowiadać (na list)|ied
+marry|poślubić|ied
+stop|zatrzymywać (się)|dbl
+plan|planować|dbl
+drop|upuszczać|dbl
+shop|robić zakupy|dbl
+chat|czatować, gawędzić|dbl
+jog|biegać (truchtem)|dbl
+rob|okradać|dbl
+hug|przytulać|dbl
+prefer|woleć|dbl
+admit|przyznawać się|dbl
+regret|żałować|dbl
+travel|podróżować|dbl`.split('\n').map(l=>{ const [b,pl,r]=l.split('|'); return {id:'r:'+b,b,pl,rule:r,irr:false}; });
+function regPast(v){
+  const b=v.b; if(v.rule==='d') return [b+'d']; if(v.rule==='ied') return [b.slice(0,-1)+'ied'];
+  if(v.rule==='dbl'){ const f=b+b.slice(-1)+'ed'; return b==='travel'?[f,'traveled']:[f]; } return [b+'ed'];
+}
+REG.forEach(v=>{ v.v2=regPast(v); v.v3=v.v2; });
+const RULES={
+  ed:'Dodajesz po prostu -ed.',
+  d:'Czasownik kończy się na -e, więc dodajesz tylko -d.',
+  ied:'Spółgłoska + y → y zmieniasz na i i dodajesz -ed (study → studied).',
+  dbl:'Krótka sylaba akcentowana kończąca się na samogłoskę + spółgłoskę → podwajasz ostatnią literę (stop → stopped).'
+};
+const ruleOf=v=>{ if(v.irr) return 'Formy trzeba znać na pamięć.'; if(v.b==='travel') return 'W brytyjskim angielskim travel → travelled (podwojone l); w amerykańskim traveled – obie formy są dobre.';
+  if(['play','enjoy','stay','destroy'].includes(v.b)) return 'Samogłoska + y → y zostaje, dodajesz -ed (play → played).'; return RULES[v.rule]; };
+
+/* ============ ZDANIA (jak na egzaminie) ============ */
+// {odpowiedź} – luka, w nawiasie forma podstawowa. Po did/didn't zawsze forma podstawowa!
+const SENT=`We {went} to Zakopane last winter.|go
+I {bought} a new phone yesterday.|buy
+She {wrote} a long letter to her grandma.|write
+Have you ever {been} to London?|be
+They have just {eaten} lunch.|eat
+I {saw} a great film on Saturday.|see
+My dad {drove} me to school this morning.|drive
+I have never {ridden} a horse.|ride
+Who {broke} the window?|break
+He has {lost} his keys again.|lose
+Did you {go} to the party last night?|go
+I didn't {see} him yesterday.|see
+She didn't {buy} anything in the shop.|buy
+Did they {win} the match?|win
+We didn't {have} time for breakfast.|have
+Our team {won} the match 3:1.|win
+Has she {told} you the news?|tell
+The film {began} at 8 p.m.|begin
+I {forgot} my homework at home.|forget
+Somebody has {stolen} my bike!|steal
+We {met} our new teacher last week.|meet
+It {was} very cold yesterday.|be
+They {were} at school on Monday.|be
+I have {known} her for five years.|know
+He {fell} off his bike yesterday.|fall
+Have you {done} your homework?|do
+I {thought} the test was easy.|think
+She {taught} us English last year.|teach
+The baby has {slept} for three hours.|sleep
+We {spent} two weeks in Spain.|spend
+I {found} 20 złoty in my pocket.|find
+Have you {chosen} a present for Mum?|choose
+The sun {rose} at 6 o'clock.|rise
+He {threw} the ball to his dog.|throw
+I have {written} three emails today.|write
+She {sang} a beautiful song.|sing
+We {swam} in the lake every day.|swim
+The phone {rang} during the lesson.|ring
+I {played} football after school.|play
+She {studied} for the test all evening.|study
+We {stopped} at a petrol station.|stop
+They {stayed} at a hotel by the sea.|stay
+He {tried} to open the door.|try
+I {liked} the book very much.|like
+We {travelled} around Europe last summer.|travel
+The bus {arrived} late.|arrive
+My brother {dropped} his phone into the water.|drop
+Did she {enjoy} the concert?|enjoy
+I didn't {study} for the test.|study
+The children {carried} the boxes to the car.|carry
+She {planned} a surprise party for her friend.|plan
+We {watched} a match on TV.|watch
+I have {lived} here since 2015.|live
+Has it {stopped} raining?|stop
+He {cried} when his team lost.|cry`.split('\n').map((l,i)=>{ const [s,b]=l.split('|'); return {id:'s:'+i,s,b}; });
+const ALLV=[...IRR,...REG]; const BYB=Object.fromEntries(ALLV.map(v=>[v.b,v]));
+
+/* ============ POSTĘP ============ */
+const box=id=>(S.q[id]||{}).b||0;
+function record(id,ok){
+  const e=S.q[id]||(S.q[id]={b:0,r:0,w:0});
+  if(ok){ e.r++; e.b=Math.min(3,e.b+1); } else { e.w++; e.b=0; }
+  const d=today(); if(!S.days.includes(d)) S.days.push(d); save();
+}
+const mastered=list=>list.filter(v=>box(v.id)>=2).length;
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const norm=s=>String(s).toLowerCase().replace(/[’`]/g,"'").replace(/\s+/g,' ').trim();
+// „was/were” wymaga obu form (dowolna kolejność, przecinek albo ukośnik); przy innych wariantach wystarczy jeden.
+function okForm(input,forms,base){
+  const a=norm(input); if(!a) return null;
+  if(base==='be'&&forms.includes('was')){ const parts=a.split(/\s*[\/,]\s*|\s+/).filter(Boolean).sort().join('/'); return parts==='was/were'; }
+  const parts=a.split(/\s*[\/,]\s*/).filter(Boolean); // kilka form naraz (np. „burnt/burned”) – każda musi być poprawna
+  return parts.length>0&&parts.every(p=>forms.includes(p));
+}
+const showForms=v=>`<span class="b">${esc(v.b)}</span><span class="sep">–</span><span class="f2">${esc(v.v2.join(' / '))}</span><span class="sep">–</span><span class="f3">${esc(v.v3.join(' / '))}</span>`;
+const dots=id=>{ const b=Math.min(box(id),2); return `<span class="dots">${'●'.repeat(b)}<span class="off">${'●'.repeat(2-b)}</span></span>`; };
+
+/* ============ WYMOWA ============ */
+let voice=null;
+function pickVoice(){ const vs=speechSynthesis.getVoices(); voice=vs.find(v=>/^en(-|_)GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null; }
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function say(t){ try{ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; if(voice) u.voice=voice; u.rate=.85; speechSynthesis.speak(u); }catch(e){} }
+const sayForms=v=>say([v.b,v.v2[0],v.v3[0]].join(', '));
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const mI=mastered(IRR), mR=mastered(REG), st=streak(), last=S.tests.slice(-1)[0];
+  $app.innerHTML=`<h1>🇬🇧 Irregular verbs</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Trzy formy czasowników nieregularnych i końcówka -ed – pod egzamin ósmoklasisty.</p>
+    <div class="pills"><span class="pill">🔥 ${st} ${st===1?'dzień':'dni'} z rzędu</span><span class="pill">✅ nieregularne: ${mI}/${IRR.length}</span><span class="pill">✅ regularne: ${mR}/${REG.length}</span></div>
+    <button class="big dark" id="bThree"><span class="i">✍️</span><span><span class="t">Trzy formy</span><span class="d">Wpisz 2. i 3. formę czasownika nieregularnego (np. go → went → gone)</span></span></button>
+    <button class="big" id="bMix"><span class="i">🔀</span><span><span class="t">Regularny czy nieregularny?</span><span class="d">Mieszanka: wpisz formę przeszłą – -ed czy wyjątek?</span></span></button>
+    <button class="big" id="bSent"><span class="i">📝</span><span><span class="t">Zdania jak na egzaminie</span><span class="d">Uzupełnij lukę: Past Simple, Present Perfect, a po „did” – forma podstawowa</span></span></button>
+    <button class="big" id="bTest"><span class="i">🏁</span><span><span class="t">Sprawdzian</span><span class="d">20 pytań ze wszystkiego, wynik na końcu${last?` · ostatnio ${last.p}%`:''}</span></span></button>
+    <button class="big" id="bTable"><span class="i">📖</span><span><span class="t">Tabela i zasady</span><span class="d">Wszystkie formy pogrupowane według wzoru, z wymową i zasadami -ed</span></span></button>
+    <div class="card"><h2>Postęp</h2>
+      <div class="small">Nieregularne – opanowane ${mI} z ${IRR.length}</div><div class="bar"><span style="width:${pct(mI,IRR.length)}%"></span></div>
+      <div class="small">Regularne (-ed) – opanowane ${mR} z ${REG.length}</div><div class="bar"><span style="width:${pct(mR,REG.length)}%"></span></div>
+      <div class="small">Zdania – opanowane ${mastered(SENT)} z ${SENT.length}</div><div class="bar"><span style="width:${pct(mastered(SENT),SENT.length)}%"></span></div>
+      <p class="muted small" style="margin:8px 0 0">Opanowane = dobrze dwa razy z rzędu.</p></div>
+    <div class="row"><button class="btn small" id="bSpeak">${S.speak?'🔊 Czytanie na głos: wł.':'🔇 Czytanie na głos: wył.'}</button>
+    ${canSave?'':'<span class="muted small">Ta przeglądarka nie zapisze postępów.</span>'}</div>`;
+  $('bThree').onclick=()=>three(); $('bMix').onclick=()=>mix(); $('bSent').onclick=()=>sentences(); $('bTest').onclick=()=>test(); $('bTable').onclick=table;
+  $('bSpeak').onclick=()=>{ S.speak=!S.speak; save(); home(); };
+}
+
+/* ============ WYBÓR ELEMENTÓW ============ */
+function pick(list,n){ // słabsze częściej, ale bez powtórek w rundzie
+  const w=list.map(v=>({v,k:Math.random()*(box(v.id)>=2?0.35:1+(2-box(v.id)))}));
+  return w.sort((a,b)=>b.k-a.k).slice(0,n).map(x=>x.v);
+}
+
+/* ============ PYTANIA ============ */
+// typy: three (2 pola: V2, V3; z polskiego – 3 pola), past (1 pole: forma przeszła), sent (luka w zdaniu)
+function qThree(v,fromPl){ return {kind:'three',v,id:v.id,fromPl}; }
+function qPast(v){ return {kind:'past',v,id:v.id}; }
+function qSent(s){ return {kind:'sent',s,id:s.id,v:BYB[s.b]}; }
+
+function renderQ(q,box_,i,n,title){
+  const v=q.v;
+  let body='';
+  if(q.kind==='three'){
+    body=q.fromPl
+      ? `<div class="qlab">Podaj trzy formy · ${i+1}/${n}</div><div class="qmain">${esc(v.pl)}</div>
+         <div class="fields">${['1. forma (base)','2. forma (Past Simple)','3. forma (Past Participle)'].map((l,k)=>`<div class="field"><label>${l}</label><input class="inp" id="f${k}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="en"></div>`).join('')}</div>`
+      : `<div class="qlab">Podaj 2. i 3. formę · ${i+1}/${n}</div><div class="qmain">${esc(v.b)}</div><div class="qpl">${esc(v.pl)}</div>
+         <div class="fields">${['2. forma (Past Simple)','3. forma (Past Participle)'].map((l,k)=>`<div class="field"><label>${l}</label><input class="inp" id="f${k+1}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="en"></div>`).join('')}</div>`;
+  } else if(q.kind==='past'){
+    body=`<div class="qlab">Forma przeszła (Past Simple) · ${i+1}/${n}</div><div class="qmain">${esc(v.b)}</div><div class="qpl">${esc(v.pl)}</div>
+      <div class="fields"><div class="field"><label>Past Simple</label><input class="inp" id="f1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="en"></div></div>`;
+  } else {
+    const s=q.s.s.replace(/\{[^}]+\}/g,'<span class="gap">…</span>');
+    body=`<div class="qlab">Uzupełnij zdanie właściwą formą · ${i+1}/${n}</div><div class="sent">${s} <span class="muted">(${esc(q.s.b)})</span></div>
+      <div class="fields"><div class="field"><label>Twoja odpowiedź</label><input class="inp" id="f1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="en"></div></div>`;
+  }
+  box_.innerHTML=`<div class="q" id="q">${body}<div class="row" style="margin-top:12px"><button class="btn primary" id="bOk" style="flex:1">Sprawdź</button><button class="btn" id="bSkip">Nie wiem</button></div><div id="fb" aria-live="polite"></div></div>`;
+}
+function grade(q){ // → {ok, parts:[{el,ok}], fbHtml}
+  const v=q.v, parts=[];
+  const get=k=>$('f'+k)?$('f'+k).value:'';
+  if(q.kind==='three'){
+    if(q.fromPl) parts.push({k:0,ok:okForm(get(0),[v.b],v.b)});
+    parts.push({k:1,ok:okForm(get(1),v.v2,v.b)},{k:2,ok:okForm(get(2),v.v3,v.b)});
+  } else if(q.kind==='past') parts.push({k:1,ok:okForm(get(1),v.v2,v.b)});
+  else { const ans=q.s.s.match(/\{([^}]+)\}/)[1]; const alts=[ans]; if(ans==='travelled') alts.push('traveled'); parts.push({k:1,ok:okForm(get(1),alts,ans==='was'||ans==='were'?'':v.b)}); }
+  if(parts.some(p=>p.ok===null)) return null;
+  return {ok:parts.every(p=>p.ok),parts};
+}
+function feedbackHtml(q,ok){
+  const v=q.v;
+  const tag=v.irr?'<span class="tag irr">nieregularny</span>':'<span class="tag reg">regularny</span>';
+  let extra='';
+  if(q.kind==='sent'){ const full=q.s.s.replace(/\{([^}]+)\}/g,'<b>$1</b>'); extra=`<div style="margin:4px 0">${full}</div>`;
+    if(/\b(did|didn't)\b/i.test(q.s.s)) extra+=`<div class="small">💡 Po <b>did / didn't</b> zawsze forma podstawowa – czas przeszły „jest już” w did.</div>`;
+    else if(/\b(have|has|haven't|hasn't)\b/i.test(q.s.s)&&v) extra+=`<div class="small">💡 Present Perfect: <b>have/has + 3. forma</b>.</div>`;
+    else extra+=`<div class="small">💡 Past Simple (np. yesterday, last…, ago): <b>2. forma</b>.</div>`; }
+  return `<div class="fb ${ok?'ok':'bad'}"><div class="h">${ok?'Correct! ✅':'Nie tym razem'}</div>${extra}
+    <div class="forms">${showForms(v)} <button class="say" id="bSay" aria-label="Posłuchaj">🔊</button></div>
+    <div class="small">${tag} ${esc(ruleOf(v))}</div></div>
+    <button class="btn primary wide" id="bNext" style="margin-top:10px">Dalej</button>`;
+}
+
+/* ============ RUNDA ============ */
+function round(items,title,opts={}){
+  window.scrollTo(0,0);
+  const log=[]; let i=0;
+  function next(){
+    if(i>=items.length) return finish();
+    const q=items[i];
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/items.length}%"></span></div><div id="qb"></div>`;
+    $('bBack').onclick=home;
+    renderQ(q,$('qb'),i,items.length,title);
+    const inputs=[...$app.querySelectorAll('.inp')];
+    if(!matchMedia('(pointer:coarse)').matches) inputs[0].focus();
+    let answered=false;
+    const finishQ=(ok,given)=>{
+      answered=true; record(q.id,ok); log.push({q,ok,given});
+      inputs.forEach(x=>x.disabled=true); $('bSkip').disabled=true;
+      $('q').classList.add(ok?'ok':'bad');
+      if(opts.test){ i++; setTimeout(next,ok?250:250); return; }
+      $('fb').innerHTML=feedbackHtml(q,ok);
+      $('bOk').style.display='none';
+      $('bSay').onclick=()=>sayForms(q.v);
+      $('bNext').onclick=()=>{ i++; next(); }; $('bNext').focus({preventScroll:true});
+      if(S.speak) sayForms(q.v);
+      $('fb').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    const check=()=>{
+      if(answered) return;
+      const g=grade(q); if(!g){ const e=inputs.find(x=>!x.value.trim()); (e||inputs[0]).focus(); return; }
+      g.parts.forEach(p=>$('f'+p.k).classList.add(p.ok?'ok':'bad'));
+      finishQ(g.ok,inputs.map(x=>x.value.trim()).join(' – '));
+    };
+    $('bOk').onclick=check; $('bSkip').onclick=()=>{ if(!answered) finishQ(false,''); };
+    inputs.forEach((x,k)=>x.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); if(answered){ $('bNext')&&$('bNext').click(); return; } if(k<inputs.length-1&&!inputs[k+1].value) inputs[k+1].focus(); else check(); } });
+  }
+  function finish(){
+    const okN=log.filter(x=>x.ok).length, p=pct(okN,log.length), wrong=log.filter(x=>!x.ok);
+    if(opts.test){ S.tests.push({d:today(),p}); save(); }
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div style="font:800 56px/1 var(--fh)">${p}%</div>
+      <h2 style="margin-top:8px">${p===100?'Perfect! 🏆':p>=80?'Great job! 👏':p>=50?'Good – ćwicz dalej!':'Don\'t worry – spróbuj jeszcze raz!'}</h2>
+      <p>${okN} z ${log.length} dobrze</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="bAgain">Jeszcze raz</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórki</h2>${wrong.map(x=>`<div class="miss">${x.q.kind==='sent'?`<div class="small">${x.q.s.s.replace(/\{([^}]+)\}/g,'<b>$1</b>')}</div>`:''}<div class="forms" style="font-size:18px">${showForms(x.q.v)}</div>${x.given?`<div class="muted small">Twoja odpowiedź: ${esc(x.given)}</div>`:''}</div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home; $('bAgain').onclick=opts.again;
+  }
+  next();
+}
+function three(){
+  window.scrollTo(0,0);
+  $app.innerHTML=`${topBar('✍️ Trzy formy')}<div class="card"><p>Jak chcesz ćwiczyć?</p>
+    <div class="seg"><button data-m="0" aria-pressed="${!S.plMode}">go → went, gone</button><button data-m="1" aria-pressed="${S.plMode}">iść → go, went, gone</button></div>
+    <p class="muted small">Druga wersja jest trudniejsza – z polskiego podajesz wszystkie trzy formy.</p>
+    <button class="btn primary wide" id="bGo">Zaczynam (12 czasowników)</button></div>`;
+  $('bBack').onclick=home;
+  $app.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{ S.plMode=b.dataset.m==='1'; save(); three(); });
+  $('bGo').onclick=()=>round(pick(IRR,12).map(v=>qThree(v,S.plMode)),'Trzy formy',{again:three});
+}
+function mix(){ const items=shuffle([...pick(IRR,7),...pick(REG,7)]).map(qPast); round(items,'Regularny czy nieregularny?',{again:mix}); }
+function sentences(){ round(pick(SENT,12).map(qSent),'Zdania jak na egzaminie',{again:sentences}); }
+function test(){ const items=shuffle([...pick(IRR,8).map(v=>qThree(v,false)),...pick(REG,4).map(qPast),...pick(SENT,8).map(qSent)]); round(items,'Sprawdzian',{test:true,again:test}); }
+
+/* ============ TABELA ============ */
+function table(){
+  window.scrollTo(0,0);
+  const groups=[['AAA – wszystkie trzy formy takie same',v=>v.v2[0]===v.b&&v.v3[0]===v.b],['ABB – 2. i 3. forma takie same',v=>!(v.v2[0]===v.b&&v.v3[0]===v.b)&&v.v2[0]===v.v3[0]],['ABA – 3. forma jak 1.',v=>v.v3[0]===v.b&&v.v2[0]!==v.b],['ABC – pozostałe: różne formy',v=>v.v2[0]!==v.v3[0]&&v.v3[0]!==v.b]];
+  const row=v=>`<tr data-b="${v.b}"><td class="b">${esc(v.b)}</td><td class="v2">${esc(v.v2.join(' / '))}</td><td class="v3">${esc(v.v3.join(' / '))}</td><td>${dots(v.id)}</td><td><button class="say" data-say="${v.b}" aria-label="Posłuchaj">🔊</button></td></tr><tr data-b="${v.b}"><td colspan="5" class="pl" style="border-top:0;padding-top:0">${esc(v.pl)}</td></tr>`;
+  $app.innerHTML=`${topBar('📖 Tabela i zasady')}
+    <div class="card"><input class="search" id="q" placeholder="Szukaj (po angielsku albo po polsku)…" autocomplete="off" autocapitalize="off" spellcheck="false">
+    ${groups.map(([t,f])=>`<h3>${t}</h3><table class="vt"><tr><th>1. forma</th><th>2. Past Simple</th><th>3. Past Participle</th><th></th><th></th></tr>${IRR.filter(f).map(row).join('')}</table>`).join('')}</div>
+    <div class="card"><h2>Kiedy która forma?</h2>
+      <div class="rule"><b>Past Simple (2. forma)</b> – zakończona przeszłość: <i>yesterday, last week, two days ago, in 2020</i>. <br>I <b>went</b> to school yesterday.</div>
+      <div class="rule"><b>Present Perfect: have/has + 3. forma</b> – <i>ever, never, just, already, yet, since, for</i>. <br>I have never <b>been</b> to London.</div>
+      <div class="rule"><b>Po did / didn't – forma podstawowa!</b> <br>Did you <b>go</b>? I didn't <b>go</b>. (nie: <s>didn't went</s>)</div></div>
+    <div class="card"><h2>Czasowniki regularne: końcówka -ed</h2>
+      <div class="rule"><b>+ed</b> – zwykle: work → worked, play → played (samogłoska + y zostaje)</div>
+      <div class="rule"><b>+d</b> – gdy kończy się na -e: like → liked, live → lived</div>
+      <div class="rule"><b>y → ied</b> – spółgłoska + y: study → studied, try → tried, carry → carried</div>
+      <div class="rule"><b>podwojenie</b> – krótka akcentowana sylaba: samogłoska + spółgłoska: stop → stopped, plan → planned, prefer → preferred, travel → travelled (BrE)</div>
+      <table class="vt" style="margin-top:8px"><tr><th>czasownik</th><th>Past Simple</th><th>po polsku</th></tr>${REG.map(v=>`<tr data-b="${v.b}"><td class="b">${esc(v.b)}</td><td class="v2">${esc(v.v2.join(' / '))}</td><td class="pl">${esc(v.pl)}</td></tr>`).join('')}</table></div>`;
+  $('bBack').onclick=home;
+  $app.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>sayForms(BYB[b.dataset.say]));
+  $('q').oninput=e=>{ const t=norm(e.target.value); $app.querySelectorAll('tr[data-b]').forEach(tr=>{ const v=BYB[tr.dataset.b]; const hay=[v.b,...v.v2,...v.v3,v.pl].join(' ').toLowerCase(); tr.style.display=!t||hay.includes(t)?'':'none'; }); };
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>

@@ -210,6 +210,18 @@
       "added": "2026-09-27",
       "updated": "2026-09-27",
       "desc": "197 krajów: flagi, stolice, kontury, mapa"
+    },
+    {
+      "id": "irregular-verbs",
+      "file": "apps/irregular-verbs.html",
+      "title": "Irregular verbs – trzy formy czasowników",
+      "emoji": "🇬🇧",
+      "subject": "angielski",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-03",
+      "desc": "Trzy formy, -ed i zdania pod egzamin"
     }
   ]
 }
