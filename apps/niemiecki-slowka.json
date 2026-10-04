@@ -615,6 +615,145 @@
           "type": "zdanie"
         }
       ]
+    },
+    {
+      "id": "geburtstag",
+      "title": "Alles Gute zum Geburtstag! – przygotowania do imprezy",
+      "words": [
+        {
+          "pl": "Wszystkiego najlepszego z okazji urodzin!",
+          "de": "Alles Gute zum Geburtstag!",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Z okazji urodzin dużo szczęścia!",
+          "de": "Zum Geburtstag viel Glück!",
+          "type": "zdanie"
+        },
+        {
+          "pl": "rozpakowywać prezenty",
+          "de": "Geschenke auspacken"
+        },
+        {
+          "pl": "rozmawiać z rodzicami",
+          "de": "mit den Eltern sprechen"
+        },
+        {
+          "pl": "wysyłać wszystkie zaproszenia",
+          "de": "alle Einladungen schicken"
+        },
+        {
+          "pl": "robić zakupy",
+          "de": "einkaufen"
+        },
+        {
+          "pl": "sprzątać",
+          "de": "aufräumen"
+        },
+        {
+          "pl": "pisać zaproszenia",
+          "de": "Einladungen schreiben"
+        },
+        {
+          "pl": "dzwonić do przyjaciół",
+          "de": "Freunde anrufen"
+        },
+        {
+          "pl": "nakrywać do stołu",
+          "de": "den Tisch decken",
+          "alt": [
+            "Tisch decken"
+          ]
+        },
+        {
+          "pl": "przygotowywać gry i zabawy",
+          "de": "Spiele vorbereiten"
+        },
+        {
+          "pl": "planować jadłospis",
+          "de": "das Menü planen",
+          "alt": [
+            "Menü planen"
+          ]
+        },
+        {
+          "pl": "załatwić (kupić) tort i świeczki",
+          "de": "Torte und Kerzen besorgen"
+        },
+        {
+          "pl": "zrobić listę gości",
+          "de": "die Gästeliste machen",
+          "alt": [
+            "Gästeliste machen",
+            "eine Gästeliste machen"
+          ]
+        },
+        {
+          "pl": "przygotować naczynia i sztućce",
+          "de": "Geschirr und Besteck vorbereiten"
+        },
+        {
+          "pl": "mieć dobry humor",
+          "de": "gute Laune haben"
+        },
+        {
+          "pl": "zrobić listę zakupów",
+          "de": "die Einkaufsliste machen",
+          "alt": [
+            "Einkaufsliste machen",
+            "eine Einkaufsliste machen"
+          ]
+        },
+        {
+          "pl": "zatroszczyć się o muzykę",
+          "de": "für Musik sorgen",
+          "alt": [
+            "Musik besorgen"
+          ]
+        },
+        {
+          "pl": "Dzieci rozmawiają z rodzicami.",
+          "de": "Die Kinder sprechen mit den Eltern.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Moja mama robi zakupy.",
+          "de": "Meine Mutter kauft ein.",
+          "alt": [
+            "Meine Mama kauft ein."
+          ],
+          "type": "zdanie"
+        },
+        {
+          "pl": "A ja sprzątam w domu.",
+          "de": "Und ich räume zu Hause auf.",
+          "alt": [
+            "Ich räume zu Hause auf."
+          ],
+          "type": "zdanie"
+        },
+        {
+          "pl": "Chłopiec ma dobry humor.",
+          "de": "Der Junge hat gute Laune.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Dziewczynka wysyła zaproszenia.",
+          "de": "Das Mädchen schickt Einladungen.",
+          "alt": [
+            "Das Mädchen schickt die Einladungen."
+          ],
+          "type": "zdanie"
+        },
+        {
+          "pl": "Dziecko rozpakowuje prezenty.",
+          "de": "Das Kind packt Geschenke aus.",
+          "alt": [
+            "Das Kind packt die Geschenke aus."
+          ],
+          "type": "zdanie"
+        }
+      ]
     }
   ]
 }
