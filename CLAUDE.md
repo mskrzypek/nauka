@@ -26,6 +26,11 @@ Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
 - Nowa lekcja = nowy obiekt **na końcu** `lessons` (`id`, `title`, `words`). Ostatnia lekcja jest pokazywana jako „Na najbliższą lekcję”, starsze wracają w powtórkach (odstępy 1–2–4–7–14–30 dni).
 - Nie zmieniaj `id` lekcji ani `pl`/`de` istniejących słówek – po nich zapisany jest postęp. Rzeczowniki z rodzajnikiem (`die Blumen`), `note` np. „l.mn.”, `alt` – inne poprawne odpowiedzi, `type: "zdanie"` – bez wielkości liter i interpunkcji.
 
+## Słówka z angielskiego
+
+- `apps/angielski.html` to ta sama apka co niemiecka, ale czyta `apps/angielski-<dziecko>.json` (dziecko z `?dla=`; teraz jest tylko `angielski-igor.json`). Zasady dopisywania lekcji i pól są w `_opis` pliku; odpowiedź jest w polu `en`.
+- Słówka dla kolejnego dziecka: nowy plik `angielski-<dziecko>.json` i dopisanie dziecka do `kids` apki w `apps.json`.
+
 ## Państwa świata
 
 - `apps/panstwa.html` czyta kraje z `apps/panstwa.json` (edytuj bezpośrednio w repo). Kontury, mapy i sąsiedzi są liczeni z mapy `world-atlas` (CDN), flagi z `flag-icons` (CDN) – dla nowego kraju wystarczy wpis w JSON z poprawnym kodem `iso` (alfa-2).

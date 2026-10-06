@@ -1,0 +1,200 @@
+{
+  "_opis": "Słówka z angielskiego (Igor) do apki apps/angielski.html – plik angielski-<dziecko>.json. Nowa lekcja = nowy obiekt NA KOŃCU 'lessons'. Nie zmieniaj 'id' lekcji ani pól 'pl'/'en' istniejących słówek – po nich zapisuje się postęp. Pola: pl (pytanie po polsku), en (odpowiedź; część w nawiasie jest opcjonalna, np. „get on (well)”), alt (inne poprawne odpowiedzi), note (dopisek przy pytaniu), type: 'zdanie'. Wielkość liter, interpunkcja, skróty (that's = that is) i „to” przed czasownikiem nie mają znaczenia.",
+  "lessons": [
+    {
+      "id": "unit1",
+      "title": "Unit 1 – szkoła i przyjaźń (My words)",
+      "words": [
+        {
+          "pl": "przygotować prezentację",
+          "en": "do a presentation"
+        },
+        {
+          "pl": "nie zaliczyć testu / klasówki",
+          "en": "fail a test"
+        },
+        {
+          "pl": "dostać dobrą ocenę",
+          "en": "get a good mark"
+        },
+        {
+          "pl": "dostać słabą ocenę",
+          "en": "get a low mark"
+        },
+        {
+          "pl": "opuszczać zajęcia w szkole",
+          "en": "miss school"
+        },
+        {
+          "pl": "zaliczyć test / klasówkę",
+          "en": "pass a test"
+        },
+        {
+          "pl": "powtarzać materiał przed testem / klasówką",
+          "en": "revise for a test"
+        },
+        {
+          "pl": "pisać test / klasówkę",
+          "en": "take a test"
+        },
+        {
+          "pl": "notować",
+          "en": "take notes"
+        },
+        {
+          "pl": "nosić mundurek",
+          "en": "wear a uniform"
+        },
+        {
+          "pl": "pisać wypracowanie",
+          "en": "write an essay"
+        },
+        {
+          "pl": "przerwa (w szkole)",
+          "en": "breaktime",
+          "alt": [
+            "break time",
+            "break"
+          ]
+        },
+        {
+          "pl": "szkoła prywatna",
+          "en": "private school"
+        },
+        {
+          "pl": "rok szkolny",
+          "en": "school year"
+        },
+        {
+          "pl": "szkoła publiczna",
+          "en": "state school"
+        },
+        {
+          "pl": "semestr",
+          "en": "term"
+        },
+        {
+          "pl": "pocieszyć kogoś",
+          "en": "cheer someone up",
+          "alt": [
+            "cheer somebody up",
+            "cheer sb up"
+          ]
+        },
+        {
+          "pl": "czuć się samotnym / samotną",
+          "en": "feel lonely"
+        },
+        {
+          "pl": "(dobrze) się dogadywać",
+          "en": "get on (well)"
+        },
+        {
+          "pl": "poznać (kogoś)",
+          "en": "get to know"
+        },
+        {
+          "pl": "mieć (dużo) wspólnego",
+          "en": "have (a lot) in common"
+        },
+        {
+          "pl": "pokłócić się",
+          "en": "have an argument"
+        },
+        {
+          "pl": "dochowywać tajemnicy",
+          "en": "keep a secret"
+        },
+        {
+          "pl": "zaprzyjaźnić się",
+          "en": "make friends"
+        },
+        {
+          "pl": "przeprosić",
+          "en": "say sorry"
+        },
+        {
+          "pl": "mówić prawdę",
+          "en": "tell the truth"
+        },
+        {
+          "pl": "Sobota rano mi nie pasuje.",
+          "en": "Saturday morning doesn't work for me.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Świetnie!",
+          "en": "That's so cool!",
+          "note": "Real English",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Ojej!",
+          "en": "Oops!",
+          "note": "Real English",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Poddaję się!",
+          "en": "I give up!",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Nie zgadzam się!",
+          "en": "I disagree!",
+          "type": "zdanie"
+        },
+        {
+          "pl": "To prawda.",
+          "en": "That's true.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "No właśnie!",
+          "en": "Exactly!",
+          "note": "zgadzanie się",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Nie jestem tego pewny / pewna.",
+          "en": "I'm not sure about that.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Słuszna uwaga!",
+          "en": "That's a good point!",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Też tak sądzę.",
+          "en": "I think so, too.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "równy",
+          "en": "equal"
+        },
+        {
+          "pl": "strój narodowy",
+          "en": "national costume"
+        },
+        {
+          "pl": "nadruk, wzór",
+          "en": "print"
+        },
+        {
+          "pl": "szata",
+          "en": "robe"
+        },
+        {
+          "pl": "fartuch, kitel",
+          "en": "smock"
+        },
+        {
+          "pl": "różnić się",
+          "en": "vary"
+        }
+      ]
+    }
+  ]
+}

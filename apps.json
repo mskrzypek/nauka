@@ -222,6 +222,18 @@
       ],
       "added": "2026-10-03",
       "desc": "Trzy formy, -ed i zdania pod egzamin"
+    },
+    {
+      "id": "angielski",
+      "file": "apps/angielski.html",
+      "title": "Angielski – słówka z lekcji",
+      "emoji": "🇬🇧",
+      "subject": "angielski",
+      "kids": [
+        "igor"
+      ],
+      "added": "2026-10-06",
+      "desc": "Słówka z unitów, PL → EN"
     }
   ]
 }
