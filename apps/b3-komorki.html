@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B3 Komórki i tkanki – fiszki</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦠</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Treść wyłącznie z materiału „B3 · Chemizm życia, komórki, tkanki” i jego klucza.
+// mc: o[0] = poprawna odpowiedź (kolejność jest losowana). pairs: [lewa, prawa] = poprawne pary.
+// trap: miejsce, które Wiktor mylił (częściej w powtórkach + osobny tryb „Pułapki”).
+const GROUPS=[
+  {id:'g1',n:'Poziomy budowy',i:'🧱'},
+  {id:'g2',n:'Pierwiastki',i:'⚛️'},
+  {id:'g3',n:'Związki chemiczne',i:'🧪'},
+  {id:'g4',n:'Organella',i:'🏭'},
+  {id:'g5',n:'Typy komórek',i:'🦠'},
+  {id:'g6',n:'Tkanki roślinne',i:'🌱'},
+  {id:'g7',n:'Tkanki zwierzęce',i:'💪'},
+];
+const Q=[];
+const mc=(g,id,q,o,e,trap)=>Q.push({g,id,type:'mc',q,o,e,trap:!!trap});
+const pairs=(g,id,q,p,e,trap)=>Q.push({g,id,type:'pairs',q,p,e,trap:!!trap});
+
+// 1. Poziomy budowy
+mc('g1','1a','Jaki poziom budowy jest następny po tkance?',['narząd','układ narządów','organizm','komórka'],'Kolejność: komórka → tkanka → narząd → układ narządów → organizm. Jak dom: z cegieł ściany, ze ścian pokoje, z pokoi piętra, z pięter dom.');
+mc('g1','1b','Która kolejność jest prawidłowa (od najprostszego)?',['komórka – tkanka – narząd – układ – organizm','komórka – tkanka – narząd – organizm – układ','komórka – tkanka – układ – narząd – organizm','komórka – tkanka – układ – organizm – narząd'],'Każdy poziom jest zbudowany z elementów poprzedniego: komórka → tkanka → narząd → układ narządów → organizm.');
+mc('g1','1c','Cytologia to nauka o…',['komórkach','tkankach','narządach','organizmach'],'Cytologia – od gr. kytos (komórka). Bada komórki – najniższy poziom budowy organizmu.');
+mc('g1','1d','Histologia to nauka o…',['tkankach','komórkach','narządach','układach narządów'],'Histologia – od gr. histos (tkanka). Tkanka to grupa komórek o podobnej budowie i funkcji – wyższy poziom niż komórka.');
+pairs('g1','1f','Dobierz przykład do poziomu budowy.',[['komórka mięśniowa','komórka'],['tkanka mięśniowa','tkanka'],['serce','narząd'],['układ krążenia','układ narządów']],'Przykład z materiału: komórka mięśniowa → tkanka mięśniowa → serce → układ krążenia → człowiek.');
+mc('g1','1g','Żołądek to przykład…',['narządu','tkanki','układu narządów','komórki'],'Kolejność: komórka nabłonkowa → nabłonek (tkanka) → żołądek (narząd) → układ pokarmowy.');
+
+// 2. Pierwiastki
+mc('g2','2a','Które cztery pierwiastki to razem ok. 96% masy ciała?',['C, H, O, N','C, H, O, Fe','Ca, P, Mg, K','C, O, N, I'],'Organizmy składają się głównie z węgla (C), wodoru (H), tlenu (O) i azotu (N).');
+mc('g2','2b','O tym, czy pierwiastek jest makro-, czy mikroelementem, decyduje…',['ilość w organizmie (próg 0,01% masy)','jego ważność dla organizmu','to, czy jest metalem','to, czy buduje białka'],'Decyduje ilość, a nie ważność: makroelementów jest więcej niż 0,01% masy ciała, mikroelementów – poniżej 0,01%.');
+mc('g2','2c','Żelazo (Fe) to…',['mikroelement – choć bardzo ważny','makroelement, bo jest bardzo ważne','makroelement, bo buduje hemoglobinę','w ogóle nie występuje w organizmie'],'Pułapka: żelazo jest bardzo ważne, ale jest go mało – to mikroelement. O podziale decyduje ilość.');
+mc('g2','2d','Magnez (Mg) to…',['makroelement','mikroelement','pierwiastek tylko roślin','pierwiastek tylko zwierząt'],'Magnez to makroelement – nawet jeśli w tabeli ma 0,04%, to wciąż więcej niż 0,01%.');
+mc('g2','2e','Który pierwiastek jest składnikiem chlorofilu?',['magnez (Mg)','żelazo (Fe)','wapń (Ca)','jod (I)'],'U roślin magnez jest składnikiem chlorofilu; u człowieka potrzebny do pracy mięśni i nerwów.');
+mc('g2','2f','Która grupa to same mikroelementy?',['Fe, I, F, Zn, Cu','Ca, Mg, K, Na','C, H, O, N','Fe, Mg, Ca, I'],'Mikroelementy (poniżej 0,01%): Fe, I, F, Zn, Cu. Makroelementy: C, H, O, N, P, S, Ca, Mg, K, Na, Cl.');
+pairs('g2','2g','Dobierz pierwiastek do jego roli.',[['żelazo (Fe)','składnik hemoglobiny – przenoszenie tlenu'],['jod (I)','wytwarzanie hormonów tarczycy'],['magnez (Mg) u roślin','składnik chlorofilu'],['wapń (Ca)','buduje kości i zęby, krzepnięcie krwi']],'Fe – hemoglobina; I – hormony tarczycy; Mg – chlorofil; Ca – kości i zęby, krzepnięcie krwi, skurcz mięśni.');
+pairs('g2','2h','Dobierz niedobór pierwiastka do skutku.',[['brak żelaza','anemia (niedokrwistość)'],['brak jodu','wole (powiększona tarczyca)'],['brak wapnia','krzywica, osteoporoza'],['brak magnezu','skurcze mięśni']],'Fe → anemia; I → wole; Ca → krzywica, osteoporoza (łamliwe kości); Mg → skurcze mięśni.');
+mc('g2','2j','Fosfor (P) w organizmie…',['buduje kości (z wapniem), DNA i nośnik energii ATP','jest składnikiem chlorofilu','jest składnikiem hemoglobiny','jest potrzebny do hormonów tarczycy'],'Fosfor to makroelement: buduje kości razem z wapniem, wchodzi w skład DNA i ATP – nośnika energii.');
+
+// 3. Związki chemiczne
+pairs('g3','3a','Dobierz wielocukier do jego roli.',[['skrobia','zapas cukru roślin'],['glikogen','zapas cukru zwierząt i grzybów'],['celuloza','ściana komórkowa roślin'],['chityna','ściana grzybów, pancerzyki owadów']],'Cztery wielocukry z każdego konkursu: skrobia i glikogen to zapasy, celuloza i chityna budują ściany.');
+mc('g3','3b','Komórka grzyba ma ścianę z … i magazynuje …',['chityny … glikogen','celulozy … skrobię','chityny … skrobię','celulozy … glikogen'],'Para do zapamiętania: grzyb = chityna + glikogen, roślina = celuloza + skrobia. Grzyby magazynują glikogen, tak jak zwierzęta.',true);
+mc('g3','3c','Komórka rośliny ma ścianę z … i magazynuje …',['celulozy … skrobię','chityny … glikogen','celulozy … glikogen','chityny … skrobię'],'Para do zapamiętania: roślina = celuloza + skrobia, grzyb = chityna + glikogen.',true);
+mc('g3','3d','Który związek NIE występuje w komórkach grzybów?',['celuloza','chityna','glikogen','białka'],'Celuloza buduje ścianę roślin. Ściana grzybów jest z innego wielocukru – chityny.',true);
+mc('g3','3e','Który związek NIE występuje w organizmach roślin?',['glikogen','skrobia','celuloza','białka'],'Glikogen to zapas zwierząt (w wątrobie i mięśniach) i grzybów. Rośliny magazynują skrobię.',true);
+mc('g3','3f','Grzyby magazynują cukier w postaci…',['glikogenu','skrobi','celulozy','chityny'],'Grzyby nie magazynują skrobi, tylko glikogen – tak jak zwierzęta. Zapamiętaj: grzyb = chityna + glikogen.',true);
+mc('g3','3g','Gdzie człowiek magazynuje glikogen?',['w wątrobie i mięśniach','w kościach','w skórze','w krwi'],'Glikogen jest w wątrobie i mięśniach; w razie potrzeby rozkładany do glukozy, która daje energię.');
+mc('g3','3h','Włókna bawełny to prawie czysta…',['celuloza','keratyna','chityna','skrobia'],'Bawełna to włókna z nasion rośliny, głównie celuloza (cukier).');
+mc('g3','3i','Wełna jest zbudowana z…',['keratyny (białka)','celulozy (cukru)','kreatyny','chityny'],'Wełna to sierść owiec – białko keratyna (od gr. keras – róg). „Kreatyna” to zupełnie inny związek.');
+mc('g3','3j','Czym wykryjesz skrobię i jaki zobaczysz kolor?',['płynem Lugola (jodyną) – kolor granatowy','płynem Lugola – kolor czerwony','bibułą – tłusta plama','wodą – kolor granatowy'],'Kropla płynu Lugola (roztworu jodu) albo jodyny na przekrojony ziemniak: tam, gdzie jest skrobia, kolor granatowy (niebieskoczarny).');
+mc('g3','3k','Jak najprościej wykryjesz tłuszcz?',['zostawia na bibule tłustą, przeświecającą plamę','barwi się na granatowo płynem Lugola','pieni się w wodzie','zmienia kolor na czerwony'],'Tłuszcz zostawia na bibule tłustą, przeświecającą plamę. Granatowy kolor po Lugolu to skrobia.');
+pairs('g3','3l','Dobierz białko do funkcji.',[['hemoglobina','transport tlenu we krwi'],['keratyna','budulec włosów, paznokci, naskórka'],['pepsyna','enzym – trawi białka w żołądku'],['insulina','hormon – obniża poziom glukozy we krwi']],'Każde białko ma swoją robotę: transportowa, budulcowa, enzymatyczna, regulacyjna (hormon).');
+pairs('g3','3m','Dobierz białko do funkcji.',[['kolagen','skóra, ścięgna, sprężystość kości'],['aktyna i miozyna','skurcz mięśni'],['amylaza ślinowa','trawi skrobię'],['przeciwciała','obrona organizmu']],'Kolagen – budulcowa; aktyna i miozyna – ruchowa; amylaza – enzymatyczna; przeciwciała – obronna.');
+mc('g3','3n','Białka są zbudowane z…',['aminokwasów','glukozy','glicerolu i kwasów tłuszczowych','soli mineralnych'],'Białka zbudowane są z aminokwasów – po strawieniu białka w jelicie powstają właśnie aminokwasy.');
+mc('g3','3o','Dlaczego tłuszcze są zapasem energii?',['dają najwięcej energii z grama','są najlżejsze','rozpuszczają się w wodzie','budują ścianę komórkową'],'Tłuszcze dają najwięcej energii z grama. Poza tym chronią przed utratą ciepła, osłaniają narządy, budują błony.');
+mc('g3','3p','Która zasada jest w DNA, a w RNA zamiast niej jest uracyl (U)?',['tymina (T)','adenina (A)','guanina (G)','cytozyna (C)'],'Różnica, o którą pytają: DNA zawiera tyminę (T), a RNA zamiast niej uracyl (U).');
+mc('g3','3q','Gdzie w komórce z jądrem znajduje się DNA?',['w jądrze, mitochondriach i chloroplastach','tylko w jądrze','w rybosomach','w lizosomach'],'DNA jest w jądrze, a także w mitochondriach i chloroplastach.');
+mc('g3','3r','Które dwa składniki NIE są źródłem energii?',['witaminy i sole mineralne','cukry i tłuszcze','białka i tłuszcze','cukry i białka'],'Energii dostarczają cukry i tłuszcze (w razie potrzeby białka). Witaminy i sole mineralne są niezbędne, ale energii nie dają.');
+
+// 4. Organella
+pairs('g4','4a','Dobierz organellum do funkcji („dział fabryki”).',[['jądro','zawiera DNA, kieruje komórką (dyrekcja)'],['mitochondrium','uwalnia energię z glukozy (elektrownia)'],['chloroplast','fotosynteza (panele słoneczne + kuchnia)'],['rybosom','wytwarza białka (maszyny montażowe)']],'Komórka to fabryka: jądro – dyrekcja z archiwum, mitochondrium – elektrownia, chloroplast – panele + kuchnia, rybosomy – maszyny.');
+pairs('g4','4b','Dobierz organellum do funkcji („dział fabryki”).',[['aparat Golgiego','modyfikuje, pakuje i wysyła substancje (poczta)'],['lizosom','trawi zużyte części komórki (ekipa sprzątająca)'],['wakuola','magazyn, jędrność komórki (zbiornik)'],['błona komórkowa','decyduje, co wpuścić i wypuścić (brama)']],'Golgi – pakownia i poczta, lizosomy – ekipa sprzątająca, wakuola – magazyn, błona – brama z ochroną.');
+mc('g4','4d','Jak komórka roślinna pozyskuje (uwalnia) energię?',['oddychaniem komórkowym w mitochondriach','fotosyntezą w chloroplastach','w wakuoli z sokiem komórkowym','w rybosomach'],'Roślina robi glukozę w chloroplastach, ale energię z niej uwalnia – tak jak zwierzę i grzyb – w mitochondriach (oddychanie komórkowe).',true);
+mc('g4','4e','Prawda czy fałsz: „Komórka roślinna uwalnia energię w chloroplastach.”',['Fałsz – w mitochondriach','Prawda'],'Fałsz. Chloroplasty robią glukozę (fotosynteza), a energię roślina uwalnia w mitochondriach.',true);
+mc('g4','4f','Fotosynteza to sposób…',['odżywiania – wytwarzania pokarmu','uwalniania energii','oddychania','trawienia zużytych części'],'Fotosynteza to sposób odżywiania (wytwarzania pokarmu), a nie uwalniania energii – to robi mitochondrium.',true);
+mc('g4','4g','W tabeli porównania rośliny i grzyba, w wierszu „pozyskiwanie energii przez komórkę”, u rośliny wpisujesz…',['oddychanie komórkowe w mitochondriach','fotosynteza w chloroplastach','samożywność','chityna'],'W obu kolumnach – u rośliny i grzyba – oddychanie komórkowe w mitochondriach. Pułapka: nie wpisuj roślinie „fotosyntezy”.',true);
+mc('g4','4h','Siateczka śródplazmatyczna szorstka…',['ma na sobie rybosomy – wytwarza i transportuje białka','wytwarza tłuszcze i unieszkodliwia trucizny','trawi zużyte części komórki','przeprowadza fotosyntezę'],'Szorstka = taśmociąg z maszynami (rybosomami) – białka. Gładka = taśmociąg bez maszyn – tłuszcze i trucizny.');
+mc('g4','4i','Siateczka śródplazmatyczna gładka…',['wytwarza tłuszcze i unieszkodliwia trucizny','wytwarza białka na rybosomach','pakuje i wysyła substancje','kieruje życiem komórki'],'Gładka siateczka to taśmociąg bez maszyn (bez rybosomów): tłuszcze i unieszkodliwianie trucizn.');
+mc('g4','4j','W którym organellum zachodzi replikacja (kopiowanie) DNA?',['w jądrze komórkowym','w mitochondrium','w rybosomie','w aparacie Golgiego'],'Jądro – dyrekcja z archiwum: zawiera DNA i tu DNA jest kopiowane przed podziałem.');
+mc('g4','4k','Prawda czy fałsz: „Aparat Golgiego wytwarza białka.”',['Fałsz – białka wytwarzają rybosomy','Prawda'],'Fałsz. Aparat Golgiego modyfikuje, pakuje i wysyła substancje. Białka wytwarzają rybosomy.');
+
+// 5. Typy komórek
+mc('g5','5a','Czego NIE ma komórka bakterii?',['jądra komórkowego','rybosomów','błony komórkowej','cytoplazmy'],'Bakteria jest prokariotyczna – nie ma jądra; DNA to swobodna nić w cytoplazmie. Jak warsztat bez biur.');
+mc('g5','5b','Które trzy elementy ma każda komórka – także bakterii?',['błona komórkowa, cytoplazma, rybosomy','jądro, mitochondria, błona','ściana, chloroplasty, cytoplazma','jądro, rybosomy, wakuola'],'Błona, cytoplazma i rybosomy są u bakterii, roślin, zwierząt i grzybów.');
+mc('g5','5c','Komórka bakterii posiada…',['błonę komórkową, ścianę komórkową i cytozol','ścianę komórkową, otoczkę i chloroplasty','ścianę, błonę i jądro komórkowe','błonę, cytozol i chloroplasty'],'Bakteria nie ma jądra ani chloroplastów. Cytozol to płynna część cytoplazmy.');
+mc('g5','5e','Na schemacie komórki bakterii NIE rysujesz…',['jądra komórkowego','rybosomów','ściany komórkowej','błony komórkowej'],'Nie rysuj jądra! Bezpieczny zestaw podpisów: ściana, błona, cytoplazma, DNA (nukleoid), rybosomy.');
+mc('g5','5f','Dojrzała czerwona krwinka (erytrocyt)…',['nie ma jądra ani mitochondriów','ma jądro i chloroplasty','ma ścianę komórkową','ma dużą wakuolę'],'Wyjątek w ciele człowieka: dojrzały erytrocyt nie ma jądra ani mitochondriów – „zrobił miejsce” na hemoglobinę.');
+mc('g5','5g','Komórka skórki cebuli nie ma chloroplastów. Co to znaczy?',['to nadal komórka roślinna – po prostu nie przeprowadza fotosyntezy','to komórka grzyba','to komórka bakterii','to komórka zwierzęca'],'Nie każda komórka rośliny ma chloroplasty: nie mają ich komórki korzenia, skórki cebuli, bulwy ziemniaka. Roślinę od grzyba odróżnisz po ścianie i zapasie.',true);
+mc('g5','5h','Które komórki rośliny NIE mają chloroplastów?',['korzenia, skórki cebuli, bulwy ziemniaka','miękiszu asymilacyjnego liścia','wszystkie komórki liścia','żadne – każda ma chloroplasty'],'Chloroplastów nie mają komórki, które nie przeprowadzają fotosyntezy: korzeń, skórka cebuli, bulwa ziemniaka.');
+mc('g5','5i','Który zestaw w całości występuje w komórce grzyba?',['jądro, mitochondria, ściana z chityny','jądro, chloroplasty, ściana z celulozy','nukleoid, rybosomy, ściana z chityny','jądro, mitochondria, skrobia'],'Grzyb: jądro, mitochondria, ściana z chityny, zapas – glikogen, brak chloroplastów.',true);
+mc('g5','5j','Komórka ma ścianę, mitochondria i jądro, ale nie ma chloroplastów. To komórka…',['grzyba – bo ma jądro i mitochondria','bakterii – bo nie ma chloroplastów','bakterii – bo ma ścianę','zwierzęcia – bo nie ma chloroplastów'],'Grzyb, ponieważ ma jądro komórkowe i mitochondria – bakteria ich nie ma.');
+mc('g5','5k','Okrągła komórka z jądrem, mitochondriami i lizosomami, bez ściany i chloroplastów, to komórka…',['zwierzęca','roślinna','grzyba','bakterii'],'Zwierzęca, ponieważ otacza ją tylko błona (nie ma ściany) i nie ma chloroplastów. Do tego eukariotyczna i cudzożywna.');
+mc('g5','5l','Które organizmy mają komórki ze ścianą komórkową?',['drożdże, salmonella, koniczyna, pieczarka','pantofelek, tasiemiec, mrówka','tasiemiec, koniczyna, mrówka','pantofelek, drożdże, mrówka'],'Ścianę mają grzyby (drożdże, pieczarka), bakterie (salmonella) i rośliny (koniczyna). Zwierzęta i pantofelek – nie.');
+
+// 6. Tkanki roślinne
+mc('g6','6a','Przez co odbywa się wymiana gazowa w skórce?',['przez aparaty szparkowe','przez przetchlinki','przez kutykulę','przez rurki sitowe'],'Skórka: jedna warstwa żywych komórek z aparatami szparkowymi – przez nie wymiana gazowa i parowanie wody. Przetchlinki są w korkowicy.',true);
+mc('g6','6b','Przez co odbywa się wymiana gazowa w korkowicy?',['przez przetchlinki','przez aparaty szparkowe','przez naczynia','przez kutykulę'],'Korkowica: wiele warstw martwych komórek z powietrzem – wymiana gazowa przez przetchlinki. Aparaty szparkowe są w skórce.',true);
+mc('g6','6c','W jakiej tkance występują aparaty szparkowe?',['w skórce (liście, młode łodygi)','w korkowicy','w drewnie','w miękiszu spichrzowym'],'Aparaty szparkowe są w skórce – tkance okrywającej liści i młodych łodyg („mur z oknami”).',true);
+mc('g6','6d','Aparat szparkowy to…',['dwie nerkowate komórki ze szparką','wiele warstw martwych komórek','martwa rurka przewodząca wodę','komórka z „sitkami”'],'Aparat szparkowy: dwie nerkowate komórki, a między nimi szparka. Przez nie skórka wymienia gazy.',true);
+mc('g6','6e','Która cecha pasuje do skórki, a NIE do korkowicy?',['jedna warstwa żywych komórek z aparatami szparkowymi','wiele warstw martwych komórek z powietrzem','przetchlinki','ochrona starych pni'],'Skórka: jedna warstwa, komórki żywe, aparaty szparkowe. Korkowica: wiele warstw, komórki martwe, przetchlinki.',true);
+pairs('g6','6f','Dobierz rodzaj miękiszu do funkcji.',[['asymilacyjny','fotosynteza (wnętrze liścia)'],['spichrzowy','magazyn – bulwa ziemniaka, nasiona'],['wodny','magazyn wody – aloes, kaktusy'],['powietrzny','unoszenie się w wodzie – rośliny wodne']],'Miękisz: asymilacyjny – kuchnia, spichrzowy – magazyn, wodny – zbiornik wody, powietrzny – pływak.');
+pairs('g6','6g','Dobierz tkankę roślinną do funkcji.',[['drewno','prowadzi wodę z solami od korzeni w górę'],['łyko','prowadzi cukry z liści do innych części'],['twórcza','wzrost – wierzchołki korzenia i pędu'],['wzmacniająca','sztywność łodygi i liści']],'Roślina jak miasto: drewno – wodociąg, łyko – dostawy jedzenia, twórcza – ekipa budowlana, wzmacniająca – rusztowanie.');
+mc('g6','6h','Którą tkanką cukier płynie z liści do korzeni?',['łykiem (rurki sitowe)','drewnem (naczynia)','skórką','korkowicą'],'Łyko prowadzi cukry – produkty fotosyntezy – z liści do innych części rośliny, np. do korzeni.');
+mc('g6','6i','Którą tkanką woda płynie z korzeni do liści?',['drewnem (naczynia)','łykiem (rurki sitowe)','miękiszem powietrznym','tkanką twórczą'],'Drewno prowadzi wodę z solami mineralnymi od korzeni w górę – martwymi rurkami (naczyniami).');
+mc('g6','6j','Dlaczego liście aloesu są mięsiste?',['mają miękisz wodny – magazyn wody','mają dużo tkanki twórczej','mają grubą korkowicę','mają miękisz powietrzny'],'Miękisz wodny to duże komórki z ogromnymi wakuolami – magazyn wody u aloesu i kaktusów.');
+mc('g6','6k','Miękisz przeprowadzający fotosyntezę to miękisz…',['asymilacyjny','spichrzowy','wodny','powietrzny'],'Miękisz asymilacyjny – komórki pełne chloroplastów we wnętrzu liścia („kuchnia”).');
+
+// 7. Tkanki zwierzęce
+mc('g7','7a','Naskórek jest zbudowany z nabłonka…',['wielowarstwowego','jednowarstwowego','mięśniowego','łącznego'],'Naskórek to nabłonek wielowarstwowy: wiele warstw, na wierzchu płaskie komórki – chroni przed uszkodzeniem.',true);
+mc('g7','7b','Gdzie występuje nabłonek wielowarstwowy?',['naskórek, jama ustna, przełyk','pęcherzyki płucne, naczynia włosowate, jelito','ściany żołądka i naczyń','mózg i nerwy'],'Wielowarstwowy (ochrona): naskórek, jama ustna, przełyk. Jednowarstwowy (wymiana, wchłanianie): pęcherzyki płucne, naczynia włosowate, jelito.',true);
+mc('g7','7c','Gdzie występuje nabłonek jednowarstwowy?',['pęcherzyki płucne, naczynia włosowate, jelito','naskórek','jama ustna i przełyk','naskórek i przełyk'],'Jednowarstwowy: pęcherzyki płucne, naczynia włosowate, jelito – tam liczy się wymiana i wchłanianie. Naskórek jest wielowarstwowy.',true);
+mc('g7','7d','Do czego służy nabłonek wielowarstwowy (np. naskórek)?',['chroni przed uszkodzeniem','wymienia substancje i je wchłania','przewodzi impulsy','umożliwia ruch'],'Wiele warstw komórek = ochrona przed uszkodzeniem. Jednowarstwowy służy wymianie substancji i wchłanianiu.',true);
+mc('g7','7e','Prawda czy fałsz: „Naskórek to nabłonek jednowarstwowy.”',['Fałsz – wielowarstwowy','Prawda'],'Fałsz. Naskórek (skóra) to nabłonek wielowarstwowy – z płaskimi komórkami na wierzchu.',true);
+pairs('g7','7f','Dobierz rodzaj tkanki mięśniowej do miejsca.',[['gładka','ściany żołądka, jelit, naczyń'],['poprzecznie prążkowana szkieletowa','mięsień dwugłowy ramienia, język'],['poprzecznie prążkowana serca','tylko serce']],'Gładka – wolne skurcze niezależne od woli; szkieletowa – szybkie, silne, zależne od woli; serca – rytmiczne, nie męczy się.');
+mc('g7','7g','Język jest zbudowany z tkanki mięśniowej…',['poprzecznie prążkowanej szkieletowej','gładkiej','poprzecznie prążkowanej serca','nabłonkowej'],'Język to mięśnie szkieletowe (poprzecznie prążkowane) – ruszasz nim zgodnie z wolą.');
+mc('g7','7h','Skurcze mięśni gładkich (np. w ścianie jelita) są…',['wolne i niezależne od woli','szybkie i zależne od woli','rytmiczne, tylko w sercu','w ogóle nie występują'],'Mięśnie gładkie: wrzecionowate komórki, wolne skurcze niezależne od woli – ściany żołądka, jelit, naczyń.');
+mc('g7','7i','Co nadaje kościom twardość, a co sprężystość?',['twardość – sole mineralne, sprężystość – kolagen','twardość – kolagen, sprężystość – sole mineralne','obie cechy – tłuszcz','obie cechy – osocze'],'W tkance kostnej: sole mineralne dają twardość, białko kolagen – sprężystość.');
+mc('g7','7j','Osocze to substancja międzykomórkowa…',['krwi','chrząstki','kości','tkanki tłuszczowej'],'Krew: płynna substancja międzykomórkowa (osocze) + krwinki. Osocze to nie chrząstka.');
+mc('g7','7k','Gdzie występuje tkanka chrzęstna?',['krtań, nos, małżowina uszna','ściany jelita','naskórek','mózg i rdzeń kręgowy'],'Chrząstka: elastyczna podpora – krtań, nos, małżowina uszna, powierzchnie stawów.');
+mc('g7','7l','Komórka nerwowa to…',['neuron','nefron','neuryt','synapsa'],'Komórka nerwowa to neuron. Nefron to część nerki, neuryt – wypustka neuronu, a synapsa – połączenie neuronów.');
+mc('g7','7m','Neurony łączą się ze sobą…',['synapsami','wstawkami','kolagenem','osoczem'],'Tkanka nerwowa: neurony z wypustkami łączą się synapsami i przewodzą impulsy.');
+mc('g7','7o','Cztery rodzaje tkanek zwierzęcych to…',['nabłonkowa, mięśniowa, łączna, nerwowa','twórcza, okrywająca, przewodząca, miękisz','nabłonkowa, kostna, krew, skórka','mięśniowa, nerwowa, drewno, łyko'],'U zwierząt są cztery rodzaje tkanek: nabłonkowa, mięśniowa, łączna i nerwowa.');
+mc('g7','7p','Tkanka tłuszczowa…',['magazynuje energię i chroni przed utratą ciepła','przewodzi impulsy','prowadzi tlen','buduje naskórek'],'Komórki wypełnione kroplą tłuszczu – zapas energii i ochrona przed utratą ciepła (pod skórą, wokół narządów).');
+
+/* ============ ZAPIS ============ */
+const KEY='b3-fiszki-v1:'+kid, INT=[0,1,3,7,14], KNOWN=2;
+let S={q:{},days:[],rounds:[]}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const dayStr=d=>d.toLocaleDateString('sv');
+const today=()=>dayStr(new Date());
+const addDays=n=>{ const d=new Date(); d.setDate(d.getDate()+n); return dayStr(d); };
+const st=q=>S.q[q.id];
+const box=q=>(st(q)||{}).b||0;
+const known=q=>box(q)>=KNOWN;
+// Pomyłka: pudełko 0 i powrót jeszcze dziś. Dobra odpowiedź: kolejne pudełko i coraz dłuższa przerwa (1, 3, 7, 14 dni).
+function record(q,ok){
+  const e=S.q[q.id]||(S.q[q.id]={b:0,due:today(),r:0,w:0});
+  if(ok){ e.r++; e.b=Math.min(INT.length-1,e.b+1); e.due=addDays(INT[e.b]); } else { e.w++; e.b=0; e.due=today(); }
+  const d=today(); if(!S.days.includes(d)) S.days.push(d); save();
+}
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const GN=Object.fromEntries(GROUPS.map(g=>[g.id,g]));
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+function streak(){ let n=0; const d=new Date(); if(!S.days.includes(dayStr(d))) d.setDate(d.getDate()-1); while(S.days.includes(dayStr(d))){ n++; d.setDate(d.getDate()-1); } return n; }
+
+/* ============ DOBÓR FISZEK ============ */
+// Najpierw te do powtórki (pomylone i z minionym terminem), potem nowe, a znane tylko wtedy, gdy brakuje innych.
+function pick(pool,n){
+  const t=today();
+  const rank=q=>{ const e=st(q); let k;
+    if(!e) k=1; else if(e.due<=t) k=e.b===0?0:.5; else k=2+e.b;
+    return k-(q.trap?.4:0)+Math.random()*.6; };
+  return pool.map(q=>({q,k:rank(q)})).sort((a,b)=>a.k-b.k).slice(0,n).map(x=>x.q);
+}
+const dueCount=pool=>pool.filter(q=>{ const e=st(q); return e&&e.due<=today(); }).length;
+const hard=()=>Q.filter(q=>{ const e=st(q); return e&&e.w>0&&e.b<KNOWN; });
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const k=Q.filter(known).length, traps=Q.filter(q=>q.trap), hd=hard().length, s=streak(), due=dueCount(Q);
+  $app.innerHTML=`<h1>🦠 B3 – komórki i tkanki</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Fiszki do konkursu: chemizm życia, komórki, tkanki. To, co mylisz, wraca częściej; to, co umiesz – rzadziej.</p>
+    <div class="pills"><span class="pill">🔥 ${s} ${s===1?'dzień':'dni'} z rzędu</span><span class="pill">✅ umiesz ${k} z ${Q.length}</span>${due?`<span class="pill">🔁 do powtórki: ${due}</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎴</span><span><span class="t">Fiszki ze wszystkiego</span><span class="d">12 fiszek – najpierw powtórki i nowe</span></span></button>
+    <button class="big trap" id="bTrap"><span class="i">⚠️</span><span><span class="t">Pułapki</span><span class="d">Aparaty szparkowe, naskórek, grzyb vs roślina, energia rośliny – to, co myliłeś (${traps.filter(known).length}/${traps.length})</span></span></button>
+    <button class="big" id="bHard" ${hd?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Trudne</span><span class="d">${hd?`${hd} ${hd===1?'fiszka sprawia':hd<5?'fiszki sprawiają':'fiszek sprawia'} trudność`:'Na razie nic nie sprawia trudności'}</span></span></button>
+    <div class="card"><h2>Grupy</h2>${GROUPS.map(g=>{ const l=Q.filter(q=>q.g===g.id), kk=l.filter(known).length;
+      return `<button class="big" data-g="${g.id}" style="box-shadow:none;margin-bottom:8px"><span class="i">${g.i}</span><span style="flex:1"><span class="t">${esc(g.n)}</span><span class="d">umiesz ${kk} z ${l.length}${dueCount(l)?` · do powtórki ${dueCount(l)}`:''}</span><span class="bar"><span style="width:${pct(kk,l.length)}%"></span></span></span></button>`; }).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze postępów.</p>'}`;
+  $('bAll').onclick=()=>round(pick(Q,12),'Wszystko');
+  $('bTrap').onclick=()=>round(pick(traps,12),'⚠️ Pułapki');
+  $('bHard').onclick=()=>{ if(hard().length) round(pick(hard(),12),'🩹 Trudne'); };
+  $app.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{ const g=GN[b.dataset.g]; round(pick(Q.filter(q=>q.g===g.id),12),`${g.i} ${g.n}`); });
+}
+
+/* ============ RUNDA ============ */
+function round(items,title){
+  window.scrollTo(0,0);
+  const queue=items.map(q=>({q,again:false})), total=items.length, log=new Map(); let done=0;
+  function next(){
+    if(!queue.length) return finish();
+    const cur=queue.shift(), q=cur.q;
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*done/total}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${GN[q.g].i} ${esc(GN[q.g].n)}${q.trap?' <span class="tag">pułapka</span>':''}</span><span>${cur.again?'jeszcze raz 💪':`${done+1}/${total}`}</span></div>
+      <div class="qt">${esc(q.q)}</div><div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!cur.again) record(q,ok);
+      const L=log.get(q.id)||{q,wrong:0}; if(!ok) L.wrong++; log.set(q.id,L);
+      if(!ok&&!cur.again) queue.splice(Math.min(queue.length,3),0,{q,again:true}); // pomylona fiszka wraca w tej samej rundzie
+      if(ok||cur.again) done++;
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Nie tym razem'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">Dalej</button>`;
+      $('bNext').onclick=next; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    if(q.type==='mc') askMc(q,after); else askPairs(q,after);
+  }
+  function finish(){
+    const entries=[...log.values()], wrong=entries.filter(x=>x.wrong>0), ok=entries.length-wrong.length;
+    S.rounds.push({d:today(),n:entries.length,ok}); save();
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div style="font:800 52px/1 var(--fh)">${ok}/${entries.length}</div>
+      <h2 style="margin-top:8px">${!wrong.length?'Bezbłędnie! 🏆':wrong.length<=2?'Bardzo dobrze! 👏':'Dobra robota – trudne fiszki wrócą w powtórce.'}</h2>
+      <p class="muted small">dobrze za pierwszym razem</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="bAgain">Kolejna runda</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Sprawiły trudność</h2>${wrong.map(x=>`<div class="diff"><div class="qq">${esc(x.q.q)}</div><div>✅ ${x.q.type==='mc'?esc(x.q.o[0]):x.q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>✅ ')}</div><div class="muted small">${esc(x.q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>{ const pool=title==='⚠️ Pułapki'?Q.filter(q=>q.trap):title==='🩹 Trudne'?(hard().length?hard():Q):title==='Wszystko'?Q:Q.filter(q=>`${GN[q.g].i} ${GN[q.g].n}`===title); round(pick(pool,12),title); };
+  }
+  next();
+}
+
+/* ============ WYBÓR Z 2–4 ============ */
+function askMc(q,after){
+  const order=q.o.length===2&&/^(Fałsz|Prawda)/.test(q.o[0])?q.o.map((_,i)=>i).sort((a,b)=>/^Prawda/.test(q.o[a])?-1:1):shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===0;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`); });
+}
+
+/* ============ DOBIERZ W PARY ============ */
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const usedR=Object.values(match), num=Object.keys(match).map(Number);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=num.indexOf(l.i); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${l.i in match?`<span class="n" style="background:${COLORS[Object.keys(match).indexOf(String(l.i))%4]}">${Object.keys(match).indexOf(String(l.i))+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=Object.keys(match).find(k=>match[k]===r.i); const k=li!=null?Object.keys(match).indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${Object.keys(match).length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>

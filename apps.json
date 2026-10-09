@@ -234,6 +234,18 @@
       ],
       "added": "2026-10-06",
       "desc": "Słówka z unitów, PL → EN"
+    },
+    {
+      "id": "b3-komorki",
+      "file": "apps/b3-komorki.html",
+      "title": "B3 Komórki i tkanki – fiszki",
+      "emoji": "🦠",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-09",
+      "desc": "Konkurs: fiszki – chemizm, komórki, tkanki"
     }
   ]
 }
