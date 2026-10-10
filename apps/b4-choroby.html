@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B4 Wirusy, bakterie, choroby – fiszki</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💉</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Treść wyłącznie z materiału „B4 · Wirusy, bakterie, protisty – choroby zakaźne” i jego klucza.
+// mc: o[0] = poprawna odpowiedź (kolejność jest losowana). pairs: [lewa, prawa] = poprawne pary.
+// wbp: „wirus / bakteria / protist?” – stała kolejność przycisków, c = indeks poprawnej.
+// trap: najczęstsze pułapki (częściej w powtórkach + osobny tryb „Pułapki”).
+const GROUPS=[
+  {id:'g1',n:'Wirusy',i:'🧬'},
+  {id:'g2',n:'Bakterie',i:'🦠'},
+  {id:'g3',n:'Bakterie pożyteczne',i:'🧀'},
+  {id:'g4',n:'Choroby wirusowe',i:'🤧'},
+  {id:'g5',n:'Choroby bakteryjne',i:'🧫'},
+  {id:'g6',n:'Protisty chorobotwórcze',i:'🦟'},
+  {id:'g7',n:'Odporność',i:'💉'},
+];
+const Q=[];
+const WBP=['wirus','bakteria','protist'];
+const mc=(g,id,q,o,e,trap)=>Q.push({g,id,type:'mc',q,o,c:0,e,trap:!!trap});
+const wbp=(g,id,q,ans,e,trap)=>Q.push({g,id,type:'mc',q,o:WBP,c:WBP.indexOf(ans),fixed:true,e,trap:!!trap});
+const pairs=(g,id,q,p,e,trap)=>Q.push({g,id,type:'pairs',q,p,e,trap:!!trap});
+
+// 1. Wirusy
+mc('g1','1a','Z czego zbudowany jest kapsyd wirusa?',['z białek','z tłuszczów (lipidów)','z celulozy','z DNA'],'Kapsyd to płaszcz z białek, który chroni kwas nukleinowy. Otoczkę z tłuszczów (lipidów) mają tylko niektóre wirusy, np. grypy i HIV.');
+mc('g1','1b','Jaki materiał genetyczny ma wirus?',['DNA albo RNA – nigdy oba naraz','zawsze DNA i RNA','nie ma materiału genetycznego','tylko białka'],'Kwas nukleinowy to „instrukcja” do budowy nowych wirusów: DNA albo RNA, nigdy oba naraz.');
+mc('g1','1c','Bakteriofag to…',['wirus, który atakuje bakterie','bakteria, która atakuje wirusy','zakaźne białko bez kwasu nukleinowego','białe krwinki „pożerające” bakterie'],'Bakteriofag to wirus atakujący bakterie (dosłownie „zjada” bakterie): kapsyd z kwasem nukleinowym, ogonek i włókienka do przyczepiania się.');
+pairs('g1','1e','Ułóż etapy namnażania wirusa (bakteriofaga).',[['1. etap','przyczepienie do komórki'],['2. etap','wstrzyknięcie DNA wirusa do środka'],['3. etap','komórka kopiuje DNA i robi białka wirusa'],['4. etap','składanie nowych wirusów'],['5. etap','komórka pęka i ginie – uwolnienie wirusów']],'Przyczepienie → wstrzyknięcie → kopiowanie → składanie → uwolnienie. Jak włamywacz w fabryce: podmienia instrukcję i każe produkować swoje kopie, aż fabryka się rozpadnie.');
+mc('g1','1g','Który argument mówi, że wirus NIE jest organizmem?',['nie ma budowy komórkowej','ma materiał genetyczny (DNA lub RNA)','zmienia się (mutuje)','w komórce gospodarza namnaża się i przekazuje cechy kopiom'],'Wirus nie jest organizmem, bo: 1) nie ma budowy komórkowej, 2) nie ma własnej przemiany materii (nie oddycha, nie odżywia się), 3) nie rozmnaża się samodzielnie – tylko w żywej komórce. Reszta odpowiedzi to argumenty, że wirus przypomina organizm.');
+mc('g1','1h','Który argument mówi, że wirus PRZYPOMINA organizm?',['ma materiał genetyczny (DNA lub RNA)','nie ma budowy komórkowej','nie oddycha i nie odżywia się','rozmnaża się tylko w żywej komórce gospodarza'],'Wirus przypomina organizm, bo: ma materiał genetyczny, w komórce gospodarza namnaża się i przekazuje cechy kopiom, zmienia się (mutuje) – np. co roku nowa odmiana grypy.');
+mc('g1','1i','Masz podać DWA argumenty, że wirus nie jest organizmem. Która odpowiedź da punkt?',['nie ma budowy komórkowej + nie ma własnej przemiany materii','nie ma komórek + nie jest zbudowany z komórek','nie oddycha + nie odżywia się','nie ma budowy komórkowej + ma DNA lub RNA'],'„Nie ma komórek” i „nie jest zbudowany z komórek” to ten sam argument dwa razy – 0 pkt. „Nie oddycha” i „nie odżywia się” to też jedna cecha (brak przemiany materii). Każdy argument = inna cecha: budowa, czynności, rozmnażanie.',true);
+mc('g1','1j','Dlaczego antybiotyk nie leczy grypy?',['grypę wywołuje wirus, a antybiotyk niszczy elementy komórki bakterii – wirus komórki nie ma','wirus grypy jest za duży dla antybiotyku','antybiotyk działa tylko na protisty','antybiotyk działa dopiero po tygodniu'],'Antybiotyk niszczy np. ścianę komórkową i rybosomy bakterii. Wirus nie ma komórki – nie ma czego zniszczyć. Grypy, przeziębienia, ospy nie leczy się antybiotykiem; przeciw wirusom chronią przede wszystkim szczepionki.',true);
+mc('g1','1k','Priony to…',['zakaźne białka bez kwasu nukleinowego','wirusy atakujące bakterie','bakterie bez ściany komórkowej','protisty wywołujące malarię'],'Priony są jeszcze prostsze od wirusów (wywołują np. chorobę szalonych krów). Gdy w zadaniu do wyboru są „wirusy / bakterie / protisty / priony”, priony to prawie zawsze dystraktor.');
+mc('g1','1l','Polecenie „wykaż, że wirusy nie należą do żadnego z królestw” znaczy to samo co…',['„wykaż, że wirus nie jest organizmem”','„wykaż, że wirus jest bakterią”','„wykaż, że wirus jest groźny”','„podaj przykład wirusa”'],'Królestwa to: bakterie, protisty, grzyby, rośliny, zwierzęta – same organizmy. Odpowiadasz argumentami: brak budowy komórkowej, brak przemiany materii, brak samodzielnego rozmnażania.');
+pairs('g1','1m','Dobierz wirus do komórek, które atakuje.',[['wirus grypy','nabłonek dróg oddechowych'],['wirusy WZW','wątroba'],['HIV','limfocyty (odporność)'],['bakteriofag','bakterie']],'Każdy wirus atakuje konkretne komórki. Zakażone komórki giną – stąd objawy choroby (np. przy grypie giną komórki nabłonka dróg oddechowych).');
+
+// 2. Bakterie
+mc('g2','2a','Bakterie to prokarionty, czyli…',['nie mają jądra – DNA leży swobodnie w cytoplazmie','nie mają DNA','nie mają rybosomów','nie mają ściany komórkowej'],'Bakteria ma ścianę komórkową, błonę, cytoplazmę, rybosomy i nukleoid (DNA bez otaczającej błony). Nie ma jądra, mitochondriów, chloroplastów ani wakuoli.');
+pairs('g2','2b','Dobierz element komórki bakterii do funkcji.',[['wić','ruch'],['fimbrie','przyczepianie się'],['otoczka śluzowa','ochrona'],['plazmid','dodatkowe małe kółko DNA']],'Bakteria: często otoczka śluzowa (ochrona), wić (ruch), fimbrie (przyczepianie się); obok nukleoidu bywają plazmidy – małe kółka DNA.');
+pairs('g2','2c','Dobierz bakterię do kształtu.',[['prątek gruźlicy','pałeczka'],['gronkowiec złocisty','kulki w „grono”'],['paciorkowiec (angina)','łańcuszek kulek jak korale'],['krętek boreliozy','spiralka'],['przecinkowiec cholery','wygięta pałeczka']],'Nazwy wielu bakterii mówią o kształcie: gronkowiec – grono kulek, paciorkowiec – łańcuszek, prątek – pałeczka, przecinkowiec – jak przecinek, krętek – spiralka.');
+mc('g2','2d','Jak rozmnaża się bakteria?',['przez prosty podział komórki na dwie','przez mitozę','przez przetrwalniki','tylko w komórce gospodarza'],'Mitoza to podział jądra – a bakteria jądra nie ma. Dzieli się przez prosty podział, w dobrych warunkach co ok. 20 minut. Nawet jeśli w treści zadania napisano „mitoza” – to błąd.',true);
+mc('g2','2e','Przetrwalnik służy bakterii do…',['przetrwania złych warunków (susza, mróz, brak pokarmu)','szybkiego rozmnażania','ruchu','fotosyntezy'],'Przetrwalnik to komórka w grubej osłonie – przetrwa nawet dziesiątki lat w glebie. Z jednego przetrwalnika powstaje jedna bakteria, więc to przetrwanie, a nie rozmnażanie.',true);
+mc('g2','2f','Dlaczego głęboka rana kłuta jest groźna z powodu tężca?',['laseczka tężca to beztlenowiec – w głębi rany nie ma tlenu','w głębi rany jest dużo tlenu, którego potrzebuje laseczka','laseczka tężca to wirus','głęboka rana szybko się zamyka'],'Tlenowce potrzebują tlenu; beztlenowce żyją bez tlenu, a tlen im szkodzi. Głęboko w ranie kłutej tlenu brak – laseczka tężca ma dobre warunki.');
+pairs('g2','2g','Dobierz bakterie do sposobu odżywiania.',[['sinice','samożywne (fotosynteza)'],['bakterie gnilne w glebie','saprobionty (reducenci)'],['bakterie brodawkowe','symbionty'],['prątki gruźlicy','pasożyty']],'Samożywne same wytwarzają związki organiczne; saprobionty rozkładają martwe szczątki; symbionty żyją z innym organizmem z korzyścią dla obu; pasożyty żyją kosztem żywiciela i wywołują choroby.');
+mc('g2','2h','Dlaczego słoik z kompotem gotuje się przed schowaniem do spiżarni?',['wysoka temperatura zabija bakterie','gotowanie zamienia bakterie w przetrwalniki','gotowanie zakwasza kompot','żeby bakterie szybciej się dzieliły'],'Większość bakterii ginie w wysokiej temperaturze (gotowanie, pasteryzacja). Niska temperatura (lodówka) i kwaśne środowisko (ocet, kiszenie) tylko hamują ich namnażanie.');
+mc('g2','2i','Penicylina – co jest prawdą?',['odkrył ją Aleksander Fleming w 1928 r.; wytwarza ją pleśń pędzlak (grzyb)','odkrył ją Aleksander Fleming w 1928 r.; wytwarza ją bakteria','to lek na wirusy; wytwarza ją pleśń pędzlak','odkrył ją Aleksander Fleming w 1828 r.; wytwarza ją wirus'],'Fleming zauważył w 1928 r., że pleśń pędzlak (grzyb) zabija bakterie na szalce. Penicylina to pierwszy antybiotyk.');
+mc('g2','2j','Dlaczego antybiotyk trzeba brać do końca, nawet gdy objawy minęły?',['inaczej przeżyją najodporniejsze bakterie – powstaną bakterie oporne','żeby zabić pozostałe wirusy','żeby organizm wytworzył przeciwciała','bo antybiotyk zaczyna działać dopiero po tygodniu'],'Po przerwaniu kuracji najodporniejsze bakterie przeżyją i się rozmnożą – choroba wraca, a bakterie są oporne na antybiotyk. Antybiotyk tylko na choroby bakteryjne i tylko z przepisu lekarza; zabija też pożyteczne bakterie jelitowe, dlatego lekarz zaleca probiotyk.');
+
+// 3. Bakterie pożyteczne
+mc('g3','3a','Bakterie-reducenci…',['rozkładają martwe szczątki i odchody – zamykają obieg materii','wiążą azot z powietrza','wytwarzają tlen','produkują insulinę'],'Reducenci (saprobionty) rozkładają martwe szczątki i odchody, zamykają obieg materii i użyźniają glebę.');
+mc('g3','3b','Bakterie brodawkowe…',['wiążą azot z powietrza i dostarczają go roślinie','wytwarzają tlen w wodzie','rozkładają celulozę w żwaczu krowy','robią ocet'],'Żyją w korzeniach roślin motylkowych (fasola, groch, łubin, koniczyna) – to symbionty: roślina dostaje azot.');
+mc('g3','3c','Sinice…',['przeprowadzają fotosyntezę – wytwarzają tlen','rozkładają martwe szczątki','wiążą azot w korzeniach fasoli','wytwarzają witaminę K w jelicie'],'Sinice są samożywne: wytwarzają tlen i związki organiczne – początek łańcucha pokarmowego w wodzie. (Za to w czasie „zakwitu” wody wytwarzają trujące toksyny.)');
+mc('g3','3d','Co robią bakterie w jelicie człowieka?',['wytwarzają witaminy (K, z grupy B) i nie dopuszczają bakterii chorobotwórczych','wytwarzają insulinę','wiążą azot z powietrza','rozkładają antybiotyki'],'Bakterie jelitowe wytwarzają witaminy K i z grupy B oraz bronią dostępu bakteriom chorobotwórczym. U krowy bakterie w żwaczu rozkładają celulozę.');
+pairs('g3','3e','Dobierz produkt lub zastosowanie do pracy bakterii.',[['jogurt, kefir, sery','fermentacja mlekowa'],['ocet','fermentacja octowa'],['oczyszczalnia ścieków','rozkład zanieczyszczeń'],['insulina dla chorych na cukrzycę','zmienione genetycznie bakterie']],'W gospodarce: fermentacja mlekowa (jogurt, kefir, sery, kiszonki), octowa (ocet), oczyszczalnie ścieków, kompost, biogazownie, biotechnologia (insulina, antybiotyki).');
+mc('g3','3f','Kiszona kapusta i ogórki powstają dzięki…',['fermentacji mlekowej','fermentacji octowej','pleśni pędzlakowi','niskiej temperaturze'],'Fermentacja mlekowa: jogurt, kefir, sery, kiszona kapusta i ogórki, kiszonka dla bydła. Fermentacja octowa daje ocet.');
+mc('g3','3g','Podaj DWA różne przykłady wykorzystania bakterii w gospodarce. Która para jest najlepsza?',['jogurt + oczyszczalnia ścieków','jogurt + kefir','kiszona kapusta + kiszone ogórki','ser + jogurt'],'Jogurt, kefir, ser, kiszonki – to ta sama fermentacja mlekowa, czyli jeden przykład. Drugi musi wnosić coś nowego: ocet, oczyszczalnia, kompost, biogazownia, insulina.',true);
+
+// 4. Choroby wirusowe
+wbp('g4','4a','Kto wywołuje odrę?','wirus','Odra, świnka, różyczka – choroby wirusowe, kropelkowe; jedna wspólna szczepionka w dzieciństwie.');
+pairs('g4','4c','Dobierz chorobę wirusową do drogi zakażenia.',[['grypa','kropelkowa'],['WZW A','pokarmowa – brudne ręce, woda'],['WZW B','przez krew, płciowa'],['wścieklizna','ugryzienie chorego zwierzęcia']],'Grypa – kropelkowo; WZW A („żółtaczka pokarmowa”) – brudne ręce i woda; WZW B – krew i płciowo; wścieklizna – ugryzienie lub ślina chorego zwierzęcia (lis, pies, kot, nietoperz).');
+pairs('g4','4d','Dobierz chorobę wirusową do drogi zakażenia.',[['polio','pokarmowa'],['Ebola','krew i płyny ciała chorego'],['opryszczka','pocałunek, wspólny kubek'],['HPV','płciowa']],'Polio – szczepionka, może powodować porażenia; Ebola – izolacja chorych, bardzo wysoka śmiertelność (Afryka); opryszczka – pęcherzyki na wardze; HPV – szczepionka, może wywołać raka szyjki macicy.');
+mc('g4','4e','Na którą z tych chorób wirusowych NIE ma szczepionki?',['przeziębienie','grypa','odra','polio'],'Bez szczepionki: przeziębienie, WZW C, AIDS. Grypa – szczepionka co roku, odra – wspólna ze świnką i różyczką, polio – szczepionka.');
+mc('g4','4f','Dlaczego na grypę szczepi się co roku?',['wirus grypy się zmienia (mutuje)','szczepionka działa tylko tydzień','co roku zmienia się droga zakażenia','grypa to choroba bakteryjna'],'Wirus grypy się zmienia – co roku pojawia się nowa odmiana, więc potrzebna jest nowa szczepionka.');
+mc('g4','4g','Różyczka jest szczególnie groźna dla…',['płodu – gdy zachoruje kobieta w ciąży','chłopców – może wywołać niepłodność','wątroby','osób po ukąszeniu kleszcza'],'Różyczka jest bardzo groźna dla płodu w ciąży. To świnka u chłopców może wywołać zapalenie jąder i niepłodność.');
+mc('g4','4h','WZW B i WZW C – co ze szczepionką?',['WZW B – jest (obowiązkowa), WZW C – brak','obie mają szczepionkę','żadna nie ma szczepionki','WZW C – jest, WZW B – brak'],'Obie zakażają przez krew (i płciowo). Na WZW B jest obowiązkowa szczepionka, na WZW C – nie ma; chroni sterylny sprzęt.');
+mc('g4','4i','Którędy NIE zarazisz się wirusem HIV?',['przez podanie ręki albo ukłucie komara','przez krew','drogą płciową','z matki na dziecko'],'HIV: przez krew, płciowo, z matki na dziecko. Nie zarażasz się przez podanie ręki, przytulenie, wspólne naczynia ani ukłucie komara. Wirus niszczy limfocyty, czyli odporność; szczepionki brak.');
+mc('g4','4j','Pogryzł cię lis albo obcy pies. Co robisz?',['natychmiast do lekarza – szczepionka i surowica','czekasz, czy pojawią się objawy','bierzesz antybiotyk','nic – ugryzienie nie przenosi chorób'],'Wścieklizna po wystąpieniu objawów jest śmiertelna – dlatego od razu szczepionka i surowica (gotowe przeciwciała). Profilaktyka: szczepienie psów i kotów, szczepionki dla lisów zrzucane w lasach.');
+mc('g4','4l','Która z tych chorób NIE jest zakaźna?',['cukrzyca','różyczka','świnka','odra'],'Cukrzyca, miażdżyca, nowotwory (np. czerniak), choroby genetyczne – nie wywołuje ich żaden patogen. W zadaniach „podkreśl choroby wirusowe” stoją jako pułapki.',true);
+mc('g4','4m','Alicję ugryzł błąkający się pies, który na początku był łagodny i dawał się głaskać. Na co jest narażona?',['wirus → wścieklizna','bakteria → tężec','protist → malaria','wirus → HPV'],'Ugryzienie lub ślina chorego zwierzęcia → wirus wścieklizny. Takie zadanie było na konkursie 2025/26 – w odpowiedzi wykreślasz błędne opcje.',true);
+wbp('g4','4n','Kto wywołuje kleszczowe zapalenie mózgu?','wirus','Ten sam kleszcz, dwie choroby: kleszczowe zapalenie mózgu – wirus, JEST szczepionka; borelioza – bakteria, NIE MA szczepionki.',true);
+mc('g4','4o','Na którą chorobę przenoszoną przez kleszcza JEST szczepionka?',['kleszczowe zapalenie mózgu (wirus)','borelioza (bakteria)','na obie','na żadną'],'Kleszczowe zapalenie mózgu (wirus) – szczepionka, repelenty, oglądanie ciała. Borelioza (bakteria) – szczepionki nie ma.',true);
+pairs('g4','4p','Grupy chorób według drogi zakażenia.',[['z kleszcza','borelioza, kleszczowe zapalenie mózgu'],['z ziemi przez ranę','tężec'],['ugryzienie przez zwierzę','wścieklizna'],['z komara','malaria']],'Choroby łatwiej zapamiętać w grupach według drogi zakażenia („wszystko, co z kleszcza”) niż pojedynczo. Malaria w Polsce nie występuje.',true);
+
+// 5. Choroby bakteryjne
+wbp('g5','5a','Kto wywołuje gruźlicę?','bakteria','Gruźlica – prątek gruźlicy (bakteria), kropelkowo; szczepionka BCG po urodzeniu; atakuje głównie płuca; leczenie antybiotykami trwa miesiące.');
+pairs('g5','5d','Dobierz bakterię do choroby.',[['prątek','gruźlica'],['laseczka','tężec'],['krętek','borelioza'],['przecinkowiec','cholera']],'Prątek gruźlicy, laseczka tężca, krętek boreliozy, przecinkowiec cholery – nazwa bakterii mówi o jej kształcie.');
+pairs('g5','5e','Dobierz chorobę bakteryjną do drogi zakażenia.',[['salmonelloza','surowe jaja, drób, lody, majonez'],['cholera','skażona woda'],['tężec','rana zanieczyszczona ziemią'],['kiła','płciowa (także z matki na dziecko)']],'Salmonelloza – mycie jaj, obróbka termiczna, lodówka; cholera – przegotowana woda; tężec – szczepionka, odkażanie ran; kiła – prezerwatywa, badania i leczenie.');
+mc('g5','5f','Krztusiec i błonica – co je łączy?',['bakteryjne, kropelkowe; szczepionka razem z tężcem (DTP)','wirusowe, kropelkowe; brak szczepionki','bakteryjne, pokarmowe; chroni mycie rąk','przenosi je kleszcz'],'Krztusiec i błonica – bakterie, droga kropelkowa; szczepi się razem z tężcem (szczepionka „DTP”).');
+mc('g5','5g','Angina i szkarlatyna…',['bakterie (paciorkowce); brak szczepionki; leczy się antybiotykiem','wirusy; szczepionka w dzieciństwie','prątki; szczepionka BCG','krętki; przenosi je kleszcz'],'Angina i szkarlatyna – paciorkowce, kropelkowo; szczepionki brak; chroni unikanie chorych i higiena. Dlatego antybiotyk leczy anginę bakteryjną, a grypy nie.');
+mc('g5','5h','Kiła, rzeżączka, chlamydioza – co je łączy?',['bakteryjne, płciowe; nieleczone mogą powodować niepłodność','wirusowe, płciowe; jest szczepionka','bakteryjne, kropelkowe','protistowe, płciowe'],'Profilaktyka: prezerwatywa, badania i szybkie leczenie zakażonych oraz ich partnerów; leczenie antybiotykiem. (Protistowa choroba płciowa to rzęsistkowica.)');
+mc('g5','5j','Jak zapobiegać boreliozie (profilaktyka)?',['długie spodnie i rękawy, repelent, oglądanie ciała po lesie, szybkie usunięcie kleszcza','szczepionka przeciw boreliozie','antybiotyk','moskitiera nad łóżkiem'],'Antybiotyk to leczenie, a nie profilaktyka. Szczepionki na boreliozę nie ma. Objaw: rumień wędrujący wokół ukłucia.',true);
+mc('g5','5k','Bakterie wytwarzające jad kiełbasiany to pod względem odżywiania…',['saprobionty – rozwijają się w martwej materii (jedzeniu)','pasożyty – bo wywołują zatrucie','samożywne','symbionty'],'Laseczka jadu kiełbasianego nie żyje w człowieku. Rozwija się bez tlenu w źle wyjałowionych konserwach i wędlinach i wytwarza toksynę – szkodzi nam zjedzona toksyna. Chroni: nie jeść z wybrzuszonych puszek i słoików, właściwa pasteryzacja.',true);
+mc('g5','5m','Skąd się bierze próchnica?',['bakterie w jamie ustnej rozkładają cukry na kwasy','wirus niszczy szkliwo','zęby atakuje protist','to choroba genetyczna'],'Próchnica – bakterie w jamie ustnej rozkładają cukry na kwasy. Profilaktyka: mycie zębów, mało słodyczy.');
+mc('g5','5n','Basia przewróciła się do kałuży i głęboko zraniła przedramię – rana jest zabrudzona błotem. Na co jest narażona?',['bakteria → tężec','wirus → wścieklizna','protist → malaria','wirus → HPV'],'Rana zanieczyszczona ziemią lub odchodami zwierząt → laseczka tężca (bakteria, beztlenowiec). Profilaktyka: szczepionka (dawka przypominająca co 10 lat), odkażanie ran. Takie zadanie było na konkursie 2025/26.',true);
+wbp('g5','5o','Kto wywołuje boreliozę?','bakteria','Boreliozę wywołuje krętek (bakteria); kleszcz tylko ją przenosi (wektor). Szczepionki nie ma – w odróżnieniu od kleszczowego zapalenia mózgu (wirus).',true);
+mc('g5','5p','Które z tych działań to LECZENIE, a nie profilaktyka?',['antybiotyk','szczepienie','repelent','mycie rąk'],'Profilaktyka = zapobieganie, zanim zachorujesz. Antybiotyk leczy chorobę bakteryjną, która już jest – w kolumnie „profilaktyka” to błąd.',true);
+pairs('g5','5q','Tabela: borelioza. Co wpisać w każdą kolumnę?',[['czynnik chorobotwórczy','krętek – bakteria'],['droga zakażenia','ukłucie kleszcza'],['profilaktyka','repelent, oglądanie ciała po lesie']],'Kleszcz to wektor – idzie do kolumny „droga zakażenia”, nie „czynnik”. Antybiotyk to leczenie – nie wpisuj go do „profilaktyki”.',true);
+pairs('g5','5r','Grupy chorób według drogi zakażenia.',[['brudne ręce i woda','WZW A, polio, salmonelloza, cholera, czerwonka'],['przez krew','WZW B, WZW C, AIDS'],['kropelkowo','grypa, odra, gruźlica'],['płciowo','kiła, rzeżączka, HPV']],'Grupy z materiału: brudne ręce i woda (też czerwonka pełzakowa i lamblioza), krew, kropelkowo, płciowo. Ucz się grupami, nie pojedynczo.',true);
+pairs('g5','5s','Zeszłoroczny konkurs: dobierz sytuację do czynnika i choroby.',[['głęboka rana zabrudzona błotem','bakteria → tężec'],['ugryzienie przez obcego psa','wirus → wścieklizna'],['gorączka po ukąszeniach komarów w Afryce','protist → malaria']],'Na konkursie 2025/26 były dokładnie te trzy: tężec (rana z ziemią), wścieklizna (ugryzienie), malaria (komar w tropikach).',true);
+
+// 6. Protisty chorobotwórcze
+mc('g6','6a','Protisty chorobotwórcze z tego tematu to…',['pierwotniaki – jednokomórkowe, z jądrem (eukarionty)','bakterie bez jądra','wirusy z otoczką','grzyby'],'Protisty to głównie jednokomórkowe eukarionty (z jądrem). Wszystkie chorobotwórcze z tego tematu to pierwotniaki (protisty zwierzęce): zarodziec, świdrowiec, pełzak, lamblia, toksoplazma, rzęsistek.');
+mc('g6','6b','Co wywołuje malarię?',['zarodziec malarii (protist)','komar widliszek','bakteria z wody','wirus'],'Komar to wektor – przenosi zarodźce, ale nie jest przyczyną choroby. Czynnik chorobotwórczy = zarodziec malarii.',true);
+mc('g6','6c','Kto przenosi malarię?',['samica komara widliszka','samiec komara widliszka','mucha tse-tse','kleszcz'],'Samica widliszka żywi się krwią: pijąc krew chorego pobiera zarodźce, a kłując zdrowego – wprowadza je ze śliną.');
+mc('g6','6d','Gdzie w człowieku namnaża się zarodziec malarii?',['najpierw w komórkach wątroby, potem w krwinkach czerwonych','najpierw w krwinkach czerwonych, potem w płucach','w jelicie','w limfocytach'],'Zarodźce najpierw namnażają się w komórkach wątroby, a potem w krwinkach czerwonych, które rozsadzają.');
+mc('g6','6e','Dlaczego chory na malarię ma anemię?',['zarodźce niszczą (rozsadzają) krwinki czerwone','komar wypija dużo krwi','zarodziec niszczy limfocyty','brakuje mu witaminy K'],'Gdy pękają krwinki czerwone i uwalniają się nowe zarodźce – napady gorączki co 2–3 dni i dreszcze; niszczenie krwinek → niedokrwistość (anemia).');
+mc('g6','6f','Jak chronić się przed malarią?',['moskitiery, repelenty, leki przeciwmalaryczne przed wyjazdem w tropiki','szczepionka obowiązkowa w Polsce','mycie rąk i przegotowana woda','antybiotyk po powrocie'],'Do tego długie ubranie wieczorem i osuszanie bagien, gdzie rozwijają się larwy komarów. Malaria występuje w ciepłych krajach (Afryka, Azja, Ameryka Południowa).');
+mc('g6','6g','Kto wywołuje śpiączkę afrykańską?',['świdrowiec gambijski (protist)','mucha tse-tse','komar widliszek','wirus'],'Mucha tse-tse tylko przenosi świdrowca – to wektor, a nie czynnik chorobotwórczy. Chroni odzież i ochrona przed muchami.',true);
+pairs('g6','6h','Dobierz chorobę protistową do drogi zakażenia.',[['śpiączka afrykańska','ukąszenie muchy tse-tse'],['lamblioza','woda, brudne ręce'],['toksoplazmoza','odchody kota, surowe mięso'],['rzęsistkowica','płciowa']],'Lamblioza i czerwonka pełzakowa – mycie rąk, przegotowana woda; toksoplazmoza – mycie rąk po kontakcie z kotem i ziemią, dobrze wysmażone mięso; rzęsistkowica – prezerwatywa.');
+mc('g6','6i','Kobieta w ciąży ma kota. Przed jaką chorobą powinna się szczególnie chronić?',['toksoplazmozą – myć ręce po kontakcie z kotem i ziemią, jeść dobrze wysmażone mięso','wścieklizną – nie głaskać kota','malarią – spać pod moskitierą','boreliozą – oglądać kota po spacerze'],'Toksoplazmoza (pierwotniak toksoplazma: odchody kota, surowe lub niedosmażone mięso) jest groźna dla płodu w ciąży.');
+wbp('g6','6j','Kto wywołuje czerwonkę pełzakową?','protist','Czerwonkę pełzakową wywołuje pełzak (protist). Jest też czerwonka bakteryjna – obie przez brudne ręce i wodę. Patrz na słowo „pełzakowa”.',true);
+wbp('g6','6k','Kto wywołuje lambliozę?','protist','Lamblia (ogoniastek jelitowy) to protist; zakażenie przez wodę i brudne ręce; chroni mycie rąk i przegotowana woda.');
+mc('g6','6m','Janek wrócił z wakacji w Afryce, gdzie kilka razy pokąsały go komary. Ma wysoką gorączkę i silne dreszcze. Co mu zagraża?',['protist → malaria','wirus → wścieklizna','bakteria → tężec','wirus → HPV'],'Komar widliszek w ciepłych krajach → zarodziec malarii (protist): napady gorączki, dreszcze. Takie zadanie było na konkursie 2025/26.',true);
+pairs('g6','6n','Tabela: malaria. Co wpisać w każdą kolumnę?',[['czynnik chorobotwórczy','zarodziec malarii – protist'],['droga zakażenia','ukłucie samicy komara widliszka'],['profilaktyka','moskitiery, repelenty']],'W kolumnie „czynnik” wpisujesz organizm, który wywołuje chorobę – nie komara. Komar to wektor, czyli droga zakażenia.',true);
+
+// 7. Odporność
+mc('g7','7a','Odporność wrodzona (nieswoista) to np.…',['skóra, śluz, łzy, kwas w żołądku, gorączka','przeciwciała przeciw odrze','komórki pamięci','odporność po szczepieniu'],'Wrodzona: mamy ją od urodzenia, działa tak samo na każdego intruza. Nabyta (swoista) powstaje dopiero po spotkaniu z drobnoustrojem i działa przeciw jednemu konkretnemu (przeciwciała, komórki pamięci).');
+mc('g7','7b','Antygen to…',['obcy element (np. białko wirusa, toksyna), który organizm rozpoznaje jako „wroga”','białko wytwarzane przez limfocyty B','lek, który zabija bakterie','rodzaj białych krwinek'],'Antygen to obcy element – np. białko z powierzchni wirusa lub bakterii albo toksyna. Na antygen organizm odpowiada przeciwciałami.');
+mc('g7','7c','Kto wytwarza przeciwciała?',['limfocyty B (białe krwinki)','krwinki czerwone','komórki wątroby','antygeny'],'Limfocyty B wytwarzają przeciwciała – białka, które przyczepiają się do konkretnego drobnoustroju i pomagają go zniszczyć.');
+mc('g7','7d','Po co są komórki pamięci?',['przy kolejnym spotkaniu z tym samym patogenem organizm reaguje błyskawicznie','żeby surowica działała dłużej','żeby antybiotyk działał na wirusy','żeby odporność wrodzona działała na każdego intruza'],'Za pierwszym razem odpowiedź trwa – dlatego przy pierwszym zakażeniu chorujemy. Przy następnym komórki pamięci reagują błyskawicznie i zwykle nie chorujemy.');
+mc('g7','7e','Główny składnik szczepionki to…',['antygeny – zabite lub osłabione drobnoustroje albo ich fragmenty','gotowe przeciwciała','antybiotyki','leukocyty (krwinki białe)'],'Szczepionka nie zawiera przeciwciał – zawiera to, przeciwko czemu organizm ma je sam wytworzyć (też unieszkodliwione toksyny).',true);
+mc('g7','7f','Surowica zawiera…',['gotowe przeciwciała','antygeny','osłabione drobnoustroje','antybiotyk'],'Surowica: gotowe przeciwciała (np. od uodpornionego konia albo człowieka) – działa od razu, ale krótko (kilka tygodni), bez komórek pamięci.',true);
+mc('g7','7h','Osobę ukąszoną przez żmiję ratuje się…',['surowicą – gotowe przeciwciała od razu unieszkodliwiają jad','szczepionką – organizm sam wytworzy przeciwciała','antybiotykiem','nie trzeba nic robić'],'Surowica ratuje po zakażeniu lub zatruciu (jad żmii, tężec u nieszczepionego), bo działa od razu. Szczepionka działa dopiero po kilku dniach–tygodniach.',true);
+mc('g7','7i','Jaką odporność uzyskał człowiek, któremu po ukąszeniu żmii podano surowicę?',['nabyta, swoista, bierna, sztuczna','nabyta, swoista, bierna, naturalna','nabyta, swoista, czynna, sztuczna','wrodzona, nieswoista, bierna, sztuczna'],'Gotowe przeciwciała → bierna; zabieg w szpitalu → sztuczna. Nie „naturalna”, mimo że ukąszenie zdarzyło się w lesie.',true);
+pairs('g7','7j','Dobierz sytuację do rodzaju odporności.',[['przechorowanie ospy','czynna naturalna'],['szczepienie','czynna sztuczna'],['przeciwciała z mlekiem matki','bierna naturalna'],['podanie surowicy','bierna sztuczna']],'Pytaj dwa razy: kto wytworzył przeciwciała? (sam → czynna, gotowe → bierna); czy był zabieg medyczny? (tak → sztuczna, nie → naturalna). Wszystkie cztery to odporność nabyta i swoista.');
+mc('g7','7k','Odporność po szczepieniu to odporność…',['czynna sztuczna','bierna sztuczna','czynna naturalna','bierna naturalna'],'Organizm sam wytwarza przeciwciała → czynna, choć wywołana sztucznie (zabieg medyczny). Bierna jest po surowicy.',true);
+mc('g7','7l','Prawda czy fałsz: „Szczepionka leczy chorobę.”',['Fałsz – szczepionka zapobiega chorobie (profilaktyka)','Prawda'],'Fałsz. Szczepionkę podaje się, zanim zachorujesz – to profilaktyka. Ratunkiem po zakażeniu lub zatruciu jest surowica.',true);
+mc('g7','7m','Po co podaje się drugą (przypominającą) dawkę szczepionki?',['komórki pamięci reagują szybciej i powstaje dużo więcej przeciwciał, które utrzymują się długo','żeby szczepionka zadziałała od razu jak surowica','bo pierwsza dawka nie zawiera antygenów','żeby zabić bakterie oporne na antybiotyk'],'Po pierwszej dawce powstają komórki pamięci. Przy drugiej szybciej i mocniej wytwarzają przeciwciała, które utrzymują się długo. Po surowicy przeciwciał jest dużo od razu, ale szybko ich ubywa.');
+mc('g7','7n','Nieszczepiony rolnik głęboko skaleczył się widłami w oborze. Lekarz dał mu surowicę i szczepionkę. Po co surowica?',['chroni od razu – zanim tężec zdąży się rozwinąć','chroni na lata przy następnych zranieniach','odkaża ranę','zabija bakterie jak antybiotyk'],'Surowica – natychmiastowa, krótkotrwała ochrona (bierna). Szczepionka – organizm sam wytworzy przeciwciała i komórki pamięci: ochrona na lata (czynna).');
+
+/* ============ ZAPIS ============ */
+const KEY='b4-fiszki-v1:'+kid, INT=[0,1,3,7,14], KNOWN=2;
+let S={q:{},days:[],rounds:[]}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const dayStr=d=>d.toLocaleDateString('sv');
+const today=()=>dayStr(new Date());
+const addDays=n=>{ const d=new Date(); d.setDate(d.getDate()+n); return dayStr(d); };
+const st=q=>S.q[q.id];
+const box=q=>(st(q)||{}).b||0;
+const known=q=>box(q)>=KNOWN;
+// Pomyłka: pudełko 0 i powrót jeszcze dziś. Dobra odpowiedź: kolejne pudełko i coraz dłuższa przerwa (1, 3, 7, 14 dni).
+function record(q,ok){
+  const e=S.q[q.id]||(S.q[q.id]={b:0,due:today(),r:0,w:0});
+  if(ok){ e.r++; e.b=Math.min(INT.length-1,e.b+1); e.due=addDays(INT[e.b]); } else { e.w++; e.b=0; e.due=today(); }
+  const d=today(); if(!S.days.includes(d)) S.days.push(d); save();
+}
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const GN=Object.fromEntries(GROUPS.map(g=>[g.id,g]));
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+function streak(){ let n=0; const d=new Date(); if(!S.days.includes(dayStr(d))) d.setDate(d.getDate()-1); while(S.days.includes(dayStr(d))){ n++; d.setDate(d.getDate()-1); } return n; }
+
+/* ============ DOBÓR FISZEK ============ */
+// Najpierw te do powtórki (pomylone i z minionym terminem), potem nowe, a znane tylko wtedy, gdy brakuje innych.
+function pick(pool,n){
+  const t=today();
+  const rank=q=>{ const e=st(q); let k;
+    if(!e) k=1; else if(e.due<=t) k=e.b===0?0:.5; else k=2+e.b;
+    return k-(q.trap?.4:0)+Math.random()*.6; };
+  return pool.map(q=>({q,k:rank(q)})).sort((a,b)=>a.k-b.k).slice(0,n).map(x=>x.q);
+}
+const dueCount=pool=>pool.filter(q=>{ const e=st(q); return e&&e.due<=today(); }).length;
+const hard=()=>Q.filter(q=>{ const e=st(q); return e&&e.w>0&&e.b<KNOWN; });
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const k=Q.filter(known).length, traps=Q.filter(q=>q.trap), hd=hard().length, s=streak(), due=dueCount(Q);
+  $app.innerHTML=`<h1>💉 B4 – choroby zakaźne</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Fiszki do konkursu: wirusy, bakterie, protisty, choroby zakaźne i odporność. To, co mylisz, wraca częściej; to, co umiesz – rzadziej.</p>
+    <div class="pills"><span class="pill">🔥 ${s} ${s===1?'dzień':'dni'} z rzędu</span><span class="pill">✅ umiesz ${k} z ${Q.length}</span>${due?`<span class="pill">🔁 do powtórki: ${due}</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎴</span><span><span class="t">Fiszki ze wszystkiego</span><span class="d">12 fiszek – najpierw powtórki i nowe</span></span></button>
+    <button class="big trap" id="bTrap"><span class="i">⚠️</span><span><span class="t">Pułapki</span><span class="d">Czynnik ≠ wektor, profilaktyka ≠ leczenie, kleszcz, szczepionka ≠ surowica, zeszłoroczny konkurs (${traps.filter(known).length}/${traps.length})</span></span></button>
+    <button class="big" id="bHard" ${hd?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Trudne</span><span class="d">${hd?`${hd} ${hd===1?'fiszka sprawia':hd<5?'fiszki sprawiają':'fiszek sprawia'} trudność`:'Na razie nic nie sprawia trudności'}</span></span></button>
+    <div class="card"><h2>Grupy</h2>${GROUPS.map(g=>{ const l=Q.filter(q=>q.g===g.id), kk=l.filter(known).length;
+      return `<button class="big" data-g="${g.id}" style="box-shadow:none;margin-bottom:8px"><span class="i">${g.i}</span><span style="flex:1"><span class="t">${esc(g.n)}</span><span class="d">umiesz ${kk} z ${l.length}${dueCount(l)?` · do powtórki ${dueCount(l)}`:''}</span><span class="bar"><span style="width:${pct(kk,l.length)}%"></span></span></span></button>`; }).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze postępów.</p>'}`;
+  $('bAll').onclick=()=>round(pick(Q,12),'Wszystko');
+  $('bTrap').onclick=()=>round(pick(traps,12),'⚠️ Pułapki');
+  $('bHard').onclick=()=>{ if(hard().length) round(pick(hard(),12),'🩹 Trudne'); };
+  $app.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{ const g=GN[b.dataset.g]; round(pick(Q.filter(q=>q.g===g.id),12),`${g.i} ${g.n}`); });
+}
+
+/* ============ RUNDA ============ */
+function round(items,title){
+  window.scrollTo(0,0);
+  const queue=items.map(q=>({q,again:false})), total=items.length, log=new Map(); let done=0;
+  function next(){
+    if(!queue.length) return finish();
+    const cur=queue.shift(), q=cur.q;
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*done/total}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${GN[q.g].i} ${esc(GN[q.g].n)}${q.trap?' <span class="tag">pułapka</span>':''}</span><span>${cur.again?'jeszcze raz 💪':`${done+1}/${total}`}</span></div>
+      <div class="qt">${esc(q.q)}</div><div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!cur.again) record(q,ok);
+      const L=log.get(q.id)||{q,wrong:0}; if(!ok) L.wrong++; log.set(q.id,L);
+      if(!ok&&!cur.again) queue.splice(Math.min(queue.length,3),0,{q,again:true}); // pomylona fiszka wraca w tej samej rundzie
+      if(ok||cur.again) done++;
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Nie tym razem'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">Dalej</button>`;
+      $('bNext').onclick=next; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    if(q.type==='mc') askMc(q,after); else askPairs(q,after);
+  }
+  function finish(){
+    const entries=[...log.values()], wrong=entries.filter(x=>x.wrong>0), ok=entries.length-wrong.length;
+    S.rounds.push({d:today(),n:entries.length,ok}); save();
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div style="font:800 52px/1 var(--fh)">${ok}/${entries.length}</div>
+      <h2 style="margin-top:8px">${!wrong.length?'Bezbłędnie! 🏆':wrong.length<=2?'Bardzo dobrze! 👏':'Dobra robota – trudne fiszki wrócą w powtórce.'}</h2>
+      <p class="muted small">dobrze za pierwszym razem</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="bAgain">Kolejna runda</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Sprawiły trudność</h2>${wrong.map(x=>`<div class="diff"><div class="qq">${esc(x.q.q)}</div><div>✅ ${x.q.type==='mc'?esc(x.q.o[x.q.c||0]):x.q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>✅ ')}</div><div class="muted small">${esc(x.q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>{ const pool=title==='⚠️ Pułapki'?Q.filter(q=>q.trap):title==='🩹 Trudne'?(hard().length?hard():Q):title==='Wszystko'?Q:Q.filter(q=>`${GN[q.g].i} ${GN[q.g].n}`===title); round(pick(pool,12),title); };
+  }
+  next();
+}
+
+/* ============ WYBÓR Z 2–4 ============ */
+function askMc(q,after){
+  const C=q.c||0;
+  const order=q.fixed?q.o.map((_,i)=>i):q.o.length===2&&/^(Fałsz|Prawda)/.test(q.o[0])?q.o.map((_,i)=>i).sort((a,b)=>/^Prawda/.test(q.o[a])?-1:1):shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts${q.fixed?' three':''}">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===C;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===C) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[C])}</b></div>`); });
+}
+
+/* ============ DOBIERZ W PARY ============ */
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const usedR=Object.values(match), num=Object.keys(match).map(Number);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=num.indexOf(l.i); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${l.i in match?`<span class="n" style="background:${COLORS[Object.keys(match).indexOf(String(l.i))%4]}">${Object.keys(match).indexOf(String(l.i))+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=Object.keys(match).find(k=>match[k]===r.i); const k=li!=null?Object.keys(match).indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${Object.keys(match).length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>

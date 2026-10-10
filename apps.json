@@ -246,6 +246,18 @@
       ],
       "added": "2026-10-09",
       "desc": "Konkurs: fiszki – chemizm, komórki, tkanki"
+    },
+    {
+      "id": "b4-choroby",
+      "file": "apps/b4-choroby.html",
+      "title": "B4 Wirusy, bakterie, choroby – fiszki",
+      "emoji": "💉",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-10",
+      "desc": "Konkurs: fiszki – wirusy, bakterie, choroby"
     }
   ]
 }
