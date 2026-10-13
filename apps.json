@@ -258,6 +258,18 @@
       ],
       "added": "2026-10-10",
       "desc": "Konkurs: fiszki – wirusy, bakterie, choroby"
+    },
+    {
+      "id": "b5-fotosynteza",
+      "file": "apps/b5-fotosynteza.html",
+      "title": "B5 Fotosynteza, oddychanie, fermentacja – fiszki",
+      "emoji": "🌱",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-13",
+      "desc": "Konkurs: fiszki – fotosynteza, oddychanie"
     }
   ]
 }
