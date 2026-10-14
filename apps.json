@@ -270,6 +270,18 @@
       ],
       "added": "2026-10-13",
       "desc": "Konkurs: fiszki – fotosynteza, oddychanie"
+    },
+    {
+      "id": "b6-kregowce",
+      "file": "apps/b6-kregowce.html",
+      "title": "B6 Kręgowce – fiszki",
+      "emoji": "🦉",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-14",
+      "desc": "Konkurs: fiszki – kręgowce"
     }
   ]
 }
