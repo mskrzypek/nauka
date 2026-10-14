@@ -282,6 +282,18 @@
       ],
       "added": "2026-10-14",
       "desc": "Konkurs: fiszki – kręgowce"
+    },
+    {
+      "id": "b7a-rosliny",
+      "file": "apps/b7a-rosliny.html",
+      "title": "B7a Mchy, paprotniki, nagonasienne – fiszki",
+      "emoji": "🌲",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-14",
+      "desc": "Konkurs: fiszki – mchy, paprotniki, nagonasienne"
     }
   ]
 }

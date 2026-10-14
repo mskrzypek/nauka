@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B7a Mchy, paprotniki, nagonasienne – fiszki</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.two{grid-template-columns:repeat(2,1fr)} .opts.two .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opts.five{grid-template-columns:repeat(5,1fr); gap:6px} .opts.five .opt{text-align:center; padding:16px 2px; font-size:16px}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Treść wyłącznie z materiału „B7a · Mchy, paprotniki, nagonasienne” i jego klucza.
+// mc: o[0] = poprawna odpowiedź (kolejność jest losowana; Prawda/Fałsz i Tak/Nie – stała). pairs: [lewa, prawa] = poprawne pary.
+// fx: dwa stałe przyciski (skórka / korkowica, stoją / zwisają), c = indeks poprawnej.
+// trap: najczęstsze pułapki (częściej w powtórkach + osobny tryb „Pułapki”).
+const GROUPS=[
+  {id:'g1',n:'Podział roślin',i:'🗂️'},
+  {id:'g2',n:'Tkanki roślinne',i:'🔬'},
+  {id:'g3',n:'Mchy',i:'🌱'},
+  {id:'g4',n:'Przemiana pokoleń',i:'🔄'},
+  {id:'g5',n:'Paprotniki',i:'🌿'},
+  {id:'g6',n:'Nagonasienne i sosna',i:'🌲'},
+  {id:'g7',n:'Siedem gatunków',i:'🔍'},
+];
+const Q=[];
+const SK=['skórka','korkowica'], SZ=['stoją','zwisają'];
+const mc=(g,id,q,o,e,trap)=>Q.push({g,id,type:'mc',q,o,c:0,e,trap:!!trap});
+const fx=(g,id,q,opts,ans,e,trap)=>Q.push({g,id,type:'mc',q,o:opts,c:opts.indexOf(ans),fixed:true,e,trap:!!trap});
+const pairs=(g,id,q,p,e,trap)=>Q.push({g,id,type:'pairs',q,p,e,trap:!!trap});
+
+// 1. Podział roślin
+mc('g1','1a','Rośliny zarodnikowe to…',['mchy i paprotniki','nago- i okrytonasienne','mchy i nagonasienne','paprotniki i nagonasienne'],'To rośliny zarodnikowe, ponieważ w procesie rozmnażania wytwarzają zarodniki – zarodnik to jedna komórka, rozsiewa go wiatr.');
+mc('g1','1b','Roślinami zarodnikowymi, które są organowcami, są…',['paprotniki','mchy','nagonasienne','okrytonasienne'],'Paprotniki mają korzeń, łodygę i liście z tkankami przewodzącymi, a mchy tylko chwytniki, łodyżki i listki.');
+mc('g1','1c','Plechowce – ciało bez organów i bez tkanek przewodzących – to np.…',['glony i porosty','mchy i paprocie','skrzypy i widłaki','sosna i świerk'],'Plecha nie jest podzielona na organy; przeciwieństwem plechowców są organowce (paprotniki i rośliny nasienne).');
+
+// 2. Tkanki roślinne
+fx('g2','2a','Aparaty szparkowe są w…',SK,'skórka','Skórka – aparaty szparkowe – żywa, jedna warstwa; korkowica – przetchlinki – martwa, wiele warstw.',true);
+fx('g2','2b','Przetchlinki są w…',SK,'korkowica','Korkowica (martwe komórki z powietrzem, na pniach) wymienia gazy przez przetchlinki; aparaty szparkowe są w skórce.',true);
+mc('g2','2c','Przez co wymienia gazy pień brzozy?',['przez przetchlinki w korkowicy','przez aparaty szparkowe w skórce','przez rurki sitowe w łyku','przez naczynia w drewnie'],'Pień pokrywa korkowica, a ona ma przetchlinki – aparaty szparkowe są w skórce liści.',true);
+mc('g2','2d','Pod mikroskopem: ściśle przylegające komórki, a wśród nich pary komórek w kształcie fasolek ze szczeliną. Co to za tkanka?',['skórka – tkanka okrywająca z aparatami szparkowymi','korkowica – tkanka okrywająca z przetchlinkami','miękisz gąbczasty','drewno'],'Każdy aparat szparkowy to dwie komórki w kształcie fasolki ze szparką pomiędzy – są w skórce.',true);
+mc('g2','2e','Którą tkanką cukry płyną z liści do bulwy ziemniaka?',['łykiem – rurkami sitowymi','drewnem – naczyniami','korkowicą','miękiszem wodnym'],'Łyko (żywe rurki sitowe) – cukry z liści; drewno (martwe naczynia) – woda z solami mineralnymi od korzeni w górę.',true);
+mc('g2','2f','Rząd wydłużonych komórek ustawionych pionowo tuż pod górną skórką liścia, a pod nim okrągławe, luźno ułożone komórki z przestrzeniami. Co to?',['miękisz asymilacyjny: palisadowy i gąbczasty','miękisz spichrzowy','korkowica','tkanka twórcza'],'Miękisz asymilacyjny jest pełen chloroplastów – jego funkcja to fotosynteza.');
+pairs('g2','2g','Dobierz tkankę do funkcji.',[['tkanka twórcza','wzrost – stożki wzrostu'],['miękisz spichrzowy','magazyn substancji zapasowych'],['miękisz wodny','magazyn wody (aloes)'],['miękisz powietrzny','unoszenie się roślin wodnych'],['tkanka wzmacniająca','sztywność i wytrzymałość']],'Tkanka twórcza to małe, ciągle dzielące się komórki; wzmacniająca ma grube, często zdrewniałe ściany.');
+
+// 3. Mchy
+pairs('g3','3a','Budowa mchu (płonnik pospolity) – dobierz część do funkcji.',[['chwytniki','mocują i pobierają wodę (to nie korzenie)'],['listki','fotosynteza'],['seta','wynosi puszkę w górę'],['puszka (zarodnia)','powstają w niej zarodniki'],['czapeczka','chroni puszkę']],'Mchy nie mają korzeni ani prawdziwych tkanek przewodzących – dlatego są niskie i chłoną wodę całą powierzchnią.');
+mc('g3','3b','Zarodniki mchu powstają w wyniku…',['mejozy – i rozsiewa je wiatr','mitozy – i rozsiewa je wiatr','zapłodnienia – i rozsiewa je woda','mejozy – i rozsiewają je owady'],'Zarodniki powstają w puszce na secie w wyniku mejozy (podziału redukcyjnego); rozsiewa je wiatr.',true);
+mc('g3','3c','Co wyrasta z zarodnika mchu?',['splątek – nitkowaty, z niego roślinki mchu','przedrośle','seta z puszką','zygota'],'Zarodnik → splątek → roślinka mchu; przedrośle to gametofit paproci.');
+mc('g3','3d','Zielona roślinka mchu to…',['gametofit','sporofit','przedrośle','splątek'],'U mchu dominuje gametofit (zielona roślinka); sporofit (seta z puszką) wyrasta na nim i jest od niego zależny.',true);
+mc('g3','3e','Dlaczego mchy są organizmami pionierskimi?',['mają małe wymagania – jako jedne z pierwszych zasiedlają nagie skały i piasek','tworzą węgiel kamienny','rosną tylko na torfowiskach','są wiatropylne'],'Mchy też magazynują wodę jak gąbka, chronią glebę przed erozją, a z obumarłych torfowców powstaje torf.');
+mc('g3','3f','Doświadczenie: czy mech chłonie wodę? Badawcza – lejek z sączkiem i suchym mchem. Kontrolna to…',['taki sam lejek z sączkiem, bez mchu','lejek z mokrym mchem','lejek z dwa razy większą ilością mchu','ten sam lejek z mchem, ale mniej wody'],'Próba kontrolna różni się tylko badanym czynnikiem – brakiem mchu; spod mchu wypływa dużo mniej wody.');
+
+// 4. Przemiana pokoleń
+mc('g4','4a','Które pokolenie dominuje u mchu, a które u paproci?',['mech – gametofit, paproć – sporofit','mech – sporofit, paproć – gametofit','u obu sporofit','u obu gametofit'],'Gametofit wytwarza plemniki i komórki jajowe (płciowo), sporofit – zarodniki (bezpłciowo); u paproci duża roślina to sporofit.',true);
+mc('g4','4b','Gametofit paproci to…',['przedrośle – małe, sercowate','splątek','duża roślina z liśćmi','kupka zarodni'],'U paproci gametofit to małe przedrośle, a dominuje sporofit – duża roślina z liśćmi.');
+mc('g4','4c','Dlaczego do zapłodnienia mchy i paprocie potrzebują wody, a sosna – nie?',['ich plemniki płyną w wodzie do komórki jajowej; u sosny komórki plemnikowe dostarcza łagiewka pyłkowa','sosna nie ma komórek jajowych','mchy i paprocie nie mają zarodników','sosna rośnie zawsze nad wodą'],'Łagiewka pyłkowa uniezależniła rośliny nasienne od wody i pozwoliła im opanować suchy ląd.');
+
+// 5. Paprotniki
+pairs('g5','5a','Dobierz grupę paprotników do wyglądu.',[['paprocie','pierzaste liście, pastorał, kupki zarodni pod liśćmi'],['skrzypy','łodyga członowana, okółki gałązek, krzemionka'],['widłaki','płożąca łodyga gęsto pokryta drobnymi listkami']],'Skrzyp polny wiosną wytwarza brązowe pędy zarodnionośne z kłosem; widłaki mają zarodnie w kłosach na wzniesionych pędach.');
+mc('g5','5b','Brązowe kropki na spodniej stronie liścia paproci to…',['kupki zarodni','choroba liścia','młode szyszki','przedrośla'],'To kupki zarodni, a nie choroba – w nich paproć wytwarza zarodniki.',true);
+mc('g5','5c','Widłak goździsty wygląda jak mech. Do jakiej grupy należy?',['paprotniki – ma prawdziwe organy i tkanki przewodzące','mchy','nagonasienne','plechowce'],'Widłaki, tak jak paprocie i skrzypy, to paprotniki; rosną bardzo wolno i są w Polsce pod ochroną.',true);
+mc('g5','5d','Z ogromnych paprotników sprzed ok. 300 mln lat powstał…',['węgiel kamienny','torf','bursztyn','krzemionka'],'Paprotniki budują też runo lasów, a skrzyp polny to roślina lecznicza (krzemionka).');
+mc('g5','5e','Które to paprocie?',['nerecznica samcza, orlica pospolita, paprotka zwyczajna','płonnik pospolity, torfowiec','widłak goździsty, skrzyp leśny','cis pospolity, jałowiec pospolity'],'Paprocie mają duże, pierzaste liście wyrastające z kłącza, a młode liście zwinięte jak pastorał.');
+
+// 6. Nagonasienne i sosna
+mc('g6','6a','Skąd nazwa „nagonasienne”?',['nasiona leżą nagie na łuskach szyszek – nie ma owocu','nie mają liści, tylko igły','nasiona nie mają zarodka','rosną na nagich skałach'],'Zalążki leżą odkryte na łuskach, nie ma zalążni, więc nie powstaje owoc.');
+mc('g6','6b','Szyszki męskie sosny…',['są małe, żółte i wytwarzają pyłek z workami powietrznymi, który niesie wiatr','mają na łuskach zalążki, z których powstają nasiona','są czerwonawe, na szczytach pędów','tworzą owoce'],'Sosna jest wiatropylna; szyszki żeńskie mają zalążki, a nasiona mają skrzydełko i też rozsiewa je wiatr.');
+mc('g6','6c','Dlaczego igły sosny mogą zostać na drzewie zimą?',['są wąskie i pokryte woskiem – tracą mało wody','pobierają wodę z powietrza','zimą sosna zrzuca igły','żywica ogrzewa igły'],'Zimą z zamarzniętej gleby nie da się pobrać wody; żywica z kanałów żywicznych chroni przed szkodnikami i grzybami.');
+
+// 7. Siedem gatunków
+mc('g7','7a','Który gatunek? Igły po dwie, długie; pień w górnej części rudy, łuszczący się.',['sosna zwyczajna','świerk pospolity','modrzew europejski','jodła pospolita'],'Sosna zwyczajna – igły po 2 na krótkopędzie, a pień u góry rudy; po tym poznasz ją z daleka.');
+mc('g7','7b','Który gatunek? Krótkie, ostre igły pojedynczo dookoła pędu; długie szyszki zwisają w dół.',['świerk pospolity','jodła pospolita','cis pospolity','sosna zwyczajna'],'Świerk – igły ostre, kłują, szyszki wiszą; jodła – igły płaskie z białymi paskami, szyszki stoją.',true);
+mc('g7','7c','Który gatunek? Płaskie, tępe igły w dwóch rzędach, spodem dwa białe paski; szyszki stoją.',['jodła pospolita','świerk pospolity','cis pospolity','modrzew europejski'],'Jodła pospolita – szyszki do góry jak świeczki, rozpadają się na drzewie; cis ma płaskie igły, ale bez białych pasków.',true);
+mc('g7','7d','Który gatunek? Miękkie, jasnozielone igły w pęczkach; mała, purpurowoczerwona, stojąca szyszka.',['modrzew europejski','sosna zwyczajna','jodła pospolita','jałowiec pospolity'],'Modrzew europejski – młode szyszki żeńskie są purpurowoczerwone („różyczki”), a igły zrzuca na zimę.');
+mc('g7','7e','Który gatunek? Płaskie, ciemnozielone igły bez białych pasków; czerwone, mięsiste „kubeczki” z ciemnym nasionem.',['cis pospolity','jodła pospolita','jałowiec pospolity','świerk pospolity'],'Cis pospolity – nie ma szyszek, nasiono otacza czerwona osnówka; cała roślina oprócz osnówki jest trująca.',true);
+mc('g7','7f','Który gatunek? Zwykle krzew; kłujące igły po trzy; kuliste, granatowe „jagody” z sinym nalotem.',['jałowiec pospolity','cis pospolity','świerk pospolity','sosna zwyczajna'],'Jałowiec pospolity – granatowe szyszkojagody dojrzewają 2–3 lata i są przyprawą.');
+mc('g7','7g','Który gatunek? Liście wachlarzowate z wcięciem na dwie „klapy”, jesienią żółte i opadają.',['miłorząb dwuklapowy','modrzew europejski','cis pospolity','jodła pospolita'],'Miłorząb ma liście, nie igły, a mimo to jest nagonasienny (nasiona nagie, bez owocu) – „żywa skamieniałość”.');
+mc('g7','7h','Które dwa z siedmiu gatunków NIE są zimozielone?',['modrzew europejski i miłorząb dwuklapowy','sosna zwyczajna i świerk pospolity','cis pospolity i jałowiec pospolity','jodła pospolita i modrzew europejski'],'Modrzew to jedyny polski iglak zrzucający igły na zimę, a miłorząb zrzuca liście; wszystkie pozostałe są zimozielone.',true);
+fx('g7','7i','Szyszki jodły pospolitej…',SZ,'stoją','„Jodła – szyszki do góry jak świeczki”; stojące szyszki ma też modrzew.',true);
+fx('g7','7j','Szyszki świerka pospolitego…',SZ,'zwisają','Świerk ma długie szyszki zwisające, które opadają w całości.',true);
+mc('g7','7k','Czy osnówka cisa i szyszkojagoda jałowca to owoce?',['Nie – nagonasienne nie mają owoców','Tak – to mięsiste owoce'],'Wyglądają jak owoce, ale nimi nie są: nasiona nagonasiennych nie są zamknięte w owocu.',true);
+mc('g7','7l','Która nazwa jest nazwą gatunkową?',['modrzew europejski','modrzew','jałowiec','cis'],'Nazwa gatunkowa to dwa wyrazy (modrzew europejski), rodzajowa – jeden (modrzew); na konkursie pisz pełną nazwę gatunkową.');
+
+/* ============ ZAPIS ============ */
+const KEY='b7a-fiszki-v1:'+kid, INT=[0,1,3,7,14], KNOWN=2;
+let S={q:{},days:[],rounds:[]}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const dayStr=d=>d.toLocaleDateString('sv');
+const today=()=>dayStr(new Date());
+const addDays=n=>{ const d=new Date(); d.setDate(d.getDate()+n); return dayStr(d); };
+const st=q=>S.q[q.id];
+const box=q=>(st(q)||{}).b||0;
+const known=q=>box(q)>=KNOWN;
+// Pomyłka: pudełko 0 i powrót jeszcze dziś. Dobra odpowiedź: kolejne pudełko i coraz dłuższa przerwa (1, 3, 7, 14 dni).
+function record(q,ok){
+  const e=S.q[q.id]||(S.q[q.id]={b:0,due:today(),r:0,w:0});
+  if(ok){ e.r++; e.b=Math.min(INT.length-1,e.b+1); e.due=addDays(INT[e.b]); } else { e.w++; e.b=0; e.due=today(); }
+  const d=today(); if(!S.days.includes(d)) S.days.push(d); save();
+}
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const GN=Object.fromEntries(GROUPS.map(g=>[g.id,g]));
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+function streak(){ let n=0; const d=new Date(); if(!S.days.includes(dayStr(d))) d.setDate(d.getDate()-1); while(S.days.includes(dayStr(d))){ n++; d.setDate(d.getDate()-1); } return n; }
+
+/* ============ DOBÓR FISZEK ============ */
+// Najpierw te do powtórki (pomylone i z minionym terminem), potem nowe, a znane tylko wtedy, gdy brakuje innych.
+function pick(pool,n){
+  const t=today();
+  const rank=q=>{ const e=st(q); let k;
+    if(!e) k=1; else if(e.due<=t) k=e.b===0?0:.5; else k=2+e.b;
+    return k-(q.trap?.4:0)+Math.random()*.6; };
+  return pool.map(q=>({q,k:rank(q)})).sort((a,b)=>a.k-b.k).slice(0,n).map(x=>x.q);
+}
+const dueCount=pool=>pool.filter(q=>{ const e=st(q); return e&&e.due<=today(); }).length;
+const hard=()=>Q.filter(q=>{ const e=st(q); return e&&e.w>0&&e.b<KNOWN; });
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const k=Q.filter(known).length, traps=Q.filter(q=>q.trap), hd=hard().length, s=streak(), due=dueCount(Q);
+  $app.innerHTML=`<h1>🌲 B7a – mchy, paprotniki, nagonasienne</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Fiszki do konkursu: tkanki roślinne, mchy, paprotniki, nagonasienne i 7 gatunków. To, co mylisz, wraca częściej; to, co umiesz – rzadziej.</p>
+    <div class="pills"><span class="pill">🔥 ${s} ${s===1?'dzień':'dni'} z rzędu</span><span class="pill">✅ umiesz ${k} z ${Q.length}</span>${due?`<span class="pill">🔁 do powtórki: ${due}</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎴</span><span><span class="t">Fiszki ze wszystkiego</span><span class="d">12 fiszek – najpierw powtórki i nowe</span></span></button>
+    <button class="big trap" id="bTrap"><span class="i">⚠️</span><span><span class="t">Pułapki</span><span class="d">Aparaty szparkowe vs przetchlinki, łyko vs drewno, gametofit vs sporofit, świerk vs jodła, zimozielone (${traps.filter(known).length}/${traps.length})</span></span></button>
+    <button class="big" id="bHard" ${hd?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Trudne</span><span class="d">${hd?`${hd} ${hd===1?'fiszka sprawia':hd<5?'fiszki sprawiają':'fiszek sprawia'} trudność`:'Na razie nic nie sprawia trudności'}</span></span></button>
+    <div class="card"><h2>Grupy</h2>${GROUPS.map(g=>{ const l=Q.filter(q=>q.g===g.id), kk=l.filter(known).length;
+      return `<button class="big" data-g="${g.id}" style="box-shadow:none;margin-bottom:8px"><span class="i">${g.i}</span><span style="flex:1"><span class="t">${esc(g.n)}</span><span class="d">umiesz ${kk} z ${l.length}${dueCount(l)?` · do powtórki ${dueCount(l)}`:''}</span><span class="bar"><span style="width:${pct(kk,l.length)}%"></span></span></span></button>`; }).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze postępów.</p>'}`;
+  $('bAll').onclick=()=>round(pick(Q,12),'Wszystko');
+  $('bTrap').onclick=()=>round(pick(traps,12),'⚠️ Pułapki');
+  $('bHard').onclick=()=>{ if(hard().length) round(pick(hard(),12),'🩹 Trudne'); };
+  $app.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{ const g=GN[b.dataset.g]; round(pick(Q.filter(q=>q.g===g.id),12),`${g.i} ${g.n}`); });
+}
+
+/* ============ RUNDA ============ */
+function round(items,title){
+  window.scrollTo(0,0);
+  const queue=items.map(q=>({q,again:false})), total=items.length, log=new Map(); let done=0;
+  function next(){
+    if(!queue.length) return finish();
+    const cur=queue.shift(), q=cur.q;
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*done/total}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${GN[q.g].i} ${esc(GN[q.g].n)}${q.trap?' <span class="tag">pułapka</span>':''}</span><span>${cur.again?'jeszcze raz 💪':`${done+1}/${total}`}</span></div>
+      <div class="qt">${esc(q.q)}</div><div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!cur.again) record(q,ok);
+      const L=log.get(q.id)||{q,wrong:0}; if(!ok) L.wrong++; log.set(q.id,L);
+      if(!ok&&!cur.again) queue.splice(Math.min(queue.length,3),0,{q,again:true}); // pomylona fiszka wraca w tej samej rundzie
+      if(ok||cur.again) done++;
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Nie tym razem'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">Dalej</button>`;
+      $('bNext').onclick=next; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    if(q.type==='mc') askMc(q,after); else askPairs(q,after);
+  }
+  function finish(){
+    const entries=[...log.values()], wrong=entries.filter(x=>x.wrong>0), ok=entries.length-wrong.length;
+    S.rounds.push({d:today(),n:entries.length,ok}); save();
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div style="font:800 52px/1 var(--fh)">${ok}/${entries.length}</div>
+      <h2 style="margin-top:8px">${!wrong.length?'Bezbłędnie! 🏆':wrong.length<=2?'Bardzo dobrze! 👏':'Dobra robota – trudne fiszki wrócą w powtórce.'}</h2>
+      <p class="muted small">dobrze za pierwszym razem</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="bAgain">Kolejna runda</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Sprawiły trudność</h2>${wrong.map(x=>`<div class="diff"><div class="qq">${esc(x.q.q)}</div><div>✅ ${x.q.type==='mc'?esc(x.q.o[x.q.c||0]):x.q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>✅ ')}</div><div class="muted small">${esc(x.q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>{ const pool=title==='⚠️ Pułapki'?Q.filter(q=>q.trap):title==='🩹 Trudne'?(hard().length?hard():Q):title==='Wszystko'?Q:Q.filter(q=>`${GN[q.g].i} ${GN[q.g].n}`===title); round(pick(pool,12),title); };
+  }
+  next();
+}
+
+/* ============ WYBÓR Z 2–4 ============ */
+function askMc(q,after){
+  const C=q.c||0;
+  const order=q.fixed?q.o.map((_,i)=>i):q.o.length===2&&/^(Fałsz|Prawda|Tak|Nie)\b/.test(q.o[0])?q.o.map((_,i)=>i).sort((a,b)=>/^(Prawda|Tak)\b/.test(q.o[a])?-1:1):shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts${q.fixed?' '+({2:'two',3:'three',5:'five'}[q.o.length]||''):''}">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===C;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===C) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[C])}</b></div>`); });
+}
+
+/* ============ DOBIERZ W PARY ============ */
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const usedR=Object.values(match), num=Object.keys(match).map(Number);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=num.indexOf(l.i); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${l.i in match?`<span class="n" style="background:${COLORS[Object.keys(match).indexOf(String(l.i))%4]}">${Object.keys(match).indexOf(String(l.i))+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=Object.keys(match).find(k=>match[k]===r.i); const k=li!=null?Object.keys(match).indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${Object.keys(match).length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>
