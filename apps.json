@@ -294,6 +294,18 @@
       ],
       "added": "2026-10-14",
       "desc": "Konkurs: fiszki – mchy, paprotniki, nagonasienne"
+    },
+    {
+      "id": "b7b-okrytonasienne",
+      "file": "apps/b7b-okrytonasienne.html",
+      "title": "B7b Rośliny okrytonasienne – fiszki",
+      "emoji": "🌸",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-15",
+      "desc": "Konkurs: fiszki – rośliny okrytonasienne"
     }
   ]
 }
