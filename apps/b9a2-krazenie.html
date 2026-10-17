@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B9a2 Człowiek: krążenie, krew, odporność – quiz</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.two{grid-template-columns:repeat(2,1fr)} .opts.two .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opts.five{grid-template-columns:repeat(5,1fr); gap:6px} .opts.five .opt{text-align:center; padding:16px 2px; font-size:16px}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+/* wybierz wszystkie + kolejność */
+.opt.sel{border-color:var(--sel); background:var(--selbg)}
+.opt.miss{border-style:dashed; border-color:var(--ok)}
+.opt .box{display:inline-block; width:1.2em}
+.ord{display:grid; gap:8px; margin-bottom:10px}
+.slot{display:flex; gap:10px; align-items:center; min-height:46px; border:2px dashed var(--line); border-radius:12px; padding:8px 12px; text-align:left; background:transparent; font-weight:700}
+.slot.full{border-style:solid; background:var(--surface)}
+.slot .k{flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--soft); font:800 13px var(--fh)}
+.slot.ok{border-color:var(--ok); background:var(--okbg)} .slot.no{border-color:var(--bad); background:var(--badbg)}
+.pool{display:flex; flex-wrap:wrap; gap:8px}
+.pool .opt{flex:1 1 auto}
+.why .w{white-space:pre-line}
+.score{font:800 56px/1 var(--fh)}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Fakty w wersji podanej przez tatę. Kolejność pytań w quizie jest losowana.
+// mc: o[0] = poprawna. tf: zdanie + true/false. pairs: [lewa, prawa]. multi: [tekst, czy pasuje]. order: elementy w poprawnej kolejności.
+// Pytania „kto może dostać tę krew?” losuje genBlood() przy każdym podejściu (id „kr:…” pozwala je odtworzyć w powtórce błędnych).
+const SECTIONS={serce:'Serce i naczynia',obieg:'Obiegi krwi',krew:'Krew',grupy:'Grupy krwi',cis:'Ciśnienie, choroby, pierwsza pomoc',odp:'Odporność',b4:'Powtórka z B4'};
+const Q=[];
+const mc=(s,id,q,o,e)=>Q.push({s,id,type:'mc',q,o,e});
+const tf=(s,id,q,val,e)=>Q.push({s,id,type:'tf',q,val,e});
+const pairs=(s,id,q,p,e)=>Q.push({s,id,type:'pairs',q,p,e});
+const multi=(s,id,q,o,e)=>Q.push({s,id,type:'multi',q,o,e});
+const order=(s,id,q,items,e)=>Q.push({s,id,type:'order',q,items,e});
+
+// 1. Serce i naczynia
+pairs('serce','c1','Dobierz część serca do funkcji.',[['przedsionki','przyjmują krew z żył'],['komory','tłoczą krew do tętnic'],['zastawki','zapobiegają cofaniu się krwi'],['naczynia wieńcowe','odżywiają mięsień sercowy'],['osierdzie','osłania serce']],'Serce ma 2 przedsionki i 2 komory rozdzielone przegrodą; zatkanie naczynia wieńcowego to zawał.');
+mc('serce','c2','Która część serca ma najgrubszą ścianę?',['lewa komora','prawa komora','lewy przedsionek','prawy przedsionek'],'Lewa komora tłoczy krew do dużego obiegu, do całego ciała, pod wysokim ciśnieniem – dlatego ma najgrubszą ścianę.');
+multi('serce','c3','Zaznacz wszystkie miejsca, w których są zastawki.',[['w sercu',1],['w żyłach',1],['w tętnicach',0],['w naczyniach włosowatych',0]],'Zastawki zapobiegają cofaniu się krwi: w sercu (trójdzielna, dwudzielna, półksiężycowate) i w żyłach – w tętnicach ich nie ma.');
+pairs('serce','c4','Dobierz naczynie krwionośne do opisu.',[['tętnica','prowadzi krew OD serca, gruba i sprężysta ściana'],['żyła','prowadzi krew DO serca, cieńsza ściana, zastawki'],['naczynie włosowate','ściana z jednej warstwy komórek – wymiana substancji']],'W tętnicach jest wysokie ciśnienie, dlatego mają grubą, sprężystą ścianę.');
+tf('serce','c5','Tętnica to naczynie, które zawsze prowadzi krew natlenowaną.',false,'Tętnica to naczynie, które prowadzi krew OD serca – tętnice płucne niosą krew odtlenowaną z prawej komory do płuc.');
+
+// 2. Obiegi krwi
+order('obieg','o1','Ułóż drogę krwi w małym (płucnym) obiegu.',['prawa komora','tętnice płucne','płuca','żyły płucne','lewy przedsionek'],'Do płuc płynie krew odtlenowana (tętnicami płucnymi), a wraca natlenowana (żyłami płucnymi).');
+order('obieg','o2','Ułóż drogę krwi w dużym obiegu.',['lewa komora','aorta','narządy','żyły główne','prawy przedsionek'],'Z narządów krew wraca żyłą główną górną i dolną do prawego przedsionka.');
+mc('obieg','o3','Jaką krew niosą tętnice płucne?',['odtlenowaną – z prawej komory do płuc','natlenowaną – z płuc do serca','natlenowaną – z lewej komory do narządów','odtlenowaną – z płuc do lewego przedsionka'],'Tętnica znaczy „od serca”, a nie „z tlenem”: tętnice płucne niosą krew odtlenowaną, a żyły płucne – natlenowaną.');
+tf('obieg','o4','Żyły płucne niosą krew natlenowaną.',true,'Żyły płucne prowadzą krew natlenowaną z płuc do lewego przedsionka.');
+
+// 3. Krew
+multi('krew','k1','Zaznacz wszystkie składniki osocza.',[['woda',1],['fibrynogen',1],['przeciwciała (immunoglobuliny)',1],['albuminy',1],['hemoglobina',0],['erytrocyty',0]],'Krew to tkanka łączna płynna: osocze + elementy morfotyczne; hemoglobina jest w erytrocytach, a nie w osoczu.');
+pairs('krew','k2','Dobierz element krwi do funkcji.',[['erytrocyty','transport tlenu – hemoglobina z żelazem'],['leukocyty','obrona organizmu'],['płytki krwi','krzepnięcie']],'Przy krzepnięciu fibrynogen zamienia się we włóknik; potrzebne są witamina K i wapń.');
+multi('krew','k3','Zaznacz wszystkie cechy dojrzałego erytrocytu.',[['dwuwklęsły kształt',1],['brak jądra',1],['brak mitochondriów',1],['żyje ok. 120 dni',1],['ma jądro z pełnym DNA',0],['wytwarza przeciwciała',0]],'Jądro z pełnym DNA mają leukocyty; przeciwciała wytwarzają limfocyty B.');
+order('krew','k4','Ułóż elementy krwi od najliczniejszych.',['erytrocyty','płytki krwi','leukocyty'],'Erytrocytów jest najwięcej, leukocytów – najmniej.');
+mc('krew','k5','Dlaczego czad (CO) jest groźny?',['blokuje hemoglobinę – do komórek dociera mniej tlenu','niszczy płytki krwi','rozpuszcza leukocyty','zatyka naczynia wieńcowe'],'Czad łączy się z hemoglobiną zamiast tlenu – dotyczy to też palaczy.');
+multi('krew','k6','Zaznacz komórki, które NIE mają w jądrze pełnego DNA (albo w ogóle nie mają jądra).',[['erytrocyt',1],['plemnik',1],['komórka zrogowaciałego naskórka',1],['leukocyt',0],['komórka mięśniowa',0]],'Erytrocyt i komórki zrogowaciałego naskórka nie mają jąder, komórki rozrodcze mają połowę DNA, a leukocyt ma jądro z pełnym DNA.');
+
+// 4. Grupy krwi (+ losowane pytania z genBlood)
+pairs('grupy','g1','Dobierz grupę krwi do antygenów i przeciwciał.',[['A','antygen A, przeciwciała anty-B'],['B','antygen B, przeciwciała anty-A'],['AB','antygeny A i B, brak przeciwciał'],['0','brak antygenów, przeciwciała anty-A i anty-B']],'Gdy przeciwciała biorcy spotkają „swój” antygen w krwi dawcy, krwinki się zlepiają – to aglutynacja.');
+mc('grupy','g2','Uniwersalnym biorcą jest osoba z grupą…',['AB','0','A','B'],'Grupa AB nie ma przeciwciał anty-A ani anty-B, więc nie zlepi krwinek dawcy; uniwersalny dawca to grupa 0 (brak antygenów).');
+mc('grupy','g3','Kiedy osoba Rh− ma przeciwciała anty-Rh?',['dopiero po uczuleniu – przetoczeniu krwi Rh+ albo ciąży z dzieckiem Rh+','zawsze, od urodzenia','nigdy','tylko gdy ma grupę 0'],'Przeciwciała anty-Rh powstają dopiero po uczuleniu, dlatego osobie Rh− przetacza się tylko krew Rh−.');
+mc('grupy','g4','Kto może zostać krwiodawcą?',['osoba w wieku 18–65 lat, ważąca co najmniej 50 kg','każdy od 16 lat','osoba w wieku 18–65 lat, ważąca co najmniej 40 kg','tylko osoba z grupą 0'],'Krwiodawca jednorazowo oddaje ok. 450 ml krwi.');
+
+// 5. Ciśnienie, choroby, pierwsza pomoc
+pairs('cis','p1','Dobierz wynik pomiaru do oceny.',[['poniżej 120/80','ciśnienie optymalne'],['130–139 / 85–89','wysokie prawidłowe'],['140/90 i więcej','nadciśnienie']],'Pierwsza liczba to ciśnienie skurczowe, druga – rozkurczowe (120/80).');
+multi('cis','p2','Zaznacz wszystkie zasady poprawnego pomiaru ciśnienia.',[['5 minut odpoczynku przed pomiarem',1],['plecy oparte',1],['ręka na wysokości serca',1],['mankiet na nagim ramieniu',1],['pomiar zaraz po wypiciu kawy',0],['rozmowa w czasie pomiaru',0]],'Kawa i rozmowa podnoszą wynik – mierzy się w spokoju.');
+mc('cis','p3','Jak zmierzysz tętno?',['dwoma palcami na tętnicy promieniowej przy nadgarstku','kciukiem na tętnicy promieniowej','dwoma palcami na żyle na grzbiecie dłoni','całą dłonią na klatce piersiowej'],'Kciukiem się nie mierzy, bo czuć w nim własne tętno; w spoczynku tętno wynosi ok. 70 na minutę.');
+pairs('cis','p4','Dobierz chorobę do opisu.',[['białaczka','nowotwór krwi – leczenie przeszczepem szpiku'],['miażdżyca','złogi zwężają tętnice'],['nadciśnienie','„cichy zabójca”'],['zawał','zatkana tętnica wieńcowa, ból za mostkiem promieniujący do lewej ręki']],'Miażdżyca może prowadzić do zawału i udaru.');
+mc('cis','p5','Krwotok z nosa – co robisz?',['pochylasz głowę DO PRZODU i uciskasz skrzydełka nosa ok. 10 minut','odchylasz głowę do tyłu','kładziesz się na plecach','mocno wydmuchujesz nos'],'Przy głowie odchylonej do tyłu krew spływa do gardła; ucisk skrzydełek tamuje krwawienie.');
+mc('cis','p6','Podejrzewasz udar. Co robisz?',['dzwonisz pod 112, zapamiętujesz godzinę, nie podajesz nic do picia','podajesz wodę i czekasz, aż przejdzie','sadzasz chorego i dajesz kawę','odprowadzasz chorego do domu'],'UDAR: usta, dłoń, artykulacja, reaguj; przy zawale też dzwonisz pod 112 i sadzasz chorego w pozycji półsiedzącej.');
+
+// 6. Odporność
+pairs('odp','i1','Dobierz narząd odpornościowy do opisu.',[['grasica','za mostkiem, limfocyty T, zanika z wiekiem'],['śledziona','lewa strona pod przeponą, filtruje krew'],['węzły chłonne','szyja, pachy, pachwiny – filtrują chłonkę'],['szpik kostny','wytwarza krwinki']],'Te narządy tworzą układ odpornościowy.');
+multi('odp','i2','Zaznacz wszystkie elementy odporności wrodzonej (nieswoistej).',[['skóra',1],['śluz',1],['łzy z lizozymem',1],['fagocytoza',1],['gorączka',1],['przeciwciała',0],['komórki pamięci',0]],'Przeciwciała (z limfocytów B), limfocyty T i komórki pamięci to odporność nabyta, swoista.');
+mc('odp','i3','Po ukąszeniu żmii podano surowicę. Jaką odporność zyskał człowiek?',['nabytą, swoistą, bierną, sztuczną','wrodzoną, nieswoistą, bierną, sztuczną','nabytą, nieswoistą, bierną, sztuczną','nabytą, swoistą, czynną, sztuczną'],'Przeciwciała z surowicy działają przeciw jednemu antygenowi (swoista), są gotowe (bierna), a podał je lekarz (sztuczna) – podawaj wszystkie cztery określenia.');
+pairs('odp','i4','Dobierz sytuację do rodzaju odporności.',[['przechorowanie','czynna naturalna'],['szczepionka','czynna sztuczna'],['przeciwciała od matki (łożysko, mleko)','bierna naturalna'],['surowica','bierna sztuczna']],'Czynna – organizm sam wytwarza przeciwciała; bierna – dostaje gotowe.');
+tf('odp','i5','Szczepionka zawiera gotowe przeciwciała.',false,'Szczepionka zawiera antygeny – zapobiega i działa długo; gotowe przeciwciała ma surowica, która leczy od razu, ale krótko (żmija, tężec).');
+mc('odp','i6','Konflikt serologiczny grozi, gdy…',['matka jest Rh−, a dziecko Rh+ (zwykle w 2. ciąży)','matka jest Rh+, a dziecko Rh−','matka i dziecko mają grupę 0','oboje rodzice są Rh+'],'Matce podaje się immunoglobulinę anty-D do 72 godzin po porodzie.');
+mc('odp','i7','Alergia to…',['nadwrażliwość na nieszkodliwy alergen','brak odporności','zakażenie wirusem','odrzucenie przeszczepu'],'Najgroźniejsza reakcja alergiczna to wstrząs anafilaktyczny.');
+multi('odp','i8','Zaznacz wszystkie drogi zakażenia HIV.',[['przez krew',1],['przez kontakty płciowe',1],['z matki na dziecko',1],['przez dotyk',0],['przez wspólny kubek',0],['na basenie',0],['przez ukąszenie komara',0]],'HIV niszczy limfocyty T; nie zarazisz się przez dotyk, kubek, basen ani komara.');
+
+// 7. Powtórka z B4
+pairs('b4','b1','Kto wywołuje chorobę?',[['gruźlica','bakteria (prątek)'],['WZW B','wirus'],['malaria','protist (zarodziec)']],'Komar tylko przenosi zarodźca malarii – jest wektorem, a nie przyczyną choroby.');
+mc('b4','b2','Malarię wywołuje…',['zarodziec – protist','komar widliszek','bakteria','wirus'],'Komar widliszek tylko przenosi zarodźca – jest wektorem.');
+multi('b4','b3','Zaznacz wszystkie zdania prawdziwe o wirusach.',[['nie są komórkami',1],['nie mają rybosomów',1],['są zbudowane z jednej komórki bez jądra',0],['mają własne rybosomy',0]],'Wirus to kwas nukleinowy w białkowym kapsydzie – bez komórki i bez rybosomów.');
+mc('b4','b4','Kapsyd wirusa jest zbudowany z…',['białek','lipidów','celulozy','DNA'],'Kapsyd to białkowy płaszcz, który chroni kwas nukleinowy (DNA albo RNA).');
+mc('b4','b5','Bakterie brodawkowe to…',['symbionty','pasożyty','saprobionty','organizmy samożywne'],'Żyją w korzeniach roślin motylkowych i wiążą dla nich azot – korzystają obie strony.');
+
+/* ---- „Kto może dostać tę krew?” ---- */
+const BG=['0 Rh−','0 Rh+','A Rh−','A Rh+','B Rh−','B Rh+','AB Rh−','AB Rh+'];
+const BLOOD_N=7;
+const abo=g=>g.split(' ')[0], rhPlus=g=>g.endsWith('+');
+const agA=g=>abo(g).includes('A'), agB=g=>abo(g).includes('B');
+const canGet=(r,d)=>(!agA(d)||agA(r))&&(!agB(d)||agB(r))&&(!rhPlus(d)||rhPlus(r));
+const antibodies=r=>({'0':'przeciwciała anty-A i anty-B','A':'przeciwciała anty-B','B':'przeciwciała anty-A','AB':'brak przeciwciał anty-A i anty-B'})[abo(r)];
+const rhNote=r=>rhPlus(r)?'':'; jest Rh−, więc krew Rh+ uczuliłaby go (wytworzy anty-Rh)';
+// Dlaczego biorca r nie może dostać krwi d – które jego przeciwciało zlepi krwinki dawcy.
+const clash=(r,d)=>{ const w=[]; if(agA(d)&&!agA(r)) w.push('anty-A zlepi krwinki z antygenem A'); if(agB(d)&&!agB(r)) w.push('anty-B zlepi krwinki z antygenem B');
+  if(rhPlus(d)&&!rhPlus(r)) w.push('krew Rh+ uczuli go – wytworzy anty-Rh'); return w.length?' → '+w.join('; '):''; };
+function makeBlood(id){
+  const p=id.split(':');
+  if(p[1]==='a'){   // biorca → która krew pasuje (jedna z czterech)
+    const r=BG[+p[2]], ok=BG.filter(d=>canGet(r,d)), no=BG.filter(d=>!canGet(r,d));
+    return {s:'grupy',id,type:'mc',q:`Pacjent ma krew ${r}. Którą krew może bezpiecznie dostać?`,o:[shuffle(ok)[0],...shuffle(no).slice(0,3)],
+      e:`Biorca ${r} ma w osoczu ${antibodies(r)}${rhNote(r)}. Może dostać tylko: ${ok.join(', ')}.`};
+  }
+  const d=BG[+p[2]], recips=p[3].split('.').map(i=>BG[+i]);   // dawca → którzy biorcy
+  return {s:'grupy',id,type:'multi',q:`Dawca ma krew ${d}. Zaznacz wszystkich biorców, którzy mogą ją dostać.`,o:recips.map(r=>[r,canGet(r,d)?1:0]),
+    e:`Krew ${d} ma: ${[agA(d)&&'antygen A',agB(d)&&'antygen B',rhPlus(d)&&'antygen D (Rh+)'].filter(Boolean).join(', ')||'brak antygenów A, B i D'}. Decydują przeciwciała biorcy:\n`+recips.map(r=>`${canGet(r,d)?'✅':'❌'} ${r}: ${antibodies(r)}${rhPlus(r)?'':', Rh−'}${clash(r,d)}`).join('\n')};
+}
+function genBlood(){
+  const out=[], rs=shuffle(BG.filter(g=>g!=='AB Rh+')), ds=shuffle(BG.slice());
+  for(let k=0;k<BLOOD_N;k++){
+    if(k%2===0) out.push(makeBlood(`kr:a:${BG.indexOf(rs[k/2])}`));
+    else { const d=ds[(k-1)/2]; let opts;
+      do opts=shuffle(BG.filter(g=>g!==d)).slice(0,4).concat(d); while(d!=='0 Rh−'&&!opts.some(r=>!canGet(r,d)));   // 0 Rh− pasuje wszystkim – wtedy każda odpowiedź jest dobra
+      out.push(makeBlood(`kr:b:${BG.indexOf(d)}:${shuffle(opts).map(g=>BG.indexOf(g)).join('.')}`)); }
+  }
+  return out;
+}
+
+/* ============ ZAPIS ============ */
+const KEY='b9a2-quiz-v1:'+kid;
+let S={wrong:[],last:null,best:null}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+const QN=Object.fromEntries(Q.map(q=>[q.id,q]));
+const getQ=id=>QN[id]||(id.startsWith('kr:')?makeBlood(id):null);
+const fullSet=()=>[...Q,...genBlood()];
+const sectionSet=k=>k==='grupy'?[...Q.filter(q=>q.s===k),...genBlood()]:Q.filter(q=>q.s===k);
+const KIND={mc:'wybierz jedną',tf:'prawda czy fałsz?',pairs:'dobierz w pary',multi:'zaznacz wszystkie pasujące',order:'ułóż w kolejności'};
+function answerText(q){
+  if(q.type==='mc') return esc(q.o[0]);
+  if(q.type==='tf') return q.val?'Prawda':'Fałsz';
+  if(q.type==='pairs') return q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>');
+  if(q.type==='multi') return q.o.filter(x=>x[1]).map(x=>esc(x[0])).join(', ');
+  return q.items.map(esc).join(' → ');
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const wr=S.wrong.filter(id=>getQ(id));
+  $app.innerHTML=`<h1>🩸 B9a2 – krążenie, krew, odporność</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Quiz przed etapem szkolnym (30.10): serce i naczynia, obiegi, krew, grupy krwi, ciśnienie i choroby, odporność, powtórka z B4. Po każdej odpowiedzi od razu wyjaśnienie.</p>
+    <div class="pills">${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎯</span><span><span class="t">Cały quiz</span><span class="d">${Q.length+BLOOD_N} pytań w losowej kolejności</span></span></button>
+    <button class="big" id="bWrong" ${wr.length?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Powtórz tylko błędne</span><span class="d">${wr.length?`${wr.length} z ostatniego podejścia`:'Na razie brak błędów do powtórki'}</span></span></button>
+    <div class="card"><h2>Zakres</h2>${Object.entries(SECTIONS).map(([k,n])=>`<button class="big" data-s="${k}" style="box-shadow:none;margin-bottom:8px"><span class="t">${esc(n)}</span><span class="d" style="margin-left:auto">${Q.filter(q=>q.s===k).length+(k==='grupy'?BLOOD_N:0)} pytań</span></button>`).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze wyników.</p>'}`;
+  $('bAll').onclick=()=>run(shuffle(fullSet()),'Cały quiz');
+  $('bWrong').onclick=()=>{ if(wr.length) run(shuffle(wr.map(getQ)),'🩹 Błędne'); };
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>run(shuffle(sectionSet(b.dataset.s)),SECTIONS[b.dataset.s]));
+}
+
+/* ============ QUIZ ============ */
+function run(items,title){
+  window.scrollTo(0,0);
+  let i=0; const wrong=[];
+  function next(){
+    if(i>=items.length) return finish();
+    const q=items[i];
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/items.length}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${esc(SECTIONS[q.s])} · ${KIND[q.type]}</span><span>${i+1}/${items.length}</span></div>
+      <div class="qt">${esc(q.q)}</div><div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!ok) wrong.push(q);
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">${i+1<items.length?'Dalej':'Wynik'}</button>`;
+      $('bNext').onclick=()=>{ i++; next(); }; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    ({mc:askMc,tf:askTf,pairs:askPairs,multi:askMulti,order:askOrder})[q.type](q,after);
+  }
+  function finish(){
+    const n=items.length, ok=n-wrong.length, pc=Math.round(100*ok/n);
+    if(title==='Cały quiz'){ S.last={ok,n}; S.best=Math.max(S.best||0,pc); S.wrong=wrong.map(q=>q.id); }
+    else if(title==='🩹 Błędne'){ S.wrong=wrong.map(q=>q.id); }
+    else { S.wrong=[...new Set([...S.wrong.filter(id=>!items.some(q=>q.id===id)),...wrong.map(q=>q.id)])]; }
+    save();
+    window.scrollTo(0,0);
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div class="score">${ok}/${n}</div>
+      <h2 style="margin-top:8px">${pc}% – ${!wrong.length?'bezbłędnie! 🏆':pc>=80?'bardzo dobrze! 👏':pc>=60?'nieźle – powtórz błędne.':'powtórz błędne i spróbuj jeszcze raz.'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px">${wrong.length?'<button class="btn primary" id="bRep">Powtórz tylko błędne</button>':''}<button class="btn" id="bAgain">Jeszcze raz wszystko</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórzenia (${wrong.length})</h2>${wrong.map(q=>`<div class="diff"><div class="qq">${esc(q.q)}</div><div>✅ ${answerText(q)}</div><div class="muted small">${esc(q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>run(shuffle(title==='Cały quiz'?fullSet():items),title);
+    if(wrong.length) $('bRep').onclick=()=>run(shuffle(wrong),'🩹 Błędne');
+  }
+  next();
+}
+
+/* ============ TYPY PYTAŃ ============ */
+function askMc(q,after){
+  const order=shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===0;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`); });
+}
+function askTf(q,after){
+  $('ans').innerHTML=`<div class="opts two"><button class="opt" data-v="1">Prawda</button><button class="opt" data-v="0">Fałsz</button></div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=(b.dataset.v==='1')===q.val;
+    btns.forEach(x=>{ x.disabled=true; if((x.dataset.v==='1')===q.val) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${q.val?'Prawda':'Fałsz'}</b></div>`); });
+}
+function askMulti(q,after){
+  const order=shuffle(q.o.map((_,i)=>i)), sel=new Set();
+  $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Zaznacz wszystkie poprawne odpowiedzi i naciśnij „Sprawdź”.</p>
+    <div class="opts">${order.map(i=>`<button class="opt" data-i="${i}"><span class="box">☐</span> ${esc(q.o[i][0])}</button>`).join('')}</div>
+    <button class="btn primary wide" id="bChk" style="margin-top:12px" disabled>Sprawdź</button>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; sel.has(i)?sel.delete(i):sel.add(i);
+    b.classList.toggle('sel',sel.has(i)); b.querySelector('.box').textContent=sel.has(i)?'☑':'☐'; $('bChk').disabled=!sel.size; });
+  $('bChk').onclick=()=>{
+    let ok=true;
+    btns.forEach(b=>{ const i=+b.dataset.i, good=!!q.o[i][1], picked=sel.has(i); b.disabled=true; b.classList.remove('sel');
+      if(good&&picked) b.classList.add('ok'); else if(!good&&picked){ b.classList.add('no'); ok=false; } else if(good&&!picked){ b.classList.add('miss'); ok=false; } });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawne: <b>${answerText(q)}</b></div><div class="muted small">Przerywana zielona ramka = to też trzeba było zaznaczyć.</div>`);
+  };
+}
+function askOrder(q,after){
+  let pool=shuffle(q.items.map((_,i)=>i)); while(pool.every((v,k)=>v===k)) pool=shuffle(pool);
+  const chosen=[]; let locked=false;
+  const draw=()=>{
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotykaj po kolei. Dotknięcie ułożonego elementu cofa go.</p>
+      <div class="ord">${chosen.map((v,k)=>`<button class="slot full" data-k="${k}"><span class="k">${k+1}</span>${esc(q.items[v])}</button>`).join('')}${chosen.length<q.items.length?`<div class="slot"><span class="k">${chosen.length+1}</span><span class="muted small">wybierz z listy poniżej</span></div>`:''}</div>
+      <div class="pool">${pool.filter(v=>!chosen.includes(v)).map(v=>`<button class="opt" data-v="${v}">${esc(q.items[v])}</button>`).join('')}</div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${chosen.length===q.items.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('.pool .opt').forEach(b=>b.onclick=()=>{ if(locked) return; chosen.push(+b.dataset.v); draw(); });
+    $('ans').querySelectorAll('button.slot').forEach(b=>b.onclick=()=>{ if(locked) return; const k=+b.dataset.k; if(chosen[k]!=null){ chosen.splice(k,1); draw(); } });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=chosen.every((v,k)=>v===k);
+    $('ans').querySelectorAll('button.slot').forEach(b=>{ const k=+b.dataset.k; b.disabled=true; b.classList.add(chosen[k]===k?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawna kolejność: <b>${answerText(q)}</b></div>`);
+  };
+  draw();
+}
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const keys=Object.keys(match);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=keys.indexOf(String(l.i)); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=keys.find(k=>match[k]===r.i); const k=li!=null?keys.indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${keys.length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>
