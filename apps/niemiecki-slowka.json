@@ -754,6 +754,180 @@
           "type": "zdanie"
         }
       ]
+    },
+    {
+      "id": "hochhaus",
+      "title": "In einem Hochhaus – rodzaje domów",
+      "words": [
+        {
+          "pl": "dom",
+          "de": "das Haus"
+        },
+        {
+          "pl": "wieżowiec",
+          "de": "das Hochhaus"
+        },
+        {
+          "pl": "dom jednorodzinny",
+          "de": "das Einfamilienhaus"
+        },
+        {
+          "pl": "dom wielorodzinny",
+          "de": "das Mehrfamilienhaus"
+        },
+        {
+          "pl": "bliźniak",
+          "de": "das Doppelhaus"
+        },
+        {
+          "pl": "szeregowiec",
+          "de": "das Reihenhaus"
+        },
+        {
+          "pl": "kamienica czynszowa",
+          "de": "das Mietshaus"
+        },
+        {
+          "pl": "blok",
+          "de": "der Wohnblock"
+        },
+        {
+          "pl": "mieszkanie",
+          "de": "die Wohnung"
+        },
+        {
+          "pl": "Mieszkam w wieżowcu.",
+          "de": "Ich wohne in einem Hochhaus.",
+          "type": "zdanie"
+        },
+        {
+          "pl": "Mieszkam w mieszkaniu.",
+          "de": "Ich wohne in einer Wohnung.",
+          "type": "zdanie"
+        }
+      ]
+    },
+    {
+      "id": "einfamilienhaus",
+      "title": "Julia wohnt in einem Einfamilienhaus – okolica",
+      "words": [
+        {
+          "pl": "rosnąć",
+          "de": "wachsen"
+        },
+        {
+          "pl": "drzewa",
+          "de": "die Bäume",
+          "note": "l.mn."
+        },
+        {
+          "pl": "oddalony",
+          "de": "entfernt"
+        },
+        {
+          "pl": "duży",
+          "de": "groß"
+        },
+        {
+          "pl": "wygodny, komfortowy",
+          "de": "bequem"
+        },
+        {
+          "pl": "pomieszczenia",
+          "de": "die Räume",
+          "note": "l.mn."
+        },
+        {
+          "pl": "w weekend",
+          "de": "am Wochenende"
+        },
+        {
+          "pl": "odwiedzać",
+          "de": "besuchen"
+        },
+        {
+          "pl": "korzystnie",
+          "de": "günstig"
+        },
+        {
+          "pl": "na obrzeżach miasta",
+          "de": "am Stadtrand"
+        },
+        {
+          "pl": "w pobliżu",
+          "de": "in der Nähe"
+        },
+        {
+          "pl": "niedaleko od",
+          "de": "nicht weit von"
+        },
+        {
+          "pl": "okolica",
+          "de": "die Gegend"
+        },
+        {
+          "pl": "sklep",
+          "de": "das Geschäft"
+        },
+        {
+          "pl": "za rogiem",
+          "de": "um die Ecke"
+        },
+        {
+          "pl": "przystanek autobusowy",
+          "de": "die Bushaltestelle"
+        },
+        {
+          "pl": "stacja",
+          "de": "die Station"
+        },
+        {
+          "pl": "zalety",
+          "de": "die Vorteile",
+          "note": "l.mn."
+        },
+        {
+          "pl": "wady",
+          "de": "die Nachteile",
+          "note": "l.mn."
+        },
+        {
+          "pl": "głośno",
+          "de": "laut"
+        },
+        {
+          "pl": "czysty",
+          "de": "sauber"
+        },
+        {
+          "pl": "świeży",
+          "de": "frisch"
+        },
+        {
+          "pl": "powietrze",
+          "de": "die Luft"
+        },
+        {
+          "pl": "hałas",
+          "de": "der Lärm"
+        },
+        {
+          "pl": "na wsi",
+          "de": "auf dem Land"
+        },
+        {
+          "pl": "w nocy",
+          "de": "in der Nacht"
+        },
+        {
+          "pl": "spokojny",
+          "de": "ruhig"
+        },
+        {
+          "pl": "znajdować się",
+          "de": "sich befinden"
+        }
+      ]
     }
   ]
 }
