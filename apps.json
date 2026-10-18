@@ -342,6 +342,18 @@
       ],
       "added": "2026-10-17",
       "desc": "Konkurs: quiz – krążenie, krew, odporność"
+    },
+    {
+      "id": "b9b1-oddychanie",
+      "file": "apps/b9b1-oddychanie.html",
+      "title": "B9b1 Człowiek: oddychanie, wydalanie, hormony – quiz",
+      "emoji": "🫁",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-18",
+      "desc": "Konkurs: quiz – oddychanie, wydalanie, hormony"
     }
   ]
 }
