@@ -354,6 +354,18 @@
       ],
       "added": "2026-10-18",
       "desc": "Konkurs: quiz – oddychanie, wydalanie, hormony"
+    },
+    {
+      "id": "b9b2-nerwy",
+      "file": "apps/b9b2-nerwy.html",
+      "title": "B9b2 Człowiek: nerwy, zmysły, rozmnażanie – quiz",
+      "emoji": "🧠",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-18",
+      "desc": "Konkurs: quiz – nerwy, zmysły, rozmnażanie"
     }
   ]
 }

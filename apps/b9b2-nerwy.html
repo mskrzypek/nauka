@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B9b2 Człowiek: nerwy, zmysły, rozmnażanie – quiz</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.two{grid-template-columns:repeat(2,1fr)} .opts.two .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opts.five{grid-template-columns:repeat(5,1fr); gap:6px} .opts.five .opt{text-align:center; padding:16px 2px; font-size:16px}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+/* wybierz wszystkie + kolejność */
+.opt.sel{border-color:var(--sel); background:var(--selbg)}
+.opt.miss{border-style:dashed; border-color:var(--ok)}
+.opt .box{display:inline-block; width:1.2em}
+.ord{display:grid; gap:8px; margin-bottom:10px}
+.slot{display:flex; gap:10px; align-items:center; min-height:46px; border:2px dashed var(--line); border-radius:12px; padding:8px 12px; text-align:left; background:transparent; font-weight:700}
+.slot.full{border-style:solid; background:var(--surface)}
+.slot .k{flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--soft); font:800 13px var(--fh)}
+.slot.ok{border-color:var(--ok); background:var(--okbg)} .slot.no{border-color:var(--bad); background:var(--badbg)}
+.pool{display:flex; flex-wrap:wrap; gap:8px}
+.pool .opt{flex:1 1 auto}
+.score{font:800 56px/1 var(--fh)}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Fakty w wersji podanej przez tatę. Kolejność pytań w quizie jest losowana.
+// mc: o[0] = poprawna. tf: zdanie + true/false. pairs: [lewa, prawa]. multi: [tekst, czy pasuje]. order: elementy w poprawnej kolejności.
+const SECTIONS={neur:'Neuron',oun:'Mózgowie, rdzeń, odruchy',aut:'Układ autonomiczny i higiena',oko:'Oko',ucho:'Ucho i inne zmysły',rozm:'Rozmnażanie i cykl',rozw:'Rozwój i zdrowie'};
+const Q=[];
+const mc=(s,id,q,o,e)=>Q.push({s,id,type:'mc',q,o,e});
+const tf=(s,id,q,val,e)=>Q.push({s,id,type:'tf',q,val,e});
+const pairs=(s,id,q,p,e)=>Q.push({s,id,type:'pairs',q,p,e});
+const multi=(s,id,q,o,e)=>Q.push({s,id,type:'multi',q,o,e});
+const order=(s,id,q,items,e)=>Q.push({s,id,type:'order',q,items,e});
+
+// 1. Neuron
+pairs('neur','n1','Dobierz część neuronu do funkcji.',[['dendryty','krótkie, rozgałęzione – odbierają sygnały'],['akson (neuryt)','długa wypustka – przewodzi impuls'],['osłonka mielinowa','izoluje – impuls biegnie szybciej, skokowo'],['synapsa','sygnał przenoszą substancje chemiczne']],'W ciele komórki nerwowej jest jądro; między neuronami sygnał przenoszą przekaźniki chemiczne.');
+order('neur','n2','Ułóż drogę impulsu przez neuron.',['dendryt','ciało komórki','akson','synapsa'],'Kierunek jest zawsze ten sam: dendryt → ciało komórki → akson, a na końcu aksonu synapsa przekazuje sygnał dalej.');
+pairs('neur','n3','Dobierz pojęcie do znaczenia.',[['neuron','komórka nerwowa'],['neuryt','długa wypustka komórki nerwowej'],['nerw','wiązka wypustek wielu neuronów'],['nefron','jednostka budowy nerki']],'Te cztery słowa brzmią podobnie, ale znaczą co innego – nefron nie należy do układu nerwowego.');
+tf('neur','n4','Dendryty przewodzą impuls od ciała komórki do następnego neuronu.',false,'Dendryty odbierają sygnały, a impuls od ciała komórki przewodzi akson.');
+
+// 2. Mózgowie, rdzeń, odruchy
+pairs('oun','o1','Dobierz część ośrodkowego układu nerwowego do funkcji.',[['kresomózgowie (kora)','myślenie, pamięć, mowa, świadome ruchy'],['międzymózgowie (podwzgórze)','głód, pragnienie, termoregulacja'],['móżdżek','równowaga i koordynacja ruchów'],['pień mózgu','ośrodki oddychania, pracy serca, ciśnienia'],['rdzeń kręgowy','przewodzi impulsy, ośrodki prostych odruchów']],'Mózgowie i rdzeń chronią kości, opony i płyn mózgowo-rdzeniowy; nerwy czuciowe prowadzą impulsy do ośrodków, a ruchowe – od ośrodków do mięśni.');
+mc('oun','o2','W którym płacie kory powstaje wrażenie widzenia?',['w potylicznym','w skroniowym','w czołowym','w móżdżku'],'Wzrok – płat potyliczny, słuch – płat skroniowy.');
+mc('oun','o3','Po alkoholu ktoś się chwieje i nie trafia ręką do celu. Która część mózgowia działa gorzej?',['móżdżek','rdzeń przedłużony','podwzgórze','płat skroniowy'],'Móżdżek odpowiada za równowagę i koordynację ruchów – alkohol go upośledza.');
+multi('oun','o4','Zaznacz odruchy, których ośrodki są w pniu mózgu.',[['kaszel',1],['kichanie',1],['połykanie',1],['ssanie',1],['odruch kolanowy',0],['jazda na rowerze',0]],'Odruch kolanowy ma ośrodek w rdzeniu kręgowym, a jazda na rowerze to odruch warunkowy z kory.');
+order('oun','o5','Ułóż elementy łuku odruchowego.',['receptor','neuron czuciowy','neuron pośredniczący','neuron ruchowy','efektor'],'Neuron pośredniczący jest w ośrodku (rdzeń lub mózg); w odruchu kolanowym go nie ma.');
+mc('oun','o6','Efektorem w łuku odruchowym jest…',['mięsień lub gruczoł','receptor','rdzeń kręgowy','neuron czuciowy'],'Efektor to narząd, który wykonuje reakcję – mięsień albo gruczoł.');
+mc('oun','o7','Odruch kolanowy – gdzie jest receptor, a co jest efektorem?',['receptor w ścięgnie pod rzepką, efektor – mięsień uda','receptor w skórze kolana, efektor – kość udowa','receptor w mózgu, efektor – rzepka','receptor w łydce, efektor – ścięgno'],'Mięsień uda prostuje nogę; w tym odruchu nie ma neuronu pośredniczącego, a ośrodek jest w rdzeniu.');
+multi('oun','o8','Zaznacz wszystkie odruchy WARUNKOWE.',[['ślinienie na widok i zapach potrawy',1],['hamowanie na czerwonym świetle',1],['jazda na rowerze',1],['pisanie bez patrzenia na klawiaturę',1],['ślinienie, gdy pokarm jest w ustach',0],['mruganie',0],['cofnięcie ręki od gorącego',0]],'Warunkowe są nabyte przez powtarzanie i mają ośrodek w korze; bezwarunkowe są wrodzone i stałe (ośrodek w rdzeniu lub pniu).');
+pairs('oun','o9','Doświadczenie Pawłowa – dobierz element do roli.',[['pokarm','bodziec bezwarunkowy'],['ślinienie','reakcja'],['lampka na początku','bodziec obojętny'],['lampka po wielu powtórzeniach','bodziec warunkowy']],'Bodziec obojętny i bezwarunkowy muszą działać razem i wielokrotnie; nie wzmacniany odruch warunkowy zanika.');
+
+// 3. Układ autonomiczny i higiena
+mc('aut','a1','Układ autonomiczny…',['steruje narządami wewnętrznymi niezależnie od woli','steruje mięśniami szkieletowymi zgodnie z wolą','odpowiada za myślenie i pamięć','to nerwy czuciowe skóry'],'Mięśniami szkieletowymi zgodnie z wolą steruje układ somatyczny.');
+multi('aut','a2','Zaznacz skutki działania układu WSPÓŁCZULNEGO.',[['serce przyspiesza',1],['źrenice się rozszerzają',1],['oskrzela się rozszerzają',1],['trawienie jest hamowane – sucho w ustach',1],['serce zwalnia',0],['trawienie jest pobudzone',0]],'Współczulny to „walcz lub uciekaj” (działa razem z adrenaliną, glukoza rośnie); przywspółczulny – „odpoczywaj i traw”: serce zwalnia, trawienie pobudzone.');
+mc('aut','a3','Dlaczego długotrwały stres szkodzi?',['kortyzol osłabia odporność, pojawiają się bóle głowy i bezsenność','adrenalina usypia','rośnie ilość melatoniny','niszczy kubki smakowe'],'Krótkotrwały stres mobilizuje (adrenalina); pomagają ruch, sen, rozmowa, planowanie i relaks.');
+mc('aut','a4','Ile snu potrzebuje nastolatek i po co?',['8–10 h – utrwalanie pamięci, regeneracja, hormon wzrostu','5–6 h – więcej czasu na naukę','12–14 h – wtedy rośnie mózg','sen można nadrobić w weekend'],'Światło ekranu wieczorem hamuje wydzielanie melatoniny i utrudnia zasypianie.');
+mc('aut','a5','Dlaczego nastolatek uzależnia się od nikotyny szybciej niż dorosły?',['jego mózg dojrzewa aż do ok. 25 lat','ma mniejsze płuca','nikotyna nie działa na dorosłych','ma więcej melatoniny'],'Nikotyna działa przez dopaminę i daje objawy odstawienia; alkohol spowalnia przewodzenie, upośledza móżdżek i niszczy neurony.');
+
+// 4. Oko
+pairs('oko','e1','Dobierz część oka do funkcji.',[['rogówka','przezroczysta – załamuje światło'],['twardówka','„białko” – kształt i ochrona'],['tęczówka','kolor oka, mięśnie zmieniają źrenicę'],['soczewka','zmienia wypukłość (ciało rzęskowe)'],['siatkówka','pręciki i czopki']],'Naczyniówka odżywia oko, a ciało szkliste (galareta) nadaje mu kształt; soczewka nie ma naczyń.');
+pairs('oko','e2','Dobierz element siatkówki do opisu.',[['pręciki','widzenie w półmroku, czarno-białe'],['czopki','barwy i ostrość'],['plamka żółta','najwięcej czopków'],['tarcza nerwu wzrokowego','brak receptorów – plamka ślepa']],'Z siatkówki impulsy biegną nerwem wzrokowym do kory w płacie potylicznym.');
+order('oko','e3','Ułóż drogę światła w oku.',['rogówka','komora przednia (ciecz wodnista)','źrenica','soczewka','ciało szkliste','siatkówka'],'Na siatkówce powstaje obraz rzeczywisty, pomniejszony i odwrócony.');
+mc('oko','e4','Patrzysz z książki na tablicę i z powrotem – soczewka zmienia wypukłość. Jak to się nazywa?',['akomodacja','adaptacja','astygmatyzm','starczowzroczność'],'Akomodacja = soczewka, dopasowanie do odległości; adaptacja = źrenica, dopasowanie do oświetlenia.');
+mc('oko','e5','Wychodzisz z ciemnego pokoju na słońce i źrenica się zwęża. Jak to się nazywa?',['adaptacja','akomodacja','krótkowzroczność','odruch warunkowy'],'Adaptacja: w jasnym świetle źrenica się zwęża, w ciemności rozszerza.');
+mc('oko','e6','Który opis pasuje do krótkowidza?',['źle widzi z daleka, obraz powstaje przed siatkówką, nosi soczewki rozpraszające (−)','źle widzi z bliska, obraz powstaje za siatkówką, nosi soczewki skupiające (+)','źle widzi z daleka, obraz powstaje za siatkówką, nosi soczewki (+)','ma nierówną rogówkę i nosi soczewki cylindryczne'],'Nazwa wady mówi, co widzi się DOBRZE: krótkowidz dobrze widzi z bliska; jego gałka oczna jest za długa.');
+pairs('oko','e7','Dobierz wadę wzroku do przyczyny i korekcji.',[['dalekowzroczność','gałka za krótka – soczewki skupiające (+)'],['astygmatyzm','nierówna rogówka – soczewki cylindryczne'],['starczowzroczność','twardnieje soczewka']],'Dalekowidz dobrze widzi z daleka, a źle z bliska; oczom pomaga spojrzenie w dal co 20 minut.');
+
+// 5. Ucho i inne zmysły
+pairs('ucho','u1','Dobierz część ucha do funkcji.',[['błona bębenkowa','drga – granica ucha zewnętrznego i środkowego'],['kosteczki słuchowe','wzmacniają i przenoszą drgania'],['trąbka słuchowa','łączy z gardłem, wyrównuje ciśnienie'],['ślimak','receptory słuchu'],['przedsionek i kanały półkoliste','równowaga']],'Choroba lokomocyjna to niezgodność sygnałów z narządu równowagi i ze wzroku.');
+multi('ucho','u2','Zaznacz wszystkie elementy ucha ŚRODKOWEGO.',[['młoteczek',1],['kowadełko',1],['strzemiączko',1],['trąbka słuchowa',1],['błona bębenkowa',0],['ślimak',0],['małżowina uszna',0]],'Błona bębenkowa leży na granicy ucha zewnętrznego i środkowego, a ślimak należy do ucha wewnętrznego (błędnika).');
+mc('ucho','u3','Dlaczego bardzo głośna muzyka (powyżej ok. 85 dB) jest groźna?',['trwale niszczy receptory słuchu w ślimaku','rozrywa trąbkę słuchową','uszkadza móżdżek','powoduje krótkowzroczność'],'Bezpieczna zasada 60/60: najwyżej 60% głośności i najwyżej 60 minut.');
+multi('ucho','u4','Zaznacz smaki, które rozpoznają kubki smakowe języka.',[['słodki',1],['słony',1],['kwaśny',1],['gorzki',1],['umami',1],['miętowy',0]],'Kubki smakowe rozpoznają pięć smaków: słodki, słony, kwaśny, gorzki i umami.');
+mc('ucho','u5','Gdzie skóra najdokładniej rozpoznaje dotyk?',['na opuszkach palców, wargach i języku','na plecach','na łokciach','na piętach'],'Doświadczenie z cyrklem: na opuszku dwa punkty czujemy już przy 2–3 mm, na plecach dopiero przy kilku centymetrach.');
+mc('ucho','u6','Dlaczego przy katarze jedzenie wydaje się „bez smaku”?',['nie działa węch – nabłonek węchowy jest w górnej części jamy nosowej','kubki smakowe obumierają','ślina przestaje się wydzielać','zatyka się trąbka słuchowa'],'W nabłonku węchowym są chemoreceptory, a smak potraw to w dużej części zapach.');
+
+// 6. Rozmnażanie i cykl
+mc('rozm','r1','Ile chromosomów ma gameta, a ile zygota?',['23 (n) i 46 (2n)','46 i 23','23 i 23','46 i 92'],'Plemnik (mały, z witką, dużo mitochondriów) i komórka jajowa (największa, nieruchoma, z zapasem substancji) mają po 23 chromosomy.');
+pairs('rozm','r2','Dobierz narząd męski do funkcji.',[['jądra','plemniki i testosteron'],['najądrza','dojrzewanie i przechowywanie plemników'],['pęcherzyki nasienne i prostata','płyn tworzący nasienie'],['prącie','cewka moczowo-nasienna']],'Jądra leżą w mosznie, bo plemniki potrzebują niższej temperatury.');
+tf('rozm','r3','Prostata wydziela hormony płciowe.',false,'Prostata wydziela płyn – składnik nasienia; testosteron wydzielają jądra.');
+mc('rozm','r4','Gdzie zwykle dochodzi do zapłodnienia?',['w jajowodzie','w macicy','w jajniku','w pochwie'],'Zarodek zagnieżdża się w macicy ok. 7. dnia i tam się rozwija.');
+order('rozm','r5','Ułóż etapy cyklu miesiączkowego.',['miesiączka – złuszcza się błona śluzowa macicy','dojrzewa pęcherzyk, estrogeny, błona grubieje','owulacja – pęcherzyk pęka (ok. 14. dnia)','ciałko żółte wydziela progesteron'],'Bez zapłodnienia ciałko żółte zanika i zaczyna się miesiączka; pracę jajnika pobudzają hormony przysadki.');
+mc('rozm','r6','Dlaczego dni płodnych jest kilka, choć komórka jajowa żyje ok. doby?',['plemniki żyją kilka dni','w każdym cyklu dojrzewa kilka komórek jajowych','owulacja trwa tydzień','progesteron przedłuża życie komórki jajowej'],'Plemniki mogą czekać na komórkę jajową kilka dni przed owulacją.');
+
+// 7. Rozwój i zdrowie
+order('rozw','d1','Ułóż etapy rozwoju człowieka przed urodzeniem.',['zygota','zagnieżdżenie (ok. 7. dnia)','zarodek (do końca 8. tygodnia)','płód (od 9. tygodnia)','poród'],'Ciąża trwa ok. 40 tygodni od 1. dnia ostatniej miesiączki (ok. 38 od zapłodnienia).');
+mc('rozw','d2','Do kiedy rozwijające się dziecko nazywamy zarodkiem?',['do końca 8. tygodnia – potem to płód','do końca 3. miesiąca','do porodu','do zagnieżdżenia'],'W okresie zarodkowym powstają narządy – to najbardziej wrażliwy czas (serce bije ok. 4. tygodnia).');
+multi('rozw','d3','Zaznacz wszystko, co przechodzi przez łożysko do dziecka.',[['tlen',1],['składniki pokarmowe',1],['alkohol',1],['nikotyna',1],['czad (CO)',1],['krew matki',0]],'Krew matki i dziecka się nie miesza; alkohol grozi płodowym zespołem alkoholowym, a nikotyna i czad – niską masą i wcześniactwem.');
+pairs('rozw','d4','Dobierz rodzaj bliźniąt do opisu.',[['bliźnięta jednojajowe','jedna zygota – identyczne geny, ta sama płeć'],['bliźnięta dwujajowe','dwie komórki jajowe i dwa plemniki']],'Dziecko rozwija się w worku owodniowym z płynem, połączone z łożyskiem pępowiną.');
+pairs('rozw','d5','Kto wywołuje chorobę przenoszoną drogą płciową?',[['kiła','bakteria – krętek blady'],['rzeżączka','bakteria – dwoinka'],['rzęsistkowica','protist'],['HPV','wirus – rak szyjki macicy'],['AIDS','wirus HIV']],'Chlamydioza to też bakteria i często nie daje objawów; nieleczona chlamydioza i rzeżączka mogą powodować niepłodność.');
+tf('rozw','d6','Antybiotyk wyleczy zakażenie HPV albo HIV.',false,'HPV i HIV to wirusy, a antybiotyki działają tylko na bakterie.');
+multi('rozw','d7','Przeciw którym z tych chorób jest szczepionka?',[['HPV',1],['WZW B',1],['kiła',0],['rzeżączka',0],['AIDS',0],['chlamydioza',0]],'Szczepionka przeciw HPV jest dla dziewcząt i chłopców; profilaktyka to też wierność, prezerwatywa, badania i leczenie obojga partnerów.');
+pairs('rozw','d8','Dobierz badanie do opisu.',[['cytologia','szyjka macicy, od ok. 25 r.ż.'],['mammografia','piersi, po 45–50 r.ż.'],['PSA','mężczyźni po 50 r.ż.']],'Do tego co miesiąc samobadanie piersi i samobadanie jąder.');
+
+/* ============ ZAPIS ============ */
+const KEY='b9b2-quiz-v1:'+kid;
+let S={wrong:[],last:null,best:null}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+const QN=Object.fromEntries(Q.map(q=>[q.id,q]));
+const KIND={mc:'wybierz jedną',tf:'prawda czy fałsz?',pairs:'dobierz w pary',multi:'zaznacz wszystkie pasujące',order:'ułóż w kolejności'};
+function answerText(q){
+  if(q.type==='mc') return esc(q.o[0]);
+  if(q.type==='tf') return q.val?'Prawda':'Fałsz';
+  if(q.type==='pairs') return q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>');
+  if(q.type==='multi') return q.o.filter(x=>x[1]).map(x=>esc(x[0])).join(', ');
+  return q.items.map(esc).join(' → ');
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const wr=S.wrong.filter(id=>QN[id]);
+  $app.innerHTML=`<h1>🧠 B9b2 – nerwy, zmysły, rozmnażanie</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Quiz przed etapem szkolnym (30.10): układ nerwowy, odruchy, oko, ucho i inne zmysły, rozmnażanie i rozwój. Po każdej odpowiedzi od razu wyjaśnienie.</p>
+    <div class="pills">${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎯</span><span><span class="t">Cały quiz</span><span class="d">${Q.length} pytań w losowej kolejności</span></span></button>
+    <button class="big" id="bWrong" ${wr.length?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Powtórz tylko błędne</span><span class="d">${wr.length?`${wr.length} z ostatniego podejścia`:'Na razie brak błędów do powtórki'}</span></span></button>
+    <div class="card"><h2>Zakres</h2>${Object.entries(SECTIONS).map(([k,n])=>`<button class="big" data-s="${k}" style="box-shadow:none;margin-bottom:8px"><span class="t">${esc(n)}</span><span class="d" style="margin-left:auto">${Q.filter(q=>q.s===k).length} pytań</span></button>`).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze wyników.</p>'}`;
+  $('bAll').onclick=()=>run(shuffle(Q),'Cały quiz');
+  $('bWrong').onclick=()=>{ if(wr.length) run(shuffle(wr.map(id=>QN[id])),'🩹 Błędne'); };
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>run(shuffle(Q.filter(q=>q.s===b.dataset.s)),SECTIONS[b.dataset.s]));
+}
+
+/* ============ QUIZ ============ */
+function run(items,title){
+  window.scrollTo(0,0);
+  let i=0; const wrong=[];
+  function next(){
+    if(i>=items.length) return finish();
+    const q=items[i];
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/items.length}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${esc(SECTIONS[q.s])} · ${KIND[q.type]}</span><span>${i+1}/${items.length}</span></div>
+      <div class="qt">${esc(q.q)}</div><div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!ok) wrong.push(q);
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">${i+1<items.length?'Dalej':'Wynik'}</button>`;
+      $('bNext').onclick=()=>{ i++; next(); }; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    ({mc:askMc,tf:askTf,pairs:askPairs,multi:askMulti,order:askOrder})[q.type](q,after);
+  }
+  function finish(){
+    const n=items.length, ok=n-wrong.length, pc=Math.round(100*ok/n);
+    if(title==='Cały quiz'){ S.last={ok,n}; S.best=Math.max(S.best||0,pc); S.wrong=wrong.map(q=>q.id); }
+    else if(title==='🩹 Błędne'){ S.wrong=wrong.map(q=>q.id); }
+    else { S.wrong=[...new Set([...S.wrong.filter(id=>!items.some(q=>q.id===id)),...wrong.map(q=>q.id)])]; }
+    save();
+    window.scrollTo(0,0);
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div class="score">${ok}/${n}</div>
+      <h2 style="margin-top:8px">${pc}% – ${!wrong.length?'bezbłędnie! 🏆':pc>=80?'bardzo dobrze! 👏':pc>=60?'nieźle – powtórz błędne.':'powtórz błędne i spróbuj jeszcze raz.'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px">${wrong.length?'<button class="btn primary" id="bRep">Powtórz tylko błędne</button>':''}<button class="btn" id="bAgain">Jeszcze raz wszystko</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórzenia (${wrong.length})</h2>${wrong.map(q=>`<div class="diff"><div class="qq">${esc(q.q)}</div><div>✅ ${answerText(q)}</div><div class="muted small">${esc(q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>run(shuffle(items),title);
+    if(wrong.length) $('bRep').onclick=()=>run(shuffle(wrong),'🩹 Błędne');
+  }
+  next();
+}
+
+/* ============ TYPY PYTAŃ ============ */
+function askMc(q,after){
+  const order=shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===0;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`); });
+}
+function askTf(q,after){
+  $('ans').innerHTML=`<div class="opts two"><button class="opt" data-v="1">Prawda</button><button class="opt" data-v="0">Fałsz</button></div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=(b.dataset.v==='1')===q.val;
+    btns.forEach(x=>{ x.disabled=true; if((x.dataset.v==='1')===q.val) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${q.val?'Prawda':'Fałsz'}</b></div>`); });
+}
+function askMulti(q,after){
+  const order=shuffle(q.o.map((_,i)=>i)), sel=new Set();
+  $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Zaznacz wszystkie poprawne odpowiedzi i naciśnij „Sprawdź”.</p>
+    <div class="opts">${order.map(i=>`<button class="opt" data-i="${i}"><span class="box">☐</span> ${esc(q.o[i][0])}</button>`).join('')}</div>
+    <button class="btn primary wide" id="bChk" style="margin-top:12px" disabled>Sprawdź</button>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; sel.has(i)?sel.delete(i):sel.add(i);
+    b.classList.toggle('sel',sel.has(i)); b.querySelector('.box').textContent=sel.has(i)?'☑':'☐'; $('bChk').disabled=!sel.size; });
+  $('bChk').onclick=()=>{
+    let ok=true;
+    btns.forEach(b=>{ const i=+b.dataset.i, good=!!q.o[i][1], picked=sel.has(i); b.disabled=true; b.classList.remove('sel');
+      if(good&&picked) b.classList.add('ok'); else if(!good&&picked){ b.classList.add('no'); ok=false; } else if(good&&!picked){ b.classList.add('miss'); ok=false; } });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawne: <b>${answerText(q)}</b></div><div class="muted small">Przerywana zielona ramka = to też trzeba było zaznaczyć.</div>`);
+  };
+}
+function askOrder(q,after){
+  let pool=shuffle(q.items.map((_,i)=>i)); while(pool.every((v,k)=>v===k)) pool=shuffle(pool);
+  const chosen=[]; let locked=false;
+  const draw=()=>{
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotykaj po kolei. Dotknięcie ułożonego elementu cofa go.</p>
+      <div class="ord">${chosen.map((v,k)=>`<button class="slot full" data-k="${k}"><span class="k">${k+1}</span>${esc(q.items[v])}</button>`).join('')}${chosen.length<q.items.length?`<div class="slot"><span class="k">${chosen.length+1}</span><span class="muted small">wybierz z listy poniżej</span></div>`:''}</div>
+      <div class="pool">${pool.filter(v=>!chosen.includes(v)).map(v=>`<button class="opt" data-v="${v}">${esc(q.items[v])}</button>`).join('')}</div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${chosen.length===q.items.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('.pool .opt').forEach(b=>b.onclick=()=>{ if(locked) return; chosen.push(+b.dataset.v); draw(); });
+    $('ans').querySelectorAll('button.slot').forEach(b=>b.onclick=()=>{ if(locked) return; const k=+b.dataset.k; if(chosen[k]!=null){ chosen.splice(k,1); draw(); } });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=chosen.every((v,k)=>v===k);
+    $('ans').querySelectorAll('button.slot').forEach(b=>{ const k=+b.dataset.k; b.disabled=true; b.classList.add(chosen[k]===k?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawna kolejność: <b>${answerText(q)}</b></div>`);
+  };
+  draw();
+}
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const keys=Object.keys(match);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=keys.indexOf(String(l.i)); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=keys.find(k=>match[k]===r.i); const k=li!=null?keys.indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${keys.length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>
