@@ -366,6 +366,18 @@
       ],
       "added": "2026-10-18",
       "desc": "Konkurs: quiz – nerwy, zmysły, rozmnażanie"
+    },
+    {
+      "id": "chemia-kwasy-zasady-ph",
+      "file": "apps/chemia-kwasy-zasady-ph.html",
+      "title": "Kwasy, zasady, pH – fiszki",
+      "emoji": "🧪",
+      "subject": "chemia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-19",
+      "desc": "Kartkówka: dysocjacja, wskaźniki, pH"
     }
   ]
 }
