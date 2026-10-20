@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B8 Protisty i grzyby – quiz</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍄</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.two{grid-template-columns:repeat(2,1fr)} .opts.two .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opts.five{grid-template-columns:repeat(5,1fr); gap:6px} .opts.five .opt{text-align:center; padding:16px 2px; font-size:16px}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+/* wybierz wszystkie + kolejność */
+.opt.sel{border-color:var(--sel); background:var(--selbg)}
+.opt.miss{border-style:dashed; border-color:var(--ok)}
+.opt .box{display:inline-block; width:1.2em}
+.ord{display:grid; gap:8px; margin-bottom:10px}
+.slot{display:flex; gap:10px; align-items:center; min-height:46px; border:2px dashed var(--line); border-radius:12px; padding:8px 12px; text-align:left; background:transparent; font-weight:700}
+.slot.full{border-style:solid; background:var(--surface)}
+.slot .k{flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--soft); font:800 13px var(--fh)}
+.slot.ok{border-color:var(--ok); background:var(--okbg)} .slot.no{border-color:var(--bad); background:var(--badbg)}
+.pool{display:flex; flex-wrap:wrap; gap:8px}
+.pool .opt{flex:1 1 auto}
+.ph{margin:0 0 12px} .ph img{display:block; width:100%; height:min(52vh,340px); object-fit:contain; background:var(--soft); border-radius:14px}
+.ph figcaption{font-size:12px; color:var(--muted); margin-top:4px; text-align:right} .ph a{color:inherit}
+.dimg{float:left; width:84px; height:84px; object-fit:cover; border-radius:10px; margin:2px 10px 4px 0} .diff{overflow:hidden}
+.score{font:800 56px/1 var(--fh)}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Fakty w wersji podanej przez tatę. Kolejność pytań w quizie jest losowana.
+// mc: o[0] = poprawna. tf: zdanie + true/false. pairs: [lewa, prawa]. multi: [tekst, czy pasuje]. order: elementy w poprawnej kolejności.
+// ph: pytanie ze zdjęciem – zdjęcia w b8-foto/, autor i licencja z zrodla/rys/B8_foto/atrybucje.json (Wikimedia Commons).
+const SECTIONS={prot:'Protisty',pant:'Pantofelek, euglena, ameba',znacz:'Znaczenie protistów',grzyby:'Grzyby',poros:'Porosty',zbior:'Grzybobranie i nazwy',foto:'Rozpoznaj ze zdjęcia'};
+const Q=[];
+const mc=(s,id,q,o,e)=>Q.push({s,id,type:'mc',q,o,e});
+const tf=(s,id,q,val,e)=>Q.push({s,id,type:'tf',q,val,e});
+const pairs=(s,id,q,p,e)=>Q.push({s,id,type:'pairs',q,p,e});
+const multi=(s,id,q,o,e)=>Q.push({s,id,type:'multi',q,o,e});
+const order=(s,id,q,items,e)=>Q.push({s,id,type:'order',q,items,e});
+const ph=(id,file,q,o,e)=>{ const a=CREDITS[file]; Q.push({s:'foto',id,type:'mc',q,o,e,img:'b8-foto/'+file,cred:`fot. ${a.autor}, ${a.licencja}`,src:a.url}); };
+const CREDITS={"kania_1.jpg": {"autor": "George Chernilevsky", "licencja": "Public domain", "url": "https://commons.wikimedia.org/wiki/File:Macrolepiota_procera_2013_G1.jpg"}, "kania_2.jpg": {"autor": "Dellex", "licencja": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:0_Gemeiner_Riesenschirmling,_Stiel.jpg"}, "muchomor_zielonawy_1.jpg": {"autor": "Holger Krisp", "licencja": "CC BY 3.0", "url": "https://commons.wikimedia.org/wiki/File:Gr%C3%BCner_Knollenbl%C3%A4tterpilz_Amanita_phalloides.jpg"}, "muchomor_jadowity.jpg": {"autor": "Jose Angel Urquia Goitia", "licencja": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Amanita_virosa_8.jpg"}, "smardz_1.jpg": {"autor": "Achim Lammerts (Syntaxys)", "licencja": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:2026-04-04_Z5-3750E_Achim-Lammerts_Morchella-esculenta.jpg"}, "smardz_2.jpg": {"autor": "TOMMES-WIKI", "licencja": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Morchella_esculenta_-_DE_-_TH_-_2013-05-02_-_01.JPG"}, "piestrzenica_1.jpg": {"autor": "Toffel", "licencja": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Gyromitra_esculenta_2011-04-17.JPG"}, "piestrzenica_2.jpg": {"autor": "virn", "licencja": "CC BY 4.0", "url": "https://commons.wikimedia.org/wiki/File:Gyromitra_esculenta_vertical_cut.jpg"}, "porost_skorupiasty.jpg": {"autor": "Caleb Catto", "licencja": "CC BY 4.0", "url": "https://commons.wikimedia.org/wiki/File:Rhizocarpon_geographicum_67977043.jpg"}, "porost_listkowaty.jpg": {"autor": "Taka", "licencja": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Xanthoria_parietina_(06_03_31).jpg"}, "porost_krzaczkowaty.jpg": {"autor": "W.carter", "licencja": "CC0", "url": "https://commons.wikimedia.org/wiki/File:Oakmoss_at_Myrstigen_3.jpg"}, "plesn_pedzlak.jpg": {"autor": "Ivtorov", "licencja": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Penicillium_%D0%BD%D0%B0_%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D0%B8%D0%BD%D0%B5.jpg"}, "drozdze_paczkowanie.jpg": {"autor": "Masur", "licencja": "Public domain", "url": "https://commons.wikimedia.org/wiki/File:S_cerevisiae_under_DIC_microscopy.jpg"}, "huba.jpg": {"autor": "George Chernilevsky", "licencja": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Fomes_fomentarius_2020_G2.jpg"}};
+
+// 1. Protisty
+mc('prot','p1','Protisty to…',['eukarionty (mają jądro), ale nie rośliny, zwierzęta ani grzyby','bakterie bez jądra komórkowego','małe rośliny wodne','wirusy żyjące w wodzie'],'Są jednokomórkowe, kolonijne (np. toczek) i wielokomórkowe (duże glony morskie, np. listownica – kilka metrów).');
+pairs('prot','p2','Dobierz grupę protistów do przykładów.',[['zwierzęce (pierwotniaki)','pantofelek, ameba, zarodziec malarii'],['roślinopodobne (glony)','euglena, okrzemki, morszczyn, listownica'],['grzybopodobne','śluzowce, lęgniowce (zaraza ziemniaczana)']],'Glony są samożywne; do pierwotniaków należą też świdrowiec i toksoplazma, a do glonów zielenice, brunatnice i krasnorosty.');
+
+// 2. Pantofelek, euglena, ameba
+pairs('pant','t1','Dobierz protista do sposobu ruchu.',[['pantofelek','rzęski'],['euglena zielona','wić'],['ameba (pełzak)','nibynóżki']],'Pantofelek – rzęski, euglena – wić, ameba – nibynóżki; wszystkie trzy oddychają tlenowo całą powierzchnią i rozmnażają się przez podział.');
+mc('pant','t2','Dlaczego pantofelek ma wodniczki tętniące?',['w słodkiej wodzie woda ciągle wnika do komórki, a wodniczki usuwają jej nadmiar – inaczej komórka by pękła','bo trawią w nich pokarm','bo wytwarzają w nich tlen','bo służą mu do pływania'],'Uzasadnienie musi mieć mechanizm: woda wnika (osmoza) → wodniczka ją wypompowuje; w wodzie destylowanej pracuje szybciej, a u wielu protistów morskich jej nie ma.');
+pairs('pant','t3','Pantofelek – dobierz element do funkcji.',[['otwór gębowy (cytostom)','tu rzęski napędzają bakterie'],['wodniczka pokarmowa','trawienie pokarmu'],['otwór odbytowy (cytopyge)','usuwanie niestrawionych resztek'],['makronukleus (duże jądro)','kieruje czynnościami życiowymi'],['mikronukleus (małe jądro)','rozmnażanie']],'Pantofelek ma 2 wodniczki tętniące z kanalikami; odpływa od substancji drażniących (np. soli) – to reakcja na bodźce.');
+mc('pant','t4','Co dzieje się podczas koniugacji pantofelków?',['wymieniają się materiałem genetycznym, a liczba osobników nie rośnie','dzielą się w poprzek i przybywa osobników','tworzą cystę','łączą się w kolonię'],'Rozmnażanie to podział w poprzek; koniugacja tylko miesza materiał genetyczny.');
+tf('pant','t5','Pantofelek to protist roślinopodobny.',false,'Pantofelek to protist zwierzęcy: ma wodniczki pokarmowe i nie ma chloroplastów; wodniczki tętniące świadczą, że żyje w słodkiej wodzie.');
+mc('pant','t6','Jak odżywia się euglena zielona?',['w świetle samożywnie, w ciemności cudzożywnie – odżywianie mieszane','zawsze cudzożywnie','zawsze samożywnie','pasożytuje na rybach'],'Plamka oczna wyczuwa światło, a w ciemności euglena wchłania substancje organiczne z wody; nie ma ściany komórkowej – to protist roślinopodobny, nie roślina.');
+mc('pant','t7','Jak ameba pobiera pokarm?',['otacza go nibynóżkami i wciąga do wodniczki pokarmowej – fagocytoza','rzęskami napędza go do otworu gębowego','przeprowadza fotosyntezę','wchłania go przez ścianę komórkową'],'W złych warunkach protisty mogą utworzyć cystę, która pozwala przetrwać.');
+
+// 3. Znaczenie protistów
+mc('znacz','z1','Dlaczego fitoplankton jest tak ważny?',['wytwarza dużą część tlenu na Ziemi i rozpoczyna łańcuchy pokarmowe w wodzie','zjada ryby i oczyszcza morza','powoduje malarię','wytwarza chitynę'],'Glony żyją też w koralowcach (dają im cukry i barwę); gdy woda się ociepla, koralowce usuwają glony, blakną i rafy słabną.');
+order('znacz','z2','Ułóż etapy zakwitu wody.',['za dużo nawozów w wodzie','masowy rozwój glonów','glony obumierają','bakterie przy rozkładzie zużywają tlen','śnięcie ryb'],'Zakwit to szkoda wyrządzana przez protisty; pierwotniaki za to oczyszczają wodę, zjadając bakterie.');
+pairs('znacz','z3','Dobierz glony do produktu.',[['krasnorosty','agar'],['brunatnice','alginiany, jod, nawóz'],['okrzemki','ziemia okrzemkowa']],'To przykłady pożytecznego znaczenia protistów dla człowieka.');
+pairs('znacz','z4','Powtórka z B4 – dobierz chorobę do sprawcy.',[['malaria','zarodziec – przenosi komar widliszek'],['toksoplazmoza','toksoplazma – kot, surowe mięso'],['śpiączka afrykańska','świdrowiec – mucha tse-tse']],'Protistową chorobą jest też lamblioza, a lęgniowce wywołują zarazę ziemniaczaną.');
+
+// 4. Grzyby
+multi('grzyby','f1','Zaznacz wszystkie cechy grzybów.',[['są cudzożywne',1],['ściana komórkowa z chityny',1],['materiał zapasowy – glikogen',1],['wytwarzają zarodniki',1],['mają chlorofil',0],['ściana komórkowa z celulozy',0],['magazynują skrobię',0]],'Grzyby wydzielają enzymy na zewnątrz i wchłaniają gotowe związki organiczne; celuloza i skrobia to cechy roślin.');
+tf('grzyby','f2','Grzyby mogą być producentami w łańcuchu pokarmowym.',false,'Grzyby nie mają chlorofilu i nie przeprowadzają fotosyntezy (rosną nawet w ciemności) – nigdy nie są producentami.');
+mc('grzyby','f3','Czym komórka grzyba różni się od komórki bakterii?',['grzyb ma jądro i mitochondria, a bakteria nie','tylko grzyb ma ścianę komórkową','tylko bakteria ma ścianę komórkową','grzyb ma chloroplasty'],'Ścianę komórkową mają oba (także rośliny i drożdże), a pantofelek i zwierzęta – nie.');
+pairs('grzyby','f4','Dobierz grzyby do sposobu odżywiania.',[['pieczarka, czernidłak, większość pleśni','saprobionty – rozkładają martwą materię'],['huby, grzybice stóp, sporysz','pasożyty – żyją kosztem żywego organizmu'],['borowik, koźlarz, maślak','symbionty – mikoryza z drzewami']],'Saprobionty to destruenci – zamykają obieg pierwiastków i tworzą próchnicę.');
+mc('grzyby','f5','Mikoryza – co daje każdy z partnerów?',['grzyb daje drzewu wodę i sole mineralne, a drzewo grzybowi cukry','grzyb daje drzewu cukry, a drzewo grzybowi wodę','grzyb daje drzewu tlen, a drzewo grzybowi chitynę','korzysta tylko grzyb, drzewo traci'],'Przykłady: koźlarz – brzoza, maślak – sosna i modrzew, borowik – sosna, świerk, buk, muchomor czerwony – brzoza.');
+mc('grzyby','f6','Drożdże w cieście. Które zdanie jest prawdziwe?',['fermentacja alkoholowa jest beztlenowa: glukoza → alkohol + CO₂, a CO₂ spulchnia ciasto','fermentacja wymaga dużo tlenu','powstaje kwas mlekowy','w zimnie drożdże pracują szybciej'],'W cieple fermentacja idzie szybciej, bo szybciej działają enzymy; drożdże są jednokomórkowe i rozmnażają się przez pączkowanie.');
+pairs('grzyby','f7','Dobierz pleśń do opisu.',[['pleśniak','szary nalot z czarnymi zarodniami na chlebie'],['pędzlak','zielononiebieski – penicylina, sery'],['kropidlak','aflatoksyny']],'Penicylinę z pędzlaka odkrył Fleming w 1928 r.; pędzlak służy też do serów (rokpol, camembert).');
+mc('grzyby','f8','Na chlebie pojawiła się pleśń. Co robisz?',['wyrzucasz cały chleb','odkrawasz spleśniałe miejsce','zamrażasz chleb','podgrzewasz chleb w piekarniku'],'Grzybnia wrasta głęboko, a toksyn nie niszczy ani mróz, ani gotowanie.');
+mc('grzyby','f9','Grzyb kapeluszowy – co jest jego główną częścią?',['grzybnia w glebie – żyje latami, a owocnik to tylko jej część','owocnik nad ziemią','zarodniki','blaszki pod kapeluszem'],'Owocnik (kapelusz + trzon) wytwarza zarodniki; jego zerwanie nie zabija grzyba.');
+
+// 5. Porosty
+mc('poros','r1','Porost to symbioza grzyba i glonu. Co daje każdy partner?',['glon daje cukry z fotosyntezy, a grzyb wodę, sole mineralne i ochronę przed wyschnięciem','grzyb daje cukry, a glon wodę','glon daje chitynę, a grzyb tlen','grzyb pasożytuje na glonie'],'Porosty są pionierami na nagich skałach (początek gleby), rosną bardzo wolno i rozmnażają się kawałkami plechy.');
+order('poros','r2','Skala porostowa: ułóż od NAJBARDZIEJ zanieczyszczonego powietrza (SO₂).',['brak porostów („pustynia porostowa”)','porosty skorupiaste','porosty listkowate','porosty krzaczkowate'],'Porosty to bioindykatory dwutlenku siarki; krzaczkowate są najbardziej wrażliwe i rosną tylko w czystym powietrzu.');
+pairs('poros','r3','Dobierz formę porostu do przykładów.',[['skorupiaste','misecznica, wzorzec geograficzny'],['listkowate','złotorost ścienny, pustułka, tarczownica'],['krzaczkowate','brodaczka, mąkla tarniowa, płucnica islandzka']],'Skorupiaste są przyrośnięte do podłoża całą powierzchnią; krzaczkowaty jest też chrobotek reniferowy.');
+order('poros','r4','Przekrój plechy porostu – ułóż warstwy od góry.',['kora górna (zbite strzępki)','warstwa glonów','rdzeń (luźne strzępki)','kora dolna','chwytniki'],'Glony leżą tuż pod korą górną – tam dociera światło do fotosyntezy.');
+
+// 6. Grzybobranie i nazwy
+mc('zbior','c1','Dlaczego grzyb wykręcasz z ziemi w całości, a nie odcinasz?',['żeby zobaczyć podstawę trzonu – czy nie ma pochwy jak u muchomora','żeby grzybnia szybciej odrosła','bo tak jest szybciej','żeby zostawić w ziemi zarodniki'],'Zbieraj tylko znane gatunki, nie zbieraj młodych „jajeczek”, noś grzyby w koszyku, nie w folii.');
+tf('zbior','c2','Trującego grzyba poznasz po tym, że łyżka albo cebula ściemnieje w czasie gotowania.',false,'Takie „testy” to mity – grzyb rozpoznaje się po cechach wyglądu (pochwa, pierścień, łuski).');
+mc('zbior','c3','Dlaczego zatrucie muchomorem zielonawym jest tak groźne?',['amanityna niszczy wątrobę, objawy pojawiają się dopiero po 6–24 h, a gotowanie jej nie niszczy','objawy są od razu, więc łatwo pomóc','toksyna znika po ugotowaniu','szkodzi tylko skórze'],'Czasem potrzebny jest przeszczep wątroby; przy zatruciu jedź do lekarza z resztkami grzybów.');
+multi('zbior','c6','Zaznacz cechy, po których poznasz MUCHOMORA (zielonawego lub jadowitego).',[['pochwa u podstawy trzonu',1],['gładki kapelusz bez łusek',1],['zwisający nieruchomy pierścień',1],['łuski na kapeluszu',0],['gruby ruchomy pierścień',0],['białe blaszki – mają je tylko muchomory',0]],'Łuski i gruby ruchomy pierścień to cechy kani; białe blaszki mają i kania, i muchomory.');
+tf('zbior','c4','Kanię odróżnisz od muchomorów po białych blaszkach.',false,'Białe blaszki mają kania i oba muchomory – patrz na pochwę u podstawy, ruchomy pierścień i łuski na kapeluszu.');
+mc('zbior','c5','Która nazwa jest nazwą GATUNKOWĄ?',['muchomor jadowity','muchomor','grzyby kapeluszowe','huby'],'Nazwa gatunkowa to oba człony; rodzajowa to pierwszy człon (muchomor, borowik, pieczarka); „grzyby kapeluszowe” i „huby” to nie nazwy rodzajowe.');
+
+// 7. Rozpoznaj ze zdjęcia
+ph('h1','kania_1.jpg','Jaki to grzyb?',['czubajka kania','muchomor jadowity','muchomor zielonawy','pieczarka'],'Kapelusz z łuskami i garbem, gruby pierścień, wysoki trzon z wężykowatym wzorem – kania; muchomory mają gładki kapelusz bez łusek.');
+ph('h2','kania_2.jpg','Zbliżenie trzonu z pierścieniem. Do którego grzyba należy?',['czubajka kania','muchomor zielonawy','muchomor jadowity','smardz jadalny'],'Gruby, RUCHOMY pierścień i wężykowaty wzór na trzonie to cechy kani; u muchomorów pierścień jest zwisający i nieruchomy.');
+ph('h3','muchomor_zielonawy_1.jpg','Jaki to grzyb?',['muchomor zielonawy','czubajka kania','muchomor jadowity','pieczarka'],'Gładki, oliwkowozielony kapelusz bez łusek, zwisający pierścień i bulwa u podstawy – muchomor zielonawy (sromotnikowy), śmiertelnie trujący.');
+ph('h4','muchomor_jadowity.jpg','Jaki to grzyb?',['muchomor jadowity','czubajka kania','muchomor zielonawy','pieczarka'],'Cały biały, dzwonkowaty kapelusz bez łusek, kosmaty trzon i bulwa w pochwie – muchomor jadowity; pieczarka ma różowe lub brązowe blaszki i nie ma pochwy.');
+ph('h5','smardz_1.jpg','Wiosenny grzyb. Jaki to?',['smardz jadalny','piestrzenica kasztanowata','czubajka kania','hubiak pospolity (huba)'],'Kapelusz z dołkami jak plaster miodu – smardz (w Polsce pod ochroną częściową); piestrzenica jest pofałdowana jak mózg.');
+ph('h6','smardz_2.jpg','Przekrój wiosennego grzyba. Co to za grzyb?',['smardz jadalny','piestrzenica kasztanowata','muchomor jadowity','czubajka kania'],'W środku pusty – jedna jama, a na brzegu żeberka z dołkami – smardz; piestrzenica ma w środku liczne komory.');
+ph('h7','piestrzenica_1.jpg','Wiosenny grzyb z boru sosnowego. Jaki to?',['piestrzenica kasztanowata','smardz jadalny','muchomor zielonawy','hubiak pospolity (huba)'],'Brązowy kapelusz pofałdowany jak mózg, bez dołków – piestrzenica; jest trująca (wątroba, układ nerwowy), szkodzą nawet jej opary.');
+ph('h8','piestrzenica_2.jpg','Przekrój wiosennego grzyba z boru. Co to za grzyb?',['piestrzenica kasztanowata','smardz jadalny','czubajka kania','muchomor jadowity'],'W środku liczne komory i pofałdowane ścianki – piestrzenica; smardz w środku jest pusty (jedna jama).');
+ph('h9','porost_skorupiasty.jpg','Porost na skale. Jaka to forma porostu?',['skorupiasty (wzorzec geograficzny)','listkowaty (złotorost ścienny)','krzaczkowaty (mąkla tarniowa)','to nie porost, tylko pleśń'],'Przyrośnięty do skały całą powierzchnią – porost skorupiasty; skorupiaste wytrzymują najbardziej zanieczyszczone powietrze.');
+ph('h10','porost_listkowaty.jpg','Porost na korze drzewa. Jaka to forma porostu?',['listkowaty (złotorost ścienny)','skorupiasty (wzorzec geograficzny)','krzaczkowaty (mąkla tarniowa)','to nie porost, tylko pleśń'],'Plecha z płaskich „listków” – porost listkowaty; na skali porostowej listkowate są pomiędzy skorupiastymi a krzaczkowatymi.');
+ph('h11','porost_krzaczkowaty.jpg','Porost na gałązce. Jaka to forma porostu?',['krzaczkowaty (mąkla tarniowa)','listkowaty (złotorost ścienny)','skorupiasty (wzorzec geograficzny)','to nie porost, tylko pleśń'],'Rozgałęziona, „krzaczkowata” plecha – porost krzaczkowaty; to najbardziej wrażliwe porosty, rosną tylko w czystym powietrzu.');
+ph('h12','plesn_pedzlak.jpg','Pleśń na owocu. Jaka to pleśń?',['pędzlak','pleśniak','kropidlak','drożdże'],'Zielononiebieski nalot (zarodniki w łańcuszkach) – pędzlak, z którego otrzymano penicylinę; pleśniak tworzy szary nalot z czarnymi zarodniami.');
+ph('h13','drozdze_paczkowanie.jpg','Zdjęcie spod mikroskopu. Co to i jak się rozmnaża?',['drożdże – pączkowanie','pędzlak – zarodniki w łańcuszkach','pantofelek – podział w poprzek','ameba – nibynóżki'],'Na zdjęciu z dużych komórek wyrastają małe „pączki” – tak rozmnażają się jednokomórkowe drożdże.');
+ph('h14','huba.jpg','Grzyb na pniu żywej brzozy. Jak się odżywia?',['jest pasożytem – żyje kosztem drzewa','jest saprobiontem martwych liści','tworzy mikoryzę z drzewem','jest porostem i robi fotosyntezę'],'Huby to pasożyty drzew (na zdjęciu hubiak pospolity); „huby” to nie nazwa rodzajowa.');
+
+/* ============ ZAPIS ============ */
+const KEY='b8-quiz-v1:'+kid;
+let S={wrong:[],last:null,best:null}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+const QN=Object.fromEntries(Q.map(q=>[q.id,q]));
+const KIND={mc:'wybierz jedną',tf:'prawda czy fałsz?',pairs:'dobierz w pary',multi:'zaznacz wszystkie pasujące',order:'ułóż w kolejności'};
+function answerText(q){
+  if(q.type==='mc') return esc(q.o[0]);
+  if(q.type==='tf') return q.val?'Prawda':'Fałsz';
+  if(q.type==='pairs') return q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>');
+  if(q.type==='multi') return q.o.filter(x=>x[1]).map(x=>esc(x[0])).join(', ');
+  return q.items.map(esc).join(' → ');
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const wr=S.wrong.filter(id=>QN[id]);
+  $app.innerHTML=`<h1>🍄 B8 – protisty i grzyby</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Quiz przed etapem szkolnym (30.10): protisty, grzyby, porosty, grzybobranie i rozpoznawanie ze zdjęć. Po każdej odpowiedzi od razu wyjaśnienie.</p>
+    <div class="pills">${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎯</span><span><span class="t">Cały quiz</span><span class="d">${Q.length} pytań w losowej kolejności</span></span></button>
+    <button class="big" id="bWrong" ${wr.length?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Powtórz tylko błędne</span><span class="d">${wr.length?`${wr.length} z ostatniego podejścia`:'Na razie brak błędów do powtórki'}</span></span></button>
+    <div class="card"><h2>Zakres</h2>${Object.entries(SECTIONS).map(([k,n])=>`<button class="big" data-s="${k}" style="box-shadow:none;margin-bottom:8px"><span class="t">${esc(n)}</span><span class="d" style="margin-left:auto">${Q.filter(q=>q.s===k).length} pytań</span></button>`).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze wyników.</p>'}`;
+  $('bAll').onclick=()=>run(shuffle(Q),'Cały quiz');
+  $('bWrong').onclick=()=>{ if(wr.length) run(shuffle(wr.map(id=>QN[id])),'🩹 Błędne'); };
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>run(shuffle(Q.filter(q=>q.s===b.dataset.s)),SECTIONS[b.dataset.s]));
+}
+
+/* ============ QUIZ ============ */
+const photo=q=>`<figure class="ph"><img src="${esc(q.img)}" alt="Zdjęcie do rozpoznania"><figcaption><a href="${esc(q.src)}" target="_blank" rel="noopener">${esc(q.cred)}</a></figcaption></figure>`;
+function run(items,title){
+  items.forEach(q=>{ if(q.img){ const i=new Image(); i.src=q.img; } });  // zdjęcia ładują się z góry
+  window.scrollTo(0,0);
+  let i=0; const wrong=[];
+  function next(){
+    if(i>=items.length) return finish();
+    const q=items[i];
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/items.length}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${esc(SECTIONS[q.s])} · ${KIND[q.type]}</span><span>${i+1}/${items.length}</span></div>
+      <div class="qt">${esc(q.q)}</div>${q.img?photo(q):''}<div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!ok) wrong.push(q);
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">${i+1<items.length?'Dalej':'Wynik'}</button>`;
+      $('bNext').onclick=()=>{ i++; next(); }; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    ({mc:askMc,tf:askTf,pairs:askPairs,multi:askMulti,order:askOrder})[q.type](q,after);
+  }
+  function finish(){
+    const n=items.length, ok=n-wrong.length, pc=Math.round(100*ok/n);
+    if(title==='Cały quiz'){ S.last={ok,n}; S.best=Math.max(S.best||0,pc); S.wrong=wrong.map(q=>q.id); }
+    else if(title==='🩹 Błędne'){ S.wrong=wrong.map(q=>q.id); }
+    else { S.wrong=[...new Set([...S.wrong.filter(id=>!items.some(q=>q.id===id)),...wrong.map(q=>q.id)])]; }
+    save();
+    window.scrollTo(0,0);
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div class="score">${ok}/${n}</div>
+      <h2 style="margin-top:8px">${pc}% – ${!wrong.length?'bezbłędnie! 🏆':pc>=80?'bardzo dobrze! 👏':pc>=60?'nieźle – powtórz błędne.':'powtórz błędne i spróbuj jeszcze raz.'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px">${wrong.length?'<button class="btn primary" id="bRep">Powtórz tylko błędne</button>':''}<button class="btn" id="bAgain">Jeszcze raz wszystko</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórzenia (${wrong.length})</h2>${wrong.map(q=>`<div class="diff">${q.img?`<img class="dimg" src="${esc(q.img)}" alt="">`:''}<div class="qq">${esc(q.q)}</div><div>✅ ${answerText(q)}</div><div class="muted small">${esc(q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>run(shuffle(items),title);
+    if(wrong.length) $('bRep').onclick=()=>run(shuffle(wrong),'🩹 Błędne');
+  }
+  next();
+}
+
+/* ============ TYPY PYTAŃ ============ */
+function askMc(q,after){
+  const order=shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===0;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`); });
+}
+function askTf(q,after){
+  $('ans').innerHTML=`<div class="opts two"><button class="opt" data-v="1">Prawda</button><button class="opt" data-v="0">Fałsz</button></div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=(b.dataset.v==='1')===q.val;
+    btns.forEach(x=>{ x.disabled=true; if((x.dataset.v==='1')===q.val) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${q.val?'Prawda':'Fałsz'}</b></div>`); });
+}
+function askMulti(q,after){
+  const order=shuffle(q.o.map((_,i)=>i)), sel=new Set();
+  $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Zaznacz wszystkie poprawne odpowiedzi i naciśnij „Sprawdź”.</p>
+    <div class="opts">${order.map(i=>`<button class="opt" data-i="${i}"><span class="box">☐</span> ${esc(q.o[i][0])}</button>`).join('')}</div>
+    <button class="btn primary wide" id="bChk" style="margin-top:12px" disabled>Sprawdź</button>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; sel.has(i)?sel.delete(i):sel.add(i);
+    b.classList.toggle('sel',sel.has(i)); b.querySelector('.box').textContent=sel.has(i)?'☑':'☐'; $('bChk').disabled=!sel.size; });
+  $('bChk').onclick=()=>{
+    let ok=true;
+    btns.forEach(b=>{ const i=+b.dataset.i, good=!!q.o[i][1], picked=sel.has(i); b.disabled=true; b.classList.remove('sel');
+      if(good&&picked) b.classList.add('ok'); else if(!good&&picked){ b.classList.add('no'); ok=false; } else if(good&&!picked){ b.classList.add('miss'); ok=false; } });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawne: <b>${answerText(q)}</b></div><div class="muted small">Przerywana zielona ramka = to też trzeba było zaznaczyć.</div>`);
+  };
+}
+function askOrder(q,after){
+  let pool=shuffle(q.items.map((_,i)=>i)); while(pool.every((v,k)=>v===k)) pool=shuffle(pool);
+  const chosen=[]; let locked=false;
+  const draw=()=>{
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotykaj po kolei. Dotknięcie ułożonego elementu cofa go.</p>
+      <div class="ord">${chosen.map((v,k)=>`<button class="slot full" data-k="${k}"><span class="k">${k+1}</span>${esc(q.items[v])}</button>`).join('')}${chosen.length<q.items.length?`<div class="slot"><span class="k">${chosen.length+1}</span><span class="muted small">wybierz z listy poniżej</span></div>`:''}</div>
+      <div class="pool">${pool.filter(v=>!chosen.includes(v)).map(v=>`<button class="opt" data-v="${v}">${esc(q.items[v])}</button>`).join('')}</div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${chosen.length===q.items.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('.pool .opt').forEach(b=>b.onclick=()=>{ if(locked) return; chosen.push(+b.dataset.v); draw(); });
+    $('ans').querySelectorAll('button.slot').forEach(b=>b.onclick=()=>{ if(locked) return; const k=+b.dataset.k; if(chosen[k]!=null){ chosen.splice(k,1); draw(); } });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=chosen.every((v,k)=>v===k);
+    $('ans').querySelectorAll('button.slot').forEach(b=>{ const k=+b.dataset.k; b.disabled=true; b.classList.add(chosen[k]===k?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawna kolejność: <b>${answerText(q)}</b></div>`);
+  };
+  draw();
+}
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const keys=Object.keys(match);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=keys.indexOf(String(l.i)); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=keys.find(k=>match[k]===r.i); const k=li!=null?keys.indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${keys.length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>

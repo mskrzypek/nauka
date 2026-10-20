@@ -390,6 +390,18 @@
       ],
       "added": "2026-10-19",
       "desc": "Kartkówka: rekordy Azji, Pierścień Ognia"
+    },
+    {
+      "id": "b8-protisty-grzyby",
+      "file": "apps/b8-protisty-grzyby.html",
+      "title": "B8 Protisty i grzyby – quiz",
+      "emoji": "🍄",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-20",
+      "desc": "Konkurs: quiz – protisty, grzyby, porosty"
     }
   ]
 }
