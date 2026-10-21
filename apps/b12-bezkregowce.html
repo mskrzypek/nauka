@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B12 Bezkręgowce – quiz</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐞</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.two{grid-template-columns:repeat(2,1fr)} .opts.two .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opts.five{grid-template-columns:repeat(5,1fr); gap:6px} .opts.five .opt{text-align:center; padding:16px 2px; font-size:16px}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+/* wybierz wszystkie + kolejność */
+.opt.sel{border-color:var(--sel); background:var(--selbg)}
+.opt.miss{border-style:dashed; border-color:var(--ok)}
+.opt .box{display:inline-block; width:1.2em}
+.ord{display:grid; gap:8px; margin-bottom:10px}
+.slot{display:flex; gap:10px; align-items:center; min-height:46px; border:2px dashed var(--line); border-radius:12px; padding:8px 12px; text-align:left; background:transparent; font-weight:700}
+.slot.full{border-style:solid; background:var(--surface)}
+.slot .k{flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--soft); font:800 13px var(--fh)}
+.slot.ok{border-color:var(--ok); background:var(--okbg)} .slot.no{border-color:var(--bad); background:var(--badbg)}
+.pool{display:flex; flex-wrap:wrap; gap:8px}
+.pool .opt{flex:1 1 auto}
+.ph{margin:0 0 12px} .ph img{display:block; width:100%; height:min(52vh,340px); object-fit:contain; background:var(--soft); border-radius:14px}
+.ph figcaption{font-size:12px; color:var(--muted); margin-top:4px; text-align:right} .ph a{color:inherit}
+.dimg{float:left; width:84px; height:84px; object-fit:cover; border-radius:10px; margin:2px 10px 4px 0} .diff{overflow:hidden}
+.svgfig{margin:0 0 12px; background:var(--soft); border-radius:14px; padding:10px; color:var(--ink)} .svgfig svg{display:block; width:100%; max-height:230px}
+.score{font:800 56px/1 var(--fh)}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Fakty w wersji podanej przez tatę. Kolejność pytań w quizie jest losowana.
+// mc: o[0] = poprawna. tf: zdanie + true/false. pairs: [lewa, prawa]. multi: [tekst, czy pasuje]. order: elementy w poprawnej kolejności.
+// ph: pytanie ze zdjęciem (b12-foto/, autor i licencja z zrodla/rys/B12_foto/atrybucje.json). sv: pytanie z prostym rysunkiem SVG.
+const SECTIONS={grupy:'Grupy bezkręgowców',parz:'Parzydełkowce',plaz:'Płazińce i nicienie',pier:'Pierścienice',staw:'Stawonogi',owady:'Owady: aparaty i rozwój',cykle:'Cztery cykle rozwojowe',miecz:'Mięczaki',licz:'Policz odnóża i czułki',foto:'Rozpoznaj ze zdjęcia'};
+const Q=[];
+const mc=(s,id,q,o,e)=>Q.push({s,id,type:'mc',q,o,e});
+const tf=(s,id,q,val,e)=>Q.push({s,id,type:'tf',q,val,e});
+const pairs=(s,id,q,p,e)=>Q.push({s,id,type:'pairs',q,p,e});
+const multi=(s,id,q,o,e)=>Q.push({s,id,type:'multi',q,o,e});
+const order=(s,id,q,items,e)=>Q.push({s,id,type:'order',q,items,e});
+const CREDITS={"jelonek_samiec.jpg": {"autor": "George Chernilevsky", "licencja": "Public domain", "url": "https://commons.wikimedia.org/wiki/File:Lucanus_cervus_male_2008_G1.jpg"}, "modraszek_nausitous.jpg": {"autor": "HanousekAdler", "licencja": "CC BY 4.0", "url": "https://commons.wikimedia.org/wiki/File:Modr%C3%A1sek_bahenn%C3%AD_(Phengaris_nausithous)_v_PP_Na_Placht%C4%9B_3.jpg"}, "husarz_wladca.jpg": {"autor": "Quartl", "licencja": "CC BY 3.0", "url": "https://commons.wikimedia.org/wiki/File:Anax_imperator_qtl2.jpg"}, "husarz_larwa.jpg": {"autor": "George Elbogen", "licencja": "CC BY 4.0", "url": "https://commons.wikimedia.org/wiki/File:Anax_imperator_nymph_-_George_Elbogen_-_Morden,_UK.jpeg"}, "oleica_krowka.jpg": {"autor": "Dimitǎr Boevski", "licencja": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Female_Meloe_proscarabaeus_in_Botevgrad,_Bulgaria_01.jpg"}, "stulbia.jpg": {"autor": "Frank Fox", "licencja": "CC BY-SA 3.0 de", "url": "https://commons.wikimedia.org/wiki/File:Mikrofoto.de-Hydra_15.jpg"}, "chelbia.jpg": {"autor": "Luc Viatour", "licencja": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Aurelia_aurita_(Cnidaria)_Luc_Viatour.jpg"}, "dzdzownica.jpg": {"autor": "Rob Hille", "licencja": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Earthworm_01.jpg"}, "pijawka.jpg": {"autor": "Karl Ragnar Gjertsen", "licencja": "CC BY 2.5", "url": "https://commons.wikimedia.org/wiki/File:Sv%C3%B8mmende_blodigle.JPG"}, "rak.jpg": {"autor": "Anna N Chapman", "licencja": "CC0", "url": "https://commons.wikimedia.org/wiki/File:European_crayfish_(Astacus_astacus).jpg"}, "krzyzak.jpg": {"autor": "Didier Descouens", "licencja": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Araneus_diadematus_MHNT_Femelle_Fronton.jpg"}, "osmiornica.jpg": {"autor": "Amada44", "licencja": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Octopus_vulgaris_-_5914.jpg"}};
+const ph=(id,file,q,o,e)=>{ const a=CREDITS[file]; Q.push({s:'foto',id,type:'mc',q,o,e,img:'b12-foto/'+file,cred:`fot. ${a.autor}, ${a.licencja}`,src:a.url}); };
+const sv=(id,svg,q,o,e)=>Q.push({s:'licz',id,type:'mc',q,o,e,svg});
+const GRP=['owad','pajęczak','skorupiak'];
+const grp=ans=>[ans,...GRP.filter(g=>g!==ans)];
+
+// Proste rysunki (widok z góry, kreska w kolorze tekstu – działa w jasnym i ciemnym motywie)
+const SVG_OWAD=`<svg viewBox="0 0 200 150" role="img" aria-label="Rysunek zwierzęcia do policzenia odnóży"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="100" cy="28" r="10"/><ellipse cx="100" cy="58" rx="12" ry="17"/><ellipse cx="100" cy="106" rx="17" ry="30"/>
+<path d="M95 20 L80 3"/><path d="M105 20 L120 3"/>
+<path d="M89 48 L66 38 L56 46"/><path d="M111 48 L134 38 L144 46"/>
+<path d="M88 58 L62 58 L52 68"/><path d="M112 58 L138 58 L148 68"/>
+<path d="M89 68 L66 80 L58 96"/><path d="M111 68 L134 80 L142 96"/></g></svg>`;
+const SVG_PAJAK=`<svg viewBox="0 0 200 150" role="img" aria-label="Rysunek zwierzęcia do policzenia odnóży"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<ellipse cx="100" cy="50" rx="16" ry="14"/><ellipse cx="100" cy="96" rx="23" ry="30"/>
+<path d="M88 42 L62 24 L50 34"/><path d="M112 42 L138 24 L150 34"/>
+<path d="M86 48 L56 42 L38 54"/><path d="M114 48 L144 42 L162 54"/>
+<path d="M86 54 L56 64 L40 80"/><path d="M114 54 L144 64 L160 80"/>
+<path d="M89 60 L66 82 L58 100"/><path d="M111 60 L134 82 L142 100"/></g></svg>`;
+const SVG_RAK=`<svg viewBox="0 0 200 170" role="img" aria-label="Rysunek zwierzęcia do policzenia odnóży i czułków"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<ellipse cx="100" cy="66" rx="15" ry="26"/><path d="M90 92 h20 v10 h-20 z M91 102 h18 v10 h-18 z M92 112 h16 v10 h-16 z M93 122 h14 v9 h-14 z"/><path d="M93 131 L84 146 L100 140 L116 146 L107 131"/>
+<path d="M95 41 L70 2"/><path d="M105 41 L130 2"/><path d="M97 41 L88 22"/><path d="M103 41 L112 22"/>
+<path d="M87 52 L62 40 L52 22"/><path d="M52 22 L44 14 M52 22 L58 12"/><path d="M113 52 L138 40 L148 22"/><path d="M148 22 L156 14 M148 22 L142 12"/>
+<path d="M86 60 L64 60 L56 70"/><path d="M114 60 L136 60 L144 70"/>
+<path d="M86 67 L64 72 L58 84"/><path d="M114 67 L136 72 L142 84"/>
+<path d="M87 74 L66 84 L62 96"/><path d="M113 74 L134 84 L138 96"/>
+<path d="M88 81 L70 96 L68 108"/><path d="M112 81 L130 96 L132 108"/></g></svg>`;
+
+// 1. Grupy bezkręgowców
+order('grupy','g1','Ułóż grupy bezkręgowców od najprostszych.',['parzydełkowce','płazińce','nicienie','pierścienice','stawonogi','mięczaki'],'Bezkręgowce to ponad 95% gatunków zwierząt; parzydełkowce mają symetrię promienistą, a od płazińców w górę – dwuboczną.');
+tf('grupy','g2','Chitynowy pancerz raka i mrówki to ściana komórkowa.',false,'Pancerz to szkielet zewnętrzny; komórki zwierząt mają tylko błonę – ścianę komórkową mają bakterie, grzyby i rośliny.');
+
+// 2. Parzydełkowce
+pairs('parz','p1','Dobierz pojęcie do opisu.',[['polip','osiadły – czułki i otwór gębowy do góry'],['meduza','pływa – parasol, czułki i otwór w dół'],['komórki parzydełkowe','nić z jadem – zdobywanie pokarmu i obrona']],'Nić wystrzeliwuje po dotknięciu włoska czuciowego; ukwiał (polip morski) żyje w symbiozie z rakiem pustelnikiem.');
+mc('parz','p2','Jama chłonąco-trawiąca parzydełkowców ma…',['jeden otwór – pokarm wchodzi i resztki wychodzą tą samą drogą','dwa otwory – gębowy i odbytowy','brak otworu','otwór przy każdym czułku'],'Parzydełkowce mają dwie warstwy komórek, a czułki otaczają ich jedyny otwór.');
+mc('parz','p3','Dlaczego koralowce blakną i giną?',['w za ciepłej wodzie tracą glony, które dają im cukry i barwę','zjadają je ryby','w wodzie jest za dużo tlenu','ich szkielet się rozpuszcza w zimnie'],'Koralowce to kolonie polipów z wapiennym szkieletem; rafy są siedliskiem wielu gatunków i chronią wybrzeża.');
+
+// 3. Płazińce i nicienie
+pairs('plaz','l1','Tasiemiec uzbrojony czy nieuzbrojony?',[['tasiemiec uzbrojony','żywiciel pośredni: świnia; przyssawki i haczyki'],['tasiemiec nieuzbrojony','żywiciel pośredni: bydło; tylko przyssawki']],'Człowiek zaraża się, jedząc surowe lub niedogotowane mięso z wągrami.');
+mc('plaz','l2','Dla dorosłego tasiemca w jelicie człowiek jest żywicielem…',['ostatecznym','pośrednim','przenosicielem (wektorem)','symbiontem'],'W żywicielu ostatecznym żyje dorosły pasożyt; przy wągrzycy (połknięte jaja tasiemca uzbrojonego → wągry np. w mózgu) człowiek jest żywicielem pośrednim.');
+pairs('plaz','l3','Dobierz pasożyta do drogi zakażenia.',[['glista ludzka','brudne ręce i warzywa'],['owsik','samozakażenie przez drapanie okolic odbytu'],['włosień kręty','surowa wieprzowina i dziczyzna'],['bruzdogłowiec szeroki','surowe ryby słodkowodne'],['bąblowiec','połknięte jaja – brudne ręce, niemyte leśne owoce']],'Owsika leczy się u całej rodziny; larwy włośnia otorbiają się w mięśniach, dlatego bada się mięso (trichinoskopia).');
+multi('plaz','l4','Zaznacz przystosowania tasiemca do pasożytnictwa.',[['przyssawki i haczyki – trzymanie się jelita',1],['brak układu pokarmowego – wchłania strawiony pokarm całą powierzchnią',1],['oskórek odporny na enzymy – nie zostaje strawiony',1],['obojnactwo i ogromna liczba jaj',1],['oczy – wypatrywanie pokarmu',0],['skrzela – oddychanie tlenem z jelita',0]],'Tasiemiec oddycha beztlenowo; jego ostatnie człony (strobila) pełne jaj odrywają się. Przystosowanie = cecha + do czego służy.');
+mc('plaz','l5','Płazińce i nicienie – która z nich ma odbyt?',['płazińce nie mają odbytu, nicienie mają','obie grupy mają odbyt','żadna nie ma odbytu','płazińce mają, nicienie nie'],'Płazińce są płaskie i są obojnakami; nicienie są obłe, bez pierścieni, z mocnym oskórkiem, rozdzielnopłciowe.');
+
+// 4. Pierścienice
+pairs('pier','e1','Dobierz pierścienicę do opisu.',[['dżdżownica','skąposzczet – siodełko tworzy kokon na jaja'],['pijawka lekarska','bez szczecinek, 2 przyssawki'],['nereida','wieloszczet morski – parapodia z wieloma szczecinkami']],'Pierścienice mają ciało z pierścieni, zamknięty układ krwionośny i płyn w jamie ciała jako szkielet hydrostatyczny.');
+mc('pier','e2','Pijawka wydziela hirudynę. Do czego jej to służy?',['krew ofiary nie krzepnie, więc pijawka może ją długo ssać','hirudyna przyciąga ofiary','hirudyna rozpuszcza skórę','to jad, który zabija ofiarę'],'Przystosowanie = cecha + do czego służy; pijawka wydziela też substancję znieczulającą, a krew gromadzi w wolu na wiele miesięcy.');
+mc('pier','e3','Dlaczego po ulewie dżdżownice wychodzą na powierzchnię?',['oddychają całą wilgotną skórą, a w zalanej glebie brakuje tlenu','szukają światła','uciekają przed kretem','wtedy się rozmnażają'],'Dżdżownice spulchniają i napowietrzają glebę i tworzą próchnicę.');
+
+// 5. Stawonogi
+mc('staw','s1','Dlaczego stawonogi linieją?',['ich szkielet zewnętrzny z chityny nie rośnie razem z ciałem','bo mają za dużo chityny','żeby się ochłodzić','bo zmieniają kolor na zimę'],'Stawonogi mają odnóża członowane i otwarty układ krwionośny.');
+mc('staw','s2','Co przenosi samica komara widliszka?',['zarodźca malarii – komar jest tylko wektorem','boreliozę','kleszczowe zapalenie mózgu','śpiączkę afrykańską'],'Śpiączkę przenosi mucha tse-tse, a boreliozę i KZM – kleszcz.');
+pairs('staw','s3','Dobierz stawonoga do jego znaczenia.',[['biedronka','zjada mszyce'],['stonka','szkodnik ziemniaka'],['kornik','szkodnik drzew'],['roztocze kurzu','alergie']],'Pożytki ze stawonogów to też zapylanie, miód, wosk, jedwab i rozkład szczątków.');
+
+// 6. Owady: aparaty i rozwój
+pairs('owady','o1','Dobierz owada do aparatu gębowego.',[['chrząszcze, konik polny, gąsienica','gryzący (żuwaczki)'],['komar (samica), wesz, pchła, mszyca','kłująco-ssący'],['motyl','ssący – ssawka zwinięta w spiralę'],['mucha','liżący – gąbczasta poduszeczka'],['pszczoła, trzmiel','gryząco-liżący']],'Pasożyty zewnętrzne (wesz, pchła) mają spłaszczone ciało, nie mają skrzydeł, a ich odnóża są czepne lub skoczne.');
+tf('owady','o2','Gąsienica i motyl mają ten sam aparat gębowy.',false,'Gąsienica ma aparat gryzący, a motyl – ssący; larwa i dorosły jedzą co innego, więc nie konkurują o pokarm.');
+mc('owady','o3','Po czym rozpoznasz przeobrażenie ZUPEŁNE?',['po stadium poczwarki','po tym, że larwa jest niepodobna do dorosłego','po liczbie odnóży','po tym, że larwa ma skrzydła'],'Zupełne: jajo → larwa → poczwarka → imago; niezupełne – bez poczwarki. Rozwój prosty (pająk, rak) – z jaja wychodzi postać podobna do dorosłej.');
+multi('owady','o4','Zaznacz owady z przeobrażeniem NIEZUPEŁNYM.',[['husarz władca (ważka)',1],['konik polny',1],['karaluch',1],['jelonek rogacz',0],['modraszek nausitous',0],['oleica krówka',0]],'Niezupełne (bez poczwarki) mają ważki, koniki polne, pluskwiaki i karaluchy; zupełne – motyle, chrząszcze, muchy, pszczoły.');
+mc('owady','o5','Polecenie: „podaj dwa przykłady owadów zapylających”. Która odpowiedź da punkt?',['pszczoła miodna i trzmiel','owad i robak','pszczoła i owad','pszczoły'],'„Dwa przykłady” to dwie różne nazwy gatunków lub rodzajów – nie „owad” ani „robak”.');
+
+// 7. Cztery cykle rozwojowe
+order('cykle','c1','Jelonek rogacz – ułóż stadia rozwoju.',['jajo w próchniejącym drewnie (pniaki, korzenie dębów)','larwa 3–5 lat w próchnie','poczwarka w glebie w „kolebce”','imago w VI–VII'],'To przeobrażenie zupełne; jelonek potrzebuje martwych drzew i jest pod ochroną ścisłą.');
+order('cykle','c2','Modraszek nausitous – ułóż stadia rozwoju.',['jajo na kwiatach krwiściągu lekarskiego','gąsienica zjada kwiatostan','gąsienica spada na ziemię, a mrówki zanoszą ją do mrowiska','w mrowisku zjada larwy mrówek i zimuje','poczwarka w mrowisku','imago w VII–VIII'],'Gąsienica udaje larwę mrówki (wścieklicy); modraszek ginie, gdy wilgotną łąkę się osuszy albo zaorze – jest pod ochroną ścisłą.');
+order('cykle','c3','Husarz władca – ułóż stadia rozwoju.',['jajo w wodzie na roślinach','drapieżna larwa 1–2 lata w wodzie, linieje','larwa wychodzi na łodygę – ostatnie linienie, zostaje wylinka','imago – drapieżnik nad wodą'],'Jako jedyny z czterech nie ma poczwarki – przeobrażenie niezupełne; larwa chwyta ofiary „maską” i oddycha skrzelami w odwłoku; potrzebuje czystej wody.');
+order('cykle','c4','Oleica krówka – ułóż stadia rozwoju.',['tysiące jaj w ziemi','ruchliwa larwa z pazurkami wchodzi na kwiat','larwa czepia się dzikiej pszczoły samotnicy','w gnieździe pszczoły zjada jajo i pyłek','poczwarka','imago wiosną'],'To nadprzeobrażenie (kilka postaci larwy); pszczoła to samotnica, nie pszczoła z ula; dorosła oleica wydziela trującą kantarydynę.');
+
+// 8. Mięczaki
+pairs('miecz','m1','Dobierz gromadę mięczaków do cech.',[['ślimaki','jedna skręcona muszla, głowa z czułkami, tarka'],['małże','muszla z 2 połówek, brak głowy, filtrują wodę'],['głowonogi','ramiona z przyssawkami (z nogi), lejek, atrament']],'Mięczaki są niesegmentowane; muszlę z węglanu wapnia wytwarza płaszcz; ośmiornica ma 8 ramion, kałamarnica i mątwa – 10.');
+mc('miecz','m2','Dlaczego błotniarka co jakiś czas wypływa na powierzchnię?',['oddycha płucem, więc wypływa po powietrze','żeby się ogrzać','żeby złożyć jaja','żeby filtrować wodę'],'Płucem oddycha też winniczek (pod ochroną częściową); ślimaki wodne są żywicielami pośrednimi motylicy wątrobowej.');
+
+// 9. Policz odnóża i czułki
+sv('v1',SVG_OWAD,'Policz odnóża i czułki na rysunku. Do jakiej grupy należy to zwierzę?',grp('owad'),'3 pary odnóży na tułowiu i 1 para czułków, ciało z głowy, tułowia i odwłoka – owad.');
+sv('v2',SVG_PAJAK,'Policz odnóża i czułki na rysunku. Do jakiej grupy należy to zwierzę?',grp('pajęczak'),'4 pary odnóży, brak czułków, ciało z głowotułowia i odwłoka – pajęczak (nogogłaszczki nie liczą się do odnóży krocznych).');
+sv('v3',SVG_RAK,'Policz odnóża i czułki na rysunku. Do jakiej grupy należy to zwierzę?',grp('skorupiak'),'5 par odnóży krocznych (pierwsza ze szczypcami) i 2 pary czułków – skorupiak.');
+mc('licz','v4','Kleszcz ma 4 pary odnóży i nie ma czułków ani skrzydeł. Do jakiej grupy należy?',grp('pajęczak'),'Kleszcz to pajęczak; przenosi boreliozę (bakteria – krętek) i KZM (wirus, jest szczepionka) – usuwaj go pęsetą tuż przy skórze, nie smaruj.');
+mc('licz','v5','Prosionek, potocznie „stonoga” spod doniczki, ma 2 pary czułków i więcej niż 3 pary odnóży. Do jakiej grupy należy?',grp('skorupiak'),'Prosionek to skorupiak lądowy, a nie owad – owad ma 3 pary odnóży i 1 parę czułków.');
+mc('licz','v6','Skorpion ma 4 pary odnóży krocznych i nie ma czułków. Do jakiej grupy należy?',grp('pajęczak'),'4 pary odnóży bez czułków = pajęczak – tak samo kleszcz i roztocze.');
+
+// 10. Rozpoznaj ze zdjęcia
+ph('f1','jelonek_samiec.jpg','Jaki to gatunek?',['jelonek rogacz','chrabąszcz majowy','oleica krówka','biedronka siedmiokropka'],'Samiec z wielkimi żuwaczkami („rogami”) – jelonek rogacz; 3 pary odnóży i czułki – owad (chrząszcz).');
+ph('f2','modraszek_nausitous.jpg','Motyl na kwiatostanie rośliny łąkowej. Jaki to gatunek?',['modraszek nausitous','husarz władca','oleica krówka','jelonek rogacz'],'Motyl siedzi na ciemnym, główkowatym kwiatostanie krwiściągu lekarskiego – na nim modraszek składa jaja.');
+ph('f3','husarz_wladca.jpg','Jaki to owad?',['husarz władca (ważka)','modraszek nausitous','komar widliszek','jelonek rogacz'],'Długi, cienki odwłok i dwie pary przezroczystych skrzydeł – ważka; husarz poluje nad czystą wodą.');
+ph('f4','husarz_larwa.jpg','Larwa żyjąca w wodzie. Czyja to larwa?',['husarza władcy (ważki)','jelonka rogacza','oleicy krówki','dżdżownicy'],'Ma 3 pary odnóży jak dorosły owad – to larwa ważki; po niej nie ma poczwarki (przeobrażenie niezupełne).');
+ph('f5','oleica_krowka.jpg','Chrząszcz z dużym, miękkim odwłokiem, spotykany wiosną. Jaki to gatunek?',['oleica krówka','jelonek rogacz','chrabąszcz majowy','biedronka siedmiokropka'],'Ciemnogranatowy chrząszcz z ogromnym, miękkim odwłokiem i krótkimi pokrywami – oleica krówka; wydziela trującą kantarydynę.');
+ph('f6','stulbia.jpg','Do jakiej grupy należy to zwierzę?',['parzydełkowce','pierścienice','płazińce','mięczaki'],'Polip z czułkami wokół otworu gębowego skierowanego do góry – stułbia, słodkowodny parzydełkowiec (ok. 1 cm).');
+ph('f7','chelbia.jpg','Meduza z Bałtyku. Jaki to gatunek?',['chełbia modra','stułbia','ukwiał','ośmiornica'],'Parasol z 4 „podkówkami”, czułki i otwór gębowy w dół – meduza chełbia modra; prawie nie parzy.');
+ph('f8','dzdzownica.jpg','Do jakiej grupy należy to zwierzę?',['pierścienice','nicienie','płazińce','stawonogi'],'Ciało z wielu pierścieni i zgrubienie (siodełko) – dżdżownica; nicienie nie mają pierścieni.');
+ph('f9','pijawka.jpg','Jaki to gatunek?',['pijawka lekarska','dżdżownica','glista ludzka','tasiemiec'],'Pierścieniowane ciało bez szczecinek, z przyssawkami na obu końcach – pijawka lekarska.');
+ph('f10','krzyzak.jpg','Policz odnóża. Do jakiej grupy należy krzyżak?',grp('pajęczak'),'4 pary odnóży, brak czułków, głowotułów i duży odwłok – pajęczak; sieć tka z nici z kądziołków.');
+ph('f11','rak.jpg','Do jakiej grupy należy to zwierzę?',grp('skorupiak'),'Twardy pancerz, 5 par odnóży (pierwsza ze szczypcami) i 2 pary czułków – rak, skorupiak.');
+ph('f12','osmiornica.jpg','Do jakiej grupy należy to zwierzę?',['mięczaki (głowonogi)','parzydełkowce','stawonogi','pierścienice'],'8 ramion z przyssawkami (powstały z nogi), brak zewnętrznej muszli, duże oczy – ośmiornica, głowonóg.');
+
+/* ============ ZAPIS ============ */
+const KEY='b12-quiz-v1:'+kid;
+let S={wrong:[],last:null,best:null}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+const QN=Object.fromEntries(Q.map(q=>[q.id,q]));
+const KIND={mc:'wybierz jedną',tf:'prawda czy fałsz?',pairs:'dobierz w pary',multi:'zaznacz wszystkie pasujące',order:'ułóż w kolejności'};
+function answerText(q){
+  if(q.type==='mc') return esc(q.o[0]);
+  if(q.type==='tf') return q.val?'Prawda':'Fałsz';
+  if(q.type==='pairs') return q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>');
+  if(q.type==='multi') return q.o.filter(x=>x[1]).map(x=>esc(x[0])).join(', ');
+  return q.items.map(esc).join(' → ');
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const wr=S.wrong.filter(id=>QN[id]);
+  $app.innerHTML=`<h1>🐞 B12 – bezkręgowce</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Quiz przed etapem szkolnym (30.10): sześć grup bezkręgowców, pasożyty, owady i ich rozwój, cztery cykle, liczenie odnóży i zdjęcia. Po każdej odpowiedzi od razu wyjaśnienie.</p>
+    <div class="pills">${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎯</span><span><span class="t">Cały quiz</span><span class="d">${Q.length} pytań w losowej kolejności</span></span></button>
+    <button class="big" id="bWrong" ${wr.length?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Powtórz tylko błędne</span><span class="d">${wr.length?`${wr.length} z ostatniego podejścia`:'Na razie brak błędów do powtórki'}</span></span></button>
+    <div class="card"><h2>Zakres</h2>${Object.entries(SECTIONS).map(([k,n])=>`<button class="big" data-s="${k}" style="box-shadow:none;margin-bottom:8px"><span class="t">${esc(n)}</span><span class="d" style="margin-left:auto">${Q.filter(q=>q.s===k).length} pytań</span></button>`).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze wyników.</p>'}`;
+  $('bAll').onclick=()=>run(shuffle(Q),'Cały quiz');
+  $('bWrong').onclick=()=>{ if(wr.length) run(shuffle(wr.map(id=>QN[id])),'🩹 Błędne'); };
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>run(shuffle(Q.filter(q=>q.s===b.dataset.s)),SECTIONS[b.dataset.s]));
+}
+
+/* ============ QUIZ ============ */
+const photo=q=>`<figure class="ph"><img src="${esc(q.img)}" alt="Zdjęcie do rozpoznania"><figcaption><a href="${esc(q.src)}" target="_blank" rel="noopener">${esc(q.cred)}</a></figcaption></figure>`;
+function run(items,title){
+  items.forEach(q=>{ if(q.img){ const i=new Image(); i.src=q.img; } });  // zdjęcia ładują się z góry
+  window.scrollTo(0,0);
+  let i=0; const wrong=[];
+  function next(){
+    if(i>=items.length) return finish();
+    const q=items[i];
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/items.length}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${esc(SECTIONS[q.s])} · ${KIND[q.type]}</span><span>${i+1}/${items.length}</span></div>
+      <div class="qt">${esc(q.q)}</div>${q.img?photo(q):''}${q.svg?`<div class="svgfig">${q.svg}</div>`:''}<div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!ok) wrong.push(q);
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">${i+1<items.length?'Dalej':'Wynik'}</button>`;
+      $('bNext').onclick=()=>{ i++; next(); }; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    ({mc:askMc,tf:askTf,pairs:askPairs,multi:askMulti,order:askOrder})[q.type](q,after);
+  }
+  function finish(){
+    const n=items.length, ok=n-wrong.length, pc=Math.round(100*ok/n);
+    if(title==='Cały quiz'){ S.last={ok,n}; S.best=Math.max(S.best||0,pc); S.wrong=wrong.map(q=>q.id); }
+    else if(title==='🩹 Błędne'){ S.wrong=wrong.map(q=>q.id); }
+    else { S.wrong=[...new Set([...S.wrong.filter(id=>!items.some(q=>q.id===id)),...wrong.map(q=>q.id)])]; }
+    save();
+    window.scrollTo(0,0);
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div class="score">${ok}/${n}</div>
+      <h2 style="margin-top:8px">${pc}% – ${!wrong.length?'bezbłędnie! 🏆':pc>=80?'bardzo dobrze! 👏':pc>=60?'nieźle – powtórz błędne.':'powtórz błędne i spróbuj jeszcze raz.'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px">${wrong.length?'<button class="btn primary" id="bRep">Powtórz tylko błędne</button>':''}<button class="btn" id="bAgain">Jeszcze raz wszystko</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórzenia (${wrong.length})</h2>${wrong.map(q=>`<div class="diff">${q.img?`<img class="dimg" src="${esc(q.img)}" alt="">`:''}<div class="qq">${esc(q.q)}</div><div>✅ ${answerText(q)}</div><div class="muted small">${esc(q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>run(shuffle(items),title);
+    if(wrong.length) $('bRep').onclick=()=>run(shuffle(wrong),'🩹 Błędne');
+  }
+  next();
+}
+
+/* ============ TYPY PYTAŃ ============ */
+function askMc(q,after){
+  const order=shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===0;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`); });
+}
+function askTf(q,after){
+  $('ans').innerHTML=`<div class="opts two"><button class="opt" data-v="1">Prawda</button><button class="opt" data-v="0">Fałsz</button></div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=(b.dataset.v==='1')===q.val;
+    btns.forEach(x=>{ x.disabled=true; if((x.dataset.v==='1')===q.val) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${q.val?'Prawda':'Fałsz'}</b></div>`); });
+}
+function askMulti(q,after){
+  const order=shuffle(q.o.map((_,i)=>i)), sel=new Set();
+  $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Zaznacz wszystkie poprawne odpowiedzi i naciśnij „Sprawdź”.</p>
+    <div class="opts">${order.map(i=>`<button class="opt" data-i="${i}"><span class="box">☐</span> ${esc(q.o[i][0])}</button>`).join('')}</div>
+    <button class="btn primary wide" id="bChk" style="margin-top:12px" disabled>Sprawdź</button>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; sel.has(i)?sel.delete(i):sel.add(i);
+    b.classList.toggle('sel',sel.has(i)); b.querySelector('.box').textContent=sel.has(i)?'☑':'☐'; $('bChk').disabled=!sel.size; });
+  $('bChk').onclick=()=>{
+    let ok=true;
+    btns.forEach(b=>{ const i=+b.dataset.i, good=!!q.o[i][1], picked=sel.has(i); b.disabled=true; b.classList.remove('sel');
+      if(good&&picked) b.classList.add('ok'); else if(!good&&picked){ b.classList.add('no'); ok=false; } else if(good&&!picked){ b.classList.add('miss'); ok=false; } });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawne: <b>${answerText(q)}</b></div><div class="muted small">Przerywana zielona ramka = to też trzeba było zaznaczyć.</div>`);
+  };
+}
+function askOrder(q,after){
+  let pool=shuffle(q.items.map((_,i)=>i)); while(pool.every((v,k)=>v===k)) pool=shuffle(pool);
+  const chosen=[]; let locked=false;
+  const draw=()=>{
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotykaj po kolei. Dotknięcie ułożonego elementu cofa go.</p>
+      <div class="ord">${chosen.map((v,k)=>`<button class="slot full" data-k="${k}"><span class="k">${k+1}</span>${esc(q.items[v])}</button>`).join('')}${chosen.length<q.items.length?`<div class="slot"><span class="k">${chosen.length+1}</span><span class="muted small">wybierz z listy poniżej</span></div>`:''}</div>
+      <div class="pool">${pool.filter(v=>!chosen.includes(v)).map(v=>`<button class="opt" data-v="${v}">${esc(q.items[v])}</button>`).join('')}</div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${chosen.length===q.items.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('.pool .opt').forEach(b=>b.onclick=()=>{ if(locked) return; chosen.push(+b.dataset.v); draw(); });
+    $('ans').querySelectorAll('button.slot').forEach(b=>b.onclick=()=>{ if(locked) return; const k=+b.dataset.k; if(chosen[k]!=null){ chosen.splice(k,1); draw(); } });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=chosen.every((v,k)=>v===k);
+    $('ans').querySelectorAll('button.slot').forEach(b=>{ const k=+b.dataset.k; b.disabled=true; b.classList.add(chosen[k]===k?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawna kolejność: <b>${answerText(q)}</b></div>`);
+  };
+  draw();
+}
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const keys=Object.keys(match);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=keys.indexOf(String(l.i)); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=keys.find(k=>match[k]===r.i); const k=li!=null?keys.indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${keys.length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>

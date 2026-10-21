@@ -402,6 +402,18 @@
       ],
       "added": "2026-10-20",
       "desc": "Konkurs: quiz – protisty, grzyby, porosty"
+    },
+    {
+      "id": "b12-bezkregowce",
+      "file": "apps/b12-bezkregowce.html",
+      "title": "B12 Bezkręgowce – quiz",
+      "emoji": "🐞",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-21",
+      "desc": "Konkurs: quiz – bezkręgowce, cykle, odnóża"
     }
   ]
 }
