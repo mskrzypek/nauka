@@ -71,6 +71,11 @@
       "emoji": "🏛️"
     },
     {
+      "id": "wos",
+      "name": "WOS",
+      "emoji": "⚖️"
+    },
+    {
       "id": "inne",
       "name": "Inne",
       "emoji": "✨"
@@ -414,6 +419,18 @@
       ],
       "added": "2026-10-21",
       "desc": "Konkurs: quiz – bezkręgowce, cykle, odnóża"
+    },
+    {
+      "id": "wos-dzial-1-2",
+      "file": "apps/wos-dzial-1-2.html",
+      "title": "WOS: człowiek, rodzina, szkoła, samorząd – quiz",
+      "emoji": "⚖️",
+      "subject": "wos",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-21",
+      "desc": "Sprawdzian: człowiek, rodzina, szkoła, samorząd"
     }
   ]
 }
