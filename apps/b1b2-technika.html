@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B1+B2 Technika konkursowa i doświadczenie – quiz</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.two{grid-template-columns:repeat(2,1fr)} .opts.two .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opts.five{grid-template-columns:repeat(5,1fr); gap:6px} .opts.five .opt{text-align:center; padding:16px 2px; font-size:16px}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+/* wybierz wszystkie + kolejność */
+.opt.sel{border-color:var(--sel); background:var(--selbg)}
+.opt.miss{border-style:dashed; border-color:var(--ok)}
+.opt .box{display:inline-block; width:1.2em}
+.ord{display:grid; gap:8px; margin-bottom:10px}
+.slot{display:flex; gap:10px; align-items:center; min-height:46px; border:2px dashed var(--line); border-radius:12px; padding:8px 12px; text-align:left; background:transparent; font-weight:700}
+.slot.full{border-style:solid; background:var(--surface)}
+.slot .k{flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--soft); font:800 13px var(--fh)}
+.slot.ok{border-color:var(--ok); background:var(--okbg)} .slot.no{border-color:var(--bad); background:var(--badbg)}
+.pool{display:flex; flex-wrap:wrap; gap:8px}
+.pool .opt{flex:1 1 auto}
+.ph{margin:0 0 12px} .ph img{display:block; width:100%; height:min(52vh,340px); object-fit:contain; background:var(--soft); border-radius:14px}
+.ph figcaption{font-size:12px; color:var(--muted); margin-top:4px; text-align:right} .ph a{color:inherit}
+.dimg{float:left; width:84px; height:84px; object-fit:cover; border-radius:10px; margin:2px 10px 4px 0} .diff{overflow:hidden}
+.svgfig{margin:0 0 12px; background:var(--soft); border-radius:14px; padding:10px; color:var(--ink)} .svgfig svg{display:block; width:100%; max-height:230px}
+.quote{margin:-4px 0 14px; padding:10px 14px; border-left:4px solid var(--sel); background:var(--selbg); border-radius:10px; font-style:italic; font-weight:700}
+.score{font:800 56px/1 var(--fh)}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Fakty w wersji podanej przez tatę (technika konkursowa B1 + doświadczenie B2). Kolejność pytań jest losowana.
+// mc: o[0] = poprawna (quote = cytowana odpowiedź ucznia). tf: zdanie + true/false. pairs: [lewa, prawa].
+// multi: [tekst, czy pasuje]. order: elementy w poprawnej kolejności. ow: „obserwacja czy wniosek?” – dwa przyciski.
+const SECTIONS={etapy:'Etapy i problem badawczy',hip:'Hipoteza',proby:'Próba badawcza i kontrolna',ow:'Obserwacja czy wniosek',wniosek:'Wniosek i pomiar',wykres:'Wykres i procenty',pol:'Technika poleceń'};
+const Q=[];
+const mc=(s,id,q,o,e,quote)=>Q.push({s,id,type:'mc',q,o,e,quote});
+const tf=(s,id,q,val,e)=>Q.push({s,id,type:'tf',q,val,e});
+const pairs=(s,id,q,p,e)=>Q.push({s,id,type:'pairs',q,p,e});
+const multi=(s,id,q,o,e)=>Q.push({s,id,type:'multi',q,o,e});
+const order=(s,id,q,items,e)=>Q.push({s,id,type:'order',q,items,e});
+const OW=['obserwacja','wniosek'];
+const ow=(id,zdanie,ans,e)=>Q.push({s:'ow',id,type:'bin',q:'Obserwacja czy wniosek?',quote:zdanie,l:OW,c:OW.indexOf(ans),e});
+
+// 1. Etapy i problem badawczy
+order('etapy','a1','Uczeń bada wpływ temperatury na fermentację drożdży. Ułóż etapy jego doświadczenia.',['problem badawczy','hipoteza','próba badawcza i kontrolna (opis + rysunek)','obserwacje / wyniki','wniosek'],'Wniosek zawsze odpowiada na problem badawczy, więc kolejność jest stała: problem → hipoteza → próby → wyniki → wniosek.');
+mc('etapy','a2','Badasz, czy światło wpływa na fotosyntezę moczarki. Który problem badawczy jest poprawny?',['Czy natężenie światła wpływa na intensywność fotosyntezy moczarki?','Moczarka w świetle wydziela więcej tlenu.','Czy moczarka wydziela pęcherzyki?','Fotosynteza moczarki w świetle.'],'Problem to pytanie: „Czy [czynnik] wpływa na [proces] [organizmu]?”; twierdzenie z kierunkiem to hipoteza.');
+mc('etapy','a3','Co jest błędem w tym problemie badawczym?',['brakuje badanego czynnika (np. wody albo temperatury)','problem powinien być twierdzeniem','brakuje nazwy organizmu','jest za krótki'],'Problem musi mieć czynnik, proces i organizm, np. „Czy woda wpływa na kiełkowanie nasion fasoli?”.','Czy nasiona fasoli kiełkują?');
+mc('etapy','a4','Zadanie za 5 pkt: „Zaplanuj doświadczenie”. Za co dostaniesz punkty?',['po 1 pkt za problem, hipotezę, opis obu prób, rysunek i wniosek','tylko za wniosek','za staranny rysunek i tytuł','1 pkt za problem i 4 pkt za wyniki'],'Rysunek musi mieć 2 naczynia, podpisy i zawartość – każdy brakujący element to stracony punkt.');
+
+// 2. Hipoteza
+mc('hip','b1','Problem: „Czy temperatura wpływa na tempo oddychania drożdży?”. Która hipoteza jest poprawna?',['Wzrost temperatury (do ok. 35°C) zwiększa tempo oddychania drożdży.','Czy temperatura wpływa na drożdże?','Drożdże reagują na temperaturę.','Światło zwiększa tempo oddychania drożdży.'],'Hipoteza to twierdzenie z kierunkiem zmiany („zwiększa / zmniejsza”) o tym samym czynniku co w problemie.');
+mc('hip','b2','Problem: „Czy stężenie soli wpływa na ruch pantofelków?”. Co jest błędem w tej hipotezie?',['brak kierunku – nie mówi, jak zmieni się ruch pantofelków','to pytanie, a nie twierdzenie','dotyczy innego czynnika niż problem','w hipotezie nie wolno pisać nazwy organizmu'],'Poprawnie np.: „Sól sprawia, że pantofelki odpływają od miejsca, gdzie ją dodano”.','Pantofelki reagują na sól.');
+mc('hip','b3','Co jest błędem w tej hipotezie?',['to pytanie, a hipoteza ma być twierdzeniem','brak nazwy organizmu','brak badanego czynnika','dotyczy innego czynnika niż problem'],'Poprawnie np.: „Woda przyspiesza kiełkowanie rzeżuchy” albo „Jeśli nasiona będą na wilgotnej ligninie, to wykiełkuje ich więcej”.','Czy woda przyspiesza kiełkowanie rzeżuchy?');
+mc('hip','b4','Problem: „Czy temperatura wpływa na tempo ruchów rozwielitek?”. Co jest błędem w tej hipotezie?',['dotyczy innego czynnika (światła) niż problem (temperatura)','brak kierunku zmiany','to pytanie, a nie twierdzenie','brak nazwy organizmu'],'Hipoteza musi dotyczyć tego samego czynnika co problem, np. „Wzrost temperatury przyspiesza ruchy rozwielitek”.','Światło przyspiesza ruchy rozwielitek.');
+
+// 3. Próba badawcza i kontrolna
+mc('proby','c1','Badasz wpływ temperatury na fermentację drożdży: kolby badawcze stoją w 5°C i w 40°C. Jaka jest próba kontrolna?',['taka sama kolba w temperaturze pokojowej','kolba „bez temperatury”','kolba bez drożdży','kolba w lodówce'],'Gdy czynnikiem jest wartość (temperatura), kontrolna ma temperaturę naturalną / optymalną (pokojową) – nie da się zrobić próby „bez temperatury”.');
+mc('proby','c2','Do szalki z pantofelkami dodajesz kryształek soli. Jaka jest próba kontrolna?',['taka sama szalka z pantofelkami, do której dodajesz tyle samo wody','szalka bez pantofelków','szalka z dwoma kryształkami soli','szalka z pantofelkami w ciemności'],'Gdy do badawczej dodajesz substancję, do kontrolnej dodajesz tyle samo wody – próby różnią się tylko solą.');
+mc('proby','c3','Badasz, czy nasiona potrzebują wody do kiełkowania. Badawcza: 10 nasion na suchej ligninie. Jaka jest kontrolna?',['10 takich samych nasion na wilgotnej ligninie, w tej samej temperaturze','10 nasion w wodzie z solą','10 nasion na suchej ligninie w lodówce','jedno nasiono na wilgotnej ligninie'],'Kontrolna ma czynnik jak w warunkach naturalnych (woda jest), a wszystko inne – tak samo.');
+mc('proby','c4','Badasz wpływ światła na fotosyntezę moczarki. Badawcza: probówka z moczarką w ciemności. Jaka jest kontrolna?',['taka sama probówka z moczarką w świetle','probówka bez moczarki','probówka z moczarką w lodówce','probówka z moczarką i solą'],'Kontrolna to warunki naturalne – światło; różni się od badawczej tylko oświetleniem.');
+mc('proby','c5','Co jest błędem w tym planie doświadczenia?',['w każdej próbie jest tylko jeden organizm – wynik może być przypadkowy','w próbie kontrolnej brakuje soli','pantofelki nie reagują na sól','próby różnią się dwoma czynnikami'],'W każdej próbie musi być kilka organizmów, np. po 20 pantofelków.','Badawcza: 1 pantofelek w wodzie z solą. Kontrolna: 1 pantofelek w czystej wodzie.');
+mc('proby','c6','Co jest błędem w tym planie doświadczenia?',['próby różnią się dwoma czynnikami – gatunkiem i temperaturą','w próbach jest za mało nasion','w próbie kontrolnej brakuje wody','temperatura nie wpływa na kiełkowanie'],'Próby mogą różnić się tylko JEDNYM czynnikiem – inaczej nie wiesz, co spowodowało różnicę.','Badawcza: 10 nasion rzeżuchy na wilgotnej ligninie w 25°C. Kontrolna: 10 nasion fasoli na wilgotnej ligninie w 5°C.');
+mc('proby','c7','Który opis próby jest „dokładny”?',['10 nasion grochu na wilgotnej ligninie w szalce, 5 dni w 20°C; liczę wykiełkowane nasiona','nasiona na ligninie','kilka nasion w szalce na parapecie','nasiona w ciepłym miejscu przez jakiś czas'],'Dokładny opis mówi: co, ile, w czym, jak długo i co mierzę.');
+multi('proby','c8','Badasz wpływ temperatury na wydzielanie pęcherzyków przez moczarkę. Zaznacz, co musi być TAKIE SAMO w obu próbach.',[['gatunek i wielkość gałązki moczarki',1],['objętość wody',1],['natężenie światła',1],['czas pomiaru',1],['temperatura wody',0]],'Temperatura to badany czynnik – tylko ona się różni; wszystko inne musi być takie samo.');
+
+// 4. Obserwacja czy wniosek
+ow('d1','Woda wapienna, przez którą przepuszczano wydychane powietrze, zmętniała.','obserwacja','Mętnienie widać gołym okiem – to obserwacja; z niej dopiero wnioskujemy, że w wydychanym powietrzu jest więcej CO₂.');
+ow('d2','Wydychane powietrze zawiera więcej CO₂ niż wdychane.','wniosek','CO₂ jest bezbarwny – nie da się go zobaczyć, więc to wniosek z obserwacji (mętnienia wody wapiennej).');
+ow('d3','W 30°C moczarka wydzielała 20 pęcherzyków na minutę, a w 10°C – 5.','obserwacja','To zmierzone liczby, czyli wynik; wnioskiem byłoby: „temperatura wpływa na intensywność fotosyntezy”.');
+ow('d4','Temperatura wpływa na intensywność fotosyntezy moczarki.','wniosek','To odpowiedź na problem badawczy, nazywająca czynnik i proces – czyli wniosek.');
+ow('d5','Po 5 dniach wykiełkowało 9 z 10 nasion na wilgotnej ligninie i 0 z 10 na suchej.','obserwacja','To policzone wyniki; test: czy to da się zobaczyć lub zmierzyć? Tak – więc obserwacja.');
+ow('d6','Nasiona fasoli do kiełkowania potrzebują wody.','wniosek','Tego nie widać bezpośrednio – to odpowiedź na problem, wyciągnięta z wyników.');
+
+// 5. Wniosek i pomiar
+pairs('wniosek','e1','Co mierzysz → jaką czynność życiową badasz?',[['liczba pęcherzyków tlenu wydzielanych przez moczarkę','fotosynteza'],['mętnienie wody wapiennej','oddychanie (wydzielanie CO₂)'],['ruchy pokryw skrzelowych ryby','wymiana gazowa'],['ruch pantofelków od soli','reagowanie na bodźce'],['przyrost długości siewki','wzrost']],'W problemie i wniosku nazywaj czynność życiową, a nie tylko to, co mierzysz.');
+mc('wniosek','e2','Problem: „Czy temperatura wpływa na fotosyntezę moczarki?”. Który wniosek jest najlepszy?',['Temperatura wpływa na intensywność fotosyntezy moczarki – im cieplej (do 30°C), tym szybciej.','W 30°C było 20 pęcherzyków na minutę.','Moczarka lubi ciepło.','Doświadczenie się udało.'],'Wniosek odpowiada na problem: nazywa czynnik i proces; z wykresu: „Im…, tym…” + nazwa procesu.');
+mc('wniosek','e3','Dlaczego w cieple (do ok. 35°C) drożdże fermentują szybciej niż w zimnie?',['szybciej działają enzymy','bo drożdże lubią ciepło','bo ciepło daje drożdżom pokarm','bo w cieple jest więcej tlenu'],'Uzasadnienie biologiczne: tempo procesów życiowych zależy od pracy enzymów – „lubią ciepło” nie daje punktu.');
+mc('wniosek','e4','Ryba w ciepłej wodzie porusza pokrywami skrzelowymi 60 razy na minutę, a w zimnej – 30. Które uzasadnienie dobrze wykorzystuje dane?',['W cieplejszej wodzie ruchów było dwa razy więcej (60 zamiast 30), co oznacza szybszą wymianę gazową.','Ryba lubi ciepłą wodę.','W cieple ryby szybciej się ruszają.','Temperatura jest ważna dla ryb.'],'W uzasadnieniu używaj liczb i nazw z treści zadania – i nazwij czynność życiową.');
+
+// 6. Wykres i procenty
+mc('wykres','f1','Mierzyłeś liczbę pęcherzyków moczarki w 5 różnych temperaturach. Jak opiszesz osie wykresu?',['oś X: temperatura [°C], oś Y: liczba pęcherzyków [na minutę]','oś X: liczba pęcherzyków, oś Y: czas','oś X: moczarka, oś Y: woda','bez opisów – liczby wystarczą'],'Na osi X to, co zmieniano, na Y – to, co mierzono; obie osie z nazwą i jednostką, skala równa.');
+mc('wykres','f2','Porównujesz kiełkowanie nasion grochu i fasoli w trzech temperaturach. Jak narysujesz wykres?',['słupki obu gatunków obok siebie przy każdej temperaturze + legenda','jeden słupek na każdą temperaturę','wykres kołowy bez legendy','dwa wykresy bez opisów osi'],'Przy dwóch seriach danych słupki stoją obok siebie, a legenda mówi, który słupek to który gatunek.');
+mc('wykres','f3','Z 40 nasion wykiełkowało 30. Jaki to procent?',['75%','30%','133%','10%'],'Część : całość · 100% = 30 : 40 · 100% = 75%.');
+mc('wykres','f4','W 10°C moczarka wydzielała 10 pęcherzyków na minutę, a w 25°C – 15. O ile procent więcej w 25°C?',['o 50%','o 5%','o 33%','o 150%'],'„O ile % więcej” = różnica : wartość wyjściowa · 100% = 5 : 10 · 100% = 50%.');
+mc('wykres','f5','W pierwszej próbie wykiełkowało 60% nasion, a w drugiej 75%. Jaka jest różnica?',['15 punktów procentowych','15%','25%','135 punktów procentowych'],'Różnica dwóch procentów to punkty procentowe: 75% − 60% = 15 punktów procentowych.');
+
+// 7. Technika poleceń
+pairs('pol','g1','Polecenie mówi, co zrobić. Dobierz czynność do znaczenia.',[['wykreśl','przekreśl błędne – poprawne zostaje czyste'],['podkreśl','narysuj linię pod pasującym'],['zakreśl','otocz kółkiem']],'Pomylenie „wykreśl” z „podkreśl” to cały stracony punkt – podkreśl w poleceniu czasownik.');
+mc('pol','g2','Polecenie: „Podkreśl nazwy organizmów, które NIE należą do roślin”. Co robisz?',['czytam polecenie dwa razy i podkreślam te, które NIE są roślinami','podkreślam wszystkie rośliny','zakreślam kółkiem rośliny','wykreślam rośliny'],'Uważaj na słowa „nie”, „tylko”, „błędne”, „wszystkie” – zmieniają całe zadanie.');
+mc('pol','g3','Polecenie: „Podaj dwa różne argumenty, że wirus nie jest organizmem”. Co jest błędem w tej odpowiedzi?',['drugi argument powtarza pierwszy innymi słowami – 0 pkt','odpowiedź ma za mało słów','oba argumenty są nieprawdziwe','brakuje rysunku'],'„Podaj dwa” = dwa RÓŻNE argumenty, np. „nie ma budowy komórkowej” i „nie ma własnej przemiany materii”.','1. Wirus nie ma komórek. 2. Wirus nie jest zbudowany z komórek.');
+mc('pol','g4','Polecenie: „Podaj nazwę tkanki i jej funkcję”. Co jest błędem w tej odpowiedzi?',['pominięta druga część polecenia – funkcja','zła nazwa tkanki','odpowiedź jest za długa','brakuje rysunku tkanki'],'W poleceniu wieloczęściowym odhacz każdą część przed oddaniem, np. „miękisz asymilacyjny – fotosynteza”.','Miękisz asymilacyjny.');
+mc('pol','g5','Pytanie: „Które z tych zwierząt jest pajęczakiem? Uzasadnij”. Która odpowiedź da punkt?',['Kleszcz, ponieważ ma 4 pary odnóży, co oznacza, że jest pajęczakiem.','Kleszcz.','Kleszcz, bo tak.','Kleszcz albo mrówka.'],'Wybór bez uzasadnienia = 0 pkt; wzór: „[odpowiedź], ponieważ [cecha], co oznacza, że [związek z pytaniem]”.');
+mc('pol','g6','Polecenie: „Porównaj komórkę roślinną i zwierzęcą pod względem ściany komórkowej”. Która odpowiedź jest poprawna?',['Komórka roślinna ma ścianę komórkową, a zwierzęca jej nie ma.','Komórka roślinna ma ścianę komórkową.','Ściana komórkowa jest bardzo ważna.','Obie komórki różnią się od siebie.'],'„Porównaj” = zawsze o obu: „A…, a B…”; a „skonstruuj tabelę” bez tabeli to 0 pkt.');
+tf('pol','g7','Gdy nie znasz odpowiedzi, lepiej zostawić puste miejsce, niż napisać coś niepewnego.',false,'Puste miejsce to na pewno 0 pkt – zawsze coś napisz, ale nie dopisuj więcej, niż każe polecenie.');
+mc('pol','g8','Oznaczasz roślinę kluczem dwudzielnym. W parze 1 wybrałeś 1b, które każe przejść do 3. Co robisz dalej?',['czytam oba zdania pary 3 (3a i 3b), wybieram pasujące i zapisuję ścieżkę, np. 1b → 3b','czytam tylko zdanie 3a','wracam do pary 1','wybieram po kolorze rośliny'],'Zaczynaj od 1., czytaj oba zdania każdej pary, zapisuj ścieżkę; budowa jest ważniejsza niż kolor, a nazwę przepisz dokładnie.');
+
+/* ============ ZAPIS ============ */
+const KEY='b1b2-quiz-v1:'+kid;
+let S={wrong:[],last:null,best:null}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+const QN=Object.fromEntries(Q.map(q=>[q.id,q]));
+const KIND={bin:'wybierz jedno z dwóch',mc:'wybierz jedną',tf:'prawda czy fałsz?',pairs:'dobierz w pary',multi:'zaznacz wszystkie pasujące',order:'ułóż w kolejności'};
+function answerText(q){
+  if(q.type==='mc') return esc(q.o[0]);
+  if(q.type==='tf') return q.val?'Prawda':'Fałsz';
+  if(q.type==='bin') return esc(q.l[q.c]);
+  if(q.type==='pairs') return q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>');
+  if(q.type==='multi') return q.o.filter(x=>x[1]).map(x=>esc(x[0])).join(' · ');
+  return q.items.map(esc).join(' → ');
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const wr=S.wrong.filter(id=>QN[id]);
+  $app.innerHTML=`<h1>🧪 B1+B2 – technika i doświadczenie</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Quiz przed etapem szkolnym (30.10): problem, hipoteza, próba kontrolna, obserwacja i wniosek, wykres, procenty i technika poleceń. Po każdej odpowiedzi od razu wyjaśnienie.</p>
+    <div class="pills">${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎯</span><span><span class="t">Cały quiz</span><span class="d">${Q.length} pytań w losowej kolejności</span></span></button>
+    <button class="big" id="bWrong" ${wr.length?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Powtórz tylko błędne</span><span class="d">${wr.length?`${wr.length} z ostatniego podejścia`:'Na razie brak błędów do powtórki'}</span></span></button>
+    <div class="card"><h2>Zakres</h2>${Object.entries(SECTIONS).map(([k,n])=>`<button class="big" data-s="${k}" style="box-shadow:none;margin-bottom:8px"><span class="t">${esc(n)}</span><span class="d" style="margin-left:auto">${Q.filter(q=>q.s===k).length} pytań</span></button>`).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze wyników.</p>'}`;
+  $('bAll').onclick=()=>run(shuffle(Q),'Cały quiz');
+  $('bWrong').onclick=()=>{ if(wr.length) run(shuffle(wr.map(id=>QN[id])),'🩹 Błędne'); };
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>run(shuffle(Q.filter(q=>q.s===b.dataset.s)),SECTIONS[b.dataset.s]));
+}
+
+/* ============ QUIZ ============ */
+const photo=q=>`<figure class="ph"><img src="${esc(q.img)}" alt="Zdjęcie do rozpoznania"><figcaption><a href="${esc(q.src)}" target="_blank" rel="noopener">${esc(q.cred)}</a></figcaption></figure>`;
+function run(items,title){
+  items.forEach(q=>{ if(q.img){ const i=new Image(); i.src=q.img; } });  // zdjęcia ładują się z góry
+  window.scrollTo(0,0);
+  let i=0; const wrong=[];
+  function next(){
+    if(i>=items.length) return finish();
+    const q=items[i];
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/items.length}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${esc(SECTIONS[q.s])} · ${KIND[q.type]}</span><span>${i+1}/${items.length}</span></div>
+      <div class="qt">${esc(q.q)}</div>${q.quote?`<blockquote class="quote">${esc(q.quote)}</blockquote>`:''}${q.img?photo(q):''}${q.svg?`<div class="svgfig">${q.svg}</div>`:''}<div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!ok) wrong.push(q);
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">${i+1<items.length?'Dalej':'Wynik'}</button>`;
+      $('bNext').onclick=()=>{ i++; next(); }; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    ({bin:askBin,mc:askMc,tf:askTf,pairs:askPairs,multi:askMulti,order:askOrder})[q.type](q,after);
+  }
+  function finish(){
+    const n=items.length, ok=n-wrong.length, pc=Math.round(100*ok/n);
+    if(title==='Cały quiz'){ S.last={ok,n}; S.best=Math.max(S.best||0,pc); S.wrong=wrong.map(q=>q.id); }
+    else if(title==='🩹 Błędne'){ S.wrong=wrong.map(q=>q.id); }
+    else { S.wrong=[...new Set([...S.wrong.filter(id=>!items.some(q=>q.id===id)),...wrong.map(q=>q.id)])]; }
+    save();
+    window.scrollTo(0,0);
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div class="score">${ok}/${n}</div>
+      <h2 style="margin-top:8px">${pc}% – ${!wrong.length?'bezbłędnie! 🏆':pc>=80?'bardzo dobrze! 👏':pc>=60?'nieźle – powtórz błędne.':'powtórz błędne i spróbuj jeszcze raz.'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px">${wrong.length?'<button class="btn primary" id="bRep">Powtórz tylko błędne</button>':''}<button class="btn" id="bAgain">Jeszcze raz wszystko</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórzenia (${wrong.length})</h2>${wrong.map(q=>`<div class="diff">${q.img?`<img class="dimg" src="${esc(q.img)}" alt="">`:''}<div class="qq">${esc(q.q)}</div><div>✅ ${answerText(q)}</div><div class="muted small">${esc(q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>run(shuffle(items),title);
+    if(wrong.length) $('bRep').onclick=()=>run(shuffle(wrong),'🩹 Błędne');
+  }
+  next();
+}
+
+/* ============ TYPY PYTAŃ ============ */
+function askMc(q,after){
+  const order=shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===0;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`); });
+}
+function askBin(q,after){
+  $('ans').innerHTML=`<div class="opts two">${q.l.map((t,i)=>`<button class="opt" data-i="${i}">${esc(t)}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===q.c;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===q.c) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.l[q.c])}</b></div>`); });
+}
+function askTf(q,after){
+  $('ans').innerHTML=`<div class="opts two"><button class="opt" data-v="1">Prawda</button><button class="opt" data-v="0">Fałsz</button></div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=(b.dataset.v==='1')===q.val;
+    btns.forEach(x=>{ x.disabled=true; if((x.dataset.v==='1')===q.val) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${q.val?'Prawda':'Fałsz'}</b></div>`); });
+}
+function askMulti(q,after){
+  const order=shuffle(q.o.map((_,i)=>i)), sel=new Set();
+  $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Zaznacz wszystkie poprawne odpowiedzi i naciśnij „Sprawdź”.</p>
+    <div class="opts">${order.map(i=>`<button class="opt" data-i="${i}"><span class="box">☐</span> ${esc(q.o[i][0])}</button>`).join('')}</div>
+    <button class="btn primary wide" id="bChk" style="margin-top:12px" disabled>Sprawdź</button>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; sel.has(i)?sel.delete(i):sel.add(i);
+    b.classList.toggle('sel',sel.has(i)); b.querySelector('.box').textContent=sel.has(i)?'☑':'☐'; $('bChk').disabled=!sel.size; });
+  $('bChk').onclick=()=>{
+    let ok=true;
+    btns.forEach(b=>{ const i=+b.dataset.i, good=!!q.o[i][1], picked=sel.has(i); b.disabled=true; b.classList.remove('sel');
+      if(good&&picked) b.classList.add('ok'); else if(!good&&picked){ b.classList.add('no'); ok=false; } else if(good&&!picked){ b.classList.add('miss'); ok=false; } });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawne: <b>${answerText(q)}</b></div><div class="muted small">Przerywana zielona ramka = to też trzeba było zaznaczyć.</div>`);
+  };
+}
+function askOrder(q,after){
+  let pool=shuffle(q.items.map((_,i)=>i)); while(pool.every((v,k)=>v===k)) pool=shuffle(pool);
+  const chosen=[]; let locked=false;
+  const draw=()=>{
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotykaj po kolei. Dotknięcie ułożonego elementu cofa go.</p>
+      <div class="ord">${chosen.map((v,k)=>`<button class="slot full" data-k="${k}"><span class="k">${k+1}</span>${esc(q.items[v])}</button>`).join('')}${chosen.length<q.items.length?`<div class="slot"><span class="k">${chosen.length+1}</span><span class="muted small">wybierz z listy poniżej</span></div>`:''}</div>
+      <div class="pool">${pool.filter(v=>!chosen.includes(v)).map(v=>`<button class="opt" data-v="${v}">${esc(q.items[v])}</button>`).join('')}</div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${chosen.length===q.items.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('.pool .opt').forEach(b=>b.onclick=()=>{ if(locked) return; chosen.push(+b.dataset.v); draw(); });
+    $('ans').querySelectorAll('button.slot').forEach(b=>b.onclick=()=>{ if(locked) return; const k=+b.dataset.k; if(chosen[k]!=null){ chosen.splice(k,1); draw(); } });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=chosen.every((v,k)=>v===k);
+    $('ans').querySelectorAll('button.slot').forEach(b=>{ const k=+b.dataset.k; b.disabled=true; b.classList.add(chosen[k]===k?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawna kolejność: <b>${answerText(q)}</b></div>`);
+  };
+  draw();
+}
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const keys=Object.keys(match);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=keys.indexOf(String(l.i)); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=keys.find(k=>match[k]===r.i); const k=li!=null?keys.indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${keys.length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>
