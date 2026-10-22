@@ -443,6 +443,18 @@
       ],
       "added": "2026-10-22",
       "desc": "Konkurs: quiz – technika i doświadczenie"
+    },
+    {
+      "id": "pulapki-b3-b7",
+      "file": "apps/pulapki-b3-b7.html",
+      "title": "Pułapki B3–B7 – powtórka błędów",
+      "emoji": "🎯",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-22",
+      "desc": "Konkurs: quiz – najczęstsze błędy B3–B7"
     }
   ]
 }
