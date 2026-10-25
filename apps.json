@@ -455,6 +455,18 @@
       ],
       "added": "2026-10-22",
       "desc": "Konkurs: quiz – najczęstsze błędy B3–B7"
+    },
+    {
+      "id": "luki-b1-b12",
+      "file": "apps/luki-b1-b12.html",
+      "title": "Luki B1–B12 – czego jeszcze nie było",
+      "emoji": "🧩",
+      "subject": "biologia",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-10-25",
+      "desc": "Konkurs: quiz – luki B1–B12 (czego jeszcze nie było)"
     }
   ]
 }
