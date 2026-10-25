@@ -928,6 +928,116 @@
           "de": "sich befinden"
         }
       ]
+    },
+    {
+      "id": "haus-becker",
+      "title": "Im Haus von Familie Becker – pokoje i meble",
+      "words": [
+        {
+          "pl": "pomieszczenia",
+          "de": "die Räume",
+          "note": "l.mn."
+        },
+        {
+          "pl": "pokój",
+          "de": "das Zimmer"
+        },
+        {
+          "pl": "garaż",
+          "de": "die Garage"
+        },
+        {
+          "pl": "salon, pokój dzienny",
+          "de": "das Wohnzimmer"
+        },
+        {
+          "pl": "pokój dziecięcy",
+          "de": "das Kinderzimmer"
+        },
+        {
+          "pl": "sypialnia",
+          "de": "das Schlafzimmer"
+        },
+        {
+          "pl": "jadalnia",
+          "de": "das Esszimmer"
+        },
+        {
+          "pl": "gabinet, pracownia",
+          "de": "das Arbeitszimmer"
+        },
+        {
+          "pl": "łazienka",
+          "de": "das Badezimmer",
+          "alt": [
+            "das Bad"
+          ]
+        },
+        {
+          "pl": "łazienka (krótko, 3 litery)",
+          "de": "das Bad",
+          "alt": [
+            "das Badezimmer"
+          ]
+        },
+        {
+          "pl": "toaleta",
+          "de": "die Toilette"
+        },
+        {
+          "pl": "kuchnia",
+          "de": "die Küche"
+        },
+        {
+          "pl": "piwnica",
+          "de": "der Keller"
+        },
+        {
+          "pl": "balkon",
+          "de": "der Balkon"
+        },
+        {
+          "pl": "meble",
+          "de": "die Möbel",
+          "note": "l.mn."
+        },
+        {
+          "pl": "stół",
+          "de": "der Tisch"
+        },
+        {
+          "pl": "biurko",
+          "de": "der Schreibtisch"
+        },
+        {
+          "pl": "krzesło",
+          "de": "der Stuhl"
+        },
+        {
+          "pl": "sofa",
+          "de": "das Sofa"
+        },
+        {
+          "pl": "fotel",
+          "de": "der Sessel"
+        },
+        {
+          "pl": "regał",
+          "de": "das Regal"
+        },
+        {
+          "pl": "komoda",
+          "de": "die Kommode"
+        },
+        {
+          "pl": "szafa",
+          "de": "der Schrank"
+        },
+        {
+          "pl": "łóżko",
+          "de": "das Bett"
+        }
+      ]
     }
   ]
 }
