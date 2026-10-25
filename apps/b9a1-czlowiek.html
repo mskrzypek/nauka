@@ -206,11 +206,13 @@ function home(){
   const wr=S.wrong.filter(id=>QN[id]);
   $app.innerHTML=`<h1>🦴 B9a1 – człowiek</h1>
     <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Quiz przed etapem szkolnym (30.10): budowa ciała, skóra, szkielet i ruch, odżywianie, trawienie. Po każdej odpowiedzi od razu wyjaśnienie.</p>
-    <div class="pills">${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
+    ${zButton()}
+    <div class="pills">${zBadge()}${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
     <button class="big dark" id="bAll"><span class="i">🎯</span><span><span class="t">Cały quiz</span><span class="d">${Q.length} pytań w losowej kolejności</span></span></button>
     <button class="big" id="bWrong" ${wr.length?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Powtórz tylko błędne</span><span class="d">${wr.length?`${wr.length} z ostatniego podejścia`:'Na razie brak błędów do powtórki'}</span></span></button>
     <div class="card"><h2>Zakres</h2>${Object.entries(SECTIONS).map(([k,n])=>`<button class="big" data-s="${k}" style="box-shadow:none;margin-bottom:8px"><span class="t">${esc(n)}</span><span class="d" style="margin-left:auto">${Q.filter(q=>q.s===k).length} pytań</span></button>`).join('')}</div>
     ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze wyników.</p>'}`;
+  $('bZal').onclick=zalicz;
   $('bAll').onclick=()=>run(shuffle(Q),'Cały quiz');
   $('bWrong').onclick=()=>{ if(wr.length) run(shuffle(wr.map(id=>QN[id])),'🩹 Błędne'); };
   $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>run(shuffle(Q.filter(q=>q.s===b.dataset.s)),SECTIONS[b.dataset.s]));
@@ -328,6 +330,67 @@ function askPairs(q,after){
     after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
   };
   draw();
+}
+
+/* ============ ZALICZ WSZYSTKO ============ */
+// Wszystkie pytania do skutku: pomyłka wraca na koniec kolejki, zalicza dopiero dobra odpowiedź.
+// Stan w S.z (q – kolejka id, ok – zaliczone, miss – pomylone choć raz) zapisuje się po każdej odpowiedzi; odznaka w S.zDone.
+const zAll=()=>typeof fullSet==='function'?fullSet():Q;
+const zGet=id=>typeof getQ==='function'?getQ(id):Q.find(q=>q.id===id);
+const zToday=()=>new Date().toLocaleDateString('sv');
+const zDate=d=>d.split('-').reverse().join('.');
+const zPl=n=>n===1?'pytanie':n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?'pytania':'pytań';
+function zState(){
+  if(!S.z){ S.z={q:shuffle(zAll()).map(q=>q.id),ok:[],miss:[]}; save(); return S.z; }
+  const z=S.z; z.q=z.q.filter(id=>zGet(id)); z.ok=z.ok.filter(id=>zGet(id));
+  const seen=new Set([...z.q,...z.ok]), add=shuffle(Q.filter(q=>!seen.has(q.id))).map(q=>q.id);
+  if(add.length){ z.q.push(...add); save(); }  // pytania dopisane do quizu po starcie trybu
+  if(!z.q.length&&!S.zDone){ S.zDone={d:zToday(),n:z.ok.length}; save(); }
+  return z;
+}
+function zCount(){ if(!S.z) return [0,zAll().length]; const z=zState(); return [z.ok.length,z.ok.length+z.q.length]; }
+const zBadge=()=>S.zDone?`<span class="pill">✅ zaliczony 100% (${zDate(S.zDone.d)})</span>`:'';
+function zButton(){
+  const [x,n]=zCount();
+  const sub=S.z&&!S.z.q.length?`zaliczony 100% (${zDate(S.zDone.d)}) – możesz zacząć od nowa`
+    :S.z&&(x||S.z.miss.length)?`Wznów – do zaliczenia jeszcze ${n-x}`:`Wszystkie ${n} ${zPl(n)} do skutku – pomyłki wracają na koniec kolejki`;
+  return `<button class="big" id="bZal" style="border:2px solid var(--ok)"><span class="i">✅</span><span style="flex:1"><span class="t">Zalicz wszystko (${x}/${n})</span><span class="d">${sub}</span><span class="bar"><span style="width:${n?Math.round(100*x/n):0}%"></span></span></span></button>`;
+}
+function zalicz(){
+  const z=zState();
+  if(!z.q.length) return zFinish();
+  const id=z.q[0], q=zGet(id), n=z.ok.length+z.q.length, again=z.miss.includes(id);
+  const nx=z.q[1]&&zGet(z.q[1]); if(nx&&nx.img){ const i=new Image(); i.src=nx.img; }  // następne zdjęcie ładuje się z góry
+  const lab=typeof GN!=='undefined'?`${GN[q.g].i} ${esc(GN[q.g].n)}${q.trap?' <span class="tag">pułapka</span>':''}`:`${esc(SECTIONS[q.s])} · ${KIND[q.type]}`;
+  window.scrollTo(0,0);
+  $app.innerHTML=`${topBar('✅ Zalicz wszystko')}<div style="position:sticky;top:0;z-index:5;background:var(--paper);padding:6px 0 1px;margin-top:-6px"><div class="row" style="justify-content:space-between;font-weight:700;margin-bottom:6px"><span>zaliczone ${z.ok.length} z ${n}</span><span class="muted small">${again?'jeszcze raz 💪':`w kolejce: ${z.q.length}`}</span></div>
+    <div class="prog"><span style="width:${100*z.ok.length/n}%"></span></div></div>
+    <div class="q" id="qc"><div class="qlab"><span>${lab}</span></div>
+    <div class="qt">${esc(q.q)}</div>${q.quote?`<blockquote class="quote">${esc(q.quote)}</blockquote>`:''}${q.img&&typeof photo==='function'?photo(q):''}${q.svg?`<div class="svgfig">${q.svg}</div>`:''}<div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+  $('bBack').onclick=home;
+  const after=(ok,detail)=>{
+    if(typeof record==='function'&&!again) record(q,ok);  // fiszki: pierwsza odpowiedź liczy się też do powtórek
+    z.q.shift();
+    if(ok) z.ok.push(id); else { z.q.push(id); if(!again) z.miss.push(id); }
+    const fin=!z.q.length; if(fin) S.zDone={d:zToday(),n};
+    save();
+    $('qc').classList.add(ok?'ok':'bad');
+    $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌ – to pytanie wróci na końcu kolejki'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+      <button class="btn primary wide" id="bNext" style="margin-top:10px">${fin?'Wynik':'Dalej'}</button>`;
+    $('bNext').onclick=zalicz; $('bNext').focus({preventScroll:true});
+    $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+  };
+  window['ask'+q.type[0].toUpperCase()+q.type.slice(1)](q,after);
+}
+function zFinish(){
+  const z=S.z, n=z.ok.length;
+  window.scrollTo(0,0);
+  $app.innerHTML=`${topBar('✅ Zalicz wszystko')}<div class="card" style="text-align:center"><div style="font:800 52px/1 var(--fh)">100%</div>
+    <h2 style="margin-top:8px">zaliczone wszystkie ${n} ${zPl(n)} 🏆</h2>
+    <p class="muted">${zDate(S.zDone.d)} · ${z.miss.length?`po drodze poprawione: ${z.miss.length}`:'bez ani jednej pomyłki'}</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="bZNew">Zacznij od nowa</button><button class="btn" id="bHome">Menu</button></div></div>`;
+  $('bBack').onclick=home; $('bHome').onclick=home;
+  $('bZNew').onclick=()=>{ S.z=null; save(); zalicz(); };
 }
 
 /* ============ START ============ */
