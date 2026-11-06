@@ -467,6 +467,18 @@
       ],
       "added": "2026-10-25",
       "desc": "Konkurs: quiz – luki B1–B12 (czego jeszcze nie było)"
+    },
+    {
+      "id": "matma-automatyzmy",
+      "file": "apps/matma-automatyzmy.html",
+      "title": "Matma – automatyzmy na konkurs",
+      "emoji": "🧮",
+      "subject": "matematyka",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-11-06",
+      "desc": "Konkurs: dryl automatyzmów, 8 trybów"
     }
   ]
 }

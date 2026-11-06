@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matma – automatyzmy na konkurs</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5FA; --grid:#E1E6F2; --ink:#161C2E; --muted:#56607A; --line:#CBD3E6; --surface:#FFFFFF; --soft:#E8ECF6;
+  --accent:#3651C9; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#3651C9; --selbg:#E6EBFF;
+  --shadow:0 1px 2px rgba(22,28,46,.06),0 6px 18px rgba(22,28,46,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1320; --grid:#161C2C; --ink:#E6EAF5; --muted:#9DA7C0; --line:#2A3350; --surface:#161C2D; --soft:#1C2338;
+    --accent:#8CA2FF; --accent-ink:#0F1320; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8CA2FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn.danger{border-color:var(--bad); color:var(--bad)}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.pill.ok{border-color:var(--ok); color:var(--ok)}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:26px; width:42px; text-align:center; flex:none; font-family:var(--fh); font-weight:800}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.big.dark .d{color:var(--accent-ink); opacity:.85}
+.big.done{border:2px solid var(--ok)}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+.sticky{position:sticky; top:0; z-index:5; background:var(--paper); padding:6px 0 1px; margin-top:-6px}
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px; align-items:center}
+.dots{font-size:16px; letter-spacing:2px; color:var(--ok)}
+.qp{font-size:16px; color:var(--muted); margin-top:8px}
+.qt{font:800 30px/1.35 var(--fb); margin:4px 0 14px; overflow-wrap:anywhere}
+.qt.long{font-size:22px}
+.tin{width:100%; font:700 22px var(--fb); padding:12px 14px; border:2px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink)}
+.tin:focus{outline:none; border-color:var(--sel)}
+.keys{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+.key{min-width:44px; height:44px; border:1px solid var(--line); background:var(--soft); border-radius:10px; font:700 20px var(--fb); padding:0 10px}
+.opts2{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.opt{text-align:center; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:12px; font-weight:800; font-size:18px}
+.opt.sel{border-color:var(--sel); background:var(--selbg)}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.warnmsg{margin-top:8px; color:var(--warn); font-weight:700; font-size:16px}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 19px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:9px 0; font-size:16px}
+.ql{display:flex; justify-content:space-between; gap:10px; border-top:1px solid var(--line); padding:7px 0; font-size:17px}
+.ql .r{white-space:nowrap; color:var(--muted); font-size:14px}
+table{border-collapse:collapse; width:100%; font-size:15px}
+td,th{padding:5px 4px; border-bottom:1px solid var(--line); text-align:left}
+th{font:700 13px var(--fh); color:var(--muted)}
+textarea{width:100%; min-height:110px; font:14px/1.4 ui-monospace,Menlo,monospace; border:1px solid var(--line); border-radius:10px; padding:8px; background:var(--surface); color:var(--ink)}
+details summary{cursor:pointer; color:var(--muted); font-size:15px}
+.toast{position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom) + 24px); transform:translateX(-50%); background:var(--ink); color:var(--paper); padding:8px 16px; border-radius:99px; font-weight:700; z-index:20}
+/* zapis matematyczny */
+sup{font-size:.62em; line-height:0}
+.fr{display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; font-size:.72em; line-height:1.15; margin:0 .08em}
+.fr>span:first-child{border-bottom:.08em solid currentColor; padding:0 .12em}
+.rt{white-space:nowrap} .rt .rad{border-top:.08em solid currentColor; padding:.04em .04em 0 .02em}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+const CONTEST=new Date(2026,10,18);  // konkurs 18.11.2026; cel: wszystko opanowane do 17.11
+
+/* ============ ZAPIS MATEMATYCZNY ============ */
+// Znaczniki w treści pytań: a^{n} – potęga, √{x} – pierwiastek z kreską, [a/b] – ułamek piętrowy.
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function M(s){
+  let h=esc(s);  // kolejność: ułamki, pierwiastki, potęgi (wstawiony HTML zawiera „/”)
+  h=h.replace(/\[([^\[\]\/]+)\/([^\[\]\/]+)\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>');
+  h=h.replace(/√\{([^{}]*)\}/g,'<span class="rt">√<span class="rad">$1</span></span>');
+  for(let i=0;i<3;i++) h=h.replace(/\^\{([^{}]*)\}/g,'<sup>$1</sup>');
+  return h;
+}
+const SUP={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','−':'⁻','-':'⁻','?':'ˀ','n':'ⁿ'};
+function TX(s){  // wersja tekstowa do raportu
+  return String(s).replace(/(\d)\[/g,'$1 [').replace(/\^\{\?\}/g,'^?').replace(/\^\{([^{}]*)\}/g,(_,a)=>[...a].map(c=>SUP[c]||'^'+c).join(''))
+    .replace(/√\{([^{}]*)\}/g,(_,a)=>a.length>2&&/[^0-9]/.test(a)?`√(${a})`:'√'+a)
+    .replace(/\[([^\[\]\/]+)\/([^\[\]\/]+)\]/g,'$1/$2');
+}
+
+/* ============ PYTANIA ============ */
+// Każdy tryb ma stałą pulę – nowe pytania dopisuj na końcu, nie zmieniaj id istniejących (po nich zapisany jest postęp).
+// k – sposób sprawdzania: expr (wyrażenie, równoważne zapisy), int/num (liczba; num przyjmuje też ułamek i dziesiętny),
+// frac (ułamek zwykły), dec (dziesiętny, okres w nawiasie), pct (procent), surd (a√b), prime (pierwsza / dzielnik).
+const MODES=[
+  {id:'w',n:'Wzory skróconego mnożenia',s:'Wzory',i:'a²',h:'(a ± b)^{2} = a^{2} ± 2ab + b^{2} – nie zapomnij o 2ab. (a − b)(a + b) = a^{2} − b^{2}.',keys:['x','a','b','²','√','−','+','/']},
+  {id:'p',n:'Kwadraty, sześciany, potęgi',s:'Potęgi',i:'2ⁿ',h:'Warto znać na pamięć: kwadraty do 25^{2}, sześciany do 10^{3}, 2^{10} = 1024, 3^{5} = 243, 5^{4} = 625.',keys:[]},
+  {id:'k',n:'Wyłączanie spod pierwiastka',s:'Pierwiastki',i:'√',h:'Szukaj największego kwadratu: 80 = 16 · 5 → √{80} = 4√{5}.',keys:['√']},
+  {id:'n',n:'Potęgi ujemne i zerowe',s:'Ujemne',i:'x⁻¹',h:'a^{−n} = [1/a^{n}], ([a/b])^{−n} = ([b/a])^{n}, a^{0} = 1 (a ≠ 0).',keys:['/','−',',']},
+  {id:'u',n:'Ułamek ↔ procent ↔ dziesiętny',s:'Procenty',i:'%',h:'Procent = ułamek · 100%. Dziesiętny = licznik : mianownik. Okres zapisuj w nawiasie: [1/3] = 0,(3).',keys:['/',',','(',')']},
+  {id:'l',n:'Czy liczba pierwsza?',s:'Pierwsze',i:'p?',h:'Sprawdzaj dzielniki do √{n}: 2, 3, 5, 7, 11, 13. Pułapki: 51 = 3 · 17, 91 = 7 · 13, 119 = 7 · 17, 133 = 7 · 19, 143 = 11 · 13. 1 nie jest pierwsza.',keys:[]},
+  {id:'j',n:'Jednostki i czas',s:'Jednostki',i:'m²',h:'1 ha = 100 a = 10 000 m^{2}, 1 km^{2} = 100 ha; 1 l = 1 dm^{3} = 1000 cm^{3}, 1 m^{3} = 1000 l = 10 hl; min → h: : 60; km/h → m/s: : 3,6.',keys:['/',',']},
+  {id:'g',n:'Wzory geometrii',s:'Geometria',i:'△',h:'Graniastosłup n-kątny: n + 2 ścian, 3n krawędzi, 2n wierzchołków. Ostrosłup: n + 1 ścian, 2n krawędzi, n + 1 wierzchołków. Suma kątów n-kąta: (n − 2) · 180°. Przekątne: [n(n − 3)/2].',keys:[]},
+];
+const MN=Object.fromEntries(MODES.map(m=>[m.id,m]));
+const Q=[];
+const add=(m,id,p,q,a,k,x,h)=>Q.push({m,id:m+':'+id,p,q,a,k,...x,h});
+
+// 1. Wzory skróconego mnożenia
+[['01','(x + 3)^{2}','x^{2} + 6x + 9','x^{2} + 2 · x · 3 + 3^{2}'],
+ ['02','(x − 5)^{2}','x^{2} − 10x + 25','x^{2} − 2 · x · 5 + 5^{2}'],
+ ['03','(2a + 1)^{2}','4a^{2} + 4a + 1','(2a)^{2} + 2 · 2a · 1 + 1^{2}'],
+ ['04','(3b − 2)^{2}','9b^{2} − 12b + 4','(3b)^{2} − 2 · 3b · 2 + 2^{2}'],
+ ['05','(√{5} − 1)^{2}','6 − 2√{5}','(√{5})^{2} − 2√{5} + 1 = 5 − 2√{5} + 1'],
+ ['06','(√{3} + 2)^{2}','7 + 4√{3}','3 + 2 · √{3} · 2 + 4 = 3 + 4√{3} + 4'],
+ ['07','(3 − √{2})^{2}','11 − 6√{2}','9 − 2 · 3 · √{2} + 2 = 9 − 6√{2} + 2'],
+ ['08','(2√{3} + 1)^{2}','13 + 4√{3}','(2√{3})^{2} = 4 · 3 = 12, więc 12 + 4√{3} + 1'],
+ ['09','(√{7} − √{2})(√{7} + √{2})','5','(a − b)(a + b) = a^{2} − b^{2} = 7 − 2'],
+ ['10','(x − 4)(x + 4)','x^{2} − 16','(a − b)(a + b) = a^{2} − b^{2}'],
+ ['16','(x + 5)^{2}','x^{2} + 10x + 25','x^{2} + 2 · x · 5 + 5^{2}'],
+ ['17','(x − 1)^{2}','x^{2} − 2x + 1','x^{2} − 2 · x · 1 + 1^{2}'],
+ ['18','(a + b)^{2}','a^{2} + 2ab + b^{2}','sam wzór – podwojony iloczyn 2ab w środku'],
+ ['19','(a − b)^{2}','a^{2} − 2ab + b^{2}','sam wzór – minus tylko przy 2ab, b^{2} jest dodatnie'],
+ ['20','(2x − 3)^{2}','4x^{2} − 12x + 9','(2x)^{2} − 2 · 2x · 3 + 3^{2}'],
+ ['21','(5 − x)^{2}','25 − 10x + x^{2}','5^{2} − 2 · 5 · x + x^{2} – kolejność składników bez znaczenia'],
+ ['22','(2x + 3)(2x − 3)','4x^{2} − 9','(2x)^{2} − 3^{2}'],
+ ['23','(3a − 1)(3a + 1)','9a^{2} − 1','(3a)^{2} − 1^{2}'],
+ ['24','(√{2} + 1)^{2}','3 + 2√{2}','2 + 2√{2} + 1'],
+ ['25','(1 − √{3})^{2}','4 − 2√{3}','1 − 2√{3} + 3'],
+ ['26','(2√{2} − 1)^{2}','9 − 4√{2}','(2√{2})^{2} = 8, więc 8 − 4√{2} + 1'],
+ ['27','(√{6} − √{3})^{2}','9 − 6√{2}','6 − 2√{18} + 3, a √{18} = 3√{2}, więc 2√{18} = 6√{2}'],
+ ['28','(√{5} + √{3})(√{5} − √{3})','2','a^{2} − b^{2} = 5 − 3'],
+ ['29','(2√{5} − 3)(2√{5} + 3)','11','(2√{5})^{2} − 3^{2} = 20 − 9'],
+ ['36','(x + [1/2])^{2}','x^{2} + x + [1/4]','x^{2} + 2 · x · [1/2] + ([1/2])^{2}'],
+].forEach(([id,q,a,h])=>add('w',id,'Rozwiń i uprość',q,a,'expr',{ex:a},h));
+[['11','101^{2} − 99^{2}',400,'a^{2} − b^{2} = (a − b)(a + b) = 2 · 200'],
+ ['12','21^{2}',441,'(20 + 1)^{2} = 400 + 40 + 1'],
+ ['13','49 · 51',2499,'(50 − 1)(50 + 1) = 2500 − 1'],
+ ['14','99^{2}',9801,'(100 − 1)^{2} = 10 000 − 200 + 1'],
+ ['15','102 · 98',9996,'(100 + 2)(100 − 2) = 10 000 − 4'],
+ ['30','31^{2}',961,'(30 + 1)^{2} = 900 + 60 + 1'],
+ ['31','19^{2}',361,'(20 − 1)^{2} = 400 − 40 + 1'],
+ ['32','59 · 61',3599,'(60 − 1)(60 + 1) = 3600 − 1'],
+ ['33','98^{2}',9604,'(100 − 2)^{2} = 10 000 − 400 + 4'],
+ ['34','52^{2}',2704,'(50 + 2)^{2} = 2500 + 200 + 4'],
+ ['35','103 · 97',9991,'(100 + 3)(100 − 3) = 10 000 − 9'],
+].forEach(([id,q,v,h])=>add('w',id,'Policz w pamięci',q,String(v),'int',{v},h));
+
+// 2. Kwadraty, sześciany, potęgi – w obie strony
+for(let n=11;n<=25;n++){ add('p','sq'+n,'Oblicz',`${n}^{2}`,String(n*n),'int',{v:n*n},`${n}^{2} = ${n} · ${n} = ${n*n}`);
+  add('p','sqr'+n,'Uzupełnij',`${n*n} = ?^{2}`,String(n),'int',{v:n},`${n}^{2} = ${n*n}`); }
+for(let n=1;n<=10;n++){ add('p','c'+n,'Oblicz',`${n}^{3}`,String(n**3),'int',{v:n**3},`${n}^{3} = ${n} · ${n} · ${n} = ${n**3}`);
+  add('p','cr'+n,'Uzupełnij',`${n**3} = ?^{3}`,String(n),'int',{v:n},`${n}^{3} = ${n**3}`); }
+[[2,12,'2^{10} = 1024 – od niego licz w górę i w dół'],[3,6,'3^{4} = 81, 3^{5} = 243, 3^{6} = 729'],[5,5,'5^{3} = 125, 5^{4} = 625, 5^{5} = 3125']].forEach(([b,K,h])=>{
+  for(let k=1;k<=K;k++){ add('p',b+'e'+k,'Oblicz',`${b}^{${k}}`,String(b**k),'int',{v:b**k},`${b}^{${k}} = ${b**k}. ${h}`);
+    add('p',b+'r'+k,'Uzupełnij wykładnik',`${b**k} = ${b}^{?}`,String(k),'int',{v:k},`${b}^{${k}} = ${b**k}. ${h}`); } });
+
+// 3. Największy kwadrat pod pierwiastkiem
+[8,12,18,20,27,32,45,48,50,72,75,80,98,108,125,180,200,24,28,63,90,99,150,162,243,300].forEach(n=>{
+  let a=1; for(let k=2;k*k<=n;k++) if(n%(k*k)===0) a=k; const b=n/(a*a);
+  add('k',String(n),'Zapisz w postaci a√b',`√{${n}}`,`${a}√{${b}}`,'surd',{n},`${n} = ${a*a} · ${b} → √{${a*a}} · √{${b}} = ${a}√{${b}}`); });
+
+// 4. Potęgi ujemne i zerowe – wynik dokładnie (ułamek zwykły albo dziesiętny)
+[['01','2^{−3}','[1/8]',1/8,'2^{−3} = [1/2^{3}]'],['02','3^{−2}','[1/9]',1/9,'3^{−2} = [1/3^{2}]'],
+ ['03','10^{−4}','[1/10000]',1e-4,'[1/10^{4}] = 0,0001'],['04','([1/2])^{−3}','8',8,'odwróć ułamek: 2^{3}'],
+ ['05','([2/3])^{−2}','[9/4]',9/4,'odwróć ułamek: ([3/2])^{2} = [9/4] = 2,25'],['06','(−2)^{−3}','−[1/8]',-1/8,'[1/(−2)^{3}] = [1/−8] – nieparzysta potęga zostawia minus'],
+ ['07','5^{0}','1',1,'każda liczba (≠ 0) do potęgi 0 to 1'],['08','([1/2] + [1/4])^{−1}','[4/3]',4/3,'najpierw nawias: [1/2] + [1/4] = [3/4], potem odwrotność'],
+ ['09','2^{−1} + 2^{−1}','1',1,'[1/2] + [1/2] = 1'],['10','2^{−1}','[1/2]',1/2,'a^{−1} to odwrotność a'],
+ ['11','4^{−2}','[1/16]',1/16,'[1/4^{2}]'],['12','5^{−2}','[1/25]',1/25,'[1/5^{2}] = 0,04'],
+ ['13','10^{−2}','[1/100]',1/100,'[1/10^{2}] = 0,01'],['14','([1/4])^{−2}','16',16,'odwróć ułamek: 4^{2}'],
+ ['15','(−3)^{−2}','[1/9]',1/9,'[1/(−3)^{2}] – parzysta potęga, wynik dodatni'],['16','(−[1/3])^{−3}','−27',-27,'odwróć: (−3)^{3} = −27'],
+ ['17','([2/5])^{−1}','[5/2]',5/2,'odwrotność [2/5] to [5/2] = 2,5'],['18','(−5)^{0}','1',1,'potęga 0 obejmuje cały nawias'],
+ ['19','−5^{0}','−1',-1,'potęga dotyczy tylko 5: −(5^{0}) = −1'],['20','2^{−2} + 2^{−2}','[1/2]',1/2,'[1/4] + [1/4]'],
+ ['21','3^{0} + 3^{−1}','[4/3]',4/3,'1 + [1/3]'],['22','0,5^{−2}','4',4,'0,5 = [1/2], odwróć: 2^{2}'],
+ ['23','(1[1/2])^{−1}','[2/3]',2/3,'1[1/2] = [3/2], odwrotność [2/3]'],['24','2^{−3} · 2^{5}','4',4,'dodaj wykładniki: 2^{−3 + 5} = 2^{2}'],
+ ['25','10^{−3}','[1/1000]',1e-3,'[1/10^{3}] = 0,001'],
+].forEach(([id,q,a,v,h])=>add('n',id,'Oblicz',q,a,'num',{v},h));
+
+// 5. Ułamek ↔ procent ↔ dziesiętny
+const UP={pct:'Zapisz w procentach',dec:'Zapisz jako ułamek dziesiętny',frac:'Zapisz jako ułamek zwykły (skrócony)'};
+[['01','[1/2]','pct','50%',50],['02','[1/2]','dec','0,5',.5],['03','[1/4]','pct','25%',25],['04','[1/4]','dec','0,25',.25],
+ ['05','[3/4]','pct','75%',75],['06','[3/4]','dec','0,75',.75],['07','[1/5]','pct','20%',20],['08','[1/5]','dec','0,2',.2],
+ ['09','[1/8]','dec','0,125',.125,'[1/8] = 1 : 8 = 0,125 – warto pamiętać'],['10','[1/8]','pct','12,5%',12.5,'[1/8] = 0,125 = 12,5%'],
+ ['11','[3/8]','dec','0,375',.375,'3 · 0,125 = 0,375'],['12','[5/8]','pct','62,5%',62.5,'5 · 12,5% = 62,5%'],['13','[5/8]','dec','0,625',.625,'5 · 0,125 = 0,625'],
+ ['14','[7/8]','pct','87,5%',87.5,'7 · 12,5% = 87,5%'],['15','[1/3]','pct','33[1/3]% (= 33,(3)%)',100/3,'[1/3] · 100% = 33[1/3]% – wpisz 33 1/3 albo 33,(3)'],
+ ['16','[2/3]','dec','0,(6)',2/3,'2 : 3 = 0,666… = 0,(6) – okres w nawiasie'],['17','[1/20]','pct','5%',5,'[1/20] = [5/100]'],
+ ['18','[1/25]','pct','4%',4,'[1/25] = [4/100]'],['19','[1/25]','dec','0,04',.04,'[1/25] = [4/100] = 0,04'],['20','[1/50]','pct','2%',2,'[1/50] = [2/100]'],
+ ['21','[1/50]','dec','0,02',.02,'[1/50] = [2/100]'],['22','0,045','pct','4,5%',4.5,'· 100: przesuń przecinek o 2 miejsca w prawo'],
+ ['23','0,045','frac','[9/200]',9/200,'[45/1000] = [9/200] – skróć przez 5'],['24','1,25','frac','[5/4] (= 1[1/4])',5/4,'1,25 = 1 + [1/4]'],
+ ['25','1,25','pct','125%',125,'· 100%'],['26','0,5%','dec','0,005',.005,': 100 – przesuń przecinek o 2 miejsca w lewo'],
+ ['27','0,5%','frac','[1/200]',1/200,'[0,5/100] = [5/1000] = [1/200]'],['28','12,5%','frac','[1/8]',1/8,'12,5% = 0,125 = [1/8]'],
+ ['29','75%','frac','[3/4]',3/4,'[75/100] = [3/4]'],['30','40%','frac','[2/5]',2/5,'[40/100] = [2/5]'],['31','0,3','pct','30%',30,'· 100%'],
+ ['32','2,5%','dec','0,025',.025,': 100'],['33','150%','dec','1,5',1.5,': 100'],['34','0,8','frac','[4/5]',4/5,'[8/10] = [4/5]'],
+ ['35','0,35','frac','[7/20]',7/20,'[35/100] = [7/20] – skróć przez 5'],['36','[2/3]','pct','66[2/3]% (= 66,(6)%)',200/3,'[2/3] · 100% = 66[2/3]%'],
+].forEach(([id,q,k,a,v,h])=>add('u',id,UP[k],q,a,k,{v},h));
+
+// 6. Czy liczba pierwsza? (jeśli nie – podaj dzielnik)
+[2,1,51,57,59,61,87,89,91,97,119,121,133,143,69,71,73,77,79,83,93,101,103,111,113,117,127,129,131,137,139,141,147,149,161,169,187,209,221].forEach(n=>{
+  let d=0; for(let k=2;k*k<=n;k++) if(n%k===0){ d=k; break; }
+  const pr=n>1&&!d;
+  const a=n===1?'nie – 1 nie jest liczbą pierwszą':pr?'tak, pierwsza':`nie – ${n} = ${d} · ${n/d}`;
+  const h=n===1?'Liczba pierwsza ma dokładnie dwa dzielniki; 1 ma tylko jeden – nie jest ani pierwsza, ani złożona.'
+    :n===2?'2 to jedyna parzysta liczba pierwsza.'
+    :pr?`${n} nie dzieli się przez żadną liczbę pierwszą ≤ √{${n}} (≈ ${Math.floor(Math.sqrt(n))}).`
+    :`${n} = ${d} · ${n/d}` + (d===3?' – suma cyfr dzieli się przez 3':'');
+  add('l',String(n),'Czy to liczba pierwsza?',String(n),a,'prime',{n,pr},h); });
+
+// 7. Jednostki i czas
+const HJ={a:'1 ha = 100 a = 10 000 m^{2}; 1 a = 100 m^{2}; 1 km^{2} = 100 ha = 1 000 000 m^{2}',
+  v:'1 l = 1 dm^{3} = 1000 cm^{3}; 1 ml = 1 cm^{3}; 1 m^{3} = 1000 l = 10 hl; 1 hl = 100 l',
+  t:'min → h: podziel przez 60 i skróć (20 min = [20/60] h = [1/3] h)',
+  s:'km/h → m/s: podziel przez 3,6; m/s → km/h: pomnóż przez 3,6 (10 m/s = 36 km/h)'};
+[['01','1 ha = ? m^{2}','10 000',1e4,'a'],['02','1 a = ? m^{2}','100',100,'a'],['03','1 ha = ? a','100',100,'a'],['04','1 km^{2} = ? ha','100',100,'a'],
+ ['05','1 km^{2} = ? m^{2}','1 000 000',1e6,'a'],['06','2,5 ha = ? m^{2}','25 000',25000,'a'],['07','300 a = ? ha','3',3,'a'],['08','0,4 km^{2} = ? ha','40',40,'a'],
+ ['09','5000 m^{2} = ? ha','0,5',.5,'a'],['10','1 m^{2} = ? dm^{2}','100',100,'a'],['11','1 m^{2} = ? cm^{2}','10 000',1e4,'a'],
+ ['12','1 l = ? dm^{3}','1',1,'v'],['13','1 l = ? cm^{3}','1000',1000,'v'],['14','1 m^{3} = ? l','1000',1000,'v'],['15','1 hl = ? l','100',100,'v'],
+ ['16','1 m^{3} = ? hl','10',10,'v'],['17','1 ml = ? cm^{3}','1',1,'v'],['18','2,5 l = ? cm^{3}','2500',2500,'v'],['19','0,3 m^{3} = ? l','300',300,'v'],
+ ['20','750 cm^{3} = ? l','0,75',.75,'v'],['21','1 dm^{3} = ? cm^{3}','1000',1000,'v'],
+ ['22','20 min = ? h','[1/3]',1/3,'t'],['23','15 min = ? h','[1/4]',1/4,'t'],['24','45 min = ? h','[3/4]',3/4,'t'],['25','40 min = ? h','[2/3]',2/3,'t'],
+ ['26','12 min = ? h','[1/5]',1/5,'t'],['27','6 min = ? h','[1/10]',1/10,'t'],['28','90 min = ? h','[3/2] = 1,5',1.5,'t'],['29','0,2 h = ? min','12',12,'t'],
+ ['30','[3/4] h = ? min','45',45,'t'],
+ ['31','36 km/h = ? m/s','10',10,'s'],['32','72 km/h = ? m/s','20',20,'s'],['33','90 km/h = ? m/s','25',25,'s'],['34','54 km/h = ? m/s','15',15,'s'],
+ ['35','18 km/h = ? m/s','5',5,'s'],['36','10 m/s = ? km/h','36',36,'s'],['37','20 m/s = ? km/h','72',72,'s'],['38','15 m/s = ? km/h','54',54,'s'],
+ ['39','5 m/s = ? km/h','18',18,'s'],
+].forEach(([id,q,a,v,t])=>add('j',id,'Uzupełnij',q,a,'num',{v},HJ[t]));
+
+// 8. Wzory geometrii
+const HG={gr:'Graniastosłup n-kątny: ściany n + 2, krawędzie 3n, wierzchołki 2n.',os:'Ostrosłup n-kątny: ściany n + 1, krawędzie 2n, wierzchołki n + 1.',
+  sk:'Suma kątów wewnętrznych n-kąta: (n − 2) · 180°.',kf:'Kąt n-kąta foremnego: [(n − 2) · 180°/n].',pr:'Liczba przekątnych n-kąta: [n(n − 3)/2].'};
+[['01','Graniastosłup sześciokątny – ile ma ścian?',8,'gr','6 + 2 = 8'],['02','Graniastosłup sześciokątny – ile ma krawędzi?',18,'gr','3 · 6 = 18'],
+ ['03','Graniastosłup pięciokątny – ile ma wierzchołków?',10,'gr','2 · 5 = 10'],['04','Graniastosłup ośmiokątny – ile ma krawędzi?',24,'gr','3 · 8 = 24'],
+ ['05','Graniastosłup trójkątny – ile ma ścian?',5,'gr','3 + 2 = 5'],['06','Graniastosłup dziesięciokątny – ile ma wierzchołków?',20,'gr','2 · 10 = 20'],
+ ['07','Graniastosłup siedmiokątny – ile ma ścian?',9,'gr','7 + 2 = 9'],['08','Ostrosłup sześciokątny – ile ma krawędzi?',12,'os','2 · 6 = 12'],
+ ['09','Ostrosłup pięciokątny – ile ma ścian?',6,'os','5 + 1 = 6'],['10','Ostrosłup ośmiokątny – ile ma wierzchołków?',9,'os','8 + 1 = 9'],
+ ['11','Ostrosłup czworokątny – ile ma krawędzi?',8,'os','2 · 4 = 8'],['12','Ostrosłup dziesięciokątny – ile ma ścian?',11,'os','10 + 1 = 11'],
+ ['13','Graniastosłup ma 27 krawędzi – ile ma ścian?',11,'gr','3n = 27 → n = 9, ściany 9 + 2 = 11'],
+ ['14','Graniastosłup ma 16 wierzchołków – ile ma krawędzi?',24,'gr','2n = 16 → n = 8, krawędzie 3 · 8 = 24'],
+ ['15','Graniastosłup ma 12 ścian – ile ma wierzchołków?',20,'gr','n + 2 = 12 → n = 10, wierzchołki 2 · 10 = 20'],
+ ['16','Ostrosłup ma 20 krawędzi – ile ma wierzchołków?',11,'os','2n = 20 → n = 10, wierzchołki 10 + 1 = 11'],
+ ['17','Ostrosłup ma 9 ścian – ile ma krawędzi?',16,'os','n + 1 = 9 → n = 8, krawędzie 2 · 8 = 16'],
+ ['18','Ostrosłup ma 7 wierzchołków – ile boków ma jego podstawa?',6,'os','n + 1 = 7 → n = 6 (sześciokąt)'],
+ ['19','Graniastosłup ma 15 krawędzi – ile ma wierzchołków?',10,'gr','3n = 15 → n = 5, wierzchołki 2 · 5 = 10'],
+ ['20','Suma kątów wewnętrznych pięciokąta (w stopniach)?',540,'sk','3 · 180° = 540°'],['21','Suma kątów wewnętrznych sześciokąta (w stopniach)?',720,'sk','4 · 180° = 720°'],
+ ['22','Suma kątów wewnętrznych ośmiokąta (w stopniach)?',1080,'sk','6 · 180° = 1080°'],['23','Suma kątów wewnętrznych dziesięciokąta (w stopniach)?',1440,'sk','8 · 180° = 1440°'],
+ ['24','Suma kątów wewnętrznych dwunastokąta (w stopniach)?',1800,'sk','10 · 180° = 1800°'],
+ ['25','Suma kątów wewnętrznych wielokąta to 1260°. Ile ma boków?',9,'sk','1260° : 180° = 7 = n − 2 → n = 9'],
+ ['26','Kąt wewnętrzny sześciokąta foremnego (w stopniach)?',120,'kf','720° : 6 = 120°'],['27','Kąt wewnętrzny ośmiokąta foremnego (w stopniach)?',135,'kf','1080° : 8 = 135°'],
+ ['28','Kąt wewnętrzny pięciokąta foremnego (w stopniach)?',108,'kf','540° : 5 = 108°'],
+ ['29','Ile przekątnych ma pięciokąt?',5,'pr','[5 · 2/2] = 5'],['30','Ile przekątnych ma sześciokąt?',9,'pr','[6 · 3/2] = 9'],
+ ['31','Ile przekątnych ma ośmiokąt?',20,'pr','[8 · 5/2] = 20'],['32','Ile przekątnych ma dziesięciokąt?',35,'pr','[10 · 7/2] = 35'],
+ ['33','Ile przekątnych ma dwunastokąt?',54,'pr','[12 · 9/2] = 54'],['34','Wielokąt ma 14 przekątnych. Ile ma boków?',7,'pr','[7 · 4/2] = 14 → n = 7'],
+].forEach(([id,q,v,t,x])=>add('g',id,'Odpowiedz liczbą',q,String(v),'int',{v},`${HG[t]} ${x}.`));
+
+const QN=Object.fromEntries(Q.map(q=>[q.id,q]));
+const inMode=m=>Q.filter(q=>q.m===m);
+// Pytania z „Procentów” mają tę samą liczbę z różnymi poleceniami – na listach dopisz polecenie.
+const qH=q=>M(q.q)+(q.m==='u'?` <span class="muted small">(${esc(q.p.replace(/^Zapisz /,'').replace(/ \(skrócony\)/,''))})</span>`:'');
+const qT=q=>TX(q.q)+(q.m==='u'?` (${q.p.replace(/^Zapisz /,'')})`:'');
+
+/* ============ SPRAWDZANIE ODPOWIEDZI ============ */
+const FR={'½':' 1/2','⅓':' 1/3','⅔':' 2/3','¼':' 1/4','¾':' 3/4','⅕':' 1/5','⅖':' 2/5','⅛':' 1/8','⅜':' 3/8','⅝':' 5/8','⅞':' 7/8'};
+const gcd=(a,b)=>{ a=Math.abs(a); b=Math.abs(b); while(b){ [a,b]=[b,a%b]; } return a; };
+// Liczba w dowolnym dokładnym zapisie: 12, 0,125, 1/8, 1 1/4, 0,(3), 33⅓. Zwraca {v, f: int|dec|frac|mixed|per, red: czy ułamek skrócony} albo null.
+function parseNum(raw){
+  let s=String(raw).trim().replace(/[−–]/g,'-').replace(/[⅟½⅓⅔¼¾⅕⅖⅛⅜⅝⅞]/g,c=>FR[c]||c).replace(/:/g,'/').replace(/,/g,'.').replace(/\s+/g,' ').trim();
+  if(!s.includes('/')) s=s.replace(/ /g,'');          // 10 000 → 10000
+  s=s.replace(/\s*\/\s*/g,'/').replace(/^-\s+/,'-');
+  let m;
+  if((m=s.match(/^(-?)(\d+)$/))) return {v:+(m[1]+m[2]),f:'int',red:true};
+  if((m=s.match(/^-?\d*\.\d+$/))) return {v:+s,f:'dec',red:true};
+  if((m=s.match(/^(-?)(\d+)\/(\d+)$/))){ const a=+m[2],b=+m[3]; if(!b) return null; return {v:(m[1]?-1:1)*a/b,f:'frac',red:gcd(a,b)===1}; }
+  if((m=s.match(/^(-?)(\d+) (\d+)\/(\d+)$/))){ const w=+m[2],a=+m[3],b=+m[4]; if(!b) return null; return {v:(m[1]?-1:1)*(w+a/b),f:'mixed',red:gcd(a,b)===1&&a<b}; }
+  if((m=s.match(/^(-?)(\d*)\.(\d*)\((\d+)\)$/))){ const w=+(m[2]||0), nr=m[3], rp=m[4];
+    const frac=((nr?+nr:0)+ +rp/(10**rp.length-1))/10**nr.length; return {v:(m[1]?-1:1)*(w+frac),f:'per',red:true}; }
+  return null;
+}
+const same=(a,b)=>Math.abs(a-b)<=1e-9*Math.max(1,Math.abs(a),Math.abs(b));
+// Wyrażenia: tokeny, parser zstępujący, wartość w kilku punktach (równoważne zapisy = ta sama wartość).
+function tokens(raw){
+  const s=String(raw).replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/[·×]/g,'*').replace(/:/g,'/').replace(/,/g,'.').replace(/sqrt/gi,'√').replace(/[½¼]/g,c=>c==='½'?'(1/2)':'(1/4)');
+  const t=[]; let i=0;
+  while(i<s.length){ const c=s[i];
+    if(/[0-9.]/.test(c)){ let j=i; while(j<s.length&&/[0-9.]/.test(s[j])) j++; const n=s.slice(i,j); if(!/^\d+(\.\d+)?$|^\.\d+$/.test(n)) throw 0; t.push({t:'n',v:+n}); i=j; continue; }
+    if(/[xab]/.test(c)){ t.push({t:'v',v:c}); i++;
+      if(/[0-9]/.test(s[i]||'')){ let j=i; while(j<s.length&&/[0-9]/.test(s[j])) j++; t.push({t:'^'},{t:'n',v:+s.slice(i,j)}); i=j; } continue; }  // x2 = x²
+    if(c==='²'||c==='³'){ t.push({t:'^'},{t:'n',v:c==='²'?2:3}); i++; continue; }
+    if('+-*/^()√'.includes(c)){ t.push({t:c}); i++; continue; }
+    throw 0;
+  }
+  return t;
+}
+function parseExpr(raw){
+  const t=tokens(raw); let p=0;
+  const pk=()=>t[p]&&t[p].t, nx=()=>t[p++];
+  const atom=()=>{ const k=pk();
+    if(k==='n'||k==='v') return nx();
+    if(k==='√'){ nx(); return {t:'√',a:atom()}; }
+    if(k==='('){ nx(); const e=expr(); if(pk()!==')') throw 0; nx(); return e; }
+    throw 0; };
+  const power=()=>{ let b=atom(); while(pk()==='^'){ nx(); let neg=false; if(pk()==='-'){ nx(); neg=true; } const e=atom(); b={t:'^',a:b,b:neg?{t:'neg',a:e}:e}; } return b; };
+  const unary=()=>{ if(pk()==='-'){ nx(); return {t:'neg',a:unary()}; } if(pk()==='+'){ nx(); return unary(); } return power(); };
+  const term=()=>{ let a=unary();
+    for(;;){ const k=pk();
+      if(k==='*'||k==='/'){ nx(); a={t:k,a,b:unary()}; }
+      else if(k==='n'||k==='v'||k==='√'||k==='('){ a={t:'*',a,b:power()}; }
+      else return a; } };
+  const expr=()=>{ let a=term(); while(pk()==='+'||pk()==='-'){ const k=nx().t; a={t:k,a,b:term()}; } return a; };
+  const e=expr(); if(p!==t.length) throw 0;
+  let terms=1, depth=0;
+  t.forEach((x,i)=>{ if(x.t==='(') depth++; else if(x.t===')') depth--;
+    else if((x.t==='+'||x.t==='-')&&depth===0&&i>0&&!['+','-','*','/','^','(','√'].includes(t[i-1].t)) terms++; });
+  const roots=[]; t.forEach((x,i)=>{ if(x.t==='√'&&t[i+1]&&t[i+1].t==='n') roots.push(t[i+1].v); });
+  return {e,terms,roots};
+}
+function ev(n,env){
+  switch(n.t){ case 'n': return n.v; case 'v': return env[n.v]; case 'neg': return -ev(n.a,env); case '√': return Math.sqrt(ev(n.a,env));
+    case '+': return ev(n.a,env)+ev(n.b,env); case '-': return ev(n.a,env)-ev(n.b,env); case '*': return ev(n.a,env)*ev(n.b,env);
+    case '/': return ev(n.a,env)/ev(n.b,env); case '^': return Math.pow(ev(n.a,env),ev(n.b,env)); }
+}
+const ENVS=[{x:1.37,a:1.71,b:0.93},{x:2.71,a:0.41,b:-1.37},{x:-0.63,a:-2.19,b:2.31}];
+const exprPlain=s=>s.replace(/\^\{([^{}]*)\}/g,'^($1)').replace(/√\{([^{}]*)\}/g,'√($1)').replace(/\[([^\[\]\/]+)\/([^\[\]\/]+)\]/g,'(($1)/($2))');
+const hasSquare=n=>{ for(let k=2;k*k<=n;k++) if(n%(k*k)===0) return true; return false; };
+
+// → {st:'ok'|'bad'|'invalid', msg}  (invalid = nie rozumiem zapisu, pytanie się nie liczy)
+function check(q,raw){
+  const s=String(raw).trim();
+  if(!s) return {st:'invalid',msg:''};
+  if(q.k==='expr'){
+    if(/[()]/.test(s)) return {st:'bad',msg:'Rozwiń nawiasy – wynik ma być bez nawiasów.'};
+    let u; try{ u=parseExpr(s); }catch(e){ return {st:'invalid',msg:'Nie rozumiem zapisu. Pisz np. x²+6x+9 albo 6−2√5 (przyciski poniżej).'}; }
+    const x=parseExpr(exprPlain(q.ex));
+    const eq=ENVS.every(env=>same(ev(u.e,env),ev(x.e,env)));
+    if(!eq) return {st:'bad',msg:''};
+    if(u.roots.some(hasSquare)) return {st:'bad',msg:'Wartość się zgadza, ale wyłącz czynnik spod pierwiastka (np. 2√18 = 6√2).'};
+    if(u.terms>x.terms) return {st:'bad',msg:'Wartość się zgadza, ale uprość – zredukuj wyrazy podobne.'};
+    return {st:'ok'};
+  }
+  if(q.k==='surd'){
+    const z=s.replace(/[\s*·]/g,'').replace(/sqrt/gi,'√');
+    const m=z.match(/^(\d*)√(\d+)$/);
+    if(!m){ const r=parseNum(z); if(r&&same(r.v*r.v,q.n)) return {st:'ok'}; return {st:'invalid',msg:'Zapisz w postaci a√b, np. 4√5 (przycisk √ poniżej).'}; }
+    const a=m[1]?+m[1]:1, b=+m[2];
+    if(a*a*b!==q.n) return {st:'bad',msg:''};
+    if(hasSquare(b)) return {st:'bad',msg:'To jeszcze nie koniec – pod pierwiastkiem został kwadrat. Szukaj największego.'};
+    return {st:'ok'};
+  }
+  const t=q.k==='pct'?s.replace(/%\s*$/,''):s.replace(/°\s*$/,'');
+  const r=parseNum(t);
+  if(!r) return {st:'invalid',msg:q.k==='frac'?'Wpisz ułamek zwykły, np. 3/4.':'Wpisz liczbę – np. 12, 0,125, 1/8 albo 0,(3).'};
+  if(!same(r.v,q.v)){
+    const close=Math.abs(r.v-q.v)<=Math.max(.011,Math.abs(q.v)*.002)&&r.f==='dec';
+    return {st:'bad',msg:close?'To tylko przybliżenie – wpisz dokładnie: ułamkiem zwykłym albo z okresem w nawiasie, np. 0,(3).':''}; }
+  if(q.k==='int'&&r.f!=='int') return {st:'bad',msg:'Wynik to liczba całkowita.'};
+  if(q.k==='frac'&&!['int','frac','mixed'].includes(r.f)) return {st:'bad',msg:'Wartość się zgadza, ale tu trzeba ułamka zwykłego.'};
+  if(q.k==='dec'&&!['int','dec','per'].includes(r.f)) return {st:'bad',msg:'Wartość się zgadza, ale tu trzeba ułamka dziesiętnego.'};
+  if(!r.red) return {st:'bad',msg:'Wartość się zgadza, ale skróć ułamek.'};
+  return {st:'ok'};
+}
+
+/* ============ ZAPIS POSTĘPU ============ */
+// S.q[id] = {c: dobre z rzędu w różnych dniach (0–2; 2 = opanowane), last: dzień ostatniej liczonej dobrej, ctl: dzień kontroli opanowanego,
+//            w/r: błędy/dobre ogółem, wd: dzień ostatniego błędu, ld: dzień ostatniej odpowiedzi, lr: ostatnia dobra (1/0), la: ostatnia zła odpowiedź}
+// S.days[dzień] = {r: rundy, sec: sekundy, n: odpowiedzi, done: pierwszy trening dnia skończony}; S.rounds – historia rund do raportu.
+const KEY='matma-dryl-v1:'+kid;
+const fresh=()=>({v:1,q:{},days:{},rounds:[]});
+let S=fresh(), canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(fresh(),JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const dayStr=d=>d.toLocaleDateString('sv');
+const today=()=>dayStr(new Date());
+const daysAgo=n=>{ const d=new Date(); d.setDate(d.getDate()-n); return dayStr(d); };
+const plDate=d=>d?d.split('-').reverse().join('.'):'–';
+const st=q=>S.q[q.id];
+const lvl=q=>(st(q)||{}).c||0;
+const mastered=q=>lvl(q)>=2;
+const dotsOf=q=>{ const c=lvl(q); return (c>=1?'●':'○')+(c>=2?'●':'○'); };
+const dayRec=()=>S.days[today()]||(S.days[today()]={r:0,sec:0,n:0,done:false});
+// Dobra: ○○ → ●○; ●○ → ●● tylko innego dnia niż poprzednia liczona dobra. Zła: zawsze ○○.
+function record(q,ok,ans){
+  const T=today(), e=S.q[q.id]||(S.q[q.id]={c:0,last:'',w:0,r:0});
+  e.ld=T; e.lr=ok?1:0;
+  if(ok){ e.r++;
+    if(e.c===0){ e.c=1; e.last=T; } else if(e.c===1&&e.last<T){ e.c=2; e.last=T; } else if(e.c>=2) e.ctl=T; }
+  else { e.w++; e.c=0; e.wd=T; e.la=String(ans).slice(0,40); }
+}
+const modeDone=m=>inMode(m).every(mastered);
+const allDone=()=>MODES.every(m=>modeDone(m.id));
+function dueToday(list){ const T=today(); return list.filter(q=>{ const e=st(q); return e&&((e.c===0&&e.w>0)||(e.c===1&&e.last<T)); }).length; }
+function streak(){ let n=0; const d=new Date(); if(!(S.days[dayStr(d)]||{}).r) d.setDate(d.getDate()-1); while((S.days[dayStr(d)]||{}).r){ n++; d.setDate(d.getDate()-1); } return n; }
+function daysLeft(){ const t=new Date(); t.setHours(0,0,0,0); return Math.max(0,Math.round((CONTEST-t)/864e5)); }
+
+/* ============ DOBÓR PYTAŃ ============ */
+// Zwykła runda: najpierw pomylone, potem ●○ z wcześniejszego dnia (dziś mogą dostać ●●), potem nowe i ○○;
+// opanowane tylko jako kontrola (min. 4 dni od ostatniej), najwyżej 2 na rundę.
+// Dodatkowa runda tego samego dnia: najpierw dzisiejsze błędy (do poprawnej), potem nieruszone i ○○.
+function pick(pool,n,extra){
+  const T=today(), old=daysAgo(4);
+  const rank=q=>{ const e=st(q);
+    if(extra){ if(e&&e.ld===T&&e.lr===0) return 0; if(!e) return 1; if(e.c===0) return 2; if(e.c===1&&e.last<T) return 3; if(e.c===1) return 6; return (e.ctl||e.last)<=old?4:7; }
+    if(!e) return 2; if(e.c===0&&e.w>0) return 0; if(e.c===1&&e.last<T) return 1; if(e.c===0) return 2;
+    if(e.c>=2) return (e.ctl||e.last)<=old?4:7; return 6; };
+  const ranked=pool.map(q=>({q,k:rank(q)+Math.random()*.9})).sort((a,b)=>a.k-b.k);
+  const out=[]; let ctl=0;
+  for(const x of ranked){ if(out.length>=n) break; if(Math.floor(x.k)===4){ if(ctl>=2) continue; ctl++; } out.push(x.q); }
+  return shuffle(out);
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const pl=(n,a,b,c)=>n===1?a:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?b:c;
+function toast(t){ const d=document.createElement('div'); d.className='toast'; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),1800); }
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); toast('Skopiowano ✓'); }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast('Skopiowano ✓'); }catch(_){ toast('Zaznacz i skopiuj ręcznie'); } ta.remove(); }
+}
+const modeStats=m=>{ const l=inMode(m); return {n:l.length,ok:l.filter(mastered).length,due:dueToday(l)}; };
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const T=today(), d=S.days[T]||{r:0,sec:0,n:0}, mins=Math.round(d.sec/60), s=streak(), left=Q.length-Q.filter(mastered).length, dl=daysLeft();
+  const goal=d.done||d.sec>=600;
+  $app.innerHTML=`<h1>🧮 Matma – automatyzmy</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Wpisujesz wynik, od razu widzisz, czy dobrze. Pytanie jest opanowane ●●, gdy odpowiesz dobrze dwa razy z rzędu w dwóch różnych dniach.</p>
+    <div class="card" style="padding:12px 14px">
+      <div style="font:800 18px var(--fh)">${allDone()?'🏆 Całość zaliczona – wszystkie 8 trybów!':`⏳ Do konkursu (18.11): ${dl} ${pl(dl,'dzień','dni','dni')}`}</div>
+      <div class="muted small">Opanowane ${Q.length-left} z ${Q.length}${left?` · zostało ${left} – cel: wszystko do 17.11${dl>1?` (ok. ${Math.ceil(left/Math.max(1,dl-1))} dziennie)`:''}`:''}</div>
+      <div class="bar"><span style="width:${Math.round(100*(Q.length-left)/Q.length)}%"></span></div>
+    </div>
+    <div class="pills"><span class="pill">🔥 seria: ${s} ${pl(s,'dzień','dni','dni')}</span><span class="pill">Dziś: ${d.r} ${pl(d.r,'runda','rundy','rund')}, ${mins} min, ${d.n} ${pl(d.n,'pytanie','pytania','pytań')}</span><span class="pill${goal?' ok':''}">🎯 min. 10 min ${goal?'✓':'–'}</span></div>
+    ${d.done?`<button class="big dark" id="bDaily"><span class="i">➕</span><span><span class="t">Na dziś koniec ✓ – jeszcze jedna runda?</span><span class="d">15 pytań: najpierw dzisiejsze błędy, potem nowe</span></span></button>`
+      :`<button class="big dark" id="bDaily"><span class="i">▶</span><span><span class="t">Dzisiejszy trening</span><span class="d">20 pytań, ok. 10 min – najpierw błędy, potem nieopanowane</span></span></button>`}
+    <div class="card"><h2>Tryby</h2>
+      ${MODES.map(m=>{ const x=modeStats(m.id), done=x.ok===x.n;
+        return `<button class="big${done?' done':''}" data-m="${m.id}" style="box-shadow:none;margin-bottom:8px"><span class="i" style="font-size:20px">${esc(m.i)}</span><span style="flex:1"><span class="t">${esc(m.n)}${done?' <span style="color:var(--ok)">✓</span>':''}</span><span class="d">opanowane ${x.ok}/${x.n}${x.due?` · do powtórki dziś: ${x.due}`:''}${done?' · tryb zaliczony':''}</span><span class="bar"><span style="width:${Math.round(100*x.ok/x.n)}%"></span></span></span></button>`; }).join('')}
+      <button class="big" id="bMix" style="box-shadow:none;margin-bottom:0"><span class="i">🎲</span><span><span class="t">Mieszany</span><span class="d">15 pytań ze wszystkich trybów</span></span></button>
+    </div>
+    <button class="btn wide" id="bDad">👨 Dla taty – postępy, eksport</button>
+    ${canSave?'':'<p class="muted small" style="margin-top:10px">Ta przeglądarka nie zapisze postępów.</p>'}`;
+  $('bDaily').onclick=()=>{ const ex=!!(S.days[T]||{}).done; round(pick(Q,ex?15:20,ex),{title:ex?'Jeszcze jedna runda':'Dzisiejszy trening',kind:ex?'extra':'daily'}); };
+  $('bMix').onclick=()=>round(pick(Q,15,false),{title:'🎲 Mieszany',kind:'mix'});
+  $app.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>modePage(b.dataset.m));
+  $('bDad').onclick=dad;
+}
+
+/* ============ TRYB – LISTA PYTAŃ ============ */
+function modePage(m){
+  window.scrollTo(0,0);
+  const M_=MN[m], l=inMode(m), x=modeStats(m);
+  $app.innerHTML=`${topBar(esc(M_.n))}
+    <div class="card"><div style="font:800 18px var(--fh)">${x.ok===x.n?'Tryb zaliczony ✓':`Opanowane ${x.ok} z ${x.n}`}</div>
+      <div class="bar"><span style="width:${Math.round(100*x.ok/x.n)}%"></span></div>
+      <p class="muted small" style="margin-top:8px">${M(M_.h)}</p>
+      <button class="btn primary wide" id="bGo">Runda: 15 pytań${x.due?` (do powtórki dziś: ${x.due})`:''}</button></div>
+    <div class="card"><h2>Wszystkie pytania (${l.length})</h2>
+      ${l.map(q=>{ const e=st(q)||{}; return `<div class="ql"><span>${qH(q)}</span><span class="r"><span class="dots">${dotsOf(q)}</span>${e.w?` · błędy: ${e.w}`:''}</span></div>`; }).join('')}
+      <p class="muted small" style="margin-top:8px">○○ jeszcze nie / ●○ raz dobrze / ●● opanowane (dobrze w dwóch różnych dniach).</p></div>`;
+  $('bBack').onclick=home;
+  $('bGo').onclick=()=>round(pick(l,15,false),{title:M_.n,kind:'mode',mode:m});
+}
+
+/* ============ RUNDA ============ */
+function round(items,meta){
+  window.scrollTo(0,0);
+  const queue=items.map(q=>({q,again:false})), total=items.length, first=new Map(), wrongs=[];
+  const before=Object.fromEntries(MODES.map(m=>[m.id,modeDone(m.id)])), mBefore=Q.filter(mastered).length;
+  let done=0, sec=0, answers=0;
+  function next(){
+    if(!queue.length) return finish();
+    const cur=queue.shift(), q=cur.q, md=MN[q.m], t0=Date.now();
+    const long=q.q.length>24;
+    $app.innerHTML=`${topBar(esc(meta.title))}<div class="sticky"><div class="row" style="justify-content:space-between;font-weight:700;margin-bottom:6px"><span>${done}/${total}</span><span class="muted small">${cur.again?'jeszcze raz 💪':''}</span></div>
+      <div class="prog"><span style="width:${100*done/total}%"></span></div></div>
+      <div class="q" id="qc"><div class="qlab"><span>${esc(md.n)}</span><span class="dots" id="dots" title="postęp pytania">${dotsOf(q)}</span></div>
+      <div class="qp">${esc(q.p)}</div><div class="qt${long?' long':''}">${M(q.q)}${q.k==='prime'||/\?/.test(q.q)||q.k==='int'&&q.m==='g'?'':' = ?'}</div>
+      <div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail,ans)=>{
+      sec+=Math.min(120,(Date.now()-t0)/1000); answers++;
+      record(q,ok,ans);
+      const d=dayRec(); d.sec+=Math.min(120,(Date.now()-t0)/1000); d.n++;
+      if(!first.has(q.id)) first.set(q.id,ok);
+      if(!ok){ wrongs.push({q,ans}); queue.splice(Math.min(queue.length,4),0,{q,again:true}); }  // pomyłka wraca w tej rundzie
+      if(ok||cur.again) done++;
+      save();
+      $('dots').textContent=dotsOf(q);
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌'}</div>${detail||''}<div>${ok?'':'Poprawnie: '}<b>${M(q.a)}</b></div>
+        <div class="w">💡 ${M(q.h||md.h)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">${queue.length?'Dalej':'Wynik'}</button>`;
+      $('bNext').onclick=next; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    if(q.k==='prime') askPrime(q,after); else askText(q,md,after);
+  }
+  function finish(){
+    const T=today(), d=dayRec(), n=first.size, ok=[...first.values()].filter(Boolean).length, mins=Math.max(1,Math.round(sec/60));
+    d.r++; if(meta.kind==='daily') d.done=true;
+    const errIds=[...new Set(wrongs.map(w=>w.q.id))];
+    S.rounds.push({d:T,t:meta.title,m:meta.mode||meta.kind,n,ok,sec:Math.round(sec),err:errIds.map(id=>({id,a:(wrongs.find(w=>w.q.id===id)||{}).ans}))});
+    if(S.rounds.length>400) S.rounds=S.rounds.slice(-400);
+    save();
+    const newly=MODES.filter(m=>!before[m.id]&&modeDone(m.id)), gained=Q.filter(mastered).length-mBefore;
+    const errText=errIds.map(id=>{ const q=QN[id], w=wrongs.find(x=>x.q.id===id); return `- ${qT(q)} → wpisał: ${w.ans} · poprawnie: ${TX(q.a)}`; }).join('\n');
+    const report=`Matma – ${meta.title} · ${plDate(T)} · ${ok}/${n} za pierwszym razem (${mins} min)${errText?'\nBłędy:\n'+errText:'\nBez błędów.'}`;
+    const goalNow=d.done||d.sec>=600;
+    window.scrollTo(0,0);
+    $app.innerHTML=`${topBar(esc(meta.title))}
+      ${newly.map(m=>`<div class="card" style="border:2px solid var(--ok);text-align:center"><div style="font:800 22px var(--fh);color:var(--ok)">Tryb zaliczony ✓</div><div>${esc(m.n)} – wszystkie pytania opanowane ●●</div></div>`).join('')}
+      ${newly.length&&allDone()?'<div class="card" style="text-align:center;font:800 22px var(--fh)">🏆 Całość zaliczona – wszystkie 8 trybów!</div>':''}
+      <div class="card" style="text-align:center"><div style="font:800 52px/1 var(--fh)">${ok}/${n}</div>
+        <p class="muted" style="margin:6px 0 0">dobrze za pierwszym razem · ${mins} min${gained>0?` · nowe opanowane ●●: +${gained}`:''}</p>
+        ${goalNow&&meta.kind!=='mode'?'<h2 style="margin-top:12px">Na dziś koniec ✓ – wróć jutro</h2><p class="muted small">Druga kropka ● wpada dopiero innego dnia – jutro te pytania wrócą.</p>':''}
+        <div class="row" style="justify-content:center;margin-top:10px">
+          ${meta.kind==='mode'?'<button class="btn primary" id="bMore">Jeszcze runda z tego trybu</button>':'<button class="btn primary" id="bMore">Jeszcze jedna runda</button>'}
+          <button class="btn" id="bHome">Menu</button></div></div>
+      <div class="card"><h2>${errIds.length?`Błędy (${errIds.length})`:'Bez błędów 🏆'}</h2>
+        ${errIds.map(id=>{ const q=QN[id], w=wrongs.find(x=>x.q.id===id); return `<div class="diff">${qH(q)} → wpisał: <b>${esc(w.ans)}</b> · poprawnie: <b>${M(q.a)}</b></div>`; }).join('')}
+        <button class="btn wide" id="bCopy" style="margin-top:10px">📋 Kopiuj wynik (dla taty)</button></div>`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bCopy').onclick=()=>copyText(report);
+    $('bMore').onclick=()=>meta.kind==='mode'?round(pick(inMode(meta.mode),15,false),meta):round(pick(Q,15,true),{title:'Jeszcze jedna runda',kind:'extra'});
+  }
+  next();
+}
+
+/* ============ WPISYWANIE ============ */
+function askText(q,md,after){
+  const numeric=q.k==='int';
+  const keys=q.m==='w'&&q.k==='int'?[]:md.keys;
+  $('ans').innerHTML=`<input class="tin" id="tin" type="text" ${numeric?'inputmode="numeric" pattern="[0-9]*"':''} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="wpisz wynik">
+    ${keys.length?`<div class="keys">${keys.map(k=>`<button class="key" data-k="${esc(k)}" type="button">${esc(k)}</button>`).join('')}<button class="key" data-k="⌫" type="button" aria-label="Usuń">⌫</button></div>`:''}
+    <div class="warnmsg" id="warn"></div>
+    <button class="btn primary wide" id="bChk" style="margin-top:10px">Sprawdź</button>`;
+  const tin=$('tin');
+  $('ans').querySelectorAll('.key').forEach(b=>b.onclick=()=>{ const k=b.dataset.k, s=tin.selectionStart??tin.value.length, e=tin.selectionEnd??s;
+    if(k==='⌫'){ if(s===e&&s>0) tin.setRangeText('',s-1,s,'end'); else tin.setRangeText('',s,e,'end'); }
+    else tin.setRangeText(k==='−'?'-':k,s,e,'end');
+    tin.focus({preventScroll:true}); });
+  const go=()=>{ const v=tin.value, r=check(q,v);
+    if(r.st==='invalid'){ $('warn').textContent=r.msg; return; }
+    tin.disabled=true; $('ans').querySelectorAll('.key').forEach(b=>b.disabled=true); $('bChk').remove(); $('warn').textContent='';
+    after(r.st==='ok',r.msg?`<div style="margin:2px 0 4px">${esc(r.msg)}</div>`:'',v.trim()); };
+  $('bChk').onclick=go; tin.onkeydown=ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); go(); } };
+  setTimeout(()=>tin.focus({preventScroll:true}),60);
+}
+// Liczba pierwsza: tak / nie; przy „nie” trzeba jeszcze wpisać dzielnik (oprócz 1).
+function askPrime(q,after){
+  $('ans').innerHTML=`<div class="opts2"><button class="opt" id="bYes">tak, pierwsza</button><button class="opt" id="bNo">nie</button></div><div id="div"></div>`;
+  const lock=()=>{ $('bYes').disabled=true; $('bNo').disabled=true; };
+  $('bYes').onclick=()=>{ lock(); $('bYes').classList.add(q.pr?'ok':'no'); if(!q.pr) $('bNo').classList.add('ok'); after(q.pr,'','pierwsza'); };
+  $('bNo').onclick=()=>{
+    if(q.pr){ lock(); $('bNo').classList.add('no'); $('bYes').classList.add('ok'); return after(false,'','nie'); }
+    if(q.n===1){ lock(); $('bNo').classList.add('ok'); return after(true,'','nie'); }
+    $('bNo').classList.add('sel'); lock();
+    $('div').innerHTML=`<p class="small muted" style="margin:12px 0 6px">Podaj dzielnik ${q.n} (inny niż 1 i ${q.n}):</p>
+      <input class="tin" id="tin" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" enterkeyhint="done" placeholder="dzielnik">
+      <div class="warnmsg" id="warn"></div><button class="btn primary wide" id="bChk" style="margin-top:10px">Sprawdź</button>`;
+    const go=()=>{ const v=$('tin').value.trim(), d=+v;
+      if(!/^\d+$/.test(v)){ $('warn').textContent='Wpisz liczbę.'; return; }
+      $('tin').disabled=true; $('bChk').remove(); $('warn').textContent='';
+      const ok=d>1&&d<q.n&&q.n%d===0;
+      $('bNo').classList.remove('sel'); $('bNo').classList.add(ok?'ok':'no');
+      after(ok,ok?'':`<div style="margin:2px 0 4px">Dobrze, że „nie”, ale ${d} nie jest dzielnikiem ${q.n}.</div>`,'nie, dzielnik '+v); };
+    $('bChk').onclick=go; $('tin').onkeydown=ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); go(); } };
+    setTimeout(()=>$('tin').focus({preventScroll:true}),60);
+  };
+}
+
+/* ============ DLA TATY ============ */
+function report(){
+  const T=today(), d=S.days[T]||{r:0,sec:0,n:0}, left=Q.length-Q.filter(mastered).length;
+  const lines=[`Matma – automatyzmy · raport (${KIDS[kid]}) · ${plDate(T)}`,
+    `Do konkursu: ${daysLeft()} ${pl(daysLeft(),'dzień','dni','dni')} · opanowane ${Q.length-left}/${Q.length} · seria ${streak()} ${pl(streak(),'dzień','dni','dni')} · dziś: ${d.r} ${pl(d.r,'runda','rundy','rund')}, ${Math.round(d.sec/60)} min, ${d.n} ${pl(d.n,'pytanie','pytania','pytań')}`,'','Tryby:'];
+  MODES.forEach(m=>{ const l=inMode(m.id), c=modeCounts(l); lines.push(`- ${m.n}: opanowane ${c.ok}/${l.length}, w trakcie ${c.mid}, z błędami ${c.err}, nieruszone ${c.none}, ostatni trening ${plDate(c.last)}${c.ok===l.length?' ✓ zaliczony':''}`); });
+  lines.push('','Najwięcej błędów:');
+  topErr(20).forEach(q=>{ const e=st(q); lines.push(`- [${MN[q.m].s}] ${qT(q)} → ${TX(q.a)} (błędy: ${e.w}, teraz ${dotsOf(q)}${e.la?`, ostatnio wpisał: ${e.la}`:''})`); });
+  lines.push('','Ostatnie rundy:');
+  S.rounds.slice(-10).reverse().forEach(r=>lines.push(`- ${plDate(r.d)} ${r.t}: ${r.ok}/${r.n} (${Math.max(1,Math.round(r.sec/60))} min)${r.err.length?' · błędy: '+r.err.map(e=>QN[e.id]?qT(QN[e.id]):e.id).join('; '):''}`));
+  return lines.join('\n');
+}
+function modeCounts(l){ let ok=0,mid=0,err=0,none=0,last=''; l.forEach(q=>{ const e=st(q); if(!e){ none++; return; } if(e.ld>last) last=e.ld;
+  if(e.c>=2) ok++; else if(e.w>0&&e.c===0) err++; else mid++; }); return {ok,mid,err,none,last}; }
+const topErr=n=>Q.filter(q=>(st(q)||{}).w>0).sort((a,b)=>st(b).w-st(a).w||lvl(a)-lvl(b)).slice(0,n);
+function dad(){
+  window.scrollTo(0,0);
+  const left=Q.length-Q.filter(mastered).length;
+  $app.innerHTML=`${topBar('👨 Dla taty')}
+    <div class="card"><div style="font:800 18px var(--fh)">Opanowane ${Q.length-left} z ${Q.length} · do konkursu ${daysLeft()} dni</div>
+      <p class="muted small" style="margin:4px 0 10px">Opanowane = dobrze 2 razy z rzędu w dwóch różnych dniach (●●). „W trakcie” = ●○ albo ruszone bez błędu, „z błędami” = ostatnio źle.</p>
+      <table><tr><th>Tryb</th><th>●●</th><th>w trakcie</th><th>błędy</th><th>ostatnio</th></tr>
+      ${MODES.map(m=>{ const l=inMode(m.id), c=modeCounts(l); return `<tr><td>${esc(m.s)}${c.ok===l.length?' ✓':''}</td><td>${c.ok}/${l.length}</td><td>${c.mid}</td><td>${c.err}</td><td>${plDate(c.last).slice(0,5)}</td></tr>`; }).join('')}</table></div>
+    <div class="card"><h2>Najwięcej błędów</h2>
+      ${topErr(15).map(q=>{ const e=st(q); return `<div class="ql"><span>${qH(q)} → ${M(q.a)}</span><span class="r">${e.w}× · <span class="dots">${dotsOf(q)}</span></span></div>`; }).join('')||'<p class="muted">Na razie brak błędów.</p>'}
+      <button class="btn primary wide" id="bRep" style="margin-top:10px">📋 Kopiuj raport (do wklejenia w czacie)</button></div>
+    <div class="card"><h2>Ostatnie dni</h2>
+      ${Object.keys(S.days).sort().reverse().slice(0,10).map(k=>{ const x=S.days[k]; return `<div class="ql"><span>${plDate(k)}</span><span class="r">${x.r} ${pl(x.r,'runda','rundy','rund')} · ${Math.round(x.sec/60)} min · ${x.n} pytań</span></div>`; }).join('')||'<p class="muted">Jeszcze nic.</p>'}</div>
+    <div class="card"><h2>Przeniesienie postępu</h2>
+      <p class="muted small">Na nowym telefonie lub komputerze: skopiuj kod tutaj i wklej go tam w „Import”.</p>
+      <button class="btn wide" id="bExp">⬆ Eksport postępu (kod do skopiowania)</button>
+      <textarea id="ioTa" placeholder="Tu pojawi się kod albo wklej kod do importu" style="margin-top:8px"></textarea>
+      <button class="btn wide" id="bImp" style="margin-top:8px">⬇ Import – wczytaj kod z pola</button></div>
+    <details class="card"><summary>Zacznij od nowa…</summary>
+      <p class="small" style="margin-top:8px">Usuwa cały postęp (kropki, historię rund). Zrób najpierw eksport.</p>
+      <button class="btn danger wide" id="bReset">Usuń postęp i zacznij od nowa</button></details>`;
+  $('bBack').onclick=home;
+  $('bRep').onclick=()=>copyText(report());
+  $('bExp').onclick=()=>{ const code='MATMA1:'+btoa(unescape(encodeURIComponent(JSON.stringify(S)))); $('ioTa').value=code; $('ioTa').select(); copyText(code); };
+  $('bImp').onclick=()=>{ const raw=$('ioTa').value.trim().replace(/^MATMA1:/,'');
+    let d; try{ d=JSON.parse(decodeURIComponent(escape(atob(raw)))); }catch(e){ toast('To nie jest poprawny kod'); return; }
+    if(!d||typeof d.q!=='object'){ toast('To nie jest poprawny kod'); return; }
+    if(!confirm('Zastąpić obecny postęp tym z kodu?')) return;
+    S=Object.assign(fresh(),d); save(); toast('Wczytano ✓'); home(); };
+  $('bReset').onclick=()=>{ if(!confirm('Na pewno usunąć cały postęp?')) return; if(!confirm('Ostatnie pytanie: usunąć wszystko i zacząć od zera?')) return; S=fresh(); save(); home(); };
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>
