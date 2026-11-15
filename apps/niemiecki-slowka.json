@@ -1038,6 +1038,112 @@
           "de": "das Bett"
         }
       ]
+    },
+    {
+      "id": "urlaub",
+      "title": "Wakacje – gdzie i co robimy",
+      "words": [
+        {
+          "pl": "w wodzie",
+          "de": "im Wasser"
+        },
+        {
+          "pl": "na plaży",
+          "de": "am Strand"
+        },
+        {
+          "pl": "w szkole językowej",
+          "de": "in der Sprachenschule",
+          "alt": [
+            "in der Sprachschule"
+          ]
+        },
+        {
+          "pl": "w łódce",
+          "de": "im Boot"
+        },
+        {
+          "pl": "w Niemczech",
+          "de": "in Deutschland"
+        },
+        {
+          "pl": "w parku",
+          "de": "im Park"
+        },
+        {
+          "pl": "na jeziorze",
+          "de": "auf einem See",
+          "alt": [
+            "auf dem See"
+          ]
+        },
+        {
+          "pl": "w górach",
+          "de": "im Gebirge"
+        },
+        {
+          "pl": "nad jeziorem",
+          "de": "am See"
+        },
+        {
+          "pl": "nad morzem",
+          "de": "an der See"
+        },
+        {
+          "pl": "uczyć się",
+          "de": "lernen"
+        },
+        {
+          "pl": "jeździć na nartach",
+          "de": "Ski fahren"
+        },
+        {
+          "pl": "nurkować",
+          "de": "tauchen"
+        },
+        {
+          "pl": "opalać się",
+          "de": "sich sonnen"
+        },
+        {
+          "pl": "jeździć na snowboardzie",
+          "de": "Snowboard fahren"
+        },
+        {
+          "pl": "kąpać się",
+          "de": "baden"
+        },
+        {
+          "pl": "żeglować",
+          "de": "segeln"
+        },
+        {
+          "pl": "leżeć",
+          "de": "liegen"
+        },
+        {
+          "pl": "pływać",
+          "de": "schwimmen"
+        },
+        {
+          "pl": "pływać łódką",
+          "de": "Boot fahren"
+        },
+        {
+          "pl": "wędrować",
+          "de": "wandern"
+        },
+        {
+          "pl": "morze",
+          "de": "die See",
+          "note": "uwaga na rodzajnik!"
+        },
+        {
+          "pl": "jezioro",
+          "de": "der See",
+          "note": "uwaga na rodzajnik!"
+        }
+      ]
     }
   ]
 }
