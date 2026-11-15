@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Środki stylistyczne – quiz na kartkówkę</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✒️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F7F3; --grid:#DFEBE2; --ink:#16271D; --muted:#56695C; --line:#CADCCF; --surface:#FFFFFF; --soft:#E9F2EC;
+  --accent:#2E8B57; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB; --warn:#9A6700; --warnbg:#FFF4D6;
+  --sel:#2F5BD3; --selbg:#E6EDFF;
+  --shadow:0 1px 2px rgba(22,39,29,.06),0 6px 18px rgba(22,39,29,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0F1813; --grid:#16231B; --ink:#E6F0E9; --muted:#9DB3A4; --line:#29402F; --surface:#15221A; --soft:#1B2B21;
+    --accent:#5CC98A; --accent-ink:#0F1813; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628; --warn:#FFD36B; --warnbg:#3A3116;
+    --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.btn:disabled{opacity:.4}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:28px; width:38px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.big.dark .d{color:var(--paper); opacity:.8}
+.big.trap{border:2px solid #E0A800}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+
+/* fiszka */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 21px/1.3 var(--fh); margin:6px 0 14px}
+.tag{display:inline-block; background:var(--warnbg); color:var(--warn); border-radius:8px; padding:0 8px; font:700 12px var(--fh)}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; line-height:1.35; font-weight:700}
+.opts.two{grid-template-columns:repeat(2,1fr)} .opts.two .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opts.five{grid-template-columns:repeat(5,1fr); gap:6px} .opts.five .opt{text-align:center; padding:16px 2px; font-size:16px}
+.opts.three{grid-template-columns:repeat(3,1fr)} .opts.three .opt{text-align:center; padding:16px 4px; font-size:17px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pairs .col{display:grid; gap:8px; align-content:start}
+.pb{position:relative; text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 10px 9px 12px; line-height:1.3; font-size:15px; font-weight:700; min-height:48px}
+.pb.sel{border-color:var(--sel); background:var(--selbg)}
+.pb .n{position:absolute; top:-8px; right:-6px; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:800 12px var(--fh); color:#fff}
+.pb.ok{border-color:var(--ok); background:var(--okbg)} .pb.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 18px var(--fh)}
+.why .w{margin-top:6px; font-size:16px}
+.why ul{margin:6px 0 0; padding-left:1.1em; font-size:16px}
+.diff{border-top:1px solid var(--line); padding:10px 0}
+.diff .qq{font-weight:700}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+/* wybierz wszystkie + kolejność */
+.opt.sel{border-color:var(--sel); background:var(--selbg)}
+.opt.miss{border-style:dashed; border-color:var(--ok)}
+.opt .box{display:inline-block; width:1.2em}
+.ord{display:grid; gap:8px; margin-bottom:10px}
+.slot{display:flex; gap:10px; align-items:center; min-height:46px; border:2px dashed var(--line); border-radius:12px; padding:8px 12px; text-align:left; background:transparent; font-weight:700}
+.slot.full{border-style:solid; background:var(--surface)}
+.slot .k{flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--soft); font:800 13px var(--fh)}
+.slot.ok{border-color:var(--ok); background:var(--okbg)} .slot.no{border-color:var(--bad); background:var(--badbg)}
+.pool{display:flex; flex-wrap:wrap; gap:8px}
+.pool .opt{flex:1 1 auto}
+.ph{margin:0 0 12px} .ph img{display:block; width:100%; height:min(52vh,340px); object-fit:contain; background:var(--soft); border-radius:14px}
+.ph figcaption{font-size:12px; color:var(--muted); margin-top:4px; text-align:right} .ph a{color:inherit}
+.dimg{float:left; width:84px; height:84px; object-fit:cover; border-radius:10px; margin:2px 10px 4px 0} .diff{overflow:hidden}
+.svgfig{margin:0 0 12px; background:var(--soft); border-radius:14px; padding:10px; color:var(--ink)} .svgfig svg{display:block; width:100%; max-height:230px}
+.quote{margin:-4px 0 14px; padding:10px 14px; border-left:4px solid var(--sel); background:var(--selbg); border-radius:10px; font-style:italic; font-weight:700}
+.score{font:800 56px/1 var(--fh)}
+.tin{width:100%; font:700 20px var(--fb); padding:12px 14px; border:2px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink)}
+.tin:focus{outline:none; border-color:var(--sel)}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={wiktor:'Wiktor',igor:'Igor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'wiktor').toLowerCase();
+if(!KIDS[kid]) kid='wiktor';
+
+/* ============ PYTANIA ============ */
+// Środki stylistyczne – definicje z zeszytu Wiktora; cytaty z lektur szkolnych (Mickiewicz, Kochanowski, Krasicki, Tuwim, Brzechwa).
+// mc: o[0] = poprawna. tf: zdanie + true/false. pairs: [lewa, prawa]. multi: [tekst, czy pasuje]. bin: dwie odpowiedzi, c = indeks poprawnej.
+// txt: wpisz nazwę – a = lista przyjmowanych nazw (pierwsza to główna).
+const SECTIONS={wpisz:'Wpisz nazwę',def:'Definicje – dobierz',przyk:'Rozpoznaj w przykładzie',lit:'Z lektur',pul:'Pułapki – nie pomyl',zaz:'Zaznacz wszystkie'};
+const Q=[];
+const mc=(s,id,q,o,e,quote)=>Q.push({s,id,type:'mc',q,o,e,quote});
+const tf=(s,id,q,val,e)=>Q.push({s,id,type:'tf',q,val,e});
+const pairs=(s,id,q,p,e)=>Q.push({s,id,type:'pairs',q,p,e});
+const multi=(s,id,q,o,e)=>Q.push({s,id,type:'multi',q,o,e});
+const bin=(s,id,q,l,c,e)=>Q.push({s,id,type:'bin',q,l,c,e});
+const NAZWY={anafora:['anafora','anafory'],wyliczenie:['wyliczenie','enumeracja'],zgrubienie:['zgrubienie','zgrubienia','augmentativum'],
+  zdrobnienie:['zdrobnienie','zdrobnienia','deminutywum'],ironia:['ironia'],oksymoron:['oksymoron'],symbol:['symbol'],aforyzm:['aforyzm','aforyzmy','sentencja'],
+  przysłowie:['przysłowie','przysłowia'],epitet:['epitet','epitety'],porównanie:['porównanie','porównania'],metafora:['metafora','przenośnia','metafory'],
+  personifikacja:['personifikacja','uosobienie'],animizacja:['animizacja','ożywienie'],hiperbola:['hiperbola','wyolbrzymienie'],
+  onomatopeja:['onomatopeja','onomatopeje','dźwiękonaśladownictwo','wyraz dźwiękonaśladowczy'],apostrofa:['apostrofa'],'pytanie retoryczne':['pytanie retoryczne'],powtórzenie:['powtórzenie','powtórzenia']};
+const txt=(id,q,n,e)=>Q.push({s:'wpisz',id,type:'txt',q,a:NAZWY[n],e});
+
+// Wpisz nazwę (definicje z zeszytu)
+txt('w1','Powtórzenie tego samego wyrazu na początku kolejnych zdań lub wersów.','anafora','Anafora – np. „Nie chcę smutku, nie chcę łez”: te same słowa otwierają kolejne części.');
+txt('w2','Wymienianie kolejnych elementów, np. róże, tulipany, stokrotki.','wyliczenie','Wyliczenie – szereg wymienionych po kolei rzeczy, osób albo czynności.');
+txt('w3','Forma wyrazu podkreślająca duży rozmiar (często lekceważąco), np. psisko, nochal.','zgrubienie','Zgrubienie – przyrostki -isko, -sko, -al: psisko, łapsko, nochal.');
+txt('w4','Forma wskazująca na mały rozmiar lub czułość, np. domek, kotek.','zdrobnienie','Zdrobnienie – domek, kotek, rączka, Jaś.');
+txt('w5','Wypowiedź, w której zamierzone znaczenie różni się od dosłownego, np. „Świetnie!” po czyimś błędzie.','ironia','Ironia – mówimy odwrotnie, niż myślimy, zwykle z kpiną.');
+txt('w6','Zestawienie wyrazów o sprzecznych znaczeniach, np. wymowne milczenie.','oksymoron','Oksymoron – milczenie nie może „mówić”, a jednak bywa wymowne: gorący lód, żywy trup.');
+txt('w7','Element, który ma znaczenie dosłowne i dodatkowe, np. gołąb oznacza pokój.','symbol','Symbol – gołąb = pokój, serce = miłość, kotwica = nadzieja.');
+txt('w8','Krótkie, zwięzłe zdanie wyrażające refleksję, zwykle znanego autora, np. „Wiem, że nic nie wiem”.','aforyzm','Aforyzm – zwięzła, mądra myśl; ma autora (tu: Sokrates).');
+txt('w9','Ludowe powiedzenie przekazujące mądrość życiową, np. „Gdzie kucharek sześć, tam nie ma co jeść”.','przysłowie','Przysłowie – mądrość ludowa, bez znanego autora.');
+txt('w10','Określenie rzeczownika, które uwydatnia jego cechę, np. tajemniczy las.','epitet','Epitet – zwykle przymiotnik przy rzeczowniku: tajemniczy las, srebrny księżyc.');
+txt('w11','Zestawienie dwóch rzeczy ze względu na podobieństwo, ze słowem „jak”, „niczym”, „jakby”, np. mądry jak sowa.','porównanie','Porównanie – rozpoznasz je po słowie jak, niczym, jakby, na kształt.');
+txt('w12','Połączenie słów o niedosłownym znaczeniu, np. ząb czasu, burza oklasków.','metafora','Metafora (przenośnia) – słowa znaczą coś innego niż dosłownie; nie ma słowa „jak”.');
+txt('w13','Nadanie zjawiskom, zwierzętom lub przedmiotom cech ludzkich, np. słońce się uśmiecha.','personifikacja','Personifikacja (uosobienie) – cechy LUDZKIE: mówi, śmieje się, myśli, płacze.');
+txt('w14','Nadanie rzeczom lub zjawiskom cech istot żywych (np. ruchu, oddechu), np. kamienie pełzały po zboczu.','animizacja','Animizacja (ożywienie) – cechy ISTOT ŻYWYCH, ale nie typowo ludzkie: pełza, oddycha, wyje.');
+txt('w15','Celowe wyolbrzymienie, np. czekam całą wieczność.','hiperbola','Hiperbola – przesada: milion razy, cała wieczność, plecak waży tonę.');
+txt('w16','Wyraz naśladujący dźwięk, np. stuk, szum, bum, kukuryku.','onomatopeja','Onomatopeja – słowo, które brzmi jak dźwięk, który nazywa.');
+txt('w17','Uroczysty, bezpośredni zwrot do adresata, np. „Litwo! Ojczyzno moja!”.','apostrofa','Apostrofa – zwrot do osoby, rzeczy albo idei, często z wykrzyknikiem.');
+txt('w18','Pytanie, na które nie oczekuje się odpowiedzi, np. „Czy można żyć bez przyjaźni?”.','pytanie retoryczne','Pytanie retoryczne – zadane dla podkreślenia myśli, odpowiedź jest oczywista.');
+txt('w19','Celowe, ponowne użycie tego samego wyrazu lub wyrażenia, np. „biegnij, biegnij!”.','powtórzenie','Powtórzenie – ten sam wyraz kilka razy; anafora to szczególny rodzaj powtórzenia (na początku wersów).');
+
+// Definicje – dobierz w pary
+pairs('def','p1','Dobierz w pary: powtórzenia i określenia.',[['anafora','powtórzenie na początku kolejnych wersów'],['powtórzenie','ponowne użycie tego samego wyrazu'],['wyliczenie','wymienianie kolejnych elementów'],['epitet','określenie rzeczownika']],'Anafora to powtórzenie, ale zawsze na POCZĄTKU kolejnych zdań lub wersów.');
+pairs('def','p2','Dobierz w pary: rozmiar, przesada, dźwięk.',[['zgrubienie','podkreśla duży rozmiar'],['zdrobnienie','mały rozmiar lub czułość'],['hiperbola','celowe wyolbrzymienie'],['onomatopeja','naśladuje dźwięk']],'Zgrubienie i zdrobnienie to formy wyrazu; hiperbola to przesada w treści.');
+pairs('def','p3','Dobierz w pary: ożywianie i zwroty.',[['personifikacja','cechy ludzkie'],['animizacja','cechy istot żywych'],['apostrofa','uroczysty zwrot do adresata'],['pytanie retoryczne','nie oczekuje odpowiedzi']],'Personifikacja = człowiek, animizacja = coś żywego (ruch, oddech).');
+pairs('def','p4','Dobierz w pary: niedosłowne znaczenia.',[['ironia','mówi się odwrotnie, niż się myśli'],['oksymoron','wyrazy o sprzecznych znaczeniach'],['symbol','znaczenie dosłowne i dodatkowe'],['metafora','niedosłowne połączenie słów'],['porównanie','podobieństwo ze słowem „jak”']],'Metafora i porównanie są podobne – ale tylko porównanie ma „jak”, „niczym”.');
+pairs('def','p5','Dobierz przykład do środka.',[['psisko','zgrubienie'],['kotek','zdrobnienie'],['gorący lód','oksymoron'],['bum, trach','onomatopeja'],['mądry jak sowa','porównanie']],'Oksymoron łączy sprzeczności: lód nie może być gorący.');
+pairs('def','p6','Dobierz cytat lub przykład do środka.',[['„Wiem, że nic nie wiem” (Sokrates)','aforyzm'],['„Kto rano wstaje, temu Pan Bóg daje”','przysłowie'],['gołąb – pokój','symbol'],['ząb czasu','metafora']],'Aforyzm ma autora, przysłowie jest ludowe.');
+
+// Rozpoznaj w przykładzie
+mc('przyk','r1','Jaki to środek?',['anafora','wyliczenie','epitet','apostrofa'],'Te same słowa „nie chcę” na początku kolejnych części – to anafora.','Nie chcę smutku, nie chcę łez, nie chcę żalu.');
+mc('przyk','r2','Jaki to środek?',['wyliczenie','epitet','anafora','porównanie'],'Wymienione po kolei owoce – wyliczenie.','Na stole leżały jabłka, gruszki, śliwki i winogrona.');
+mc('przyk','r3','Jaki środek tworzą wyrazy „łapsko” i „nochal”?',['zgrubienie','zdrobnienie','epitet','onomatopeja'],'Łapsko, nochal – formy podkreślające duży rozmiar.','Pies miał wielkie łapsko i ogromny nochal.');
+mc('przyk','r4','Jaki środek tworzą wyrazy „ciasteczka” i „domku”?',['zdrobnienie','zgrubienie','epitet','symbol'],'Ciasteczka, domek – zdrobnienia (mały rozmiar, czułość).','Babcia piekła ciasteczka w małym domku.');
+mc('przyk','r5','Kolega spóźnił się godzinę, a nauczyciel mówi:',['ironia','porównanie','hiperbola','aforyzm'],'Nauczyciel myśli odwrotnie, niż mówi – to ironia.','No, punktualny jak zawsze!');
+mc('przyk','r6','Jaki to środek?',['oksymoron','epitet','metafora','ironia'],'Słodycz i gorycz, gorąco i lód – sprzeczności, czyli oksymorony.','gorący lód, słodka gorycz');
+mc('przyk','r7','Biały gołąb na plakacie oznacza pokój. Gołąb jest tu…',['symbolem','metaforą','epitetem','personifikacją'],'Gołąb to ptak (znaczenie dosłowne) i znak pokoju (znaczenie dodatkowe) – symbol.');
+mc('przyk','r8','Jaki to środek?',['aforyzm','przysłowie','pytanie retoryczne','ironia'],'Zwięzła myśl znanego autora (Kartezjusz) – aforyzm.','Myślę, więc jestem. (Kartezjusz)');
+mc('przyk','r9','Jaki to środek?',['przysłowie','aforyzm','wyliczenie','ironia'],'Ludowa mądrość bez autora – przysłowie.','Gdzie kucharek sześć, tam nie ma co jeść.');
+mc('przyk','r10','Wyrazy „srebrny” i „cichy” to…',['epitety','porównania','metafory','wyliczenia'],'Określenia rzeczowników (księżyc, wieczór) – epitety.','srebrny księżyc, cichy wieczór');
+mc('przyk','r11','Jaki to środek?',['porównanie','metafora','hiperbola','epitet'],'Jest słowo „jak” – porównanie.','Biegł szybko jak wiatr.');
+mc('przyk','r12','Jaki to środek?',['metafora','epitet','porównanie','oksymoron'],'Czas nie ma zębów, oklaski to nie burza – znaczenie niedosłowne, bez „jak”: metafora.','ząb czasu, burza oklasków');
+mc('przyk','r13','Jaki to środek?',['personifikacja','animizacja','epitet','onomatopeja'],'Uśmiech to cecha ludzka – personifikacja.','Słońce uśmiechnęło się do dzieci.');
+mc('przyk','r14','Jaki to środek?',['animizacja','personifikacja','onomatopeja','hiperbola'],'Pełzanie to ruch istoty żywej, nie cecha typowo ludzka – animizacja.','Kamienie pełzały po zboczu.');
+mc('przyk','r15','Jaki to środek?',['hiperbola','ironia','powtórzenie','metafora'],'Milion razy to celowa przesada – hiperbola.','Mówiłem ci to już milion razy!');
+mc('przyk','r16','Wyrazy „szur”, „trzask”, „bum” to…',['onomatopeje','anafory','epitety','apostrofy'],'Słowa naśladujące dźwięki – onomatopeje.','Za ścianą: szur, trzask, bum!');
+mc('przyk','r17','Jaki to środek?',['apostrofa','pytanie retoryczne','hiperbola','wyliczenie'],'Uroczysty zwrot bezpośrednio do morza – apostrofa.','O, morze! Ty potężne!');
+mc('przyk','r18','Jaki to środek?',['pytanie retoryczne','apostrofa','ironia','aforyzm'],'Odpowiedź jest oczywista, nikt jej nie oczekuje – pytanie retoryczne.','Czy można żyć bez przyjaźni?');
+mc('przyk','r19','Jaki to środek?',['powtórzenie','wyliczenie','onomatopeja','apostrofa'],'Ten sam wyraz użyty kilka razy – powtórzenie.','Uciekaj, uciekaj, uciekaj!');
+mc('przyk','r20','Jaki to środek?',['animizacja','personifikacja','porównanie','oksymoron'],'Wycie to dźwięk zwierzęcia (istoty żywej), nie człowieka – animizacja.','Wiatr wył w kominie.');
+mc('przyk','r21','Jaki to środek?',['personifikacja','animizacja','epitet','symbol'],'Zamyślić się może tylko człowiek – personifikacja.','Księżyc zamyślił się nad jeziorem.');
+
+// Z lektur
+mc('lit','l1','Jakim środkiem jest zwrot „Litwo! Ojczyzno moja!”?',['apostrofą','pytaniem retorycznym','wyliczeniem','ironią'],'Uroczysty zwrot do ojczyzny na początku „Pana Tadeusza” (Inwokacja) – apostrofa.','Litwo! Ojczyzno moja! ty jesteś jak zdrowie. – A. Mickiewicz, „Pan Tadeusz”');
+mc('lit','l2','A słowa „ty jesteś jak zdrowie” to…',['porównanie','metafora','epitet','symbol'],'Ojczyzna porównana do zdrowia, ze słowem „jak” – porównanie.','Litwo! Ojczyzno moja! ty jesteś jak zdrowie. – A. Mickiewicz, „Pan Tadeusz”');
+mc('lit','l3','Wyrazy „leśnych” i „zielonych” to…',['epitety','porównania','zdrobnienia','onomatopeje'],'Określają rzeczowniki (pagórki, łąki) – epitety.','Do tych pagórków leśnych, do tych łąk zielonych – A. Mickiewicz, „Pan Tadeusz”');
+mc('lit','l4','Step nazwany „suchym oceanem” to…',['metafora','porównanie','hiperbola','symbol'],'Step to nie ocean – znaczenie przenośne, bez „jak”: metafora.','Wpłynąłem na suchego przestwór oceanu – A. Mickiewicz, „Stepy akermańskie”');
+mc('lit','l5','Słowa „jak łódka brodzi” to…',['porównanie','metafora','animizacja','epitet'],'Wóz porównany do łódki, ze słowem „jak” – porównanie.','Wóz nurza się w zieloność i jak łódka brodzi – A. Mickiewicz, „Stepy akermańskie”');
+mc('lit','l6','Wyrazy „buch” i „uch” to…',['onomatopeje','epitety','zdrobnienia','apostrofy'],'Naśladują sapanie lokomotywy – onomatopeje.','Buch – jak gorąco! / Uch – jak gorąco! – J. Tuwim, „Lokomotywa”');
+mc('lit','l7','Wyrazy „ciężka, ogromna” to…',['epitety','onomatopeje','zgrubienia','porównania'],'Określają rzeczownik „lokomotywa” – epitety.','Stoi na stacji lokomotywa, / Ciężka, ogromna… – J. Tuwim, „Lokomotywa”');
+mc('lit','l8','Lipa mówi do gościa. To przykład…',['personifikacji','animizacji','symbolu','ironii'],'Drzewo mówi i zaprasza jak człowiek – personifikacja.','Gościu, siądź pod mym liściem, a odpoczni sobie! – J. Kochanowski, „Na lipę”');
+mc('lit','l9','Zwrot „Gościu, siądź…” to…',['apostrofa','pytanie retoryczne','wyliczenie','ironia'],'Bezpośredni zwrot do adresata (gościa) – apostrofa.','Gościu, siądź pod mym liściem, a odpoczni sobie! – J. Kochanowski, „Na lipę”');
+mc('lit','l10','Jaki środek otwiera ten utwór?',['apostrofa','pytanie retoryczne','porównanie','ironia'],'Uroczysty zwrot do miłości ojczyzny – apostrofa.','Święta miłości kochanej ojczyzny, / Czują cię tylko umysły poczciwe! – I. Krasicki, „Hymn do miłości ojczyzny”');
+mc('lit','l11','Słowa „chrząszcz brzmi w trzcinie” naśladują brzęczenie. To…',['onomatopeja','anafora','oksymoron','aforyzm'],'Głoski sz, cz, rz naśladują dźwięk owada – onomatopeja (dźwiękonaśladownictwo).','W Szczebrzeszynie chrząszcz brzmi w trzcinie – J. Brzechwa, „Chrząszcz”');
+mc('lit','l12','Ptaki nadają własne radio. To przykład…',['personifikacji','animizacji','onomatopei','hiperboli'],'Prowadzenie radia to czynność ludzka – personifikacja.','Halo! Halo! Tu ptasie radio w brzezinie – J. Tuwim, „Ptasie radio”');
+mc('lit','l13','Zwrot „Moja droga Orszulo” to…',['apostrofa','pytanie retoryczne','onomatopeja','ironia'],'Ojciec zwraca się bezpośrednio do zmarłej córki – apostrofa.','Wielkieś mi uczyniła pustki w domu moim, / Moja droga Orszulo, tym zniknienim swoim. – J. Kochanowski, „Tren VIII”');
+mc('lit','l14','Jaki to środek?',['aforyzm','przysłowie','ironia','oksymoron'],'Słynna, zwięzła myśl Sokratesa – aforyzm.','Wiem, że nic nie wiem. – Sokrates');
+
+// Pułapki – nie pomyl
+bin('pul','b1','„Słońce się uśmiecha” – to…',['personifikacja','animizacja'],0,'Uśmiech to cecha ludzka → personifikacja.');
+bin('pul','b2','„Chmury pędziły po niebie” – to…',['personifikacja','animizacja'],1,'Pędzenie to ruch istoty żywej, nie tylko człowieka → animizacja.');
+bin('pul','b3','„oczy jak gwiazdy” – to…',['porównanie','metafora'],0,'Jest „jak” → porównanie.');
+bin('pul','b4','„gwiazdy jej oczu” – to…',['porównanie','metafora'],1,'Nie ma „jak”, oczy nazwane gwiazdami → metafora.');
+bin('pul','b5','„Kto pyta, nie błądzi” – to…',['aforyzm','przysłowie'],1,'Mądrość ludowa bez autora → przysłowie.');
+bin('pul','b6','„Być albo nie być” (Szekspir) – to…',['aforyzm','przysłowie'],0,'Ma znanego autora → aforyzm.');
+bin('pul','b7','„kocisko” – to…',['zgrubienie','zdrobnienie'],0,'-isko podkreśla duży rozmiar → zgrubienie.');
+bin('pul','b8','„rączka” – to…',['zgrubienie','zdrobnienie'],1,'Mała, czuła forma → zdrobnienie.');
+bin('pul','b9','„Idź, idź już!” – to…',['anafora','powtórzenie'],1,'Wyraz powtórzony w jednym zdaniu → powtórzenie (anafora jest na początku kolejnych zdań lub wersów).');
+bin('pul','b10','„Kocham wiosnę. Kocham lato. Kocham nawet zimę.” – to…',['anafora','wyliczenie'],0,'„Kocham” na początku kolejnych zdań → anafora.');
+bin('pul','b11','„Ten plecak waży tonę!” – to…',['hiperbola','ironia'],0,'Przesada, ale mówimy serio, że jest ciężki → hiperbola.');
+bin('pul','b12','Leje deszcz, a ktoś mówi: „Ale piękna pogoda!” – to…',['hiperbola','ironia'],1,'Mówi odwrotnie, niż myśli → ironia.');
+bin('pul','b13','„O, wiosno!” – to…',['apostrofa','pytanie retoryczne'],0,'Zwrot do wiosny → apostrofa.');
+bin('pul','b14','„Czy jest coś piękniejszego niż morze?” – to…',['apostrofa','pytanie retoryczne'],1,'Pytanie bez oczekiwania na odpowiedź → pytanie retoryczne.');
+bin('pul','b15','„gorzka czekolada” – to…',['epitet','oksymoron'],0,'Czekolada naprawdę bywa gorzka – nie ma sprzeczności → epitet.');
+bin('pul','b16','„gorzka słodycz” – to…',['epitet','oksymoron'],1,'Słodycz nie może być gorzka – sprzeczność → oksymoron.');
+tf('pul','t1','Metafora to to samo co przenośnia.',true,'Tak – to dwie nazwy tego samego środka.');
+tf('pul','t2','Anafora to powtórzenie wyrazu na końcu kolejnych wersów.',false,'Nie – anafora jest na POCZĄTKU kolejnych zdań lub wersów.');
+tf('pul','t3','Animizacja nadaje cechy ludzkie, a personifikacja – cechy zwierząt.',false,'Odwrotnie: personifikacja – cechy ludzkie, animizacja – cechy istot żywych.');
+tf('pul','t4','Przysłowie ma zwykle znanego autora.',false,'Nie – znanego autora ma aforyzm; przysłowie jest ludowe.');
+tf('pul','t5','Na pytanie retoryczne nie oczekujemy odpowiedzi.',true,'Tak – zadaje się je, żeby podkreślić myśl.');
+tf('pul','t6','Oksymoron łączy wyrazy o podobnych znaczeniach.',false,'Nie – o SPRZECZNYCH znaczeniach (wymowne milczenie).');
+tf('pul','t7','W porównaniu jest zwykle słowo „jak”, „niczym” albo „jakby”.',true,'Tak – po tym odróżnisz porównanie od metafory.');
+
+// Zaznacz wszystkie
+multi('zaz','m1','Zaznacz wszystkie epitety: „Wysoki, stary dąb rósł na zielonej polanie.”',[['wysoki',1],['stary',1],['zielonej',1],['dąb',0],['rósł',0],['polanie',0]],'Epitety określają rzeczowniki: wysoki, stary (dąb), zielonej (polanie).');
+multi('zaz','m2','Zaznacz wszystkie onomatopeje.',[['szum',1],['kukuryku',1],['trach',1],['plusk',1],['las',0],['cisza',0],['głośno',0]],'Onomatopeje naśladują dźwięki: szum, kukuryku, trach, plusk.');
+multi('zaz','m3','Zaznacz wszystkie zdrobnienia.',[['domek',1],['rączka',1],['kotek',1],['psisko',0],['domisko',0],['łapsko',0]],'Zdrobnienia: domek, rączka, kotek; psisko, domisko, łapsko to zgrubienia.');
+multi('zaz','m4','Zaznacz przykłady personifikacji (cechy LUDZKIE).',[['drzewa szepczą sekrety',1],['słońce się uśmiecha',1],['las płacze',1],['wiatr wyje',0],['rzeka pełznie',0],['kamień toczy się',0]],'Szeptać, uśmiechać się, płakać – cechy ludzkie. Wyje, pełznie – animizacja; toczy się – dosłownie.');
+multi('zaz','m5','Zaznacz wszystkie porównania.',[['mądry jak sowa',1],['biały niczym śnieg',1],['szybki jakby wiatr',1],['złote serce',0],['ząb czasu',0]],'Porównania mają jak, niczym, jakby. Złote serce, ząb czasu – metafory.');
+
+/* ============ ZAPIS ============ */
+const KEY='srodki-styl-v1:'+kid;
+let S={wrong:[],last:null,best:null}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const COLORS=['#2F5BD3','#C2410C','#7C3AED','#0E7490'];
+const QN=Object.fromEntries(Q.map(q=>[q.id,q]));
+const KIND={txt:'wpisz nazwę',bin:'wybierz jedno z dwóch',mc:'wybierz jedną',tf:'prawda czy fałsz?',pairs:'dobierz w pary',multi:'zaznacz wszystkie pasujące',order:'ułóż w kolejności'};
+function answerText(q){
+  if(q.type==='mc') return esc(q.o[0]);
+  if(q.type==='tf') return q.val?'Prawda':'Fałsz';
+  if(q.type==='bin') return esc(q.l[q.c]);
+  if(q.type==='txt') return esc(q.a[0]);
+  if(q.type==='pairs') return q.p.map(([a,b])=>`${esc(a)} → ${esc(b)}`).join('<br>');
+  if(q.type==='multi') return q.o.filter(x=>x[1]).map(x=>esc(x[0])).join(' · ');
+  return q.items.map(esc).join(' → ');
+}
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const wr=S.wrong.filter(id=>QN[id]);
+  $app.innerHTML=`<h1>✒️ Środki stylistyczne</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Quiz na kartkówkę: 19 środków z zeszytu – definicje, przykłady i cytaty z lektur. Po każdej odpowiedzi od razu wyjaśnienie.</p>
+    ${zButton()}
+    <div class="pills">${zBadge()}${S.last?`<span class="pill">ostatnio: ${S.last.ok}/${S.last.n}</span>`:''}${S.best!=null?`<span class="pill">🏆 najlepszy wynik: ${S.best}%</span>`:''}</div>
+    <button class="big dark" id="bAll"><span class="i">🎯</span><span><span class="t">Cały quiz</span><span class="d">${Q.length} pytań w losowej kolejności</span></span></button>
+    <button class="big" id="bWrong" ${wr.length?'':'disabled style="opacity:.5"'}><span class="i">🩹</span><span><span class="t">Powtórz tylko błędne</span><span class="d">${wr.length?`${wr.length} z ostatniego podejścia`:'Na razie brak błędów do powtórki'}</span></span></button>
+    <div class="card"><h2>Zakres</h2>${Object.entries(SECTIONS).map(([k,n])=>`<button class="big" data-s="${k}" style="box-shadow:none;margin-bottom:8px"><span class="t">${esc(n)}</span><span class="d" style="margin-left:auto">${Q.filter(q=>q.s===k).length} pytań</span></button>`).join('')}</div>
+    ${canSave?'':'<p class="muted small">Ta przeglądarka nie zapisze wyników.</p>'}`;
+  $('bZal').onclick=zalicz;
+  $('bAll').onclick=()=>run(shuffle(Q),'Cały quiz');
+  $('bWrong').onclick=()=>{ if(wr.length) run(shuffle(wr.map(id=>QN[id])),'🩹 Błędne'); };
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>run(shuffle(Q.filter(q=>q.s===b.dataset.s)),SECTIONS[b.dataset.s]));
+}
+
+/* ============ QUIZ ============ */
+const photo=q=>`<figure class="ph"><img src="${esc(q.img)}" alt="Zdjęcie do rozpoznania"><figcaption><a href="${esc(q.src)}" target="_blank" rel="noopener">${esc(q.cred)}</a></figcaption></figure>`;
+function run(items,title){
+  items.forEach(q=>{ if(q.img){ const i=new Image(); i.src=q.img; } });  // zdjęcia ładują się z góry
+  window.scrollTo(0,0);
+  let i=0; const wrong=[];
+  function next(){
+    if(i>=items.length) return finish();
+    const q=items[i];
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*i/items.length}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${esc(SECTIONS[q.s])} · ${KIND[q.type]}</span><span>${i+1}/${items.length}</span></div>
+      <div class="qt">${esc(q.q)}</div>${q.quote?`<blockquote class="quote">${esc(q.quote)}</blockquote>`:''}${q.img?photo(q):''}${q.svg?`<div class="svgfig">${q.svg}</div>`:''}<div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      if(!ok) wrong.push(q);
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">${i+1<items.length?'Dalej':'Wynik'}</button>`;
+      $('bNext').onclick=()=>{ i++; next(); }; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    ({txt:askTxt,bin:askBin,mc:askMc,tf:askTf,pairs:askPairs,multi:askMulti,order:askOrder})[q.type](q,after);
+  }
+  function finish(){
+    const n=items.length, ok=n-wrong.length, pc=Math.round(100*ok/n);
+    if(title==='Cały quiz'){ S.last={ok,n}; S.best=Math.max(S.best||0,pc); S.wrong=wrong.map(q=>q.id); }
+    else if(title==='🩹 Błędne'){ S.wrong=wrong.map(q=>q.id); }
+    else { S.wrong=[...new Set([...S.wrong.filter(id=>!items.some(q=>q.id===id)),...wrong.map(q=>q.id)])]; }
+    save();
+    window.scrollTo(0,0);
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div class="score">${ok}/${n}</div>
+      <h2 style="margin-top:8px">${pc}% – ${!wrong.length?'bezbłędnie! 🏆':pc>=80?'bardzo dobrze! 👏':pc>=60?'nieźle – powtórz błędne.':'powtórz błędne i spróbuj jeszcze raz.'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px">${wrong.length?'<button class="btn primary" id="bRep">Powtórz tylko błędne</button>':''}<button class="btn" id="bAgain">Jeszcze raz wszystko</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${wrong.length?`<div class="card"><h2>Do powtórzenia (${wrong.length})</h2>${wrong.map(q=>`<div class="diff">${q.img?`<img class="dimg" src="${esc(q.img)}" alt="">`:''}<div class="qq">${esc(q.q)}</div><div>✅ ${answerText(q)}</div><div class="muted small">${esc(q.e)}</div></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $('bAgain').onclick=()=>run(shuffle(items),title);
+    if(wrong.length) $('bRep').onclick=()=>run(shuffle(wrong),'🩹 Błędne');
+  }
+  next();
+}
+
+/* ============ TYPY PYTAŃ ============ */
+function askMc(q,after){
+  const order=shuffle(q.o.map((_,i)=>i));
+  $('ans').innerHTML=`<div class="opts">${order.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===0;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===0) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.o[0])}</b></div>`); });
+}
+// Wpisz nazwę: bez wielkich liter i polskich znaków; jedna literówka w dłuższym słowie przechodzi z uwagą o pisowni.
+const normTxt=v=>String(v).toLowerCase().replace(/ł/g,'l').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z ]/g,' ').replace(/\s+/g,' ').trim();
+function lev(a,b){ const d=[...Array(b.length+1).keys()]; for(let i=1;i<=a.length;i++){ let p=d[0]; d[0]=i; for(let j=1;j<=b.length;j++){ const t=d[j]; d[j]=Math.min(d[j]+1,d[j-1]+1,p+(a[i-1]===b[j-1]?0:1)); p=t; } } return d[b.length]; }
+function askTxt(q,after){
+  $('ans').innerHTML=`<input class="tin" id="tin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="wpisz nazwę środka">
+    <button class="btn primary wide" id="bTin" style="margin-top:10px">Sprawdź</button>`;
+  const go=()=>{ const v=$('tin').value, n=normTxt(v); if(!n) return;
+    $('tin').disabled=true; $('bTin').remove();
+    const acc=q.a.map(normTxt), exact=acc.includes(n), near=!exact&&n.length>=6&&acc.some(x=>lev(n,x)<=1);
+    const ok=exact||near;
+    after(ok,ok?(near?`<div>Uważaj na pisownię: <b>${esc(q.a[0])}</b></div>`:(n!==acc[0]?`<div>Główna nazwa: <b>${esc(q.a[0])}</b></div>`:''))
+      :`<div>Poprawnie: <b>${esc(q.a[0])}</b>${q.a.length>1?` <span class="muted small">(też: ${esc(q.a.slice(1).join(', '))})</span>`:''}</div>`); };
+  $('bTin').onclick=go; $('tin').onkeydown=ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); go(); } };
+  setTimeout(()=>$('tin').focus({preventScroll:true}),60);
+}
+function askBin(q,after){
+  $('ans').innerHTML=`<div class="opts two">${q.l.map((t,i)=>`<button class="opt" data-i="${i}">${esc(t)}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=+b.dataset.i===q.c;
+    btns.forEach(x=>{ x.disabled=true; if(+x.dataset.i===q.c) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${esc(q.l[q.c])}</b></div>`); });
+}
+function askTf(q,after){
+  $('ans').innerHTML=`<div class="opts two"><button class="opt" data-v="1">Prawda</button><button class="opt" data-v="0">Fałsz</button></div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=(b.dataset.v==='1')===q.val;
+    btns.forEach(x=>{ x.disabled=true; if((x.dataset.v==='1')===q.val) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,ok?'':`<div>Poprawnie: <b>${q.val?'Prawda':'Fałsz'}</b></div>`); });
+}
+function askMulti(q,after){
+  const order=shuffle(q.o.map((_,i)=>i)), sel=new Set();
+  $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Zaznacz wszystkie poprawne odpowiedzi i naciśnij „Sprawdź”.</p>
+    <div class="opts">${order.map(i=>`<button class="opt" data-i="${i}"><span class="box">☐</span> ${esc(q.o[i][0])}</button>`).join('')}</div>
+    <button class="btn primary wide" id="bChk" style="margin-top:12px" disabled>Sprawdź</button>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; sel.has(i)?sel.delete(i):sel.add(i);
+    b.classList.toggle('sel',sel.has(i)); b.querySelector('.box').textContent=sel.has(i)?'☑':'☐'; $('bChk').disabled=!sel.size; });
+  $('bChk').onclick=()=>{
+    let ok=true;
+    btns.forEach(b=>{ const i=+b.dataset.i, good=!!q.o[i][1], picked=sel.has(i); b.disabled=true; b.classList.remove('sel');
+      if(good&&picked) b.classList.add('ok'); else if(!good&&picked){ b.classList.add('no'); ok=false; } else if(good&&!picked){ b.classList.add('miss'); ok=false; } });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawne: <b>${answerText(q)}</b></div><div class="muted small">Przerywana zielona ramka = to też trzeba było zaznaczyć.</div>`);
+  };
+}
+function askOrder(q,after){
+  let pool=shuffle(q.items.map((_,i)=>i)); while(pool.every((v,k)=>v===k)) pool=shuffle(pool);
+  const chosen=[]; let locked=false;
+  const draw=()=>{
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotykaj po kolei. Dotknięcie ułożonego elementu cofa go.</p>
+      <div class="ord">${chosen.map((v,k)=>`<button class="slot full" data-k="${k}"><span class="k">${k+1}</span>${esc(q.items[v])}</button>`).join('')}${chosen.length<q.items.length?`<div class="slot"><span class="k">${chosen.length+1}</span><span class="muted small">wybierz z listy poniżej</span></div>`:''}</div>
+      <div class="pool">${pool.filter(v=>!chosen.includes(v)).map(v=>`<button class="opt" data-v="${v}">${esc(q.items[v])}</button>`).join('')}</div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${chosen.length===q.items.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('.pool .opt').forEach(b=>b.onclick=()=>{ if(locked) return; chosen.push(+b.dataset.v); draw(); });
+    $('ans').querySelectorAll('button.slot').forEach(b=>b.onclick=()=>{ if(locked) return; const k=+b.dataset.k; if(chosen[k]!=null){ chosen.splice(k,1); draw(); } });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=chosen.every((v,k)=>v===k);
+    $('ans').querySelectorAll('button.slot').forEach(b=>{ const k=+b.dataset.k; b.disabled=true; b.classList.add(chosen[k]===k?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<div>Poprawna kolejność: <b>${answerText(q)}</b></div>`);
+  };
+  draw();
+}
+function askPairs(q,after){
+  const L=q.p.map((p,i)=>({i,t:p[0]})), R=shuffle(q.p.map((p,i)=>({i,t:p[1]})));
+  const match={}; let selL=null, locked=false;   // match[indeks lewej] = indeks prawej
+  const draw=()=>{
+    const keys=Object.keys(match);
+    $('ans').innerHTML=`<p class="muted small" style="margin:-6px 0 10px">Dotknij pojęcia po lewej, a potem pasującego po prawej.</p>
+      <div class="pairs"><div class="col">${L.map(l=>{ const k=keys.indexOf(String(l.i)); return `<button class="pb${selL===l.i?' sel':''}" data-l="${l.i}">${esc(l.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div>
+      <div class="col">${R.map(r=>{ const li=keys.find(k=>match[k]===r.i); const k=li!=null?keys.indexOf(li):-1; return `<button class="pb" data-r="${r.i}">${esc(r.t)}${k>=0?`<span class="n" style="background:${COLORS[k%4]}">${k+1}</span>`:''}</button>`; }).join('')}</div></div>
+      <button class="btn primary wide" id="bChk" style="margin-top:12px" ${keys.length===L.length?'':'disabled'}>Sprawdź</button>`;
+    $('ans').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(locked) return; const i=+b.dataset.l; if(i in match){ delete match[i]; selL=i; } else selL=selL===i?null:i; draw(); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ if(locked||selL===null) return; const r=+b.dataset.r; const prev=Object.keys(match).find(k=>match[k]===r); if(prev!=null) delete match[prev]; match[selL]=r; selL=null; draw(); });
+    $('bChk').onclick=check;
+  };
+  const check=()=>{
+    locked=true; const ok=L.every(l=>match[l.i]===l.i);
+    $('ans').querySelectorAll('[data-l]').forEach(b=>{ const i=+b.dataset.l; b.disabled=true; b.classList.add(match[i]===i?'ok':'no'); });
+    $('ans').querySelectorAll('[data-r]').forEach(b=>{ b.disabled=true; const r=+b.dataset.r; const li=Object.keys(match).find(k=>match[k]===r); b.classList.add(+li===r?'ok':'no'); });
+    $('bChk').remove();
+    after(ok,ok?'':`<ul>${q.p.map(([a,b],i)=>`<li>${match[i]===i?'✅':'❌'} ${esc(a)} → <b>${esc(b)}</b></li>`).join('')}</ul>`);
+  };
+  draw();
+}
+
+/* ============ ZALICZ WSZYSTKO ============ */
+// Wszystkie pytania do skutku: pomyłka wraca na koniec kolejki, zalicza dopiero dobra odpowiedź.
+// Stan w S.z (q – kolejka id, ok – zaliczone, miss – pomylone choć raz) zapisuje się po każdej odpowiedzi; odznaka w S.zDone.
+const zAll=()=>typeof fullSet==='function'?fullSet():Q;
+const zGet=id=>typeof getQ==='function'?getQ(id):Q.find(q=>q.id===id);
+const zToday=()=>new Date().toLocaleDateString('sv');
+const zDate=d=>d.split('-').reverse().join('.');
+const zPl=n=>n===1?'pytanie':n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?'pytania':'pytań';
+function zState(){
+  if(!S.z){ S.z={q:shuffle(zAll()).map(q=>q.id),ok:[],miss:[]}; save(); return S.z; }
+  const z=S.z; z.q=z.q.filter(id=>zGet(id)); z.ok=z.ok.filter(id=>zGet(id));
+  const seen=new Set([...z.q,...z.ok]), add=shuffle(Q.filter(q=>!seen.has(q.id))).map(q=>q.id);
+  if(add.length){ z.q.push(...add); save(); }  // pytania dopisane do quizu po starcie trybu
+  if(!z.q.length&&!S.zDone){ S.zDone={d:zToday(),n:z.ok.length}; save(); }
+  return z;
+}
+function zCount(){ if(!S.z) return [0,zAll().length]; const z=zState(); return [z.ok.length,z.ok.length+z.q.length]; }
+const zBadge=()=>S.zDone?`<span class="pill">✅ zaliczony 100% (${zDate(S.zDone.d)})</span>`:'';
+function zButton(){
+  const [x,n]=zCount();
+  const sub=S.z&&!S.z.q.length?`zaliczony 100% (${zDate(S.zDone.d)}) – możesz zacząć od nowa`
+    :S.z&&(x||S.z.miss.length)?`Wznów – do zaliczenia jeszcze ${n-x}`:`Wszystkie ${n} ${zPl(n)} do skutku – pomyłki wracają na koniec kolejki`;
+  return `<button class="big" id="bZal" style="border:2px solid var(--ok)"><span class="i">✅</span><span style="flex:1"><span class="t">Zalicz wszystko (${x}/${n})</span><span class="d">${sub}</span><span class="bar"><span style="width:${n?Math.round(100*x/n):0}%"></span></span></span></button>`;
+}
+function zalicz(){
+  const z=zState();
+  if(!z.q.length) return zFinish();
+  const id=z.q[0], q=zGet(id), n=z.ok.length+z.q.length, again=z.miss.includes(id);
+  const nx=z.q[1]&&zGet(z.q[1]); if(nx&&nx.img){ const i=new Image(); i.src=nx.img; }  // następne zdjęcie ładuje się z góry
+  const lab=typeof GN!=='undefined'?`${GN[q.g].i} ${esc(GN[q.g].n)}${q.trap?' <span class="tag">pułapka</span>':''}`:`${esc(SECTIONS[q.s])} · ${KIND[q.type]}`;
+  window.scrollTo(0,0);
+  $app.innerHTML=`${topBar('✅ Zalicz wszystko')}<div style="position:sticky;top:0;z-index:5;background:var(--paper);padding:6px 0 1px;margin-top:-6px"><div class="row" style="justify-content:space-between;font-weight:700;margin-bottom:6px"><span>zaliczone ${z.ok.length} z ${n}</span><span class="muted small">${again?'jeszcze raz 💪':`w kolejce: ${z.q.length}`}</span></div>
+    <div class="prog"><span style="width:${100*z.ok.length/n}%"></span></div></div>
+    <div class="q" id="qc"><div class="qlab"><span>${lab}</span></div>
+    <div class="qt">${esc(q.q)}</div>${q.quote?`<blockquote class="quote">${esc(q.quote)}</blockquote>`:''}${q.img&&typeof photo==='function'?photo(q):''}${q.svg?`<div class="svgfig">${q.svg}</div>`:''}<div id="ans"></div><div id="why" aria-live="polite"></div></div>`;
+  $('bBack').onclick=home;
+  const after=(ok,detail)=>{
+    if(typeof record==='function'&&!again) record(q,ok);  // fiszki: pierwsza odpowiedź liczy się też do powtórek
+    z.q.shift();
+    if(ok) z.ok.push(id); else { z.q.push(id); if(!again) z.miss.push(id); }
+    const fin=!z.q.length; if(fin) S.zDone={d:zToday(),n};
+    save();
+    $('qc').classList.add(ok?'ok':'bad');
+    $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Źle ❌ – to pytanie wróci na końcu kolejki'}</div>${detail||''}<div class="w"><b>Dlaczego:</b> ${esc(q.e)}</div></div>
+      <button class="btn primary wide" id="bNext" style="margin-top:10px">${fin?'Wynik':'Dalej'}</button>`;
+    $('bNext').onclick=zalicz; $('bNext').focus({preventScroll:true});
+    $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+  };
+  window['ask'+q.type[0].toUpperCase()+q.type.slice(1)](q,after);
+}
+function zFinish(){
+  const z=S.z, n=z.ok.length;
+  window.scrollTo(0,0);
+  $app.innerHTML=`${topBar('✅ Zalicz wszystko')}<div class="card" style="text-align:center"><div style="font:800 52px/1 var(--fh)">100%</div>
+    <h2 style="margin-top:8px">zaliczone wszystkie ${n} ${zPl(n)} 🏆</h2>
+    <p class="muted">${zDate(S.zDone.d)} · ${z.miss.length?`po drodze poprawione: ${z.miss.length}`:'bez ani jednej pomyłki'}</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="bZNew">Zacznij od nowa</button><button class="btn" id="bHome">Menu</button></div></div>`;
+  $('bBack').onclick=home; $('bHome').onclick=home;
+  $('bZNew').onclick=()=>{ S.z=null; save(); zalicz(); };
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>

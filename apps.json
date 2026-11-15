@@ -479,6 +479,18 @@
       ],
       "added": "2026-11-06",
       "desc": "Konkurs: dryl automatyzmów, 8 trybów"
+    },
+    {
+      "id": "polski-srodki-stylistyczne",
+      "file": "apps/polski-srodki-stylistyczne.html",
+      "title": "Środki stylistyczne – quiz na kartkówkę",
+      "emoji": "✒️",
+      "subject": "polski",
+      "kids": [
+        "wiktor"
+      ],
+      "added": "2026-11-15",
+      "desc": "Kartkówka: środki stylistyczne – quiz"
     }
   ]
 }
