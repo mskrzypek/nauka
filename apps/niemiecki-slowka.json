@@ -1144,6 +1144,121 @@
           "note": "uwaga na rodzajnik!"
         }
       ]
+    },
+    {
+      "id": "ferien",
+      "title": "Ferien sind immer zu kurz – pory roku i święta",
+      "words": [
+        {
+          "pl": "ulubiona pora roku",
+          "de": "die Lieblingsjahreszeit"
+        },
+        {
+          "pl": "dlaczego",
+          "de": "warum"
+        },
+        {
+          "pl": "wolne (np. wolny dzień)",
+          "de": "frei"
+        },
+        {
+          "pl": "wiosna",
+          "de": "der Frühling",
+          "alt": [
+            "Frühling"
+          ]
+        },
+        {
+          "pl": "lato",
+          "de": "der Sommer",
+          "alt": [
+            "Sommer"
+          ]
+        },
+        {
+          "pl": "jesień",
+          "de": "der Herbst",
+          "alt": [
+            "Herbst"
+          ]
+        },
+        {
+          "pl": "zima",
+          "de": "der Winter",
+          "alt": [
+            "Winter"
+          ]
+        },
+        {
+          "pl": "Boże Narodzenie (święta)",
+          "de": "Weihnachten",
+          "alt": [
+            "das Weihnachten",
+            "die Weihnachten"
+          ]
+        },
+        {
+          "pl": "Wielkanoc",
+          "de": "Ostern",
+          "alt": [
+            "das Ostern"
+          ]
+        },
+        {
+          "pl": "tydzień",
+          "de": "die Woche"
+        },
+        {
+          "pl": "tygodnie",
+          "de": "die Wochen",
+          "note": "l.mn."
+        },
+        {
+          "pl": "nudne",
+          "de": "langweilig"
+        }
+      ]
+    },
+    {
+      "id": "sommer-stadt",
+      "title": "Sommer in der Stadt – lato w mieście",
+      "words": [
+        {
+          "pl": "pozostawać, zostawać",
+          "de": "bleiben"
+        },
+        {
+          "pl": "okropne",
+          "de": "schrecklich"
+        },
+        {
+          "pl": "opalać się (leżeć na słońcu)",
+          "de": "in der Sonne liegen"
+        },
+        {
+          "pl": "robić karaoke",
+          "de": "Karaoke machen",
+          "alt": [
+            "Karaoke singen"
+          ]
+        },
+        {
+          "pl": "cieszyć się (na coś)",
+          "de": "sich freuen auf"
+        },
+        {
+          "pl": "w przyszłym roku",
+          "de": "nächstes Jahr"
+        },
+        {
+          "pl": "ten rok, w tym roku",
+          "de": "dieses Jahr"
+        },
+        {
+          "pl": "zeszły rok",
+          "de": "letztes Jahr"
+        }
+      ]
     }
   ]
 }
