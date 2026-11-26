@@ -491,6 +491,18 @@
       ],
       "added": "2026-11-15",
       "desc": "Kartkówka: środki stylistyczne – quiz"
+    },
+    {
+      "id": "angielski-3-formy",
+      "file": "apps/angielski-3-formy.html",
+      "title": "Czasowniki nieregularne – grupy i wymowa",
+      "emoji": "🎵",
+      "subject": "angielski",
+      "kids": [
+        "igor"
+      ],
+      "added": "2026-11-26",
+      "desc": "3 formy czasowników – grupy i wymowa"
     }
   ]
 }

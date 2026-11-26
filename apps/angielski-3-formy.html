@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Czasowniki nieregularne – grupy i wymowa</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F6FB; --grid:#E2E7F2; --ink:#18202F; --muted:#586379; --line:#CDD5E6; --surface:#FFFFFF; --soft:#E9EDF6;
+  --accent:#D6453D; --accent-ink:#FFFFFF; --ok:#1C7F54; --okbg:#E2F3EA; --bad:#C0284E; --badbg:#FBE5EB;
+  --hi:#1F4FBF; --hibg:#E3EBFF; --sel:#1F4FBF; --selbg:#E3EBFF;
+  --shadow:0 1px 2px rgba(24,32,47,.06),0 6px 18px rgba(24,32,47,.06);
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fb:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#10141F; --grid:#171D2C; --ink:#E7EBF4; --muted:#9DA8BF; --line:#2B3450; --surface:#171D2D; --soft:#1D2438;
+    --accent:#FF7A6E; --accent-ink:#10141F; --ok:#55D197; --okbg:#10362A; --bad:#FF7C9C; --badbg:#3C1628;
+    --hi:#8FB0FF; --hibg:#1C2847; --sel:#8FB0FF; --selbg:#1C2847; --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; min-height:100vh; color:var(--ink); font:18px/1.5 var(--fb); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:24px 24px}
+.wrap{max-width:660px; margin:0 auto; padding:max(16px,env(safe-area-inset-top)) 16px max(90px,calc(env(safe-area-inset-bottom) + 80px))}
+h1,h2{font-family:var(--fh); line-height:1.12; margin:0}
+h1{font-size:clamp(26px,7vw,36px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:21px; font-weight:800; margin-bottom:8px}
+p{margin:0 0 .6em}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:15px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px}
+.btn{border:2px solid var(--ink); background:transparent; border-radius:12px; padding:9px 16px; font:800 16px var(--fh)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.wide{width:100%; padding:13px}
+.pills{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px}
+.pill{background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px 12px; font-size:15px; font-weight:700}
+.big{display:flex; gap:12px; align-items:center; text-align:left; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow); margin-bottom:10px}
+.big .i{font-size:26px; width:40px; text-align:center; flex:none}
+.big .t{font:800 18px var(--fh); display:block}
+.big .d{color:var(--muted); font-size:14px; line-height:1.35; display:block}
+.big.dark{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.big.dark .d{color:var(--accent-ink); opacity:.85}
+.big.done{border:2px solid var(--ok)}
+.bar{height:7px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:6px}
+.bar span{display:block; height:100%; background:var(--ok); border-radius:6px}
+.top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.back{border:1px solid var(--line); background:var(--surface); width:44px; height:44px; border-radius:50%; font-size:20px; flex:none; box-shadow:var(--shadow)}
+.prog{height:10px; background:var(--soft); border-radius:6px; overflow:hidden; margin-bottom:12px}
+.prog span{display:block; height:100%; background:var(--accent); transition:width .25s}
+.snd{border:1px solid var(--line); background:var(--soft); border-radius:12px; min-width:44px; height:44px; font-size:20px; flex:none}
+/* tabela form */
+.vt{width:100%; border-collapse:collapse}
+.vt td{padding:8px 4px; border-top:1px solid var(--line); vertical-align:middle}
+.vt .f{font:700 18px var(--fb)}
+.vt .pl{color:var(--muted); font-size:14px; display:block; font-weight:400}
+.vt th{font:700 12px var(--fh); color:var(--muted); text-align:left; padding:0 4px 4px}
+mark{background:var(--hibg); color:var(--hi); border-radius:4px; padding:0 1px}
+.rule{background:var(--hibg); color:var(--ink); border-radius:12px; padding:10px 12px; font-size:16px; margin:6px 0 10px}
+/* pytanie */
+.q{background:var(--surface); border:2px solid var(--line); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.q.ok{border-color:var(--ok)} .q.bad{border-color:var(--bad)}
+.qlab{font:700 13px var(--fh); color:var(--muted); display:flex; justify-content:space-between; gap:8px}
+.qt{font:800 30px/1.25 var(--fb); margin:8px 0 4px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.qs{color:var(--muted); margin-bottom:12px}
+.opts{display:grid; gap:8px}
+.opt{text-align:left; border:2px solid var(--line); background:var(--surface); border-radius:12px; padding:12px 14px; font-weight:700; font-size:18px}
+.opt.ok{border-color:var(--ok); background:var(--okbg)} .opt.no{border-color:var(--bad); background:var(--badbg)}
+.fl{display:block; font:700 13px var(--fh); color:var(--muted); margin:8px 0 4px}
+.tin{width:100%; font:700 21px var(--fb); padding:11px 14px; border:2px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink)}
+.tin:focus{outline:none; border-color:var(--sel)}
+.tin.ok{border-color:var(--ok); background:var(--okbg)} .tin.no{border-color:var(--bad); background:var(--badbg)}
+.why{margin-top:12px; border-radius:14px; padding:12px 14px}
+.why.ok{background:var(--okbg)} .why.bad{background:var(--badbg)}
+.why .h{font:800 19px var(--fh)}
+.forms3{font:800 21px var(--fb); margin-top:4px}
+.miss{border-top:1px solid var(--line); padding:8px 0; display:flex; justify-content:space-between; gap:8px; align-items:center}
+.search{width:100%; font:18px var(--fb); padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink); margin-bottom:8px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+/* ============ GRACZ ============ */
+const KIDS={igor:'Igor',wiktor:'Wiktor',zoja:'Zoja'};
+let kid=(new URLSearchParams(location.search).get('dla')||'igor').toLowerCase();
+if(!KIDS[kid]) kid='igor';
+
+/* ============ CZASOWNIKI ============ */
+// Lista z podręcznika Igora („Irregular verbs”). base|past simple|past participle|po polsku; kilka form rozdziela „/”.
+const V=`be|was/were|been|być
+become|became|become|zostawać, stawać się
+begin|began|begun|zaczynać
+blow|blew|blown|wiać, dmuchać
+break|broke|broken|łamać, psuć się
+bring|brought|brought|przynosić
+build|built|built|budować
+buy|bought|bought|kupować
+catch|caught|caught|łapać
+choose|chose|chosen|wybierać
+come|came|come|przychodzić
+cost|cost|cost|kosztować
+cut|cut|cut|ciąć, kroić
+do|did|done|robić (czynność, np. lekcje)
+draw|drew|drawn|rysować, ciągnąć
+dream|dreamt/dreamed|dreamt/dreamed|marzyć, śnić
+drink|drank|drunk|pić
+drive|drove|driven|jechać, kierować
+eat|ate|eaten|jeść
+fall|fell|fallen|upadać
+feed|fed|fed|karmić
+feel|felt|felt|czuć
+find|found|found|znajdować
+fly|flew|flown|latać
+forget|forgot|forgotten|zapominać
+get|got|got|dostawać
+give|gave|given|dawać
+go|went|gone|iść, jechać
+grow|grew|grown|rosnąć
+have|had|had|mieć
+hear|heard|heard|słyszeć
+hide|hid|hidden|ukrywać, chować
+hurt|hurt|hurt|ranić
+keep|kept|kept|trzymać
+know|knew|known|wiedzieć, znać
+learn|learnt/learned|learnt/learned|uczyć się
+leave|left|left|opuszczać, zostawiać
+let|let|let|pozwalać
+lose|lost|lost|gubić, tracić
+make|made|made|robić, wytwarzać (np. tort)
+mean|meant|meant|znaczyć
+meet|met|met|spotykać, poznawać
+pay|paid|paid|płacić
+put|put|put|kłaść
+read|read|read|czytać
+ride|rode|ridden|jeździć
+ring|rang|rung|dzwonić
+run|ran|run|biec
+say|said|said|mówić, powiedzieć
+see|saw|seen|widzieć
+sell|sold|sold|sprzedawać
+send|sent|sent|wysyłać
+set|set|set|ustawiać
+show|showed|shown|pokazywać
+sing|sang|sung|śpiewać
+sit|sat|sat|siedzieć
+sleep|slept|slept|spać
+smell|smelt/smelled|smelt/smelled|czuć (zapach), pachnieć
+speak|spoke|spoken|mówić (językiem)
+spend|spent|spent|spędzać, wydawać
+stand|stood|stood|stać
+swim|swam|swum|pływać
+take|took|taken|brać, wziąć
+teach|taught|taught|uczyć (kogoś)
+tell|told|told|powiedzieć, opowiadać
+think|thought|thought|myśleć
+throw|threw|thrown|rzucać
+understand|understood|understood|rozumieć
+wake|woke|woken|budzić
+wear|wore|worn|nosić (ubranie)
+win|won|won|wygrywać, zdobywać
+write|wrote|written|pisać`.split('\n').map(l=>{ const [b,v2,v3,pl]=l.split('|'); return {b,v2:v2.split('/'),v3:v3.split('/'),pl}; });
+const VB=Object.fromEntries(V.map(v=>[v.b,v]));
+
+// Grupy: czasowniki, które odmieniają się albo brzmią podobnie – uczysz się wzoru, a nie 72 osobnych słów.
+const GROUPS=[
+  {id:'aaa',n:'Trzy takie same',i:'🟰',r:'Wszystkie trzy formy wyglądają tak samo: cut – cut – cut. Uwaga na read: piszemy tak samo, ale w 2. i 3. formie czytamy „red”.',v:['cut','put','let','set','cost','hurt','read']},
+  {id:'iau',n:'i – a – u',i:'🎵',r:'Śpiewaj jak piosenkę: sing – sang – sung. Zmienia się tylko samogłoska: i → a → u.',v:['sing','ring','drink','swim','begin']},
+  {id:'aba',n:'Pierwsza = trzecia',i:'🔁',r:'Trzecia forma wraca do pierwszej: come – came – come, run – ran – run.',v:['come','become','run']},
+  {id:'ought',n:'-ought / -aught',i:'💭',r:'Druga i trzecia forma rymują się na „-ought” / „-aught” (czyta się jak „ot”): think – thought – thought.',v:['bring','buy','think','catch','teach']},
+  {id:'ewn',n:'-ew – -own',i:'🌬️',r:'Druga forma kończy się na -ew, trzecia na -wn: blow – blew – blown. Wyjątek: show – showed – shown.',v:['blow','grow','know','throw','fly','draw','show']},
+  {id:'eet',n:'ee / ea → krótkie e',i:'💤',r:'Długie „ii” skraca się do krótkiego „e” i zwykle dochodzi -t: sleep – slept – slept, keep – kept – kept.',v:['sleep','keep','feel','meet','feed','mean','dream','leave']},
+  {id:'t',n:'Końcówka -t',i:'🔚',r:'Na końcu pojawia się -t (często zamiast -d): send – sent – sent, build – built – built.',v:['send','spend','build','learn','smell','lose']},
+  {id:'ioi',n:'i – o – i+en',i:'🚲',r:'Druga forma ma „o”, trzecia wraca do „i” i dostaje -en: ride – rode – ridden, write – wrote – written.',v:['ride','drive','write']},
+  {id:'oen',n:'o – o+en',i:'🔨',r:'Druga forma ma „o”, trzecia to druga + -en: break – broke – broken, speak – spoke – spoken.',v:['break','speak','choose','wake','forget','get']},
+  {id:'d',n:'Krótkie z -d',i:'💳',r:'Druga i trzecia forma kończą się na -d: pay – paid – paid, have – had – had, make – made – made.',v:['pay','say','make','have','hear']},
+  {id:'old',n:'-old i -ood',i:'🛒',r:'Pary do zapamiętania razem: sell – sold, tell – told; stand – stood, understand – understood.',v:['sell','tell','stand','understand']},
+  {id:'en',n:'Trzecia na -n',i:'🍽️',r:'Trzecia forma kończy się na -n albo -en: eat – ate – eaten, take – took – taken, see – saw – seen.',v:['eat','give','fall','take','hide','see','wear']},
+  {id:'wyj',n:'Wyjątki – na pamięć',i:'⭐',r:'Te są zupełnie inne – najlepiej je powtarzać na głos: go – went – gone, be – was/were – been.',v:['be','go','do','find','sit','win']},
+];
+const GN=Object.fromEntries(GROUPS.map(g=>[g.id,g]));
+const groupOf=b=>GROUPS.find(g=>g.v.includes(b));
+
+/* ============ ZAPIS ============ */
+// S.v[base] = {m: znaczenie 0–2, f: trzy formy 0–3, w: błędy}; opanowany = m ≥ 2 i f ≥ 2.
+const KEY='ang-3formy-v1:'+kid;
+let S={v:{},days:[],sound:true}, canSave=true;
+try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){ canSave=false; }
+const save=()=>{ if(!canSave) return; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ canSave=false; } };
+const today=()=>new Date().toLocaleDateString('sv');
+const st=b=>S.v[b]||(S.v[b]={m:0,f:0,w:0});
+const known=b=>{ const e=S.v[b]; return !!e&&e.m>=2&&e.f>=2; };
+function streak(){ let n=0; const d=new Date(); if(!S.days.includes(d.toLocaleDateString('sv'))) d.setDate(d.getDate()-1); while(S.days.includes(d.toLocaleDateString('sv'))){ n++; d.setDate(d.getDate()-1); } return n; }
+
+/* ============ WYMOWA ============ */
+// read w 2. i 3. formie czyta się „red” – syntezator dostaje tę pisownię.
+let voice=null;
+function pickVoice(){ const vs=speechSynthesis.getVoices(); voice=vs.find(v=>/^en(-|_)GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null; }
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+const spoken=(v,k)=>v.b==='read'&&k>0?'red':(k===0?v.b:(k===1?v.v2:v.v3).join(', '));
+function say(list,force){ try{ if(!('speechSynthesis' in window)||(!S.sound&&!force)) return; speechSynthesis.cancel();
+  [].concat(list).forEach(t=>{ const u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; if(voice) u.voice=voice; u.rate=.8; speechSynthesis.speak(u); }); }catch(e){} }
+const sayForms=(v,force)=>say(`${spoken(v,0)}… ${spoken(v,1)}… ${spoken(v,2)}`,force);
+const sayGroup=g=>say(g.v.map(b=>{ const v=VB[b]; return `${spoken(v,0)}, ${spoken(v,1)}, ${spoken(v,2)}.`; }),true);
+
+/* ============ POMOCNICZE ============ */
+const $app=document.getElementById('app'), $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const topBar=t=>`<div class="top"><button class="back" id="bBack" aria-label="Wróć">←</button><h2 style="margin:0;flex:1">${t}</h2></div>`;
+const pl=(n,a,b,c)=>n===1?a:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?b:c;
+// Podświetla część, która zmienia się między formami (wspólny początek i koniec zostają zwykłe).
+function marked(v){
+  const f=[v.b,v.v2.join('/'),v.v3.join('/')];
+  if(f[0]===f[1]&&f[1]===f[2]) return f.map(esc);
+  let p=0; while(f.every(x=>x[p]&&x[p]===f[0][p])) p++;
+  let s=0; while(f.every(x=>x.length-s-1>=p&&x[x.length-s-1]===f[0][f[0].length-s-1])) s++;
+  return f.map(x=>esc(x.slice(0,p))+(x.slice(p,x.length-s)?`<mark>${esc(x.slice(p,x.length-s))}</mark>`:'')+esc(x.slice(x.length-s)));
+}
+const norm=s=>String(s).toLowerCase().replace(/[’']/g,'').replace(/\s+/g,' ').trim();
+const okForm=(list,ans)=>{ const a=norm(ans).replace(/\s*[\/,]\s*/g,'/'); return list.some(x=>norm(x)===a)||a.split('/').every(p=>list.includes(p))&&a.length>0; };
+const formsTxt=v=>`${v.b} – ${v.v2.join('/')} – ${v.v3.join('/')}`;
+
+/* ============ EKRAN GŁÓWNY ============ */
+function home(){
+  window.scrollTo(0,0);
+  const k=V.filter(v=>known(v.b)).length, s=streak();
+  $app.innerHTML=`<h1>🎵 Czasowniki nieregularne</h1>
+    <p class="muted" style="margin-top:4px">Cześć, ${esc(KIDS[kid])}! Uczysz się grupami: czasowniki z jednej grupy odmieniają się albo brzmią podobnie. Najpierw posłuchaj grupy, potem ćwicz.</p>
+    <div class="pills"><span class="pill">🔥 ${s} ${pl(s,'dzień','dni','dni')} z rzędu</span><span class="pill">✅ umiesz ${k} z ${V.length}</span>
+      <button class="pill" id="bSnd" style="cursor:pointer">${S.sound?'🔊 dźwięk wł.':'🔇 dźwięk wył.'}</button></div>
+    <button class="big dark" id="bMix"><span class="i">▶</span><span><span class="t">Trening – 12 pytań</span><span class="d">Ze wszystkich grup – najpierw to, czego jeszcze nie umiesz</span></span></button>
+    <div class="card"><h2>Grupy</h2>
+      ${GROUPS.map(g=>{ const kk=g.v.filter(known).length, done=kk===g.v.length;
+        return `<button class="big${done?' done':''}" data-g="${g.id}" style="box-shadow:none;margin-bottom:8px"><span class="i">${g.i}</span><span style="flex:1"><span class="t">${esc(g.n)}${done?' ✓':''}</span><span class="d">${g.v.slice(0,4).join(', ')}${g.v.length>4?'…':''} · umiesz ${kk}/${g.v.length}</span><span class="bar"><span style="width:${Math.round(100*kk/g.v.length)}%"></span></span></span></button>`; }).join('')}</div>
+    <button class="btn wide" id="bTab">📋 Tabela wszystkich czasowników</button>
+    ${canSave?'':'<p class="muted small" style="margin-top:10px">Ta przeglądarka nie zapisze postępów.</p>'}`;
+  $('bSnd').onclick=()=>{ S.sound=!S.sound; save(); home(); };
+  $('bMix').onclick=()=>round(pickWeak(V.map(v=>v.b),12).map(b=>({b,t:typeFor(b)})),'Trening');
+  $app.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>groupPage(b.dataset.g));
+  $('bTab').onclick=table;
+}
+
+/* ============ GRUPA ============ */
+function groupPage(id){
+  window.scrollTo(0,0);
+  const g=GN[id];
+  $app.innerHTML=`${topBar(`${g.i} ${esc(g.n)}`)}
+    <div class="card"><div class="rule">💡 ${esc(g.r)}</div>
+      <button class="btn primary wide" id="bListen">🔊 Posłuchaj całej grupy</button>
+      <table class="vt" style="margin-top:10px"><tr><th>bezokolicznik</th><th>past simple</th><th>past participle</th><th></th></tr>
+      ${g.v.map(b=>{ const v=VB[b], m=marked(v); return `<tr><td><span class="f">${m[0]}</span><span class="pl">${esc(v.pl)}</span></td><td class="f">${m[1]}</td><td class="f">${m[2]}</td><td style="text-align:right"><button class="snd" data-s="${b}" aria-label="Posłuchaj ${b}">🔊</button></td></tr>`; }).join('')}</table>
+      <p class="muted small" style="margin-top:8px">Na niebiesko – to, co się zmienia. Powtarzaj na głos razem z nagraniem.</p></div>
+    <button class="btn primary wide" id="bGo">Ćwicz tę grupę</button>`;
+  $('bBack').onclick=home;
+  $('bListen').onclick=()=>sayGroup(g);
+  $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>sayForms(VB[b.dataset.s],true));
+  $('bGo').onclick=()=>round(groupItems(g),`${g.i} ${g.n}`);
+}
+// Runda grupy: każdy czasownik raz (rodzaj pytania wg postępu), potem jeszcze raz trzy formy.
+function groupItems(g){
+  const first=shuffle(g.v).map(b=>({b,t:typeFor(b)}));
+  const forms=shuffle(g.v).filter(b=>typeFor(b)!=='forms').map(b=>({b,t:'forms'}));
+  return [...first,...forms];
+}
+
+/* ============ TABELA ============ */
+function table(){
+  window.scrollTo(0,0);
+  $app.innerHTML=`${topBar('📋 Wszystkie czasowniki')}
+    <input class="search" id="q" placeholder="Szukaj po angielsku albo po polsku" autocomplete="off" autocapitalize="off">
+    <div class="card" style="padding:8px 12px"><table class="vt" id="tb"></table></div>`;
+  $('bBack').onclick=home;
+  const draw=()=>{ const f=norm($('q').value);
+    $('tb').innerHTML=V.filter(v=>!f||[v.b,...v.v2,...v.v3,v.pl].some(x=>norm(x).includes(f))).map(v=>{ const m=marked(v);
+      return `<tr><td><span class="f">${m[0]}</span><span class="pl">${esc(v.pl)} ${known(v.b)?'✅':''}</span></td><td class="f">${m[1]}</td><td class="f">${m[2]}</td><td style="text-align:right"><button class="snd" data-s="${v.b}" aria-label="Posłuchaj">🔊</button></td></tr>`; }).join('');
+    $('tb').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>sayForms(VB[b.dataset.s],true)); };
+  $('q').oninput=draw; draw();
+}
+
+/* ============ DOBÓR PYTAŃ ============ */
+// Najpierw znaczenie (ang → pol, potem pol → ang), potem trzy formy; opanowane wracają jako forma albo dyktando.
+function typeFor(b){ const e=S.v[b]||{m:0,f:0};
+  if(e.m<1) return 'en2pl'; if(e.m<2) return 'pl2en'; if(e.f<2) return 'forms';
+  return ['forms','listen','pl2en'][Math.floor(Math.random()*3)]; }
+function pickWeak(pool,n){
+  const rank=b=>{ const e=S.v[b]; if(!e) return 1+Math.random(); if(known(b)) return 3+Math.random(); return (e.w>0?0:1)+Math.random()*.8; };
+  return pool.map(b=>({b,k:rank(b)})).sort((a,b)=>a.k-b.k).slice(0,n).map(x=>x.b);
+}
+// Dystraktory: najpierw z tej samej grupy (podobnie wyglądają – trudniej zgadnąć), potem losowe.
+function distract(b,key,n){
+  const same=shuffle(groupOf(b).v.filter(x=>x!==b)), rest=shuffle(V.map(v=>v.b).filter(x=>x!==b&&!same.includes(x)));
+  const out=[]; for(const x of [...same.slice(0,2),...rest]){ if(out.length>=n) break; if(!out.some(y=>VB[y][key]===VB[x][key])&&VB[x][key]!==VB[b][key]) out.push(x); }
+  return out;
+}
+
+/* ============ RUNDA ============ */
+function round(items,title){
+  window.scrollTo(0,0);
+  const queue=items.map(x=>({...x,again:false})), total=items.length, misses=[]; let done=0, okFirst=0;
+  const T=today(); if(!S.days.includes(T)){ S.days.push(T); save(); }
+  function next(){
+    if(!queue.length) return finish();
+    const cur=queue.shift(), v=VB[cur.b], g=groupOf(cur.b);
+    $app.innerHTML=`${topBar(esc(title))}<div class="prog"><span style="width:${100*done/total}%"></span></div>
+      <div class="q" id="qc"><div class="qlab"><span>${g.i} ${esc(g.n)}</span><span>${cur.again?'jeszcze raz 💪':`${done+1}/${total}`}</span></div><div id="body"></div><div id="why" aria-live="polite"></div></div>`;
+    $('bBack').onclick=home;
+    const after=(ok,detail)=>{
+      const e=st(cur.b);
+      if(cur.t==='en2pl'||cur.t==='pl2en'){ if(ok) e.m=Math.min(2,e.m+1); else e.m=Math.max(0,e.m-1); }
+      else { if(ok) e.f=Math.min(3,e.f+1); else e.f=0; }
+      if(!ok){ e.w++; if(!cur.again) misses.push(cur.b); queue.splice(Math.min(queue.length,3),0,{...cur,again:true}); }
+      else if(!cur.again) okFirst++;
+      if(ok||cur.again) done++;
+      save();
+      $('qc').classList.add(ok?'ok':'bad');
+      $('why').innerHTML=`<div class="why ${ok?'ok':'bad'}"><div class="h">${ok?'Dobrze! ✅':'Nie tym razem'}</div>${detail||''}
+        <div class="row" style="margin-top:6px"><span class="forms3">${marked(v).join(' – ')}</span><button class="snd" id="bSay" aria-label="Posłuchaj">🔊</button></div>
+        <div class="muted small">${esc(v.pl)}</div></div>
+        <button class="btn primary wide" id="bNext" style="margin-top:10px">Dalej</button>`;
+      $('bSay').onclick=()=>sayForms(v,true); sayForms(v);
+      $('bNext').onclick=next; $('bNext').focus({preventScroll:true});
+      $('why').scrollIntoView({block:'nearest',behavior:'smooth'});
+    };
+    ({en2pl:askEn2Pl,pl2en:askPl2En,forms:askForms,listen:askListen})[cur.t](v,after);
+  }
+  function finish(){
+    window.scrollTo(0,0);
+    const miss=[...new Set(misses)];
+    $app.innerHTML=`${topBar(esc(title))}<div class="card" style="text-align:center"><div style="font:800 52px/1 var(--fh)">${okFirst}/${total}</div>
+      <p class="muted" style="margin:6px 0 0">dobrze za pierwszym razem</p>
+      <h2 style="margin-top:10px">${!miss.length?'Bezbłędnie! 🏆':miss.length<=2?'Bardzo dobrze! 👏':'Dobra robota – trudne wrócą w następnym treningu.'}</h2>
+      <div class="row" style="justify-content:center;margin-top:10px"><button class="btn primary" id="bAgain">Jeszcze raz</button><button class="btn" id="bHome">Menu</button></div></div>
+      ${miss.length?`<div class="card"><h2>Do powtórki</h2>${miss.map(b=>`<div class="miss"><span><b>${marked(VB[b]).join(' – ')}</b><br><span class="muted small">${esc(VB[b].pl)}</span></span><button class="snd" data-s="${b}">🔊</button></div>`).join('')}</div>`:''}`;
+    $('bBack').onclick=home; $('bHome').onclick=home;
+    $app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>sayForms(VB[b.dataset.s],true));
+    $('bAgain').onclick=()=>{ const g=GROUPS.find(x=>title===`${x.i} ${x.n}`); round(g?groupItems(g):pickWeak(V.map(v=>v.b),12).map(b=>({b,t:typeFor(b)})),title); };
+  }
+  next();
+}
+
+/* ============ RODZAJE PYTAŃ ============ */
+function choice(opts,correct,after,label){
+  $('ans').innerHTML=`<div class="opts">${opts.map(o=>`<button class="opt" data-o="${esc(o)}">${label(o)}</button>`).join('')}</div>`;
+  const btns=[...$('ans').querySelectorAll('.opt')];
+  btns.forEach(b=>b.onclick=()=>{ const ok=b.dataset.o===correct;
+    btns.forEach(x=>{ x.disabled=true; if(x.dataset.o===correct) x.classList.add('ok'); else if(x===b) x.classList.add('no'); });
+    after(ok,''); });
+}
+// Co znaczy? (angielski → polski)
+function askEn2Pl(v,after){
+  $('body').innerHTML=`<div class="qt">${esc(v.b)} <button class="snd" id="bS">🔊</button></div><div class="qs">Co to znaczy po polsku?</div><div id="ans"></div>`;
+  $('bS').onclick=()=>say(spoken(v,0),true); say(spoken(v,0));
+  const opts=shuffle([v.b,...distract(v.b,'pl',3)]);
+  choice(opts,v.b,after,b=>esc(VB[b].pl));
+}
+// Jak to jest po angielsku? (polski → angielski)
+function askPl2En(v,after){
+  $('body').innerHTML=`<div class="qt" style="font-size:26px">${esc(v.pl)}</div><div class="qs">Jak to jest po angielsku?</div><div id="ans"></div>`;
+  const opts=shuffle([v.b,...distract(v.b,'b',3)]);
+  choice(opts,v.b,after,b=>esc(b));
+}
+const inputHtml=(id,ph)=>`<input class="tin" id="${id}" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" placeholder="${ph}">`;
+// Trzy formy: podane 1. forma i znaczenie, wpisz 2. i 3.
+function askForms(v,after){
+  $('body').innerHTML=`<div class="qt">${esc(v.b)} <button class="snd" id="bS">🔊</button></div><div class="qs">${esc(v.pl)} – wpisz 2. i 3. formę</div>
+    <div id="ans"><label class="fl" for="f2">past simple (2. forma)</label>${inputHtml('f2','np. went')}
+    <label class="fl" for="f3">past participle (3. forma)</label>${inputHtml('f3','np. gone')}
+    <button class="btn primary wide" id="bChk" style="margin-top:12px">Sprawdź</button></div>`;
+  $('bS').onclick=()=>say(spoken(v,0),true); say(spoken(v,0));
+  const go=()=>{ const a2=$('f2').value, a3=$('f3').value; if(!norm(a2)||!norm(a3)) return;
+    const k2=okForm(v.v2,a2), k3=okForm(v.v3,a3);
+    $('f2').classList.add(k2?'ok':'no'); $('f3').classList.add(k3?'ok':'no'); $('f2').disabled=$('f3').disabled=true; $('bChk').remove();
+    after(k2&&k3,k2&&k3?'':`<div>${k2?'':`2. forma to <b>${esc(v.v2.join(' / '))}</b>. `}${k3?'':`3. forma to <b>${esc(v.v3.join(' / '))}</b>.`}</div>`); };
+  $('bChk').onclick=go;
+  $('f2').onkeydown=ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); $('f3').focus(); } };
+  $('f3').onkeydown=ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); go(); } };
+  setTimeout(()=>$('f2').focus({preventScroll:true}),60);
+}
+// Dyktando: usłysz jedną formę i wpisz ją.
+function askListen(v,after){
+  const k=v.b==='read'?0:1+Math.floor(Math.random()*2), want=k===0?[v.b]:k===1?v.v2:v.v3;
+  $('body').innerHTML=`<div class="qt">👂 <button class="snd" id="bS" style="font-size:26px;min-width:64px;height:56px">🔊</button></div>
+    <div class="qs">Posłuchaj i wpisz słowo, które słyszysz (${k===0?'1.':k===1?'2.':'3.'} forma czasownika „${esc(v.pl)}”)</div>
+    <div id="ans">${inputHtml('f1','wpisz, co słyszysz')}<button class="btn primary wide" id="bChk" style="margin-top:12px">Sprawdź</button></div>`;
+  const play=()=>say(spoken(v,k).split(', ')[0],true); $('bS').onclick=play; setTimeout(play,150);
+  const go=()=>{ const a=$('f1').value; if(!norm(a)) return; const ok=okForm(want,a);
+    $('f1').classList.add(ok?'ok':'no'); $('f1').disabled=true; $('bChk').remove();
+    after(ok,ok?'':`<div>To było: <b>${esc(want[0])}</b></div>`); };
+  $('bChk').onclick=go; $('f1').onkeydown=ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); go(); } };
+  setTimeout(()=>$('f1').focus({preventScroll:true}),60);
+}
+
+/* ============ START ============ */
+home();
+</script>
+<script src="../nav.js" defer></script>
+<script src="../learn.js" defer></script>
+</body>
+</html>
