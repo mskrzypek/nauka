@@ -28,7 +28,7 @@ Potem commit i push na `main` – GitHub Pages publikuje w ~1 minutę.
 
 ## Słówka z angielskiego
 
-- `apps/angielski.html` to ta sama apka co niemiecka, ale czyta `apps/angielski-<dziecko>.json` (dziecko z `?dla=`; teraz jest tylko `angielski-igor.json`). Zasady dopisywania lekcji i pól są w `_opis` pliku; odpowiedź jest w polu `en`.
+- `apps/angielski.html` to ta sama apka co niemiecka, ale czyta `apps/angielski-<dziecko>.json` (dziecko z `?dla=`; są `angielski-igor.json` i `angielski-wiktor.json`). Zasady dopisywania lekcji i pól są w `_opis` pliku; odpowiedź jest w polu `en`.
 - Słówka dla kolejnego dziecka: nowy plik `angielski-<dziecko>.json` i dopisanie dziecka do `kids` apki w `apps.json`.
 
 ## Państwa świata

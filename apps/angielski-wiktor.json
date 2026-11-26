@@ -1,0 +1,505 @@
+{
+  "_opis": "Słówka z angielskiego (Wiktor) do apki apps/angielski.html – plik angielski-<dziecko>.json. Nowa lekcja = nowy obiekt NA KOŃCU 'lessons'. Nie zmieniaj 'id' lekcji ani pól 'pl'/'en' istniejących słówek – po nich zapisuje się postęp. Pola: pl (pytanie po polsku), en (odpowiedź; część w nawiasie jest opcjonalna, np. „get on (well)”), alt (inne poprawne odpowiedzi), note (dopisek przy pytaniu), type: 'zdanie'. Wielkość liter, interpunkcja, skróty (that's = that is) i „to” przed czasownikiem nie mają znaczenia.",
+  "lessons": [
+    {
+      "id": "unit10",
+      "title": "Unit 10 – Sport (Wordlist)",
+      "words": [
+        {
+          "pl": "lekkoatletyka",
+          "en": "athletics"
+        },
+        {
+          "pl": "baseball",
+          "en": "baseball"
+        },
+        {
+          "pl": "boks",
+          "en": "boxing"
+        },
+        {
+          "pl": "kajakarstwo",
+          "en": "canoeing"
+        },
+        {
+          "pl": "wspinaczka",
+          "en": "climbing"
+        },
+        {
+          "pl": "krykiet",
+          "en": "cricket"
+        },
+        {
+          "pl": "kolarstwo",
+          "en": "cycling"
+        },
+        {
+          "pl": "nurkowanie",
+          "en": "diving"
+        },
+        {
+          "pl": "piłka nożna",
+          "en": "football"
+        },
+        {
+          "pl": "golf",
+          "en": "golf"
+        },
+        {
+          "pl": "gimnastyka",
+          "en": "gymnastics"
+        },
+        {
+          "pl": "jazda konna, jeździectwo",
+          "en": "horse-riding",
+          "alt": [
+            "horse riding"
+          ]
+        },
+        {
+          "pl": "hokej na lodzie",
+          "en": "ice hockey"
+        },
+        {
+          "pl": "łyżwiarstwo",
+          "en": "ice-skating",
+          "alt": [
+            "ice skating"
+          ]
+        },
+        {
+          "pl": "jazda na łyżworolkach",
+          "en": "rollerblading"
+        },
+        {
+          "pl": "rugby",
+          "en": "rugby"
+        },
+        {
+          "pl": "bieganie",
+          "en": "running"
+        },
+        {
+          "pl": "jazda na deskorolce",
+          "en": "skateboarding"
+        },
+        {
+          "pl": "narciarstwo",
+          "en": "skiing"
+        },
+        {
+          "pl": "jazda na snowboardzie",
+          "en": "snowboarding"
+        },
+        {
+          "pl": "squash",
+          "en": "squash"
+        },
+        {
+          "pl": "surfing",
+          "en": "surfing"
+        },
+        {
+          "pl": "pływanie",
+          "en": "swimming"
+        },
+        {
+          "pl": "tenis stołowy",
+          "en": "table tennis"
+        },
+        {
+          "pl": "tenis ziemny",
+          "en": "tennis"
+        },
+        {
+          "pl": "siatkówka (plażowa)",
+          "en": "(beach) volleyball"
+        },
+        {
+          "pl": "podnoszenie ciężarów",
+          "en": "weightlifting"
+        },
+        {
+          "pl": "zapasy",
+          "en": "wrestling"
+        },
+        {
+          "pl": "piłka",
+          "en": "ball"
+        },
+        {
+          "pl": "kij (do baseballa, krykieta)",
+          "en": "bat"
+        },
+        {
+          "pl": "deska",
+          "en": "board"
+        },
+        {
+          "pl": "buty (np. korki)",
+          "en": "boots"
+        },
+        {
+          "pl": "kij golfowy",
+          "en": "club",
+          "alt": [
+            "golf club"
+          ]
+        },
+        {
+          "pl": "strój kąpielowy",
+          "en": "(swimming) costume"
+        },
+        {
+          "pl": "kąpielówki",
+          "en": "(swimming) trunks"
+        },
+        {
+          "pl": "bramka",
+          "en": "goal"
+        },
+        {
+          "pl": "gogle, okulary ochronne",
+          "en": "goggles"
+        },
+        {
+          "pl": "kask",
+          "en": "helmet"
+        },
+        {
+          "pl": "siatka, kosz (w koszykówce)",
+          "en": "net"
+        },
+        {
+          "pl": "rakieta",
+          "en": "racket"
+        },
+        {
+          "pl": "narty",
+          "en": "skis"
+        },
+        {
+          "pl": "strój sportowca",
+          "en": "strip"
+        },
+        {
+          "pl": "pianka do nurkowania",
+          "en": "wetsuit"
+        },
+        {
+          "pl": "stadion (lekkoatletyczny / sportowy)",
+          "en": "stadium",
+          "alt": [
+            "athletics stadium",
+            "sports stadium"
+          ]
+        },
+        {
+          "pl": "ring (bokserski)",
+          "en": "(boxing) ring"
+        },
+        {
+          "pl": "(sztuczny) stok (narciarski)",
+          "en": "(dry) (ski) slope"
+        },
+        {
+          "pl": "boisko do piłki nożnej",
+          "en": "football pitch"
+        },
+        {
+          "pl": "boisko do rugby",
+          "en": "rugby pitch"
+        },
+        {
+          "pl": "klub fitness, ośrodek sportowy",
+          "en": "sports centre",
+          "alt": [
+            "health and fitness centre",
+            "fitness centre",
+            "sports center"
+          ]
+        },
+        {
+          "pl": "lodowisko",
+          "en": "(ice-skating) rink",
+          "alt": [
+            "ice rink",
+            "skating rink",
+            "ice skating rink"
+          ]
+        },
+        {
+          "pl": "basen (olimpijski / pływacki)",
+          "en": "(Olympic-size) (swimming) pool"
+        },
+        {
+          "pl": "kort tenisowy",
+          "en": "tennis court"
+        },
+        {
+          "pl": "boisko do koszykówki",
+          "en": "basketball court"
+        },
+        {
+          "pl": "lekkoatleta",
+          "en": "athlete"
+        },
+        {
+          "pl": "bokser",
+          "en": "boxer"
+        },
+        {
+          "pl": "kolarz",
+          "en": "cyclist"
+        },
+        {
+          "pl": "nurek",
+          "en": "diver"
+        },
+        {
+          "pl": "piłkarz",
+          "en": "footballer"
+        },
+        {
+          "pl": "gimnastyk",
+          "en": "gymnast"
+        },
+        {
+          "pl": "biegacz",
+          "en": "runner"
+        },
+        {
+          "pl": "pływak",
+          "en": "swimmer"
+        },
+        {
+          "pl": "sztangista",
+          "en": "weightlifter"
+        },
+        {
+          "pl": "wysportowany",
+          "en": "athletic"
+        },
+        {
+          "pl": "pokonać, wygrać z kimś",
+          "en": "beat"
+        },
+        {
+          "pl": "kapitan",
+          "en": "captain"
+        },
+        {
+          "pl": "złapać",
+          "en": "catch"
+        },
+        {
+          "pl": "mistrz",
+          "en": "champion"
+        },
+        {
+          "pl": "wiwatować, wznosić okrzyki",
+          "en": "cheer"
+        },
+        {
+          "pl": "trener (np. drużyny)",
+          "en": "coach",
+          "alt": [
+            "trainer"
+          ]
+        },
+        {
+          "pl": "konkurować",
+          "en": "compete"
+        },
+        {
+          "pl": "zremisować; remis",
+          "en": "draw"
+        },
+        {
+          "pl": "brać udział (w zawodach)",
+          "en": "enter"
+        },
+        {
+          "pl": "uderzyć",
+          "en": "hit"
+        },
+        {
+          "pl": "przyłączyć się",
+          "en": "join"
+        },
+        {
+          "pl": "kopnąć",
+          "en": "kick"
+        },
+        {
+          "pl": "przegrać",
+          "en": "lose"
+        },
+        {
+          "pl": "chybić, nie trafić",
+          "en": "miss"
+        },
+        {
+          "pl": "gracz",
+          "en": "player"
+        },
+        {
+          "pl": "pozycja",
+          "en": "position"
+        },
+        {
+          "pl": "ćwiczyć",
+          "en": "practise",
+          "alt": [
+            "practice"
+          ]
+        },
+        {
+          "pl": "strzelać gole",
+          "en": "score goals",
+          "alt": [
+            "score a goal"
+          ]
+        },
+        {
+          "pl": "kibicować",
+          "en": "support"
+        },
+        {
+          "pl": "zespół, drużyna",
+          "en": "team"
+        },
+        {
+          "pl": "rzucać",
+          "en": "throw"
+        },
+        {
+          "pl": "trenować",
+          "en": "train"
+        },
+        {
+          "pl": "instruktor, trener (osobisty)",
+          "en": "trainer",
+          "alt": [
+            "coach"
+          ]
+        },
+        {
+          "pl": "wygrywać",
+          "en": "win"
+        },
+        {
+          "pl": "turniej",
+          "en": "tournament"
+        },
+        {
+          "pl": "zawodowy sportowiec",
+          "en": "professional athlete"
+        },
+        {
+          "pl": "kibic",
+          "en": "supporter"
+        },
+        {
+          "pl": "sędzia (np. w piłce nożnej)",
+          "en": "referee"
+        },
+        {
+          "pl": "pobrudzić się błotem",
+          "en": "get muddy"
+        },
+        {
+          "pl": "komplet, zestaw (np. strój)",
+          "en": "kit"
+        },
+        {
+          "pl": "okrążenie (np. wokół stadionu)",
+          "en": "lap"
+        },
+        {
+          "pl": "chronić",
+          "en": "protect"
+        },
+        {
+          "pl": "potknąć się",
+          "en": "trip"
+        },
+        {
+          "pl": "pobić rekord",
+          "en": "break a record"
+        },
+        {
+          "pl": "brązowy medal",
+          "en": "bronze medal"
+        },
+        {
+          "pl": "zająć drugie miejsce",
+          "en": "come second"
+        },
+        {
+          "pl": "wpaść na kogoś",
+          "en": "crash into sb",
+          "alt": [
+            "crash into somebody",
+            "crash into someone"
+          ]
+        },
+        {
+          "pl": "skoncentrowany, skupiony",
+          "en": "focused"
+        },
+        {
+          "pl": "zranić się",
+          "en": "get hurt"
+        },
+        {
+          "pl": "ważny moment",
+          "en": "highlight"
+        },
+        {
+          "pl": "niezwykły",
+          "en": "incredible"
+        },
+        {
+          "pl": "obejmować",
+          "en": "involve"
+        },
+        {
+          "pl": "przeciwnik",
+          "en": "opponent"
+        },
+        {
+          "pl": "kara, punkty karne, karny",
+          "en": "penalty"
+        },
+        {
+          "pl": "rekordzista",
+          "en": "record holder"
+        },
+        {
+          "pl": "reguła, zasada (gry)",
+          "en": "rule"
+        },
+        {
+          "pl": "obóz sportowy",
+          "en": "sports camp"
+        },
+        {
+          "pl": "etap",
+          "en": "stage"
+        },
+        {
+          "pl": "taktyka",
+          "en": "tactics"
+        },
+        {
+          "pl": "zmieniać się (kolejno)",
+          "en": "take turns",
+          "alt": [
+            "take it in turns"
+          ]
+        }
+      ]
+    }
+  ]
+}
